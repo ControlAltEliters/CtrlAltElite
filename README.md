@@ -1,7 +1,7 @@
 # CtrlAltElite
 Senior Capstone project for the UNT Comptuer Science department
 
-Authors: Anne Sabatini, Carissa Barrett, Derek Rogers, Ryan Gerard, Sarah Richards
+Authors: AnneMarie Sabatini, Carissa Barrett, Derek Rogers, Ryan Gerard, Sarah Richards
 
 The project is currently in the brainstorming phase. Below is a list of possible projects to work on:
 

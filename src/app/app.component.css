@@ -1,0 +1,23 @@
+.container {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 40px;
+}
+
+.title{
+    margin-left: 20px;
+}
+
+.toolbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100% !important;
+    height: 30px !important;
+    background-color: aqua;
+}
+
+.space {
+    margin-right: 100px;
+}

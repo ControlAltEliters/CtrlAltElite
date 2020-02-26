@@ -1,40 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import {FormGroup,FormControl,Validators} from '@angular/forms';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-
 export class RegisterComponent implements OnInit {
 
-  registerForm: FormGroup;
-  fullName = '';
-  username = '';
-  password = '';
-  isLoadingResults = false;
-
-  constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) { }
+  registerForm:FormGroup = new FormGroup({
+    email:new FormControl(null,[Validators.email,Validators.required]),
+    username:new FormControl(null,Validators.required),
+    password:new FormControl(null,Validators.required),
+    cpass:new FormControl(null,Validators.required)
+  })
+  constructor(private _router:Router, private _userService:UserService) { }
 
   ngOnInit() {
-    this.registerForm = this.formBuilder.group({
-      fullName : [null, Validators.required],
-      username : [null, Validators.required],
-      password : [null, Validators.required]
-    });
   }
 
-  onFormSubmit(form: NgForm) {
-    this.authService.register(form)
-      .subscribe(res => {
-        this.router.navigate(['login']);
-      }, (err) => {
-        console.log(err);
-        alert(err.error);
-      });
+  moveToLogin(){
+    this._router.navigate(['/login']);
   }
 
+  register(){
+    if(!this.registerForm.valid || (this.registerForm.controls.password.value != this.registerForm.controls.cpass.value)){
+      console.log('Invalid Form'); return;
+    }
+
+    this._userService.register(JSON.stringify(this.registerForm.value))
+    .subscribe(
+      data=> {console.log(data); this._router.navigate(['/login']);},
+      error=>console.error(error)
+    )
+    // console.log(JSON.stringify(this.registerForm.value));
+  }
 }

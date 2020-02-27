@@ -1,24 +1,35 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
+let createError = require('http-errors');
+let express = require('express');
+let path = require('path');
+let cors= require('cors');
+let passport = require('passport');
+let mongoose =require('mongoose');
+let usersRouter = require('./routes/users');
+let indexRouter = require('./routes/index');
+let session = require('express-session');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var cors= require('cors');
-var app = express();
+let app = express();
 
 app.use(cors({
   origin:['http://localhost:4200','http://127.0.0.1:4200'],
   credentials:true
 }));
 
-var mongoose =require('mongoose');
 
-mongoose.connect('mongodb://localhost/database');
+// Connect to Mongo Database
+// TODO: Remove hardcoded creds later
+const mongoUrl = 'mongodb+srv://dbuser:command10@arcadiadb-2u5es.mongodb.net/test?retryWrites=true&w=majority'
+mongoose.connect(mongoUrl, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    dbName: 'test'
+})
+    .catch(err => console.log('Mongo connection error', err))
+mongoose.set('useFindAndModify', false)
+mongoose.set('useCreateIndex', true)
+
 
 //passport
-var passport = require('passport');
-var session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 app.use(session({
   name:'myname.sid',
@@ -32,14 +43,15 @@ app.use(session({
   },
   store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
-require('/Users/sarah/Desktop/Angular/Arcadia/src/app/server/passport-config.ts');
+
+require('./passport-config.ts');
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+app.set('view engine', 'ejs');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -64,4 +76,9 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+// SERVER START ---------------------------------------------------------------------------
+
+// listen
+app.listen(3000, process.env.IP, function (){
+  console.log('Server started.  Please visit: 127.0.0.1:3000')
+})

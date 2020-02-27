@@ -6,6 +6,24 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server and navigate to `http://localhost:4200/`, or run `ng serve -o` to automatically open the dev server in your browser. The app will automatically reload if you change any of the source files.
 
+## How do I run the application?
+
+- Ensure node + npm are installed correctly
+    - Run `node -v` or `npm -v` from command line to see currently installed versions
+- Run `npm install` to install project dependencies
+    - This may take a while
+    - Note: dependencies and versions are defined in the `package.json` file in the root directory of the project
+- Run `npm run start` to start the Angular frontend server
+- Run `npm run express` to start the Express backend server
+- Navigate to `http://localhost:4200/`, or run `ng serve -o` to automatically open the dev server in your browser. The app will automatically reload if you change any of the source files.
+
+## Database Access
+
+- Mongo Cloud Atlas - host for MongoDB database instance
+- Management:
+    - Login: https://cloud.mongodb.com/user
+    - Database: arcadiadb
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.

@@ -17,6 +17,7 @@ import {MatCardModule, MatCard} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormGroup, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './services/user.service';
+import { ContactFooterComponent } from './views/contact-footer/contact-footer.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { UserService } from './services/user.service';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
+    ContactFooterComponent,
   ],
   imports: [
     BrowserModule,

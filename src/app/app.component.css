@@ -1,11 +1,9 @@
 .container {
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 40px;
+    margin: 40px 20px 0px 20px;
 }
 
 .title{
-    margin-left: 20px;
+    margin-left: 2em;
 }
 
 .toolbar{
@@ -13,11 +11,22 @@
     top: 0;
     left: 0;
     z-index: 2;
+    color: white;
+    padding-top: 1.5em;
     width: 100% !important;
-    height: 30px !important;
-    background-color: aqua;
+    height: 5em !important;
+    background-color: rgb(46, 163, 184);
 }
 
 .space {
-    margin-right: 100px;
+    margin-right: 70vw;
+}
+
+button {
+    all: unset;
+    margin-right: 2em;
+}
+
+button:hover {
+  color: rgb(153, 148, 148);
 }

@@ -7,7 +7,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "express": "node src/app/server/app.js",
+    "kill": "pkill -9 node",
+    "kill-linux": "killall -s KILL node"
   },
   "private": true,
   "dependencies": {
@@ -27,6 +30,7 @@
     "connect-mongo": "^3.2.0",
     "connect-mongodb-session": "^2.3.1",
     "cors": "^2.8.5",
+    "ejs": "^2.7.1",
     "express-session": "^1.17.0",
     "jsonwebtoken": "^8.5.1",
     "mat-contenteditable": "^9.1.0",

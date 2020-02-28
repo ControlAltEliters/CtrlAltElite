@@ -1,3 +1,41 @@
 mat-card {
-  top: 6em;
+  top: 25%;
+  left: 35%;
+  width: 30%;
+  height: 40%;
+  color: white;
+  position: fixed;
+  border-radius: 1em;
+  text-align: center;
+  background: rgba(52, 222, 252, 0.616);
+}
+
+h1 {
+  font-size: 5vw;
+  font-weight: 800;
+  padding-top: .5em;
+}
+
+img {
+  height: 7vw;
+  width: auto;
+  display: block;
+  margin: 8% 0 0 37%;
+  padding: 1.5vw 1vw 1vw 1.5vw;
+}
+
+button {
+  all: unset;
+  margin: 1.5vw 0 0 0;
+  border-radius: .25em;
+  padding: .5em 1em .5em 1em;
+}
+
+#login {
+  margin: 0 1vw 0 1vw;
+  background: rgb(190, 190, 190);
+}
+
+#register {
+  background: rgb(223, 51, 151);
 }

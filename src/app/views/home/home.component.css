@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=VT323&display=swap');
+
 mat-card {
-  top: 25%;
+  top: 27%;
   left: 35%;
   width: 30%;
   height: 40%;
@@ -7,20 +9,36 @@ mat-card {
   position: fixed;
   border-radius: 1em;
   text-align: center;
-  background: rgba(52, 222, 252, 0.616);
+  background: rgba(52, 222, 252, 0.521);
+  box-shadow: .5em .5em #6bd4dbcc !important;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 h1 {
-  font-size: 5vw;
+  font-size: 3vw;
   font-weight: 800;
-  padding-top: .5em;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: 'VT323';
+  display: inline-block;
+  padding: .75em .2em 0em 0em;
+
+}
+
+.typer {
+  animation: blink 1s infinite;
 }
 
 img {
   height: 7vw;
   width: auto;
   display: block;
-  margin: 8% 0 0 37%;
+  margin: 2% 0 0 37%;
   padding: 1.5vw 1vw 1vw 1.5vw;
 }
 

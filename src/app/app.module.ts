@@ -17,6 +17,7 @@ import {MatCardModule, MatCard} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormGroup, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './services/user.service';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { UserService } from './services/user.service';
     MatCardModule,
     MatFormFieldModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSlideToggleModule
   ],
   providers: [
     UserService,

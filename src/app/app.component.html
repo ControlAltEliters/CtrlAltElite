@@ -8,19 +8,20 @@
 
   <div>
     <mat-toolbar class="toolbar" color="primary">
-      <span class="title">{{title}}</span>
-      <span class="space"></span>
-      <span *ngIf="loginStatus === false">
+      <div class="col-6 title">{{title}}</div>
+      <div class="col-6 menu">
+        <span *ngIf="loginStatus === false">
+            <button mat-menu-item [routerLink]="['/home']">Home</button>
+            <button mat-menu-item>Events</button>
+            <button mat-menu-item>FAQ</button>
+        </span>
+        <span *ngIf="loginStatus === true">
           <button mat-menu-item [routerLink]="['/home']">Home</button>
           <button mat-menu-item>Events</button>
           <button mat-menu-item>FAQ</button>
-      </span>
-      <span *ngIf="loginStatus === true">
-        <button mat-menu-item [routerLink]="['/home']">Home</button>
-        <button mat-menu-item>Events</button>
-        <button mat-menu-item>FAQ</button>
-        <button mat-menu-item>My Account</button>
-      </span>
+          <button mat-menu-item>My Account</button>
+        </span>
+      </div>
     </mat-toolbar>
 
     <div class="container"><router-outlet></router-outlet></div>

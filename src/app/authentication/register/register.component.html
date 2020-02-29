@@ -1,30 +1,33 @@
 <div class="col-sm-12">
   <form [formGroup]="registerForm">
     <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <label for="exampleInputName">Name</label>
+      <input formControlName="name" type="name" class="form-control" id="exampleInputName" aria-describedby="nameHelp" placeholder="enter name">
+      <small id="nameHelp" class="form-text text-muted"></small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email Address</label>
+      <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter email">
       <small id="emailHelp" class="form-text text-muted"></small>
     </div>
     <div class="form-group">
         <label for="exampleInputUsername">Username</label>
-        <input formControlName="username" type="text" class="form-control" id="exampleInputUsername" aria-describedby="userHelp" placeholder="username">
+        <input formControlName="username" type="text" class="form-control" id="exampleInputUsername" aria-describedby="userHelp" placeholder="enter username">
         <small id="userHelp" class="form-text text-muted"></small>
     </div>
     <div class="form-group">
       <label for="passwordInput">Password</label>
-      <input formControlName="password" type="password" class="form-control" id="passwordInput" aria-describedby="passHelp" placeholder="password">
+      <input formControlName="password" type="password" class="form-control" id="passwordInput" aria-describedby="passHelp" placeholder="enter password">
       <small id="passHelp" class="form-text text-muted"></small>
     </div>
     <div class="form-group">
         <label for="CpasswordInput">Confirm Password</label>
-        <input formControlName="cpass" type="password" class="form-control" id="CpasswordInput" aria-describedby="CpassHelp" placeholder="password">
+        <input formControlName="cpass" type="password" class="form-control" id="CpasswordInput" aria-describedby="CpassHelp" placeholder="re-enter password">
         <small id="CpassHelp" class="form-text text-muted"></small>
       </div>
-    <div class="form-group" style="text-align:center;">
-        <button type="button" class="btn btn-dark" (click)="register()">Register</button>
+    <div class="form-group" style="text-align:center; margin-left: -1em;">
+        <button type="button" class="btn btn-dark" (click)="register()">Submit</button>
         <button type="button" class="btn btn-secondary" (click)="moveToLogin()">Log in</button>
     </div>
   </form>
 </div>
-
-<app-contact-footer></app-contact-footer>

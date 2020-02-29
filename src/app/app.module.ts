@@ -17,15 +17,14 @@ import {MatCardModule, MatCard} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormGroup, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './services/user.service';
-import { ContactFooterComponent } from './views/contact-footer/contact-footer.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent,
-    ContactFooterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +36,8 @@ import { ContactFooterComponent } from './views/contact-footer/contact-footer.co
     MatCardModule,
     MatFormFieldModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSlideToggleModule
   ],
   providers: [
     UserService,

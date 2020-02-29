@@ -1,3 +1,22 @@
 form {
-  margin-top: 10em;
+  top: 18vh;
+  left: 35vw;
+  width: 30vw;
+  color: white;
+  position: fixed;
+  font-weight: 800;
+  text-align: center;
+}
+
+input {
+  text-align: center;
+}
+
+::-webkit-input-placeholder {
+  text-align: center;
+  color: rgb(216, 211, 211) !important;
+}
+
+button {
+  margin: 1em 0 0 1em;
 }

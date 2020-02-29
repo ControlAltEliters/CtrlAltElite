@@ -1,36 +1,86 @@
-/* * {
+.background {
+  background: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffree4kwallpapers.com%2Fuploads%2Foriginals%2F2017%2F01%2F18%2Fsynthwave-wallpaper.jpg&f=1&nofb=1") no-repeat;
+  background-size: cover;
+  height: 55em;
+  opacity: .5;
+}
+
+body {
   overflow: hidden;
-} */
-
-.container {
-    margin: 40px 20px 0px 20px;
+  background: rgb(39, 22, 80);
 }
 
-.title{
-    margin-left: 2em;
+.title {
+  font-size: 2em;
+  font-weight: 900;
+  padding-left: 1em;
+  letter-spacing: .25em;
 }
 
-.toolbar{
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    color: white;
-    padding-top: 1.5em;
-    width: 100% !important;
-    height: 5em !important;
-    background-color: rgb(46, 163, 184);
+.col-6 {
+  display: inline-block;
 }
 
-.space {
-    margin-right: 70vw;
+.menu {
+  text-align: right;
+}
+
+.toolbar {
+  top: 0;
+  left: 0;
+  color: white;
+  position: fixed;
+  padding-top: 1em;
+  width: 100% !important;
+  height: 5.5em !important;
+  background-color: rgba(52, 222, 252, 0.651);
+  /* box-shadow: 0 1em 1em .5em rgba(52, 222, 252, 0.651) !important; */
 }
 
 button {
-    all: unset;
-    margin-right: 2em;
+  all: unset;
+  padding: .5em;
+  margin-right: 2em;
+}
+
+button:focus {
+  outline: none;
 }
 
 button:hover {
+  border-radius: 1em;
   color: rgb(153, 148, 148);
+  background: rgba(255, 255, 255, 0.781);
+}
+
+.row {
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 6.5em;
+  margin: 0 auto;
+  color: white;
+  position: fixed;
+  padding: .5em 1em 1em 1em;
+  background: rgba(52, 222, 252, 0.705);
+  /* box-shadow: 0 1em 1em 1.5em rgba(52, 222, 252, 0.795) !important; */
+}
+
+h5 {
+  font-weight: 700;
+  font-size: 1.25vw;
+}
+
+p {
+  font-size: .5em;
+}
+
+.social {
+  text-align: right;
+}
+
+img {
+  width: auto;
+  height: 3.5em;
+  padding: 1.5em 1em 0 0;
 }

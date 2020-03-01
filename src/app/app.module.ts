@@ -1,30 +1,30 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormGroup, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCardModule, MatCard } from '@angular/material/card';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
-import { HomeComponent } from './views/home/home.component';
-
-import { HttpClientModule } from '@angular/common/http';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatCardModule, MatCard} from '@angular/material/card';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import { FormGroup, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './services/user.service';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { HomeComponent } from './views/home/home.component';
+import { ContactFooterComponent } from './views/partials/contact-footer/contact-footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    ContactFooterComponent,
   ],
   imports: [
     BrowserModule,

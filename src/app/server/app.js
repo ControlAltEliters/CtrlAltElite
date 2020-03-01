@@ -19,6 +19,7 @@ app.use(cors({
 // Connect to Mongo Database
 // TODO: Remove hardcoded creds later
 const mongoUrl = 'mongodb+srv://dbuser:command10@arcadiadb-2u5es.mongodb.net/test?retryWrites=true&w=majority'
+
 mongoose.connect(mongoUrl, {
     useUnifiedTopology: true,
     useNewUrlParser: true,

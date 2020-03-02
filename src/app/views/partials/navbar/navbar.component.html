@@ -1,0 +1,36 @@
+<div class="ui inverted segment navbar-custom">
+  <div class="ui inverted secondary pointing menu navbar-custom">
+    <div class="item">
+       ARCADIA
+    </div>
+    
+    <div class="right menu" *ngIf="loginStatus === false">
+        <a class="active item" [routerLink]="['/home']">
+        Home
+        </a>
+        <a class="item">
+        Events
+        </a>
+        <a class="item">
+        Faq
+        </a>
+        <a class="item" href="/login">
+        Login
+        </a>
+    </div>
+    <div class="right menu" *ngIf="loginStatus === true">
+        <a class="active item" [routerLink]="['/home']">
+        Home
+        </a>
+        <a class="item">
+        Events
+        </a>
+        <a class="item">
+        Faq
+        </a>
+        <a class="item">
+        Account
+        </a>
+    </div>
+  </div>
+</div>

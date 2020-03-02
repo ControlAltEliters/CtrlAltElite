@@ -1,0 +1,15 @@
+.ui.secondary.inverted.pointing.menu {
+    border-width: 0px;
+    border-color: rgba(34,36,38,.15);
+}
+
+.ui.inverted.segment, .ui.primary.inverted.segment {
+    background: rgb(46, 163, 184);
+    color: rgba(255,255,255,.9);
+}
+
+.ui.inverted.menu {
+    border: 0 solid transparent;
+    background: rgb(46, 163, 184);
+    box-shadow: none;
+}

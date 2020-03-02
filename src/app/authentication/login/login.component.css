@@ -1,33 +1,45 @@
-h1 {
-  width: 100%;
-  color: white;
-  padding: .25em;
-  font-weight: 900;
-  text-align: center;
-  border-radius: 1em;
-  margin: 4em 0 0 3em;
-  background: rgba(216, 211, 211, 0.637);
-}
-
 form {
-  top: 35vh;
-  left: 35vw;
-  width: 30vw;
-  color: white;
-  position: fixed;
-  font-weight: 800;
-  text-align: center;
+    top: 30vh;
+    left: 35vw;
+    width: 30vw;
+    color: white;
+    position: fixed;
+    font-weight: 800;
+    text-align: center;
 }
 
 input {
-  text-align: center;
+    width: 100%;
+    padding: .5em;
+    font-size: 2vh;
+    text-align: center;
+    border-radius: .5em;
+    margin: .5em 0 1em 0;
+    color: rgb(167, 161, 161);
+}
+
+input:focus {
+    outline: none;
 }
 
 ::-webkit-input-placeholder {
-  text-align: center;
-  color: rgb(216, 211, 211) !important;
+    text-align: center;
+    color: rgb(216, 211, 211) !important;
 }
 
 button {
+  all: unset;
   margin: 1em 0 0 0;
+  border-radius: .25em;
+  padding: .5em 1em .5em 1em;
+  color: rgb(221, 221, 221);
+  background: rgb(161, 161, 161);
+}
+
+button:hover {
+    background: rgb(143, 143, 143);
+}
+
+button:active {
+    transform: translateY(1px);
 }

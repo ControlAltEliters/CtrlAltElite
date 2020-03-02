@@ -1,26 +1,18 @@
-.row {
-  position: fixed;
-  margin: 0 auto;
-  width: 100vw;
-  bottom: 0;
-  left: 0;
-
-  background: rgb(46, 163, 184);
-  padding: 1em;
-  color: white;
-  height: 9em;
-}
-
-p {
-  font-size: .5em;
-}
-
-.social {
-  text-align: right;
-}
-
 img {
   padding: 2em 1em 0 0;
-  height: 4.5em;
-  width: auto;
+  height: 4em;
+  width: 3.5em;
+}
+
+/* TODO: Remove absolute positioning */
+.ui.footer.segment {
+  margin: 5em 0em 0em;
+  padding: 5em 0em;
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+}
+
+.ui.inverted.segment, .ui.primary.inverted.segment {
+  background: rgb(46, 163, 184);
 }

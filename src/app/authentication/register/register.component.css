@@ -33,13 +33,24 @@ button {
     border-radius: .25em;
     padding: .5em 1em .5em 1em;
     color: rgb(221, 221, 221);
-    background: rgb(161, 161, 161);
-}
-
-button:hover {
-    background: rgb(143, 143, 143);
 }
 
 button:active {
     transform: translateY(1px);
+}
+
+#login {
+    background: rgb(223, 51, 151);
+}
+
+#login:hover {
+  background: rgb(202, 31, 131);
+}
+
+#submit {
+    background: rgb(122, 122, 122);
+}
+
+#submit:hover {
+    background: rgb(143, 143, 143);
 }

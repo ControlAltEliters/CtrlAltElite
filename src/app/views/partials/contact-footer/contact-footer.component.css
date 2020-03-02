@@ -1,0 +1,18 @@
+img {
+  padding: 2em 1em 0 0;
+  height: 4em;
+  width: 3.5em;
+}
+
+/* TODO: Remove absolute positioning */
+.ui.footer.segment {
+  margin: 5em 0em 0em;
+  padding: 5em 0em;
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+}
+
+.ui.inverted.segment, .ui.primary.inverted.segment {
+  background: rgb(46, 163, 184);
+}

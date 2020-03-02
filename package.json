@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve -o",
+    "start": "ng serve",
+    "starto": "ng serve -o",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -33,6 +34,7 @@
     "ejs": "^2.7.1",
     "express-session": "^1.17.0",
     "gulp": "^4.0.2",
+    "jquery": "^3.4.1",
     "jsonwebtoken": "^8.5.1",
     "mat-contenteditable": "^9.1.0",
     "mongoose": "^5.9.2",

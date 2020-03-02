@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=VT323&display=swap');
 
-mat-card {
-  top: 27%;
-  left: 35%;
-  width: 30%;
-  height: 40%;
-  color: white;
-  position: fixed;
-  border-radius: 1em;
-  text-align: center;
+
+.top20 {
+  margin-top: 20px;
+}
+
+.card {
   background: rgba(52, 222, 252, 0.521);
+  margin-top: 10% !important;
+  border: 0px;
+  min-width: 400px;
   box-shadow: .5em .5em #6bd4dbcc !important;
 }
 
@@ -19,16 +19,15 @@ mat-card {
   100% { opacity: 1; }
 }
 
-h1 {
+span {
   font-size: 3vw;
   font-weight: 800;
   overflow: hidden;
   white-space: nowrap;
   font-family: 'VT323';
-  display: inline-block;
-  padding: .75em .2em 0em 0em;
-
+  min-height: none !important; 
 }
+
 
 .typer {
   animation: blink 1s infinite;
@@ -38,7 +37,6 @@ img {
   height: 7vw;
   width: auto;
   display: block;
-  margin: 2% 0 0 37%;
   padding: 1.5vw 1vw 1vw 1.5vw;
 }
 
@@ -47,6 +45,7 @@ button {
   margin: 1.5vw 0 0 0;
   border-radius: .25em;
   padding: .5em 1em .5em 1em;
+  color: #fff;
 }
 
 #login {

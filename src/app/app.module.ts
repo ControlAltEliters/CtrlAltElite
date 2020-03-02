@@ -17,6 +17,7 @@ import { RegisterComponent } from './authentication/register/register.component'
 import { UserService } from './services/user.service';
 import { HomeComponent } from './views/home/home.component';
 import { ContactFooterComponent } from './views/partials/contact-footer/contact-footer.component';
+import { NavbarComponent } from './views/partials/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ContactFooterComponent } from './views/partials/contact-footer/contact-
     RegisterComponent,
     HomeComponent,
     ContactFooterComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

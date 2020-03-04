@@ -18,6 +18,7 @@ import { UserService } from './services/user.service';
 import { HomeComponent } from './views/home/home.component';
 import { ContactFooterComponent } from './views/partials/contact-footer/contact-footer.component';
 import { NavbarComponent } from './views/partials/navbar/navbar.component';
+import { EventsPageComponent } from './views/events-page/events-page.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { NavbarComponent } from './views/partials/navbar/navbar.component';
     HomeComponent,
     ContactFooterComponent,
     NavbarComponent,
+    EventsPageComponent,
   ],
   imports: [
     BrowserModule,

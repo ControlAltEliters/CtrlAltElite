@@ -1,0 +1,20 @@
+<div class="ui container">
+    <div class="ui card centered">
+        <div class="content">
+            <button (click)="displayModal()" class="ui button">Schedule event</button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showModal">
+    <div class="ui active modal">
+        <i class="close icon" (click)="hideModal()"></i>
+        <div class="header">CREATE NEW GAME</div>
+        <div class="content">
+
+        </div>
+        <div class="actions">
+          <div class="ui black button">Create</div>
+        </div>
+      </div>
+</div>

@@ -1,22 +1,56 @@
 form {
-  top: 18vh;
-  left: 35vw;
-  width: 30vw;
-  color: white;
-  position: fixed;
-  font-weight: 800;
-  text-align: center;
+    top: 15vh;
+    left: 35vw;
+    width: 30vw;
+    color: white;
+    position: fixed;
+    font-weight: 800;
+    text-align: center;
 }
 
 input {
-  text-align: center;
+    width: 100%;
+    padding: .5em;
+    font-size: 1.95vh;
+    text-align: center;
+    border-radius: .5em;
+    margin: .5em 0 1em 0;
+    color: rgb(167, 161, 161);
+}
+
+input:focus {
+    outline: none;
 }
 
 ::-webkit-input-placeholder {
-  text-align: center;
-  color: rgb(216, 211, 211) !important;
+    text-align: center;
+    color: rgb(216, 211, 211) !important;
 }
 
 button {
-  margin: 1em 0 0 1em;
+    all: unset;
+    margin: 1em 0 0 1em;
+    border-radius: .25em;
+    padding: .5em 1em .5em 1em;
+    color: rgb(221, 221, 221);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+#login {
+    background: rgb(223, 51, 151);
+}
+
+#login:hover {
+  background: rgb(202, 31, 131);
+}
+
+#submit {
+    background: rgb(122, 122, 122);
+}
+
+#submit:hover {
+    background: rgb(143, 143, 143);
 }

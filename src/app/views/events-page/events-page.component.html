@@ -1,20 +1,52 @@
+
 <div class="ui container">
     <div class="ui card centered">
         <div class="content">
             <button (click)="displayModal()" class="ui button">Schedule event</button>
         </div>
     </div>
+    <div *ngIf="showModal">
+        <div class="ui active modal">
+            <i class="close icon" (click)="hideModal()"></i>
+            <div class="header">CREATE NEW GAME</div>
+            <div class="content">
+                <form [formGroup]="eventsForm">
+                    <div class="form-group">
+                        <label class="inputTitle">Event Title</label>
+                        <input formControlName="eventTitle" type="name" class="form-control" id="inputGame"
+                         placeholder="Enter type of game">
+                    </div>
+                    <div class="form-group">
+                        <label class="inputTitle">Date</label>
+                        <input formControlName="date" type="date" class="form-control" id="inputDate"
+                            placeholder="enter date">
+                    </div>
+                    <div class="form-group">
+                        <label class="inputTitle">Start Time</label>
+                        <input formControlName="startTime" type="time" class="form-control" id="inputStartTime"
+                        placeholder="hrs:mins">
+                    </div>
+                    <div class="form-group">
+                        <label class="inputTitle">End Time</label>
+                        <input formControlName="endTime" type="time" class="form-control" id="inputEndTime"
+                        placeholder="hrs:mins">
+                    </div>
+                    <div class="form-group">
+                        <label class="inputTitle">Max number of Players</label>
+                        <input formControlName="maxPlayers" type="number" class="form-control" id="inputMax">
+                    </div>
+                    <div class="form-group">
+                        <label class="inputTitle">Min number of Players</label>
+                        <input formControlName="minPlayers" type="number" class="form-control" id="inputMin">
+                    </div>
+                    <div class="form-group" style="text-align:center; margin-left: 10rm;">
+                        <div class="ui black button" (click)="createEvent()">Create</div>
+                    </div>
+                </form>
+            </div>
+            <div class="actions">
+            </div>
+        </div>
+    </div>
 </div>
 
-<div *ngIf="showModal">
-    <div class="ui active modal">
-        <i class="close icon" (click)="hideModal()"></i>
-        <div class="header">CREATE NEW GAME</div>
-        <div class="content">
-
-        </div>
-        <div class="actions">
-          <div class="ui black button">Create</div>
-        </div>
-      </div>
-</div>

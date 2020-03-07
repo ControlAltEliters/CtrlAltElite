@@ -19,6 +19,7 @@ import { HomeComponent } from './views/home/home.component';
 import { ContactFooterComponent } from './views/partials/contact-footer/contact-footer.component';
 import { NavbarComponent } from './views/partials/navbar/navbar.component';
 import { EventsPageComponent } from './views/events-page/events-page.component';
+import { LoginCardComponent } from './views/partials/login-card/login-card.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { EventsPageComponent } from './views/events-page/events-page.component';
     ContactFooterComponent,
     NavbarComponent,
     EventsPageComponent,
+    LoginCardComponent,
   ],
   imports: [
     BrowserModule,

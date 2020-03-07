@@ -1,7 +1,4 @@
 .title {
-    font-size: 2em;
-    font-weight: 900;
-    letter-spacing: .35em;
     padding: .5em 0 .5em .75em;
 }
 
@@ -19,4 +16,9 @@
     box-shadow: none;
     border: 0 solid transparent;
     background: rgb(46, 163, 184);
+}
+
+img {
+  max-width: 30%;
+  height: auto;
 }

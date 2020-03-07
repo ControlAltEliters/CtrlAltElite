@@ -11,9 +11,8 @@ img {
 .ui.footer.segment {
     bottom: 0px;
     width: 100%;
-    position: fixed;
     padding: 2.5em 0em;
-    margin: 2.5em 0em 0em;
+    margin: 0em;
 }
 
 .ui.inverted.segment, .ui.primary.inverted.segment {

@@ -15,11 +15,13 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
 import { UserService } from './services/user.service';
+import { EventService } from './services/event.service';
 import { HomeComponent } from './views/home/home.component';
 import { ContactFooterComponent } from './views/partials/contact-footer/contact-footer.component';
 import { NavbarComponent } from './views/partials/navbar/navbar.component';
 import { EventsPageComponent } from './views/events-page/events-page.component';
 import { LoginCardComponent } from './views/partials/login-card/login-card.component';
+import { Time24to12Format } from './pipes/time24To12Format';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { LoginCardComponent } from './views/partials/login-card/login-card.compo
     NavbarComponent,
     EventsPageComponent,
     LoginCardComponent,
+    Time24to12Format,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +50,7 @@ import { LoginCardComponent } from './views/partials/login-card/login-card.compo
   ],
   providers: [
     UserService,
+    EventService,
   ],
   bootstrap: [AppComponent],
   schemas: [

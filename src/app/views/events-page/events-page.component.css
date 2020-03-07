@@ -5,3 +5,58 @@
     margin-bottom: 0% !important;
     background: rgba(52, 222, 252, 0.521);
 }
+
+.content{
+    text-align: center;
+}
+
+form {
+    color: white;
+    font-weight: 800;
+    text-align: center;
+}
+.inputTitle{
+    color: rgb(167, 161, 161);
+}
+input {
+    width: 100%;
+    padding: .5em;
+    font-size: 1.95vh;
+    text-align: center;
+    border-radius: .5em;
+    margin: .5em 0 1em 0;
+    color: rgb(167, 161, 161);
+}
+
+input:focus {
+    outline: none;
+}
+
+::-webkit-input-placeholder {
+    text-align: center;
+    color: rgb(216, 211, 211) !important;
+}
+
+button {
+    all: unset;
+    margin: 1em 0 0 1em;
+    border-radius: .25em;
+    padding: .5em 1em .5em 1em;
+    color: rgb(221, 221, 221);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+#submit {
+    background: rgb(122, 122, 122);
+}
+
+#submit:hover {
+    background: rgb(143, 143, 143);
+}
+
+.ui.active.modal{
+    background-color: blueviolet;
+}

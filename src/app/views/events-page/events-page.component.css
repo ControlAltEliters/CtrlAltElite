@@ -6,8 +6,20 @@
     background: rgba(52, 222, 252, 0.521);
 }
 
+.modal{
+    margin-top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
 .content{
     text-align: center;
+    background: rgba(55,13,25,0.8);
+    color: white;
+    height: 100%;
+    padding: 1% 0% 5% 0%;
 }
 
 form {
@@ -57,6 +69,10 @@ button:active {
     background: rgb(143, 143, 143);
 }
 
-.ui.active.modal{
-    background-color: blueviolet;
-}
+.content-block {
+    background: rgba(55,13,25,0.8);
+    color: white;
+    height: 100%;
+    padding: 1% 0% 5% 0%;
+  }
+  

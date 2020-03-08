@@ -1,11 +1,13 @@
 
 <div class="ui container">
+    <div class="content-block">
     <div class="ui card centered">
         <div class="content">
             <button (click)="displayModal()" class="ui button">Schedule event</button>
         </div>
     </div>
     <div *ngIf="showModal">
+        <div class="modal">
         <div class="ui active modal">
             <i class="close icon" (click)="hideModal()"></i>
             <div class="header">CREATE NEW GAME</div>
@@ -47,6 +49,8 @@
             <div class="actions">
             </div>
         </div>
+        </div>
+    </div>
     </div>
 </div>
 

@@ -12,12 +12,12 @@ export class EventsPageComponent implements OnInit {
   public showModal = false;
 
   eventsForm:FormGroup = new FormGroup({
-    eventTitle:new FormControl(null, Validators.required),
-    date:new FormControl(null,[Validators.email,Validators.required]),
-    startTime:new FormControl(null,Validators.required),
-    endTime:new FormControl(null,Validators.required),
-    maxPlayers:new FormControl(null,Validators.required),
-    minPlayers:new FormControl(null,Validators.required)
+    eventTitle:new FormControl(null),
+    date:new FormControl(null),
+    startTime:new FormControl(null),
+    endTime:new FormControl(null),
+    maxPlayers:new FormControl(null),
+    minPlayers:new FormControl(null)
   })
   
   constructor(private _eventsService:EventService) { }
@@ -34,12 +34,14 @@ export class EventsPageComponent implements OnInit {
   }
 
   createEvent(){
+  
     if(!this.eventsForm.valid){
       console.log('Invalid Form'); return;
     }
-
+    
     this._eventsService.createEvent(JSON.stringify(this.eventsForm.value))
     .subscribe(
+      data=> {console.log(data);},
       error=>console.error(error)
     )
   }

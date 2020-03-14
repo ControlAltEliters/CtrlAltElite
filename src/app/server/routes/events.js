@@ -14,10 +14,9 @@ async function addToDB(req, res) {
   var event = new Event({
     evenTitle: req.body.eventTitle,
     date: req.body.date,
-    startTime: req.body.startTime,
-    endTime: req.body.endTime,
     maxPlayers: req.body.maxPlayers,
     minPlayers: req.body.minPlayers,
+    table: req.body.table,
     creation_dt: Date.now()
   });
 

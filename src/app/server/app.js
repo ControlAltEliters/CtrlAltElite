@@ -16,7 +16,6 @@ app.use(cors({
   credentials:true
 }));
 
-
 // Connect to Mongo Database
 // TODO: Remove hardcoded creds later
 const mongoUrl = 'mongodb+srv://dbuser:command10@arcadiadb-2u5es.mongodb.net/test?retryWrites=true&w=majority'

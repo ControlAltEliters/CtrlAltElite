@@ -22,6 +22,7 @@ import { NavbarComponent } from './views/partials/navbar/navbar.component';
 import { EventsPageComponent } from './views/events-page/events-page.component';
 import { LoginCardComponent } from './views/partials/login-card/login-card.component';
 import { Time24to12Format } from './pipes/time24To12Format';
+import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
 
 @NgModule({
   declarations: [
@@ -46,7 +47,10 @@ import { Time24to12Format } from './pipes/time24To12Format';
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FullCalendarModule,
   ],
   providers: [
     UserService,

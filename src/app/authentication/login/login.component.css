@@ -1,45 +1,76 @@
-form {
-    top: 30vh;
-    left: 35vw;
-    width: 30vw;
+@import url('https://fonts.googleapis.com/css?family=VT323&display=swap');
+
+.top20 {
+    margin-top: 20px;
+}
+
+.card {
+    border: 0px;
+    min-width: 400px;
+    margin-top: 5% !important;
+    margin-bottom: 5% !important;
+    background: rgba(52, 222, 252, 0.521);
+    box-shadow: .5em .5em #6bd4dbcc !important;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+span {
     color: white;
-    position: fixed;
+    font-size: 3vw;
     font-weight: 800;
-    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    font-family: 'VT323';
+    min-height: none !important;
 }
 
-input {
-    width: 100%;
-    padding: .5em;
-    font-size: 2vh;
-    text-align: center;
-    border-radius: .5em;
-    margin: .5em 0 1em 0;
-    color: rgb(167, 161, 161);
+.typer {
+    animation: blink 1s infinite;
 }
 
-input:focus {
-    outline: none;
-}
-
-::-webkit-input-placeholder {
-    text-align: center;
-    color: rgb(216, 211, 211) !important;
+img {
+    height: 7vw;
+    width: auto;
+    display: block;
+    padding: 1.5vw 1vw 1vw 1.5vw;
 }
 
 button {
-  all: unset;
-  margin: 1em 0 0 0;
-  border-radius: .25em;
-  padding: .5em 1em .5em 1em;
-  color: rgb(221, 221, 221);
-  background: rgb(161, 161, 161);
+    all: unset;
+    color: #fff !important;
+    margin: 0 0 1.5vw 0;
+    border-radius: .25em;
+    padding: .5em 1em .5em 1em;
 }
 
-button:hover {
-    background: rgb(143, 143, 143);
+#login {
+    margin: 0 1vw 0 1vw;
+    background: #FE019A;
+}
+
+#login:hover {
+    background: rgb(206, 1, 124);
+}
+
+#register {
+    background: rgb(170, 179, 189);
+}
+
+#register:hover {
+    background: rgb(137, 143, 150);
 }
 
 button:active {
     transform: translateY(1px);
 }
+
+.padded {
+  padding: 5%;
+}
+
+

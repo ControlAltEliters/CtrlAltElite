@@ -1,7 +1,11 @@
+<script src="../../calendar//caleandar.js"></script>
 
 <div class="ui container">
     <div class="content-block">
     <div class="ui card centered">
+        <div class="content">
+            <full-calendar defaultView="dayGridMonth" [plugins]="calendarPlugins"></full-calendar>
+        </div>
         <div class="content">
             <button (click)="displayModal()" class="ui button">Schedule event</button>
         </div>
@@ -24,16 +28,6 @@
                             placeholder="enter date">
                     </div>
                     <div class="form-group">
-                        <label class="inputTitle">Start Time</label>
-                        <input formControlName="startTime" type="time" class="form-control" id="inputStartTime"
-                        placeholder="hrs:mins">
-                    </div>
-                    <div class="form-group">
-                        <label class="inputTitle">End Time</label>
-                        <input formControlName="endTime" type="time" class="form-control" id="inputEndTime"
-                        placeholder="hrs:mins">
-                    </div>
-                    <div class="form-group">
                         <label class="inputTitle">Max number of Players</label>
                         <input formControlName="maxPlayers" type="number" class="form-control" id="inputMax">
                     </div>
@@ -42,7 +36,7 @@
                         <input formControlName="minPlayers" type="number" class="form-control" id="inputMin">
                     </div>
                     <div class="form-group" style="text-align:center; margin-left: 10rm;">
-                        <div class="ui black button" (click)="createEvent()">Create</div>
+                        <div class="ui black button" (click)="chooseTable()">Choose Table</div>
                     </div>
                 </form>
             </div>
@@ -51,6 +45,34 @@
         </div>
         </div>
     </div>
+
+    <div *ngIf="tableModal">
+        <div class="modal">
+        <div class="ui active modal">
+            <i class="close icon" (click)="hideTableModal()"></i>
+            <div class="header">SELECT TABLE</div>
+            <div class="content">
+                <form [formGroup]="eventsForm">
+                    <div class="form-group">
+                        <label class="inputTitle">Table</label>
+                         <select id="inputGame" class="form-control" formControlName="table">
+                            <option value="1">Table 1</option>
+                            <option value="2">Table 2</option>
+                            <option value="3">Table 3</option>
+                            <option value="4">Table 4</option>
+                          </select>
+                    </div>
+                    <div class="form-group" style="text-align:center; margin-left: 10rm;">
+                        <div class="ui black button" (click)="createEvent()">Choose Table</div>
+                    </div>
+                </form>
+            </div>
+            <div class="actions">
+            </div>
+        </div>
+        </div>
+    </div>
+
     </div>
 </div>
 

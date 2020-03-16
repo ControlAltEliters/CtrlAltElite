@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
-var schema = new Schema({
+let schema = new Schema({
     name : {type:String, require:true, lowercase:true},
     type : {type:String, require:true, lowercase:true},
     owner : {type:String},

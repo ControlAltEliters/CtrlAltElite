@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import {FormGroup,FormControl,Validators} from '@angular/forms';
+import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,15 +9,42 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  registerForm: FormGroup;
+  loginError: String
+  @Input() on: boolean;
 
-  constructor(private router: Router) { }
+  loginForm:FormGroup = new FormGroup({
+    email:new FormControl(null,Validators.required),
+    password:new FormControl(null,Validators.required)
+  })
+  constructor(private _router:Router, private _userService:UserService) { }
 
   ngOnInit(): void {
+    let i = 0;
+    let welcome = "Welcome Player 1";
+
+    function typeWriter() {
+      if (i < welcome.length) {
+        document.getElementById("welcome").innerHTML += welcome.charAt(i);
+        i++;
+        setTimeout(typeWriter, 75);
+      }
+    }
+    typeWriter();
   }
 
-  moveToLogin() {
-    this.router.navigateByUrl('/home');
-  }
+  login(){
+    if(!this.loginForm.valid){
+      console.log('Invalid Form'); return;
+    }
 
+    this._userService.login(JSON.stringify(this.loginForm.value))
+    .subscribe(
+      data => {
+        this._router.navigate(['/home']);
+      },
+      error => {
+        this.loginError = error.error.message;
+      }
+    )
+  }
 }

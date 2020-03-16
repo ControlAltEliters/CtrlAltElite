@@ -8,18 +8,19 @@ let usersRouter = require('./routes/users');
 let indexRouter = require('./routes/index');
 let eventsRouter = require('./routes/events');
 let session = require('express-session');
+let MongoStore = require('connect-mongo')(session);
 
+// initialize app
 let app = express();
 
-app.use(cors({
-  origin:['http://localhost:4200','http://127.0.0.1:4200'],
-  credentials:true
-}));
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
-// Connect to Mongo Database
 // TODO: Remove hardcoded creds later
 const mongoUrl = 'mongodb+srv://dbuser:command10@arcadiadb-2u5es.mongodb.net/test?retryWrites=true&w=majority'
 
+// Connect to mongodb
 mongoose.connect(mongoUrl, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
@@ -29,35 +30,31 @@ mongoose.connect(mongoUrl, {
 mongoose.set('useFindAndModify', false)
 mongoose.set('useCreateIndex', true)
 
+// cors
+app.use(cors({
+  origin:['http://localhost:4200','http://127.0.0.1:4200'],
+  credentials:true
+}));
 
-//passport
-const MongoStore = require('connect-mongo')(session);
+//passport / express
 app.use(session({
-  name:'myname.sid',
+  name:'auth',
   resave:false,
   saveUninitialized:false,
   secret:'secret',
   cookie:{
     maxAge:36000000,
-    httpOnly:false,
-    secure:false
   },
   store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
-
 require('./passport-config.ts');
-
 app.use(passport.initialize());
 app.use(passport.session());
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Routers
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/events', eventsRouter);

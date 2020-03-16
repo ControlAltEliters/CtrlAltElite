@@ -1,14 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {FormGroup,FormControl,Validators} from '@angular/forms';
+import { FormGroup,FormControl,Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+
 export class RegisterComponent implements OnInit {
   @Input() on: boolean;
 
@@ -21,8 +21,7 @@ export class RegisterComponent implements OnInit {
   })
   constructor(private _router:Router, private _userService:UserService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   moveToLogin(){
     this._router.navigate(['/login']);

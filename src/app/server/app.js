@@ -6,6 +6,7 @@ let passport = require('passport');
 let mongoose =require('mongoose');
 let usersRouter = require('./routes/users');
 let indexRouter = require('./routes/index');
+let eventsRouter = require('./routes/events');
 let session = require('express-session');
 let MongoStore = require('connect-mongo')(session);
 
@@ -56,6 +57,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Routers
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/events', eventsRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

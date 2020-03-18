@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
-var schema = new Schema({
+let schema = new Schema({
     eventTitle : {type:String, require:true},
     date : {type:Date, require:true},
   //  startTime : {type:Date, require:true},

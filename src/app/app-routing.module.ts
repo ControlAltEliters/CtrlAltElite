@@ -4,6 +4,7 @@ import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
 import { EventsPageComponent } from './views/events-page/events-page.component';
+import { AccountPageComponent } from './views/account-page/account-page.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,11 @@ const routes: Routes = [
     path: 'events',
     component: EventsPageComponent,
     data: { title: 'Events'}
+  },
+  {
+    path: 'account',
+    component: AccountPageComponent,
+    data: { title: 'Account'}
   },
 ];
 

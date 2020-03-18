@@ -5,7 +5,6 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
 
-declare var $: any;
 @Component({
   selector: 'app-events-page',
   templateUrl: './events-page.component.html',
@@ -17,14 +16,14 @@ export class EventsPageComponent implements OnInit {
   public showModal = false;
   public tableModal = false;
   public today = new Date();
+  public testDate = '2020-03-22'
+  public testTitle = 'Test Title'
   public dd = this.today.getDate();
   public mm = this.today.getMonth()+1; //January is 0!
   public yyyy = this.today.getFullYear();
 
 
-  calendarEvents = [
-    { title: 'event 1', date: '2020-03-20' }
-  ];
+  calendarEvents = [];
 
   eventsForm:FormGroup = new FormGroup({
     eventTitle:new FormControl(null),
@@ -39,7 +38,18 @@ export class EventsPageComponent implements OnInit {
   constructor(private _eventsService:EventService, private elementRef: ElementRef) { }
 
   ngOnInit(): void {
+    this._eventsService.event().subscribe(
+      data=> {console.log(data); this.addEventsFromDB(data)},
+      error=>console.error(error)
+    )
+  }
 
+  addEventsFromDB(data){
+    data.forEach(event => {
+      console.log(event)
+      this.calendarEvents = this.calendarEvents.concat({
+        title: event.eventTitle, date: event.date });
+    });
   }
   
   handleClick(event){
@@ -76,6 +86,16 @@ export class EventsPageComponent implements OnInit {
 
    this.tableModal = false;
 
+   this.putEventOnCalendar();
+  }
+
+  putEventOnCalendar(){
+    
+    console.log(typeof(this.eventsForm.value.date))
+    var date = this.eventsForm.value.date
+
+    this.calendarEvents = this.calendarEvents.concat({
+      title: this.eventsForm.value.eventTitle, date: this.eventsForm.value.date });
   }
 
   chooseTable(){

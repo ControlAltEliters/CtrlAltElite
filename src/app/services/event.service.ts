@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Event } from 'src/app/server/models/Event.js';
 
 @Injectable()
 export class EventService {
@@ -13,12 +15,12 @@ export class EventService {
         });
     }
 
-    event() {
-        return this._http.get('http://127.0.0.1:3000/events/event', {
-            observe: 'body',
-            withCredentials: true,
-            headers: new HttpHeaders().append('Content-Type', 'application/json')
-        });
-    }
+    event(){
+        return this._http.get('http://127.0.0.1:3000/events/events',{
+          observe:'body',
+          headers:new HttpHeaders().append('Content-Type','application/json'),
+          withCredentials: true
+        })
+      }
 
 }

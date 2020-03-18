@@ -8,11 +8,10 @@ router.post('/createEvent', function (req, res, next) {
   addToDB(req, res);
 });
 
-
 async function addToDB(req, res) {
 
   var event = new Event({
-    evenTitle: req.body.eventTitle,
+    eventTitle: req.body.eventTitle,
     date: req.body.date,
     maxPlayers: req.body.maxPlayers,
     minPlayers: req.body.minPlayers,
@@ -28,5 +27,15 @@ async function addToDB(req, res) {
     return res.status(501).json(err);
   }
 }
+
+router.get('/events', function(req,res,next){
+  Event.find({}, function (err, events) {
+    if(err){
+      res.send('something went wrong')
+      next()
+    }
+    res.json(events);
+  });
+});
 
 module.exports = router;

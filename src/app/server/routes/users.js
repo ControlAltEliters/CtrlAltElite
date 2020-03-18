@@ -8,9 +8,10 @@ router.post('/register', function (req, res, next) {
   addToDB(req, res);
 });
 
-
 async function addToDB(req, res) {
   let user = new User({
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
     email: req.body.email,
     username: req.body.username,
     password: User.hashPassword(req.body.password),
@@ -22,7 +23,8 @@ async function addToDB(req, res) {
     return res.status(201).json(doc);
   }
   catch (err) {
-    return res.status(500).json({message:'Registration error occured'});
+    console.log(err);
+    return res.status(500).json({message:'Registration error occured.'});
   }
 }
 

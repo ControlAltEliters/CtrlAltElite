@@ -16,8 +16,8 @@ export class NavbarComponent implements OnInit {
   ) {
     this._userService.user()
       .subscribe(
-        data=>this.setUser(data),
-        error=>this._router.navigate(['/login'])
+        data => this.setUser(data),
+        error => {}
       )
     }
 

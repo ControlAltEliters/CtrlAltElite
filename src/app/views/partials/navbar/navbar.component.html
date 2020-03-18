@@ -5,10 +5,10 @@
     </div>
 
     <div class="right menu" *ngIf="!readSession('activeUser')">
-        <a class="active item" [routerLink]="['/home']">
+        <a class="item" [ngClass]="{'active': href === '/home'}" [routerLink]="['/home']">
         Home
         </a>
-        <a class="item" href="/events">
+        <a class="item" [ngClass]="{'active': href === '/events'}" [routerLink]="['/events']">
         Events
         </a>
         <a class="item">
@@ -22,14 +22,17 @@
         <a class="item">
         Welcome, {{readSession('activeUser')}}
         </a>
-        <a class="active item" [routerLink]="['/home']">
+        <a class="item" [ngClass]="{'active': href === '/home'}" [routerLink]="['/home']">
         Home
         </a>
-        <a class="item" href="/events">
+        <a class="item" [ngClass]="{'active': href === '/events'}" [routerLink]="['/events']">
         Events
         </a>
         <a class="item">
         FAQ
+        </a>
+        <a class="item" [ngClass]="{'active': href === '/account'}" [routerLink]="['/account']">
+        My Account
         </a>
         <a class="item" (click)="logout()">
         Logout

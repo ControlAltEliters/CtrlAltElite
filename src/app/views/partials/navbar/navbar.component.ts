@@ -10,6 +10,8 @@ import { ApplicationRef } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
+  href: string = "";
+
   constructor(
     private _userService:UserService,
     private _router:Router,
@@ -17,11 +19,13 @@ export class NavbarComponent implements OnInit {
     this._userService.user()
       .subscribe(
         data=>this.setUser(data),
-        error=>this._router.navigate(['/login'])
+        // error=>this._router.navigate(['/login'])
       )
     }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.href = this._router.url;
+  }
 
   setUser(data){
     if (data.username) {

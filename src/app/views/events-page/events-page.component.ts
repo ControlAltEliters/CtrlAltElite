@@ -2,6 +2,8 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import {FormGroup,FormControl,Validators} from '@angular/forms';
 import { EventService } from 'src/app/services/event.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGrigPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
 
 declare var $: any;
 @Component({
@@ -11,7 +13,7 @@ declare var $: any;
 })
 export class EventsPageComponent implements OnInit {
   
-  calendarPlugins = [dayGridPlugin];
+  calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
   public showModal = false;
   public tableModal = false;
   public today = new Date();
@@ -19,6 +21,10 @@ export class EventsPageComponent implements OnInit {
   public mm = this.today.getMonth()+1; //January is 0!
   public yyyy = this.today.getFullYear();
 
+
+  calendarEvents = [
+    { title: 'event 1', date: '2020-03-20' }
+  ];
 
   eventsForm:FormGroup = new FormGroup({
     eventTitle:new FormControl(null),
@@ -35,6 +41,10 @@ export class EventsPageComponent implements OnInit {
   ngOnInit(): void {
 
   }
+  
+  handleClick(event){
+    console.log(event)
+  }
 
   displayModal(){
     this.showModal = true;
@@ -46,6 +56,10 @@ export class EventsPageComponent implements OnInit {
 
   hideTableModal(){
     this.tableModal = false;
+  }
+
+  handleEventClick(arg){
+    console.log(arg)
   }
 
   createEvent(){

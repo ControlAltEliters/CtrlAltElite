@@ -11,20 +11,61 @@
         <div class="content-block content-right">
           <div class="ui card centered">
             <div class="image">
-              <img src="./assets/images/sonic.jpg">
+              <img src="./assets/images/icon1.png">
             </div>
-            <div class="content">
-              <a class="header">Sonic</a>
-              <div class="meta">
-                <span class="date">Joined in 2013</span>
+            <div class="content" *ngIf="readSession('activeUser')">
+              <a class="header">{{readSession('activeUser')}}</a>
+              <div class="ui secondary vertical menu">
+                <a class="active item">
+                  My Profile
+                </a>
+                <a class="item">
+                  My Events
+                </a>
+                <a class="item">
+                  Favorite Games
+                </a>
+                <a class="item">
+                  Message History
+                </a>
+
+
+                <!-- Cool dropdown menu that doesn't work for some reason -->
+                <!-- <div class="ui dropdown item">
+                  <i class="dropdown icon"></i>
+                  Display Options
+                  <div class="menu">
+                    <div class="header">Text Size</div>
+                    <a class="item">Small</a>
+                    <a class="item">Medium</a>
+                    <a class="item">Large</a>
+                  </div>
+                </div> -->
               </div>
-              <div class="description">
-                Sonic is a speedy hedgehog.
-              </div>
+
+
+
+                <!-- TODO: Conditionally render joined date -->
+                <!-- <span class="date">Joined in 2013</span> -->
+                          <!-- <a class="item active">
+                          My Profile
+                          </a>
+                          <a class="item">
+                          Settings
+                          </a>
+                          <a class="item">
+                          My Events
+                          </a>
+                          <a class="item">
+                          Favorite Games
+                          </a>
+                        </div> -->
+
             </div>
             <div class="extra content">
               <a>
                 <i class="user icon"></i>
+                <!-- TODO: Pull number of friends from database for user -->
                 22 Friends
               </a>
             </div>

@@ -4,8 +4,8 @@
     <div class="row">
       <div class="ten wide column">
         <div class="content-block content-left">
-
-          </div>
+          <router-outlet></router-outlet>
+        </div>
       </div>
       <div class="six wide column">
         <div class="content-block content-right">
@@ -15,11 +15,14 @@
             </div>
             <div class="content" *ngIf="readSession('activeUser')">
               <a class="header">{{readSession('activeUser')}}</a>
+                <!-- TODO: Conditionally render joined date? -->
+                <!-- <span class="date">Joined in 2013</span> -->
               <div class="ui secondary vertical menu">
-                <a class="active item">
+                <!-- TODO: Add active class for current path -->
+                <a class="active item" [routerLink]="['profile']">
                   My Profile
                 </a>
-                <a class="item">
+                <a class="item" [routerLink]="['user-events']">
                   My Events
                 </a>
                 <a class="item">

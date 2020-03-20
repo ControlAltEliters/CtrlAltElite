@@ -28,6 +28,9 @@ export class NavbarComponent implements OnInit {
   }
 
   setUser(data){
+    if (data.email) {
+      sessionStorage.setItem('userEmail', data.email);
+    }
     if (data.username) {
       sessionStorage.setItem('activeUser', data.username);
     }

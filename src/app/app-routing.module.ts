@@ -5,7 +5,8 @@ import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
 import { EventsPageComponent } from './views/events-page/events-page.component';
 import { AccountPageComponent } from './views/account-page/account-page.component';
-
+import { ProfileComponent } from './views/partials/profile/profile.component';
+import { UserEventsComponent } from './views/partials/user-events/user-events.component';
 
 const routes: Routes = [
   {
@@ -36,7 +37,17 @@ const routes: Routes = [
   {
     path: 'account',
     component: AccountPageComponent,
-    data: { title: 'Account'}
+    data: { title: 'Account'},
+    children: [
+      {
+        path: 'profile',
+        component: ProfileComponent
+      },
+      {
+        path: 'user-events',
+        component: UserEventsComponent
+      }
+    ]
   },
 ];
 

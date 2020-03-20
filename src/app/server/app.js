@@ -18,13 +18,13 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // TODO: Remove hardcoded creds later
-const mongoUrl = 'mongodb+srv://dbuser:command10@arcadiadb-2u5es.mongodb.net/test?retryWrites=true&w=majority'
+const mongoUrl = 'mongodb+srv://dbuser:command10@arcadiadb-2u5es.mongodb.net/arcadia?retryWrites=true&w=majority'
 
 // Connect to mongodb
 mongoose.connect(mongoUrl, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-    dbName: 'test'
+    dbName: 'arcadia'
 })
     .catch(err => console.log('Mongo connection error', err))
 mongoose.set('useFindAndModify', false)

@@ -12,4 +12,8 @@ export class AccountPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  readSession(key) {
+    return sessionStorage.getItem(key);
+  }
+
 }

@@ -14,19 +14,33 @@
 }
 
 /* div {
-  outline: 1px dashed red;
+  outline: 1px dashed white;
 } */
 
-/*
+
 .card {
-  margin-top: 5% !important;
-  margin-bottom: 5% !important;
-  margin-left: 5% !important;
-  margin-right: 5% !important;
-  height: 30% !important;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
+  background: transparent;
   width: 90%;
-  background: white !important;
-  border: none !important;
-  box-shadow: none !important;
-} */
+  border: none;
+  box-shadow: none;
+  align-items: center;
+}
+
+.ui.card>.extra a,
+.ui.cards>.card>.extra a,
+.ui.card>.content>.header,
+.ui.card>.content>.menu>.item,
+.ui.card>.extra>.user {
+  color: white;
+  text-align: center;
+}
+
+.ui.card>.image {
+  max-width: 50%;
+  height: auto;
+}
 

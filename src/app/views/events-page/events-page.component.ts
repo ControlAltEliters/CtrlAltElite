@@ -27,6 +27,7 @@ export class EventsPageComponent implements OnInit {
   check1 = false
   check2 = false
   clickedEvent 
+  clickedDate
 
   calendarEvents = [];
 
@@ -149,6 +150,7 @@ export class EventsPageComponent implements OnInit {
     })
     this.clickedEvent = event
     this.eventModal = true;
+    this.clickedDate = dateAsString
   }
 
   createEvent(){

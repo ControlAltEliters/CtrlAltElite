@@ -15,13 +15,18 @@ export class EventsPageComponent implements OnInit {
   calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
   public showModal = false;
   public tableModal = false;
+  public eventModal = false;
   public today = new Date();
   public testDate = '2020-03-22'
   public testTitle = 'Test Title'
   public dd = this.today.getDate();
   public mm = this.today.getMonth()+1; //January is 0!
   public yyyy = this.today.getFullYear();
-
+  state = {}
+  events = []
+  check1 = false
+  check2 = false
+  clickedEvent 
 
   calendarEvents = [];
 
@@ -30,6 +35,8 @@ export class EventsPageComponent implements OnInit {
     date:new FormControl(null),
     startTime:new FormControl(null),
     endTime:new FormControl(null),
+    resources: new FormControl(null),
+    description: new FormControl(null),
     maxPlayers:new FormControl(null),
     minPlayers:new FormControl(null),
     table:new FormControl(null),
@@ -45,13 +52,53 @@ export class EventsPageComponent implements OnInit {
   }
 
   addEventsFromDB(data){
+
     data.forEach(event => {
       console.log(event)
+      var date = new Date(event.date)
+      var year = date.getFullYear()
+      var month = date.getMonth()
+      var day = date.getDate()
+      var startDate = new Date(year, month, day, event.startTime, 0)
+      var endDate = new Date(year, month, day, event.endTime, 0)
       this.calendarEvents = this.calendarEvents.concat({
-        title: event.eventTitle, date: event.date });
+        title: event.eventTitle, start: startDate, end: endDate }
+        );
+        this.events = this.events.concat({
+          title: event.eventTitle, 
+          date: event.date, 
+          description: event.description,
+          startTime: event.startTime, 
+          endTime: event.endTime, 
+          resources: event.resources,
+          maxPlayers: event.maxPlayers, 
+          minPlayers: event.minPlayers, 
+          table: event.table,
+          id: event._id
+        });
+        console.log(this.events)
     });
+
   }
   
+  handleChecked1(){
+    if(this.check1 === false){
+      this.check1 = true;
+    } else {
+      this.check1 = false;
+    }
+    console.log(this.check1)
+  }
+
+  handleChecked2(){
+    if(this.check2 === false){
+      this.check2 = true;
+    } else {
+      this.check2 = false;
+    }
+    console.log(this.check2)
+  }
+
   handleClick(event){
     console.log(event)
   }
@@ -68,8 +115,40 @@ export class EventsPageComponent implements OnInit {
     this.tableModal = false;
   }
 
+  hideEventModal(){
+    this.eventModal = false;
+  }
+
   handleEventClick(arg){
-    console.log(arg)
+    var eventTitle = arg.event._def.title
+    var date = new Date(arg.event.start)
+    var dateAsString = ''
+    dateAsString += (date.getFullYear() + '-')
+    var month = date.getMonth() + 1
+    var day = date.getDate() + 1
+    if(month < 10){
+      dateAsString += ( '0' + month + '-')
+    } else {
+      dateAsString += (month + '-')
+    }
+    if(day < 10){
+      dateAsString += ('0' + day)
+    } else {
+      dateAsString += (day)
+    }
+    var event
+    this.events.forEach(theEvent => {
+      var eventDate = theEvent.date
+      if(eventDate != null){
+        eventDate = eventDate.slice(0, 10)
+      }
+      
+      if(theEvent.title === eventTitle && eventDate === dateAsString){
+        event = theEvent;
+      }
+    })
+    this.clickedEvent = event
+    this.eventModal = true;
   }
 
   createEvent(){
@@ -77,7 +156,14 @@ export class EventsPageComponent implements OnInit {
     if(!this.eventsForm.valid){
       console.log('Invalid Form'); return;
     }
-    
+
+    if(this.check1 === true){
+      this.eventsForm.value.startTime += 12
+    }
+    if(this.check2 === true){
+      this.eventsForm.value.endTime += 12
+    }
+
     this._eventsService.createEvent(JSON.stringify(this.eventsForm.value))
     .subscribe(
       data=> {console.log(data);},
@@ -91,11 +177,29 @@ export class EventsPageComponent implements OnInit {
 
   putEventOnCalendar(){
     
-    console.log(typeof(this.eventsForm.value.date))
+    var startTime = this.eventsForm.value.startTime
+    if(this.check1 === true){
+      startTime += 12
+    }
+    console.log(startTime)
+    var endTime = this.eventsForm.value.endTime
+    if(this.check2 === true){
+      endTime += 12
+    }
+    // 2020-03-05
+    // new Date(y, m, d, 12, 0)
+  //  console.log(endTime)
+  //  console.log((this.eventsForm.value.date))
     var date = this.eventsForm.value.date
+    var testDate = new Date(date)
+    var year = testDate.getFullYear()
+    var month = testDate.getMonth()
+    var day = testDate.getDate()
+    var startDate = new Date(year, month, day, startTime, 0)
+    var endDate = new Date(year, month, day, endTime, 0)
 
     this.calendarEvents = this.calendarEvents.concat({
-      title: this.eventsForm.value.eventTitle, date: this.eventsForm.value.date });
+      title: this.eventsForm.value.eventTitle, start: startDate, end: endDate });
   }
 
   chooseTable(){

@@ -21,6 +21,34 @@
                             placeholder="enter date">
                     </div>
                     <div class="form-group">
+                        <label class="inputTitle">Start time</label>
+                        <input formControlName="startTime" type="number" class="form-control" id="inputStartTime"
+                         placeholder="Enter starting time ( ex. 4 ) ">
+                         <div class="ui checkbox">
+                            <input id="example-id" type="checkbox" (click)="handleChecked1()">
+                            <label for="example-id">PM</label>
+                          </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="inputTitle">End time</label>
+                        <input formControlName="endTime" type="number" class="form-control" id="inputEndTime"
+                         placeholder="Enter end time ( ex. 6 ) ">
+                         <div class="ui checkbox">
+                            <input id="example-id2" type="checkbox" (click)="handleChecked2()">
+                            <label for="example-id2">PM</label>
+                          </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="inputTitle">Resources required</label>
+                        <input formControlName="resources" type="text" class="form-control" id="inputResources"
+                         placeholder="Dice, cards, etc">
+                    </div>
+                    <div class="form-group">
+                        <label class="inputTitle">Description of event</label>
+                        <input formControlName="description" type="text" class="form-control" id="inputDescription"
+                         placeholder="Short description of play style or what the event is for">
+                    </div>
+                    <div class="form-group">
                         <label class="inputTitle">Max number of Players</label>
                         <input formControlName="maxPlayers" type="number" class="form-control" id="inputMax">
                     </div>
@@ -65,7 +93,20 @@
         </div>
         </div>
     </div>
-    
+
+    <div *ngIf="eventModal">
+        <div class="modal">
+        <div class="ui active modal">
+            <i class="close icon" (click)="hideEventModal()"></i>
+            <div class="header">{{clickedEvent.title}}</div>
+            <div class="tableContent">
+            </div>
+            <div class="actions">
+            </div>
+        </div>
+        </div>
+    </div>
+
     <div class="content-block">
     <div class="ui card centered">
         <div class="content">
@@ -74,6 +115,7 @@
             [plugins]="calendarPlugins"
             [events]="calendarEvents"
             (eventClick)="handleEventClick($event)"
+            (dateClick)="handleClick($event)"
             ></full-calendar>
         </div>
         <div class="content">

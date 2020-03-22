@@ -2,6 +2,9 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.2.
 
+## Deployment endpoint
+[45.76.237.107(dev)](http://45.76.237.107:4200/)
+
 ## Development server
 
 Run `ng serve` for a dev server and navigate to `http://localhost:4200/`, or run `ng serve -o` to automatically open the dev server in your browser. The app will automatically reload if you change any of the source files.

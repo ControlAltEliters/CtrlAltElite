@@ -1,0 +1,15 @@
+name: Deploy
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Executing deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        PORT: ${{ secrets.PORT }}
+        KEY: ${{ secrets.SSHKEY }}
+        script: "ls -al && ls -al && whoami && node -v && npm -v"
+#         script: "cd ~/CtrlAltElite/ && npm run stop-all || true && git pull && npm i && npm run express-forever && npm run angular-forever"

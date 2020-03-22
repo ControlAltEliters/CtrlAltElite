@@ -28,11 +28,21 @@ export class NavbarComponent implements OnInit {
   }
 
   setUser(data){
-    if (data.email) {
-      sessionStorage.setItem('userEmail', data.email);
+    console.log(data);
+    this.setField('userFirst', data.firstname);
+    this.setField('userLast', data.lastname);
+    this.setField('activeUser', data.username);
+    this.setField('userEmail', data.email);
+  }
+
+  setField(key, value){
+    try {
+      if (value) {
+        sessionStorage.setItem(key, value);
+      }
     }
-    if (data.username) {
-      sessionStorage.setItem('activeUser', data.username);
+    catch(err) {
+      console.log('Error setting session storage field: ' + err)
     }
   }
 

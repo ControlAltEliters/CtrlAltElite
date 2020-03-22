@@ -2,15 +2,7 @@
 <script src="../../calendar//caleandar.js"></script>
 
 <div class="ui container">
-    <div class="content-block">
-    <div class="ui card centered">
-        <div class="content">
-            <full-calendar defaultView="dayGridMonth" [plugins]="calendarPlugins"></full-calendar>
-        </div>
-        <div class="content">
-            <button (click)="displayModal()" class="ui button">Schedule event</button>
-        </div>
-    </div>
+
     <div *ngIf="showModal">
         <div class="modal">
         <div class="ui active modal">
@@ -20,7 +12,7 @@
                 <form [formGroup]="eventsForm">
                     <div class="form-group">
                         <label class="inputTitle">Event Title</label>
-                        <input formControlName="eventTitle" type="name" class="form-control" id="inputGame"
+                        <input formControlName="eventTitle" type="text" class="form-control" id="inputTitle"
                          placeholder="Enter type of game">
                     </div>
                     <div class="form-group">
@@ -52,7 +44,7 @@
         <div class="ui active modal">
             <i class="close icon" (click)="hideTableModal()"></i>
             <div class="header">SELECT TABLE</div>
-            <div class="content">
+            <div class="tableContent">
                 <form [formGroup]="eventsForm">
                     <div class="form-group">
                         <label class="inputTitle">Table</label>
@@ -73,7 +65,24 @@
         </div>
         </div>
     </div>
+    
+    <div class="content-block">
+    <div class="ui card centered">
+        <div class="content">
+            <full-calendar 
+            defaultView="dayGridMonth"
+            [plugins]="calendarPlugins"
+            [events]="calendarEvents"
+            (eventClick)="handleEventClick($event)"
+            ></full-calendar>
+        </div>
+        <div class="content">
+            <button (click)="displayModal()" class="ui button">Schedule event</button>
+        </div>
+    </div>
+    
 
+   
     </div>
 </div>
 

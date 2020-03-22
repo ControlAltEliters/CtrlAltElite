@@ -2,8 +2,9 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import {FormGroup,FormControl,Validators} from '@angular/forms';
 import { EventService } from 'src/app/services/event.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGrigPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
 
-declare var $: any;
 @Component({
   selector: 'app-events-page',
   templateUrl: './events-page.component.html',
@@ -11,14 +12,18 @@ declare var $: any;
 })
 export class EventsPageComponent implements OnInit {
   
-  calendarPlugins = [dayGridPlugin];
+  calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
   public showModal = false;
   public tableModal = false;
   public today = new Date();
+  public testDate = '2020-03-22'
+  public testTitle = 'Test Title'
   public dd = this.today.getDate();
   public mm = this.today.getMonth()+1; //January is 0!
   public yyyy = this.today.getFullYear();
 
+
+  calendarEvents = [];
 
   eventsForm:FormGroup = new FormGroup({
     eventTitle:new FormControl(null),
@@ -33,7 +38,22 @@ export class EventsPageComponent implements OnInit {
   constructor(private _eventsService:EventService, private elementRef: ElementRef) { }
 
   ngOnInit(): void {
+    this._eventsService.event().subscribe(
+      data=> {console.log(data); this.addEventsFromDB(data)},
+      error=>console.error(error)
+    )
+  }
 
+  addEventsFromDB(data){
+    data.forEach(event => {
+      console.log(event)
+      this.calendarEvents = this.calendarEvents.concat({
+        title: event.eventTitle, date: event.date });
+    });
+  }
+  
+  handleClick(event){
+    console.log(event)
   }
 
   displayModal(){
@@ -46,6 +66,10 @@ export class EventsPageComponent implements OnInit {
 
   hideTableModal(){
     this.tableModal = false;
+  }
+
+  handleEventClick(arg){
+    console.log(arg)
   }
 
   createEvent(){
@@ -62,6 +86,16 @@ export class EventsPageComponent implements OnInit {
 
    this.tableModal = false;
 
+   this.putEventOnCalendar();
+  }
+
+  putEventOnCalendar(){
+    
+    console.log(typeof(this.eventsForm.value.date))
+    var date = this.eventsForm.value.date
+
+    this.calendarEvents = this.calendarEvents.concat({
+      title: this.eventsForm.value.eventTitle, date: this.eventsForm.value.date });
   }
 
   chooseTable(){

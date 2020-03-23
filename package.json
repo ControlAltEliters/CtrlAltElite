@@ -5,13 +5,17 @@
     "ng": "ng",
     "start": "ng serve",
     "starto": "ng serve -o",
+    "start-prod": "ng serve --configuration=production",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "express": "node src/app/server/app.js",
-    "kill": "pkill -9 node",
-    "kill-linux": "killall -s KILL node"
+    "express-forever": "forever start src/app/server/app.js",
+    "angular-forever": "forever start node_modules/@angular/cli/bin/ng serve --host 0.0.0.0 --configuration=production",
+    "kill-angular": "lsof -t -i tcp:4200 | xargs kill -9",
+    "kill-express": "lsof -t -i tcp:3000 | xargs kill -9",
+    "kill-all": "npm run kill-angular && npm run kill-express"
   },
   "private": true,
   "dependencies": {

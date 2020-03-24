@@ -21,6 +21,7 @@ async function addToDB(req, res) {
     table: req.body.table,
     currentPlayers: [],
     isOpen: true,
+    playersIDs: [],
     creation_dt: Date.now()
   });
 
@@ -79,6 +80,34 @@ router.get('/:date', (req, res, next) => {
       console.log(err);
       res.status(500).json({ error: err });
     });
+})
+
+router.post('/join', (req, res) => {
+  let join = req.body;
+  Event.findOne({eventTitle: join.event}, (err, joinEvent) => {
+    if(!joinEvent){
+      res.json(join.event + "Not Found")
+    }else {
+      joinEvent.currentPlayers.push(join.user)
+      joinEvent.currentPlayers.playersIDs.push(join.userID);
+      joinEvent.save()
+    }
+  })
+})
+
+router.post('/leave', (req, res) => {
+  let quit = req.body;
+  Event.findOne({eventTitle: quit.event}, (err, quitEvent) => {
+    if(!quitEvent){
+      res.json(quit.event + "Not Found")
+    } else {
+      if(quitEvent.currentPlayers.indexOf(quit.user) !== -1){
+        quitEvent.currentPlayers.splice(quitEvent.playersIDs.indexOf(quit.user), 1);
+        quitEvent.playersIDs.splice(quitEvent.playersIDs.indexOf(quit.userID), 1);
+        quitEvent.save();
+      }
+    }
+  })
 })
 
 module.exports = router;

@@ -5,11 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormGroup, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatCardModule, MatCard } from '@angular/material/card';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './authentication/login/login.component';
@@ -42,12 +37,8 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatProgressSpinnerModule,
-    MatCardModule,
-    MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSlideToggleModule,
     BrowserAnimationsModule,
     HttpClientModule,
     FullCalendarModule,

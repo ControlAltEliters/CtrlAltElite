@@ -10,22 +10,39 @@ import { UserService } from '../../../services/user.service';
 })
 export class NavbarComponent implements OnInit {
 
+  href: string = "";
+
   constructor(
     private _userService:UserService,
     private _router:Router,
   ) {
     this._userService.user()
       .subscribe(
-        data => this.setUser(data),
-        error => {}
+        data=>this.setUser(data),
+        // error=>this._router.navigate(['/login'])
       )
     }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.href = this._router.url;
+  }
 
   setUser(data){
-    if (data.username) {
-      sessionStorage.setItem('activeUser', data.username);
+    console.log(data);
+    this.setField('userFirst', data.firstname);
+    this.setField('userLast', data.lastname);
+    this.setField('activeUser', data.username);
+    this.setField('userEmail', data.email);
+  }
+
+  setField(key, value){
+    try {
+      if (value) {
+        sessionStorage.setItem(key, value);
+      }
+    }
+    catch(err) {
+      console.log('Error setting session storage field: ' + err)
     }
   }
 

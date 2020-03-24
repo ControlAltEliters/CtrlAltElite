@@ -17,7 +17,10 @@ import { NavbarComponent } from './views/partials/navbar/navbar.component';
 import { EventsPageComponent } from './views/events-page/events-page.component';
 import { LoginCardComponent } from './views/partials/login-card/login-card.component';
 import { Time24to12Format } from './pipes/time24To12Format';
-import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { AccountPageComponent } from './views/account-page/account-page.component';
+import { ProfileComponent } from './views/partials/profile/profile.component';
+import { UserEventsComponent } from './views/partials/user-events/user-events.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
     EventsPageComponent,
     LoginCardComponent,
     Time24to12Format,
+    AccountPageComponent,
+    ProfileComponent,
+    UserEventsComponent,
   ],
   imports: [
     BrowserModule,

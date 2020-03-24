@@ -2,7 +2,7 @@
 <script src="../../calendar//caleandar.js"></script>
 
 <div class="ui container">
-    <div class="content">
+    <div *ngIf="user" class="content">
         <button (click)="displayModal()" class="ui button" style="margin-top: 20px;">Schedule event</button>
     </div>
     <div *ngIf="showModal">

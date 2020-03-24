@@ -4,6 +4,7 @@ import { EventService } from 'src/app/services/event.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-events-page',
@@ -28,6 +29,9 @@ export class EventsPageComponent implements OnInit {
   check2 = false
   clickedEvent 
   clickedDate
+  user
+  userJoin = { user:"",event: "" };
+  userQuit = { user:"", event: "" };
 
   calendarEvents = [];
 
@@ -43,14 +47,21 @@ export class EventsPageComponent implements OnInit {
     table:new FormControl(null),
   })
   
-  constructor(private _eventsService:EventService, private elementRef: ElementRef) { }
+  constructor(
+    private _eventsService:EventService,
+     private elementRef: ElementRef,
+     private _userService: UserService ) { }
 
   ngOnInit(): void {
     this._eventsService.event().subscribe(
       data=> {console.log(data); this.addEventsFromDB(data)},
       error=>console.error(error)
     )
-  }
+
+    this.user = sessionStorage.getItem('activeUser')
+    console.log("USER!")
+    console.log(this.user)
+    }
 
   addEventsFromDB(data){
 

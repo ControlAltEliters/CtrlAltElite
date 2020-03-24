@@ -5,6 +5,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
 import { UserService } from 'src/app/services/user.service';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-events-page',
@@ -32,6 +33,9 @@ export class EventsPageComponent implements OnInit {
   user
   userJoin = { user:"",event: "" };
   userQuit = { user:"", event: "" };
+  eventTitle
+  startTime
+  endTime
 
   calendarEvents = [];
 
@@ -70,7 +74,7 @@ export class EventsPageComponent implements OnInit {
       var date = new Date(event.date)
       var year = date.getFullYear()
       var month = date.getMonth()
-      var day = date.getDate()
+      var day = date.getDate() + 1
       var startDate = new Date(year, month, day, event.startTime, 0)
       var endDate = new Date(year, month, day, event.endTime, 0)
       this.calendarEvents = this.calendarEvents.concat({
@@ -132,12 +136,12 @@ export class EventsPageComponent implements OnInit {
   }
 
   handleEventClick(arg){
-    var eventTitle = arg.event._def.title
+    this.eventTitle = arg.event._def.title
     var date = new Date(arg.event.start)
     var dateAsString = ''
     dateAsString += (date.getFullYear() + '-')
     var month = date.getMonth() + 1
-    var day = date.getDate() + 1
+    var day = date.getDate()
     if(month < 10){
       dateAsString += ( '0' + month + '-')
     } else {
@@ -148,18 +152,21 @@ export class EventsPageComponent implements OnInit {
     } else {
       dateAsString += (day)
     }
-    var event
+
     this.events.forEach(theEvent => {
       var eventDate = theEvent.date
       if(eventDate != null){
         eventDate = eventDate.slice(0, 10)
       }
       
-      if(theEvent.title === eventTitle && eventDate === dateAsString){
+      if(theEvent.title === this.eventTitle && eventDate === dateAsString){
         event = theEvent;
+        this.eventTitle = this.eventTitle
+        this.startTime = theEvent.startTime
+        this.endTime = theEvent.endTime
       }
     })
-    this.clickedEvent = event
+    
     this.eventModal = true;
     this.clickedDate = dateAsString
   }

@@ -7,11 +7,10 @@
 }
 
 .modal{
-    margin-top: 50px;
+    margin-top: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 50px;
 }
 
 .content{
@@ -76,3 +75,7 @@ button:active {
     padding: 1% 0% 5% 0%;
   }
   
+  .tableContent{
+      justify-content: center;
+      padding: 10px;
+  }

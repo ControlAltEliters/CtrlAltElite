@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../environments/environment';
+
 
 @Injectable()
 export class UserService {
@@ -7,14 +9,14 @@ export class UserService {
   constructor(private _http:HttpClient) { }
 
   register(body:any){
-    return this._http.post('http://127.0.0.1:3000/users/register',body,{
+    return this._http.post(environment.baseurl + '/users/register',body,{
       observe:'body',
       headers:new HttpHeaders().append('Content-Type','application/json')
     });
   }
 
   login(body:any){
-    return this._http.post('http://127.0.0.1:3000/users/login',body,{
+    return this._http.post(environment.baseurl + '/users/login',body,{
       observe:'body',
       headers:new HttpHeaders().append('Content-Type','application/json'),
       withCredentials:true,
@@ -22,7 +24,7 @@ export class UserService {
   }
 
   user(){
-    return this._http.get('http://127.0.0.1:3000/users/user',{
+    return this._http.get(environment.baseurl + '/users/user',{
       observe:'body',
       headers:new HttpHeaders().append('Content-Type','application/json'),
       withCredentials: true
@@ -30,7 +32,7 @@ export class UserService {
   }
 
   logout(){
-    return this._http.get('http://127.0.0.1:3000/users/logout',{
+    return this._http.get(environment.baseurl + '/users/logout',{
       observe:'body',
       headers:new HttpHeaders().append('Content-Type','application/json'),
       withCredentials:true

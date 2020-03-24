@@ -175,17 +175,31 @@ export class EventsPageComponent implements OnInit {
    this.tableModal = false;
 
    this.putEventOnCalendar();
+   this.events = this.events.concat({
+    title: this.eventsForm.value.eventTitle, 
+    date: this.eventsForm.value.date, 
+    description: this.eventsForm.value.description,
+    startTime: this.eventsForm.value.startTime, 
+    endTime: this.eventsForm.value.endTime, 
+    resources: this.eventsForm.value.resources,
+    maxPlayers: this.eventsForm.value.maxPlayers, 
+    minPlayers: this.eventsForm.value.minPlayers, 
+    table: this.eventsForm.value.table,
+    id: this.eventsForm.value._id
+  });
+
+   this.eventsForm.reset();
   }
 
   putEventOnCalendar(){
     
     var startTime = this.eventsForm.value.startTime
-    if(this.check1 === true){
+    if(this.check1 === false){
       startTime += 12
     }
     console.log(startTime)
     var endTime = this.eventsForm.value.endTime
-    if(this.check2 === true){
+    if(this.check2 === false){
       endTime += 12
     }
     // 2020-03-05

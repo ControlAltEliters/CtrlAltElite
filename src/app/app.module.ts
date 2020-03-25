@@ -15,7 +15,6 @@ import { HomeComponent } from './views/home/home.component';
 import { ContactFooterComponent } from './views/partials/contact-footer/contact-footer.component';
 import { NavbarComponent } from './views/partials/navbar/navbar.component';
 import { EventsPageComponent } from './views/events-page/events-page.component';
-import { LoginCardComponent } from './views/partials/login-card/login-card.component';
 import { Time24to12Format } from './pipes/time24To12Format';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { AccountPageComponent } from './views/account-page/account-page.component';
@@ -31,7 +30,6 @@ import { UserEventsComponent } from './views/partials/user-events/user-events.co
     ContactFooterComponent,
     NavbarComponent,
     EventsPageComponent,
-    LoginCardComponent,
     Time24to12Format,
     AccountPageComponent,
     ProfileComponent,

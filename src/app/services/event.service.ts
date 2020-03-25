@@ -25,4 +25,11 @@ export class EventService {
         })
       }
 
+    join(user){
+        return this._http.post(environment.baseurl + '/events/join', user, {
+            observe: 'body',
+            headers: new HttpHeaders().append('Content-Type', 'application/json')
+        })
+    }
+
 }

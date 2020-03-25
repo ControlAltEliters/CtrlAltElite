@@ -14,7 +14,8 @@ let schema = new Schema({
     isOpen : {type:Boolean, require:true},
     currentPlayers :{type: Array, require: true},
     playersIDs: {type: Array, require: true},
-    creation_dt:{type:Date, require:true}
+    creation_dt:{type:Date, require:true},
+    eventID: {type: String},
 });
 
 module.exports = mongoose.model('Event',schema, 'events');

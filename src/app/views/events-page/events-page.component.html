@@ -105,7 +105,13 @@
                 <p>DATE: {{clickedDate}}</p>
                 <p>TIME: {{startTime}} to {{endTime}}</p>
             </div>
+            <div *ngFor="let player of currentPlayers">
+                <p>{{player}}</p>
+            </div>
             <div class="actions">
+                <div *ngIf="user">
+                    <button (click)="joinEvent()" class="ui button">Join Event</button>
+                </div>
             </div>
         </div>
         </div>
@@ -125,7 +131,6 @@
  
     </div>
     
-
    
     </div>
 </div>

@@ -19,6 +19,7 @@ async function addToDB(req, res) {
     maxPlayers: req.body.maxPlayers,
     minPlayers: req.body.minPlayers,
     table: req.body.table,
+    eventID: req.body.id,
     currentPlayers: [],
     isOpen: true,
     playersIDs: [],
@@ -84,7 +85,7 @@ router.get('/:date', (req, res, next) => {
 
 router.post('/join', (req, res) => {
   let join = req.body;
-  Event.findOne({eventTitle: join.event}, (err, joinEvent) => {
+  Event.findOne({_id: join.event}, (err, joinEvent) => {
     if(!joinEvent){
       res.json(join.event + "Not Found")
     }else {

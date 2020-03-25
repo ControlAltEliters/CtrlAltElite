@@ -31,8 +31,11 @@ export class EventsPageComponent implements OnInit {
   clickedEvent 
   clickedDate
   user
-  userJoin = { user:"",event: "" };
-  userQuit = { user:"", event: "" };
+  userID
+  eventID
+  currentPlayers = []
+  userJoin = { user:"", userID:"", event: "" };
+  userQuit = { userID:"", event: "" };
   eventTitle
   startTime
   endTime
@@ -58,19 +61,30 @@ export class EventsPageComponent implements OnInit {
 
   ngOnInit(): void {
     this._eventsService.event().subscribe(
-      data=> {console.log(data); this.addEventsFromDB(data)},
+      data=> {this.addEventsFromDB(data)},
       error=>console.error(error)
     )
 
     this.user = sessionStorage.getItem('activeUser')
     console.log("USER!")
     console.log(this.user)
+
+    this._userService.user()
+    .subscribe(
+      data => this.dealWithUser(data),
+      error => {}
+    )
+      console.log("User info")
+
+    }
+
+    dealWithUser(data){
+      this.userID = data._id;
     }
 
   addEventsFromDB(data){
 
     data.forEach(event => {
-      console.log(event)
       var date = new Date(event.date)
       var year = date.getFullYear()
       var month = date.getMonth()
@@ -87,14 +101,30 @@ export class EventsPageComponent implements OnInit {
           startTime: event.startTime, 
           endTime: event.endTime, 
           resources: event.resources,
+          currentPlayers: event.currentPlayers,
           maxPlayers: event.maxPlayers, 
           minPlayers: event.minPlayers, 
           table: event.table,
           id: event._id
         });
-        console.log(this.events)
     });
 
+
+  }
+
+  joinEvent(){
+    console.log("Join Event")
+    console.log(this.eventID)
+    console.log(this.user)
+    this.userJoin.event = this.eventID;
+    this.userJoin.user = this.user;
+    this.userJoin.userID = this.userID;
+    /*
+    this._eventsService.join(this.userJoin).subscribe(
+      data=> {console.log(data);},
+      error=>console.error(error)
+    )
+    */
   }
   
   handleChecked1(){
@@ -164,6 +194,9 @@ export class EventsPageComponent implements OnInit {
         this.eventTitle = this.eventTitle
         this.startTime = theEvent.startTime
         this.endTime = theEvent.endTime
+        this.eventID = theEvent.id
+        this.currentPlayers = theEvent.currentPlayers
+        console.log(this.currentPlayers)
       }
     })
     
@@ -192,21 +225,10 @@ export class EventsPageComponent implements OnInit {
 
    this.tableModal = false;
 
-   this.putEventOnCalendar();
-   this.events = this.events.concat({
-    title: this.eventsForm.value.eventTitle, 
-    date: this.eventsForm.value.date, 
-    description: this.eventsForm.value.description,
-    startTime: this.eventsForm.value.startTime, 
-    endTime: this.eventsForm.value.endTime, 
-    resources: this.eventsForm.value.resources,
-    maxPlayers: this.eventsForm.value.maxPlayers, 
-    minPlayers: this.eventsForm.value.minPlayers, 
-    table: this.eventsForm.value.table,
-    id: this.eventsForm.value._id
-  });
+   this.putEventOnCalendar()
 
    this.eventsForm.reset();
+   window.location.reload()
   }
 
   putEventOnCalendar(){

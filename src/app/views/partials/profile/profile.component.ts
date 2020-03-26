@@ -53,6 +53,7 @@ export class ProfileComponent implements OnInit {
     this._commonUtils.setFormFieldValue(this.editProfile, 'editLastName', this.userLastName);
     this._commonUtils.setFormFieldValue(this.editProfile, 'editEmail', this.userEmail);
     this._commonUtils.setFormFieldValue(this.editProfile, 'userId', this._commonUtils.readSessionField('userId'));
+    this._commonUtils.setFormFieldValue(this.updatePassword, 'userId', this._commonUtils.readSessionField('userId'));
   }
 
   displayInfoModal(){
@@ -111,6 +112,7 @@ export class ProfileComponent implements OnInit {
           {
             this.userPassword = this.updatePassword.value.confirmedNewPassword;
             // set session values
+            // issue here as well potentially?
             this._commonUtils.setSessionField('password', this.updatePassword.value.newPassword);
           }
           else

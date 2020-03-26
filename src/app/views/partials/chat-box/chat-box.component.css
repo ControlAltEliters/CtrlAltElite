@@ -50,6 +50,7 @@
 
 .expandedChatContent{
     color:rgb(0, 255, 200);
+    background-color: black;
     overflow: hidden;
     width: 380px;
     height: 100px;
@@ -71,17 +72,19 @@
 
 .popUpChatContent{
     color:rgb(0, 255, 200);
-    overflow: hidden;
+    position: relative;
+    offset-position: bottom;
     margin-left: 6px;
     margin-right: 6px;
     width: 380px;
     height: 100px;
     /* border: 3px solid rgb(247, 0, 255); */
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 }
 
 .expandedEmojiContent{
-    color: rgb(140, 0, 255);
+    color: rgb(238, 255, 0);
+    background-color: red;
     overflow: hidden;
     margin-left: 6px;
     margin-right: 6px;

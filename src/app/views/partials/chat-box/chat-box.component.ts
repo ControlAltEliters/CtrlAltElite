@@ -14,6 +14,8 @@ export class ChatBoxComponent implements OnInit {
 
   userMessageInput(event){
     this.echoMessage();
+    // clear the chat box 
+    this.chatInputText = "";
     // TODO: Save this.chatInputText, the group id, and the time sent and save it to the database
   }
   echoMessage(){

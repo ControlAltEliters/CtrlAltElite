@@ -58,6 +58,11 @@
 {
     color:rgb(0, 255, 200);
     overflow: hidden;
+    width: 380px;
+    height: 100px;
+    margin-left: 6px;
+    margin-right: 6px;
+    border: 3px solid rgb(247, 0, 255);
     /* padding: 0 18px;
     display: none;
     overflow: hidden;
@@ -78,4 +83,23 @@
     overflow: hidden;
     margin-left: 6px;
     margin-right: 6px;
+    width: 380px;
+    height: 100px;
+    border: 3px solid rgb(247, 0, 255);
+}
+
+.expandedEmojiContent
+{
+    color: rgb(140, 0, 255);
+    overflow: hidden;
+    margin-left: 6px;
+    margin-right: 6px;
+    margin-bottom: 40px;
+    width: 100px;
+    height: 100px;
+    position: fixed;
+    bottom: 0;
+    right: 380;
+    z-index: 2;
+    border: 3px solid rgb(247, 0, 255);
 }

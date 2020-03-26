@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApplicationRef } from '@angular/core';
 import { UserService } from '../../../services/user.service';
+import { CommonUtils } from 'src/app/utils/common-utils';
 
 @Component({
   selector: 'app-navbar',
@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     private _userService:UserService,
     private _router:Router,
+    private _commonutils: CommonUtils
   ) {
     this._userService.user()
       .subscribe(
@@ -28,22 +29,11 @@ export class NavbarComponent implements OnInit {
   }
 
   setUser(data){
-    console.log(data);
-    this.setField('userFirst', data.firstname);
-    this.setField('userLast', data.lastname);
-    this.setField('activeUser', data.username);
-    this.setField('userEmail', data.email);
-  }
-
-  setField(key, value){
-    try {
-      if (value) {
-        sessionStorage.setItem(key, value);
-      }
-    }
-    catch(err) {
-      console.log('Error setting session storage field: ' + err)
-    }
+    this._commonutils.setSessionField('userFirst', data.firstname);
+    this._commonutils.setSessionField('userLast', data.lastname);
+    this._commonutils.setSessionField('activeUser', data.username);
+    this._commonutils.setSessionField('userEmail', data.email);
+    this._commonutils.setSessionField('userId', data._id);
   }
 
   readSession(key) {

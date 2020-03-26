@@ -1,5 +1,4 @@
-.chatBox
-{
+.chatBox{
     position: fixed;
     bottom: 0;
     right: 0;
@@ -11,8 +10,7 @@
     /* border: 3px solid rgb(166, 255, 0); */
 }
 
-.emoji
-{
+.emoji{
     float: left;
     width: 34px;
     height: 34px;
@@ -24,13 +22,11 @@
     align-items: center;
 }
 
-.active, .emoji:hover
-{
+.active, .emoji:hover{
     background-color: #ccc;
 }
 
-.expandChat
-{
+.expandChat{
     width: 34px;
     height: 34px;
     border-top-right-radius: 4px;
@@ -41,21 +37,18 @@
     align-items: center;
 }
 
-.active, .expandChat:hover
-{
+.active, .expandChat:hover{
     background-color: #ccc;
 }
 
-.chatInputBox
-{
+.chatInputBox{
     float: left;
     width: 316px;
     height: 34px;
     /* border: 3px solid rgb(247, 0, 255); */
 }
 
-.expandedChatContent
-{
+.expandedChatContent{
     color:rgb(0, 255, 200);
     overflow: hidden;
     width: 380px;
@@ -70,15 +63,13 @@
     transition: max-height 0.2s ease-out; */
 }
 
-.collapsedChatContent
-{
+.collapsedChatContent{
     position: fixed;
     bottom: 3px;
     right: 3px;
 }
 
-.popUpChatContent
-{
+.popUpChatContent{
     color:rgb(0, 255, 200);
     overflow: hidden;
     margin-left: 6px;
@@ -88,8 +79,7 @@
     border: 3px solid rgb(247, 0, 255);
 }
 
-.expandedEmojiContent
-{
+.expandedEmojiContent{
     color: rgb(140, 0, 255);
     overflow: hidden;
     margin-left: 6px;

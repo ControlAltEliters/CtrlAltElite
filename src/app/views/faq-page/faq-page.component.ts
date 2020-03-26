@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-let $: any;
+declare let $: any;
 
 @Component({
   selector: 'app-faq-page',

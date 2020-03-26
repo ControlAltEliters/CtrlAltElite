@@ -1,4 +1,4 @@
-<div *ngIf="showModal">
+<div *ngIf="showInfoModal">
   <div class="modal">
     <div class="ui active modal">
         <i class="close icon" (click)="hideModal()"></i>
@@ -31,6 +31,41 @@
     </div>
   </div>
 </div>
+
+<div *ngIf="showPasswordModal">
+  <div class="modal">
+    <div class="ui active modal">
+      <i class="close icon" (click)="hideModal()"></i>
+      <div class="header">Update Password</div>
+      <div class="content">
+        <form [formGroup]="updatePassword" class="ui form">
+          <div class="form-group">
+            <div class="field">
+              <label class="inputTitle">Old Password</label>
+              <input formControlName="oldPassword" type="password" class="form-control" id="oldPassword">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="field">
+              <label class="inputTitle">New Password</label>
+              <input formControlName="newPassword" type="password" class="form-control" id="newPassword">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="field">
+              <label class="inputTitle">Re-enter New Password</label>
+              <input formControlName="confirmedNewPassword" type="password" class="form-control" id="confirmedNewPassword">
+            </div>
+          </div>
+          <div class="form-group">
+            <button class="ui button" id="edit-button" type="button" (click)="updateUserPassword()">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="content">
   <div class="ui grid">
     <div class="row">
@@ -54,17 +89,9 @@
     </div>
     <div class="row">
       <div class="sixteen wide column align-right">
-        <button (click)="displayModal()" class="ui button float-right">Edit Information</button>
+        <button (click)="displayInfoModal()" class="ui button float-right">Edit Information</button>
+        <button (click)="displayPasswordModal()" class="ui button float-right">Update Password</button>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-

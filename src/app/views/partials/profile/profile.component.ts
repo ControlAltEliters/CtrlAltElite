@@ -4,24 +4,33 @@ import { FormGroup,FormControl,Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonUtils } from 'src/app/utils/common-utils';
 
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  public showModal = false;
+  public showInfoModal = false;
+  public showPasswordModal = false;
   userFirstName: string;
   userLastName: string;
   userName: string;
   userEmail: string;
-  editProfileError: String;
+  userPassword: string;
+  editProfileError: string;
+  updatePasswordError: string;
 
   editProfile: FormGroup = new FormGroup({
     editFirstName:new FormControl(null),
     editLastName:new FormControl(null),
     editEmail:new FormControl(null),
+    userId: new FormControl(null)
+  })
+
+  updatePassword: FormGroup = new FormGroup({
+    oldPassword:new FormControl(null),
+    newPassword: new FormControl(null),
+    confirmedNewPassword: new FormControl(null),
     userId: new FormControl(null)
   })
 
@@ -43,14 +52,20 @@ export class ProfileComponent implements OnInit {
     this._commonUtils.setFormFieldValue(this.editProfile, 'editLastName', this.userLastName);
     this._commonUtils.setFormFieldValue(this.editProfile, 'editEmail', this.userEmail);
     this._commonUtils.setFormFieldValue(this.editProfile, 'userId', this._commonUtils.readSessionField('userId'));
+    this._commonUtils.setFormFieldValue(this.updatePassword, 'userId', this._commonUtils.readSessionField('userId'));
   }
 
-  displayModal(){
-    this.showModal = true;
+  displayInfoModal(){
+    this.showInfoModal = true;
+  }
+
+  displayPasswordModal() {
+    this.showPasswordModal = true;
   }
 
   hideModal(){
-    this.showModal = false;
+    this.showInfoModal = false;
+    this.showPasswordModal = false;
   }
 
   editUserProfile(){
@@ -76,6 +91,39 @@ export class ProfileComponent implements OnInit {
         this.editProfileError = error.error.message;
       }
     )
-    this.showModal = false;
+    this.showInfoModal = false;
+  }
+
+  updateUserPassword(){
+    if (!this.updatePassword.valid) {
+      this.updatePasswordError = "Invalid Form";
+      console.log('Invalid Form');
+      return;
+    }
+
+    this._userService.updatePassword(JSON.stringify(this.updatePassword.value))
+      .subscribe(
+        data => {
+          // set local state
+          // if oldPass == currPass && newPass == confirmedNewPass:
+          if (this.updatePassword.value.newPassword === this.updatePassword.value.confirmedNewPassword)
+          {
+            this.userPassword = this.updatePassword.value.confirmedNewPassword;
+            // set session values
+            // issue here as well potentially?
+            this._commonUtils.setSessionField('password', this.updatePassword.value.newPassword);
+            // clear out the input values
+          }
+          else
+          {
+            // find more elegant error display solution
+            alert("New password and re-entered password not the same. Please try again.");
+          }
+        },
+        error => {
+          this.updatePasswordError = error.error.message;
+        }
+      )
+    this.showPasswordModal = false;
   }
 }

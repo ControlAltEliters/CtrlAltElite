@@ -13,13 +13,17 @@ export class ChatBoxComponent implements OnInit {
   constructor() { }
 
   userMessageInput(event){
-    console.log("event = " + event)
-    event.chatInputText = "User text input goes here"
-    console.log("this.chatInputText = " + this.chatInputText);
     this.echoMessage();
+    // TODO: Save this.chatInputText, the group id, and the time sent and save it to the database
   }
   echoMessage(){
-    console.log("echoMessage this.chatInputText = " + this.chatInputText);
+    // append each message to the popup chat text
+    var element1 = document.getElementById("chatMsg1");
+    var element2 = document.getElementById("chatMsg2");
+    var element3 = document.getElementById("chatMsg3");
+    element3.innerHTML = element2.innerHTML;
+    element2.innerHTML = element1.innerHTML;
+    element1.innerHTML = this.chatInputText;
   }
 
   toggleChat(){

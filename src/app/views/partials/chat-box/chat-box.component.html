@@ -3,8 +3,9 @@
         <p>[eventName][Day/Month][Username]: This is the expanded chat view where you can select which chat to view/send messages to.</p>
     </div>
     <div *ngIf="isCollapsed" class="popUpChatContent" id="popUpContent">
-        <p>[eventName][Day/Month][Username]: This function of chat will flash new messages to the screen</p>
-        <p>PotatoTossing-03/02[TaterSalad]: ie. I just sent a message!</p>
+        <p id="chatMsg3">[eventName][Day/Month][Username]: This function of chat will flash new messages to the screen</p>
+        <p id="chatMsg2">PotatoTossing-03/02[TaterSalad]: ie. I just sent a message!</p>
+        <p id="chatMsg1">PotatoTossing-03/02[TaterSalad]: Try it out</p>
     </div>
     <div *ngIf="!isEmojiCollapsed" class="expandedEmojiContent" id="EmojiContent">
         <p>THIS SHOULD GO OVER EVERYTHING</p>
@@ -13,7 +14,7 @@
         <button (click)="toggleEmoji()" class="button emoji"><img src="../../assets/images/blinky_ghost_icon.png"></button>
         <!-- <form [formGroup]="chatForm"> -->
             <!-- <textarea></textarea> -->
-            <input type="text" (keydown.enter)="userMessageInput($event)" class="chatInputBox" id="chatInputText" name="chatInputText" placeholder="Chat it up with your friends">
+            <input type="text" (keydown.enter)="userMessageInput($event)" [(ngModel)]="chatInputText" class="chatInputBox" placeholder="Chat it up with your friends">
         <!-- </form> -->
         <button (click)="toggleChat()" class="button expandChat" id="expandChatButton"><img src="../../assets/images/angle_up.png"></button>
     </div>

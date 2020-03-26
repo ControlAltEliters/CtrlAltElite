@@ -1,3 +1,52 @@
-form {
-  margin-top: 10em;
+@import url('https://fonts.googleapis.com/css?family=VT323&display=swap');
+
+.top20 {
+    margin-top: 20px;
+}
+
+.card {
+    border: 0px;
+    min-width: 400px;
+    margin-top: 5% !important;
+    margin-bottom: 5% !important;
+    background: rgba(52, 222, 252, 0.521);
+    box-shadow: .5em .5em #6bd4dbcc !important;
+}
+
+button {
+    all: unset;
+    color: #fff !important;
+    margin: 0 0 1.5vw 0;
+    border-radius: .25em;
+    padding: .5em 1em .5em 1em;
+}
+
+#login {
+    margin: 0 1vw 0 1vw;
+    background: #FE019A;
+}
+
+#login:hover {
+    background: rgb(206, 1, 124);
+}
+
+#register {
+    background: rgb(170, 179, 189);
+}
+
+#register:hover {
+    background: rgb(137, 143, 150);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+.padded {
+  padding: 3%;
+}
+
+.register-header {
+  margin-top: 5%;
+  color: white;
 }

@@ -1,3 +1,75 @@
-mat-card {
-  top: 6em;
+.content-block {
+  background: rgba(55,13,25,0.8);
+  color: white;
+  height: 100%;
+  padding: 1% 0% 5% 0%;
+}
+
+.content-left {
+  height: 100% !important;
+}
+
+.content-right {
+  height: 100% !important;
+}
+
+/* div {
+  outline: 1px dashed red;
+} */
+
+
+.card {
+  margin-top: 5% !important;
+  margin-bottom: 5% !important;
+  margin-left: 5% !important;
+  margin-right: 5% !important;
+  height: 30% !important;
+  width: 90%;
+  background-color: rgba(20,9,9,0.8);
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.ghost {
+  max-width: 20%;
+  height: auto;
+  margin-right: 5%;
+}
+
+.magic {
+  max-width: 30%;
+  height: auto;
+  margin-top: 5%;
+}
+
+.blurb {
+  max-width: 50%;
+  text-align: center;
+  margin-left: 10%;
+  margin-bottom: 5%;
+  margin-top: 5%;
+  font-size: large;
+}
+
+.events {
+  height: 70%;
+  padding: 15px;
+}
+
+.date {
+  height: 30%;
+  background: rgba(55,13,25,1.0);
+}
+.holder {
+  height: 25%
+}
+
+h1 {
+  padding: 3%;
+  text-shadow: 2px 2px 5px #0ff;
+}
+
+.top {
+  border-bottom: 1px solid #0ff !important;
+  height: 20%
 }

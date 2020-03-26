@@ -1,8 +1,99 @@
-<div>
-  <mat-card>
-    <h1>Welcome</h1>
-    <button [routerLink]="['/register']" routerLinkActive="active">Register</button>
-  </mat-card>
-</div>
+<app-navbar></app-navbar>
+<div class="ui container">
+  <div class="ui grid">
+    <div class="row">
+      <div class="ten wide column">
+        <div class="content-block content-left">
+            <div class="ui card">
+              <div class="content top">
+                <h1>RETRO FREEPLAY ARCADE</h1>
+              </div>
+              <div class="content">
+                <img class="right floated ghost" style="margin-top:2em;" src="../../assets/images/pinkghost.gif">
+                <div class="blurb">
+                  We have over 60+ retro arcade cabinets at any given time and cycle through the games
+                  so that there's always something different to play. We even have pinball machines!
+                </div>
+              </div>
+            </div>
 
-<app-contact-footer></app-contact-footer>
+            <div class="ui card">
+              <div class="content top">
+                <h1>TABLETOP GAMING LOUNGE</h1>
+              </div>
+              <div class="content">
+                <img class="right floated magic" src="../../assets/images/magic.png">
+                <div class="blurb">
+                  Rent one of our board games or bring your own and enjoy playing in our
+                  open-play tabletop game room. Want to make it a tradition? Start your own
+                  game night with us. We’ll even help you find more players!
+                </div>
+              </div>
+            </div>
+
+            <div class="ui card">
+              <div class="content top">
+                <h1>ITEM SHOP</h1>
+              </div>
+              <div class="content">
+                <img class="right floated ghost" src="../../assets/images/potion.png">
+                <div class="blurb">
+                  Keep the good times rollin’ and grab some health and mana potions from
+                  our snack bar. Need to change up your TCG deck? Pick up a few boosters.
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="six wide column">
+        <div class="content-block content-right">
+          <!-- TODO: Conditionally render date/events -->
+          <div class="holder">
+            <div class="date day-one">
+              <h1>5 THURSDAY</h1>
+            </div>
+
+            <div class="events">
+              <button class="ui inverted teal button">4:30PM</button>
+              <button class="ui inverted teal button">5:30PM</button>
+              <button class="ui inverted teal button">6:30PM</button>
+            </div>
+          </div>
+          <div class="holder">
+            <div class="date day-one">
+              <h1>6 FRIDAY</h1>
+            </div>
+
+            <div class="events">
+              <button class="ui inverted teal button">4:30PM</button>
+              <button class="ui inverted teal button">5:30PM</button>
+              <button class="ui inverted teal button">6:30PM</button>
+            </div>
+          </div>
+          <div class="holder">
+            <div class="date day-one">
+              <h1>7 SATURDAY</h1>
+            </div>
+
+            <div class="events">
+              <button class="ui inverted teal button">4:30PM</button>
+              <button class="ui inverted teal button">5:30PM</button>
+              <button class="ui inverted teal button">6:30PM</button>
+            </div>
+          </div>
+          <div class="holder">
+            <div class="date day-one">
+              <h1>8 SUNDAY</h1>
+            </div>
+
+            <div class="events">
+              <button class="ui inverted teal button">4:30PM</button>
+              <button class="ui inverted teal button">5:30PM</button>
+              <button class="ui inverted teal button">6:30PM</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

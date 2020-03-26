@@ -1,0 +1,42 @@
+<div class="ui inverted segment navbar-custom">
+  <div class="ui inverted secondary pointing menu navbar-custom">
+    <div class="title">
+       <img src="../../assets/images/logo.png">
+    </div>
+
+    <div class="right menu" *ngIf="!readSession('activeUser')">
+        <a class="item" [ngClass]="{'active': href === '/home'}" [routerLink]="['/home']">
+        Home
+        </a>
+        <a class="item" [ngClass]="{'active': href === '/events'}" [routerLink]="['/events']">
+        Events
+        </a>
+        <a class="item">
+        FAQ
+        </a>
+        <a class="item" href="/login">
+        Login
+        </a>
+    </div>
+    <div class="right menu" *ngIf="readSession('activeUser')">
+        <a class="item">
+        Welcome, {{readSession('activeUser')}}
+        </a>
+        <a class="item" [ngClass]="{'active': href === '/home'}" [routerLink]="['/home']">
+        Home
+        </a>
+        <a class="item" [ngClass]="{'active': href === '/events'}" [routerLink]="['/events']">
+        Events
+        </a>
+        <a class="item">
+        FAQ
+        </a>
+        <a class="item" [ngClass]="{'active': href === '/account'}" [routerLink]="['/account/profile']">
+        My Account
+        </a>
+        <a class="item" (click)="logout()">
+        Logout
+        </a>
+    </div>
+  </div>
+</div>

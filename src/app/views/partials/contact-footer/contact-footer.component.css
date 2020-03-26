@@ -1,0 +1,20 @@
+p {
+    margin-bottom: .25em;
+}
+
+img {
+    width: auto;
+    height: 2.5em;
+    padding: .5em .5em 0 .5em;
+}
+
+.ui.footer.segment {
+    bottom: 0px;
+    width: 100%;
+    padding: 2.5em 0em;
+    margin: 0em;
+}
+
+.ui.inverted.segment, .ui.primary.inverted.segment {
+    background: rgb(46, 163, 184);
+}

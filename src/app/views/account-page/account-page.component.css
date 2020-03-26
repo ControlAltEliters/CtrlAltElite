@@ -1,0 +1,48 @@
+.content-block {
+  background: rgba(55,13,25,0.8);
+  color: white;
+  height: 100%;
+  padding: 1% 0% 5% 0%;
+}
+
+.content-left {
+  height: 100% !important;
+}
+
+.content-right {
+  height: 100% !important;
+}
+
+/* div {
+  outline: 1px dashed white;
+} */
+
+
+.card {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
+  background: transparent;
+  width: 90%;
+  border: none;
+  box-shadow: none;
+  align-items: center;
+}
+
+.ui.card>.extra a,
+.ui.cards>.card>.extra a,
+.ui.card>.content>.header,
+.ui.card>.content>.menu>.item,
+.ui.card>.extra>.user {
+  color: white;
+  text-align: center;
+}
+
+.ui.card>.image {
+  max-width: 50%;
+  height: auto;
+  padding-top: 7%;
+  padding-bottom: 7%;
+}
+

@@ -1,19 +1,2 @@
-<div>
-  <mat-toolbar class="toolbar" color="primary">
-    <span class="title">{{title}}</span>
-    <span class="space"></span>
-    <span *ngIf="loginStatus === false">
-        <button mat-menu-item [routerLink]="['/home']">Home</button>
-        <button mat-menu-item>Events</button>
-        <button mat-menu-item>FAQ</button>
-  </span>
-      <span *ngIf="loginStatus === true">
-        <button mat-menu-item [routerLink]="['/home']">Home</button>
-        <button mat-menu-item>Events</button>
-        <button mat-menu-item>FAQ</button>
-      </span>
-  </mat-toolbar>
-  <div class="container">
-    <router-outlet></router-outlet>
-  </div>
-</div>
+<router-outlet></router-outlet>
+<app-contact-footer></app-contact-footer>

@@ -1,5 +1,36 @@
-<div>
-  <h1>Login Page</h1>
+<app-navbar></app-navbar>
+<div class="ui card centered">
+  <form [formGroup]="loginForm" class="ui form" [ngClass]="{'error': loginError}">
+    <div class="content">
+      <div class="center aligned description grid">
+        <div class="row top20">
+            <span id="welcome"></span>
+            <span class="typer">|</span>
+        </div>
+        <div class="row top20">
+            <img src="assets/images/ghosty.gif">
+        </div>
+        <div class="row padded">
+          <div class="field">
+            <input formControlName="email" type="text" name="email" placeholder="Email">
+          </div>
+        </div>
+        <div class="row padded">
+          <div class="field">
+            <input formControlName="password" type="password" name="password" placeholder="Password">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="extra content">
+        <div class="center aligned author padded">
+          <button class="ui button" id="login" type="submit" (click)="login()">Login</button>
+          <button class="ui button" id="register" [routerLink]="['/register']" routerLinkActive="active">Register</button>
+          <div class="ui error message">
+            <div class="header">Login Error</div>
+            <p>{{loginError}}</p>
+          </div>
+        </div>
+    </div>
+  </form>
 </div>
-
-<app-contact-footer></app-contact-footer>

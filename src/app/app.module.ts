@@ -1,23 +1,26 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormGroup, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
-import { HomeComponent } from './views/home/home.component';
-
-import { HttpClientModule } from '@angular/common/http';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatCardModule, MatCard} from '@angular/material/card';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import { FormGroup, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './services/user.service';
-import { ContactFooterComponent } from './views/contact-footer/contact-footer.component';
+import { EventService } from './services/event.service';
+import { HomeComponent } from './views/home/home.component';
+import { ContactFooterComponent } from './views/partials/contact-footer/contact-footer.component';
+import { NavbarComponent } from './views/partials/navbar/navbar.component';
+import { EventsPageComponent } from './views/events-page/events-page.component';
+import { Time24to12Format } from './pipes/time24To12Format';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { AccountPageComponent } from './views/account-page/account-page.component';
+import { ProfileComponent } from './views/partials/profile/profile.component';
+import { UserEventsComponent } from './views/partials/user-events/user-events.component';
+import { CommonUtils } from './utils/common-utils';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,12 @@ import { ContactFooterComponent } from './views/contact-footer/contact-footer.co
     RegisterComponent,
     HomeComponent,
     ContactFooterComponent,
+    NavbarComponent,
+    EventsPageComponent,
+    Time24to12Format,
+    AccountPageComponent,
+    ProfileComponent,
+    UserEventsComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,14 +42,16 @@ import { ContactFooterComponent } from './views/contact-footer/contact-footer.co
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatProgressSpinnerModule,
-    MatCardModule,
-    MatFormFieldModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FullCalendarModule,
   ],
   providers: [
     UserService,
+    EventService,
+    CommonUtils
   ],
   bootstrap: [AppComponent],
   schemas: [

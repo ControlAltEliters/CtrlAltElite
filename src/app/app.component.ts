@@ -8,11 +8,8 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit{
   title = 'Arcadia';
-  loginStatus = false;
+  
   constructor(private router: Router) { }
 
-  ngOnInit() {
-
-  }
-
+  ngOnInit() {}
 }

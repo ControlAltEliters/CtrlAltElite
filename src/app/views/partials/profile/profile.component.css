@@ -1,0 +1,56 @@
+.ui.table {
+  color: white;
+}
+
+.ui.header .content {
+  color: white;
+}
+
+label {
+  color: black;
+}
+
+.form-group {
+  margin-top: 10px;
+}
+
+.content {
+  padding: 20px;
+}
+
+.column {
+  font-size: 16px;
+}
+
+.align-right {
+  text-align: right;
+  font-weight: bold;
+}
+
+.ui.button {
+  background: #FE019A;
+  color: white;
+}
+
+.ui.button:hover {
+  background: rgb(206, 1, 124);
+}
+
+.ui.modal>.header,
+.ui.modal>.content {
+  background: rgb(52, 186, 209, 0.9);
+  color: white;
+}
+
+.ui.form .field>label {
+  color: white;
+}
+
+.profile-header {
+  margin-left: 15px;
+}
+
+i {
+  margin-top: 2.5em;
+  margin-right: 3em;
+}

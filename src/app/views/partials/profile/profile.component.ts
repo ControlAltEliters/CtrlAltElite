@@ -12,14 +12,14 @@ import { CommonUtils } from 'src/app/utils/common-utils';
 })
 export class ProfileComponent implements OnInit {
   public showInfoModal = false;
-  // public showPasswordModal = false;
+  public showPasswordModal = false;
   userFirstName: string;
   userLastName: string;
   userName: string;
   userEmail: string;
-  // userPassword: string;
+  userPassword: string;
   editProfileError: string;
-  // updatePasswordError: string;
+  updatePasswordError: string;
 
   editProfile: FormGroup = new FormGroup({
     editFirstName:new FormControl(null),
@@ -28,12 +28,12 @@ export class ProfileComponent implements OnInit {
     userId: new FormControl(null)
   })
 
-  // updatePassword: FormGroup = new FormGroup({
-  //   oldPassword:new FormControl(null),
-  //   newPassword: new FormControl(null),
-  //   confirmedNewPassword: new FormControl(null),
-  //   userId: new FormControl(null)
-  // })
+  updatePassword: FormGroup = new FormGroup({
+    oldPassword:new FormControl(null),
+    newPassword: new FormControl(null),
+    confirmedNewPassword: new FormControl(null),
+    userId: new FormControl(null)
+  })
 
   constructor(
     private _router:Router,
@@ -59,13 +59,13 @@ export class ProfileComponent implements OnInit {
     this.showInfoModal = true;
   }
 
-  // displayPasswordModal() {
-  //   this.showPasswordModal = true;
-  // }
+  displayPasswordModal() {
+    this.showPasswordModal = true;
+  }
 
   hideModal(){
     this.showInfoModal = false;
-    // this.showPasswordModal = false;
+    this.showPasswordModal = false;
   }
 
   editUserProfile(){
@@ -94,29 +94,35 @@ export class ProfileComponent implements OnInit {
     this.showInfoModal = false;
   }
 
-  // updateUserPassword(){
+  updateUserPassword(){
     // event.preventDefault();
-  //   if (!this.updatePassword.valid) {
-  //     this.updatePasswordError = "Invalid Form";
-  //     console.log('Invalid Form');
-  //     return;
-  //   }
+    if (!this.updatePassword.valid) {
+      this.updatePasswordError = "Invalid Form";
+      console.log('Invalid Form');
+      return;
+    }
 
-  //   this._userService.updatePassword(JSON.stringify(this.updatePassword.value))
-  //     .subscribe(
-  //       data => {
-  //         // set local state
-  //         // if oldPass == currPass && newPass == confirmedNewPass:
-  //         this.userPassword = this.updatePassword.value.confirmedNewPassword;
-  //         // set session values
-  //         // unsure if it's userPassword, might need to change
-  //         this._commonUtils.setSessionField('userPassword', this.updatePassword.value.newPassword);
-
-  //       },
-  //       error => {
-  //         this.updatePasswordError = error.error.message;
-  //       }
-  //     )
-  //   this.showPasswordModal = false;
-  // }
+    this._userService.updatePassword(JSON.stringify(this.updatePassword.value))
+      .subscribe(
+        data => {
+          // set local state
+          // if oldPass == currPass && newPass == confirmedNewPass:
+          if (this.updatePassword.value.newPassword === this.updatePassword.value.confirmedNewPassword)
+          {
+            this.userPassword = this.updatePassword.value.confirmedNewPassword;
+            // set session values
+            this._commonUtils.setSessionField('password', this.updatePassword.value.newPassword);
+          }
+          else
+          {
+            // find more elegant error display solution
+            alert("New password and re-entered password not the same. Please try again.");
+          }
+        },
+        error => {
+          this.updatePasswordError = error.error.message;
+        }
+      )
+    this.showPasswordModal = false;
+  }
 }

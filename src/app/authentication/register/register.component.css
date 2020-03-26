@@ -15,9 +15,9 @@
 
 button {
     all: unset;
-    color: #fff !important;
     margin: 0 0 1.5vw 0;
     border-radius: .25em;
+    color: #fff !important;
     padding: .5em 1em .5em 1em;
 }
 
@@ -49,4 +49,15 @@ button:active {
 .register-header {
   margin-top: 5%;
   color: white;
+}
+
+a {
+  all: unset;
+  color: white;
+  font-size: .75em;
+  font-weight: 500;
+}
+
+a:hover {
+  font-weight: 800;
 }

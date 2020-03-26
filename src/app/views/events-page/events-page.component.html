@@ -3,7 +3,7 @@
 
 <div class="ui container">
     <div *ngIf="user" class="content">
-        <button (click)="displayModal()" class="ui button" style="margin-top: 20px;">Schedule event</button>
+        <button (click)="displayModal()" class="ui button" style="margin-top: 2em;">Schedule event</button>
     </div>
     <div *ngIf="showModal">
         <div class="modal">
@@ -120,7 +120,7 @@
     <div class="content-block">
     <div class="ui card centered">
         <div class="content">
-            <full-calendar 
+            <full-calendar
             defaultView="dayGridMonth"
             [plugins]="calendarPlugins"
             [events]="calendarEvents"
@@ -128,10 +128,9 @@
             (dateClick)="handleClick($event)"
             ></full-calendar>
         </div>
- 
+
     </div>
-    
-   
+
+
     </div>
 </div>
-

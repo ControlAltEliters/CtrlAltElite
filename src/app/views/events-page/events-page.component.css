@@ -18,7 +18,7 @@
     background: rgba(55,13,25,0.8);
     color: white;
     height: 100%;
-    padding: 1% 0% 5% 0%;
+    padding: 1% 0% 3% 0%;
 }
 
 form {
@@ -74,8 +74,8 @@ button:active {
     height: 100%;
     padding: 1% 0% 5% 0%;
   }
-  
-  .tableContent{
-      justify-content: center;
-      padding: 10px;
-  }
+
+.tableContent{
+  justify-content: center;
+  padding: 1em;
+}

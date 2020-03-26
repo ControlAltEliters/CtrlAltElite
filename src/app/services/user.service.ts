@@ -39,4 +39,11 @@ export class UserService {
     })
   }
 
+  editProfile(body:any){
+    return this._http.post(environment.baseurl + '/users/editprofile',body,{
+      observe:'body',
+      headers:new HttpHeaders().append('Content-Type','application/json'),
+      withCredentials:true
+    })
+  }
 }

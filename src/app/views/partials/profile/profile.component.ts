@@ -4,7 +4,6 @@ import { FormGroup,FormControl,Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonUtils } from 'src/app/utils/common-utils';
 
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -96,7 +95,6 @@ export class ProfileComponent implements OnInit {
   }
 
   updateUserPassword(){
-    // event.preventDefault();
     if (!this.updatePassword.valid) {
       this.updatePasswordError = "Invalid Form";
       console.log('Invalid Form');
@@ -114,6 +112,7 @@ export class ProfileComponent implements OnInit {
             // set session values
             // issue here as well potentially?
             this._commonUtils.setSessionField('password', this.updatePassword.value.newPassword);
+            // clear out the input values
           }
           else
           {

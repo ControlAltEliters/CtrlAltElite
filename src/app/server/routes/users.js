@@ -85,7 +85,7 @@ router.post('/updatepassword', isValidUser, function (req, res, next) {
     User.findOneAndUpdate(
       { _id: req.body.userId }, {
       $set: {
-        password: User.hashPassword(req.body.newPassword)
+        password: User.hashPassword(req.body.newPassword),
       }
     }, function (err, doc) {
       if (err) {

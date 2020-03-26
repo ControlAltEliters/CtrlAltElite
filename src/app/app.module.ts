@@ -22,6 +22,7 @@ import { AccountPageComponent } from './views/account-page/account-page.componen
 import { ProfileComponent } from './views/partials/profile/profile.component';
 import { UserEventsComponent } from './views/partials/user-events/user-events.component';
 import { FaqPageComponent } from './views/faq-page/faq-page.component';
+import { CommonUtils } from './utils/common-utils';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { FaqPageComponent } from './views/faq-page/faq-page.component';
   providers: [
     UserService,
     EventService,
+    CommonUtils
   ],
   bootstrap: [AppComponent],
   schemas: [

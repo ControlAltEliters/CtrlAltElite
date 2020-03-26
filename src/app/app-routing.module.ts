@@ -4,6 +4,7 @@ import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
 import { EventsPageComponent } from './views/events-page/events-page.component';
+import { FaqPageComponent } from './views/faq-page/faq-page.component';
 import { AccountPageComponent } from './views/account-page/account-page.component';
 import { ProfileComponent } from './views/partials/profile/profile.component';
 import { UserEventsComponent } from './views/partials/user-events/user-events.component';
@@ -33,6 +34,11 @@ const routes: Routes = [
     path: 'events',
     component: EventsPageComponent,
     data: { title: 'Events'}
+  },
+  {
+    path: 'faq',
+    component: FaqPageComponent,
+    data: { title: 'FAQ' }
   },
   {
     path: 'account',

@@ -1,4 +1,5 @@
 <app-navbar></app-navbar>
+<app-chat-box></app-chat-box>
 <script src="../../calendar//caleandar.js"></script>
 
 <div class="ui container">
@@ -118,20 +119,17 @@
     </div>
 
     <div class="content-block">
-    <div class="ui card centered">
-        <div class="content">
-            <full-calendar 
-            defaultView="dayGridMonth"
-            [plugins]="calendarPlugins"
-            [events]="calendarEvents"
-            (eventClick)="handleEventClick($event)"
-            (dateClick)="handleClick($event)"
-            ></full-calendar>
+        <div class="ui card centered">
+            <div class="content">
+                <full-calendar 
+                defaultView="dayGridMonth"
+                [plugins]="calendarPlugins"
+                [events]="calendarEvents"
+                (eventClick)="handleEventClick($event)"
+                (dateClick)="handleClick($event)"
+                ></full-calendar>
+            </div>
         </div>
- 
-    </div>
-    
-   
     </div>
 </div>
 

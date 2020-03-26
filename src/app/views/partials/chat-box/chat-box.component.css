@@ -3,11 +3,11 @@
     bottom: 0;
     right: 0;
     width: 390px;
-    height: 140px;
+    height: 155px;
     float:left;
-    z-index: 1;
-
-    /* border: 3px solid rgb(166, 255, 0); */
+    z-index: 10;
+    background: rgba(55,13,25,0.8);
+    padding: 10px;
 }
 
 .emoji{
@@ -50,7 +50,6 @@
 
 .expandedChatContent{
     color:rgb(0, 255, 200);
-    background-color: black;
     overflow: hidden;
     width: 380px;
     height: 100px;

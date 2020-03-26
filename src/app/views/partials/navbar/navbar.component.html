@@ -19,9 +19,7 @@
         </a>
     </div>
     <div class="right menu" *ngIf="readSession('activeUser')">
-        <div class="greeting">
-          <span id="welcome">Welcome, {{activeUser}}!</span>
-        </div>
+        <a class="item greeting">Welcome, {{activeUser}}!</a>
         <a class="item loggedIn" [ngClass]="{'active': href === '/home'}" [routerLink]="['/home']">
         Home
         </a>

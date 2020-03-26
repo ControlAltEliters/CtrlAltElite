@@ -12,7 +12,8 @@
     <div class="collapsedChatContent" id="collapsedContent">
         <button (click)="toggleEmoji()" class="button emoji"><img src="../../assets/images/blinky_ghost_icon.png"></button>
         <!-- <form [formGroup]="chatForm"> -->
-            <input type="text" class="chatInputBox" id="chatInputText" name="chatInputText">
+            <!-- <textarea></textarea> -->
+            <input type="text" (keydown.enter)="userMessageInput($event)" class="chatInputBox" id="chatInputText" name="chatInputText" placeholder="Chat it up with your friends">
         <!-- </form> -->
         <button (click)="toggleChat()" class="button expandChat" id="expandChatButton"><img src="../../assets/images/angle_up.png"></button>
     </div>

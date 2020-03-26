@@ -14,27 +14,28 @@
         <a class="item" [ngClass]="{'active': href === '/faq'}" [routerLink]="['/faq']">
         FAQ
         </a>
-        <a class="item" href="/login">
+        <a class="item" [ngClass]="{'active': href === '/login'}" [routerLink]="['/login']">
         Login
         </a>
     </div>
     <div class="right menu" *ngIf="readSession('activeUser')">
-        <a class="item">
-        Welcome, {{readSession('activeUser')}}
-        </a>
-        <a class="item" [ngClass]="{'active': href === '/home'}" [routerLink]="['/home']">
+        <div class="greeting">
+          <span id="welcome">Welcome, {{activeUser}}!</span>
+        </div>
+        <a class="item loggedIn" [ngClass]="{'active': href === '/home'}" [routerLink]="['/home']">
         Home
         </a>
-        <a class="item" [ngClass]="{'active': href === '/events'}" [routerLink]="['/events']">
+        <a class="item loggedIn" [ngClass]="{'active': href === '/events'}" [routerLink]="['/events']">
         Events
         </a>
         <a class="item" [ngClass]="{'active': href === '/faq'}" [routerLink]="['/faq']">
+        <a class="item loggedIn">
         FAQ
         </a>
-        <a class="item" [ngClass]="{'active': href === '/account'}" [routerLink]="['/account/profile']">
+        <a class="item loggedIn" [ngClass]="{'active': href === '/account'}" [routerLink]="['/account/profile']">
         My Account
         </a>
-        <a class="item" (click)="logout()">
+        <a class="item loggedIn" (click)="logout()">
         Logout
         </a>
     </div>

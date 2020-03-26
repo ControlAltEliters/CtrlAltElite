@@ -34,12 +34,25 @@
             <input formControlName="cpass" type="password" name="cpass" placeholder="Confirm Password">
           </div>
         </div>
+        <div *ngIf="ownerRegistration">
+          <div class="row padded">
+            <div class="field">
+              <input formControlName="" type="text" name="" placeholder="Admin Code">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="extra content">
         <div class="center aligned author padded">
           <button class="ui button" id="register" type="submit" (click)="register()">Register</button>
           <button class="ui button" id="login" [routerLink]="['/login']" routerLinkActive="active">Login</button>
+          <div *ngIf="!ownerRegistration">
+            <br><a (click)="toggleForm()">Owner? Register here!</a>
+          </div>
+          <div *ngIf="ownerRegistration">
+            <br><a (click)="toggleForm()">Go Back</a>
+          </div>
           <div class="ui error message">
             <div class="header">Registration Error</div>
             <p>{{registerError}}</p>

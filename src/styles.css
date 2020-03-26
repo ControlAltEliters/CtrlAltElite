@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=VT323&display=swap');
 
 html, body {
     height: 100%;
@@ -11,10 +12,10 @@ body {
     background-size: cover !important;
     color: white;
 }
-a {
+/* a {
   color: white;
 }
 a:active,
 a:hover {
   color: rgb(218, 218, 218);
-}
+} */

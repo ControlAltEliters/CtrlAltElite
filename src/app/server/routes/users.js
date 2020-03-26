@@ -80,6 +80,30 @@ router.post('/editprofile',isValidUser, function(req,res,next){
   }
 })
 
+router.post('/updatepassword', isValidUser, function (req, res, next) {
+  try {
+    User.findOneAndUpdate(
+      { _id: req.body.userId }, {
+      $set: {
+        password: User.hashPassword(req.body.newPassword),
+      }
+    }, function (err, doc) {
+      if (err) {
+        console.log('Update password error: ' + err)
+        return res.status(500).json({ message: 'Updated password failed' });
+      } else {
+        // console.log('Updated password: ' + doc)
+        return res.status(200).json({ message: 'Updated password', userObject: doc });
+      }
+    }
+    )
+  }
+  catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: 'Updated password failed' });
+  }
+})
+
 function isValidUser(req,res,next){
   if(req.isAuthenticated()) next();
   else {

@@ -21,6 +21,7 @@ import { AccountPageComponent } from './views/account-page/account-page.componen
 import { ProfileComponent } from './views/partials/profile/profile.component';
 import { UserEventsComponent } from './views/partials/user-events/user-events.component';
 import { CommonUtils } from './utils/common-utils';
+import { ChatBoxComponent } from './views/partials/chat-box/chat-box.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { CommonUtils } from './utils/common-utils';
     AccountPageComponent,
     ProfileComponent,
     UserEventsComponent,
+    ChatBoxComponent,
   ],
   imports: [
     BrowserModule,

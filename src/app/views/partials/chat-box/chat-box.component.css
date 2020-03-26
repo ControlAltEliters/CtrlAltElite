@@ -55,7 +55,7 @@
     height: 100px;
     margin-left: 6px;
     margin-right: 6px;
-    border: 3px solid rgb(247, 0, 255);
+    /* border: 3px solid rgb(247, 0, 255); */
     /* padding: 0 18px;
     display: none;
     overflow: hidden;
@@ -76,7 +76,8 @@
     margin-right: 6px;
     width: 380px;
     height: 100px;
-    border: 3px solid rgb(247, 0, 255);
+    /* border: 3px solid rgb(247, 0, 255); */
+    overflow-y: scroll;
 }
 
 .expandedEmojiContent{
@@ -91,5 +92,5 @@
     bottom: 0;
     right: 380;
     z-index: 2;
-    border: 3px solid rgb(247, 0, 255);
+    /* border: 3px solid rgb(247, 0, 255); */
 }

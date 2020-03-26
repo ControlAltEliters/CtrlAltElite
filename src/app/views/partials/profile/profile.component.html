@@ -1,56 +1,70 @@
-<table class="ui very basic collapsing celled table">
-  <tbody>
-    <tr>
-      <td>
-        <h4 class="ui image header">
-          <img src="" class="ui mini rounded image">
-          <div class="content">
-            First Name:
-          </div>
-        </h4>
-      </td>
-        <td>
-          {{readSession('userFirst')}}
-        </td>
-    </tr>
-    <tr>
-      <td>
-        <h4 class="ui image header">
-          <img src="" class="ui mini rounded image">
-          <div class="content">
-            Last Name:
-          </div>
-        </h4>
-      </td>
-      <td>
-        {{readSession('userLast')}}
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <h4 class="ui image header">
-          <img src="" class="ui mini rounded image">
-          <div class="content">
-            Username:
-          </div>
-        </h4>
-      </td>
-      <td>
-        {{readSession('activeUser')}}
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <h4 class="ui image header">
-          <img src="" class="ui mini rounded image">
-          <div class="content">
-            Email:
-          </div>
-        </h4>
-      </td>
-      <td>
-        {{readSession('userEmail')}}
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div *ngIf="showModal">
+  <div class="modal">
+    <div class="ui active modal">
+        <i class="close icon" (click)="hideModal()"></i>
+        <div class="header">Edit Information</div>
+        <div class="content">
+          <form [formGroup]="editProfile" class="ui form">
+            <div class="form-group">
+              <div class="field">
+                <label class="inputTitle">First Name</label>
+                <input formControlName="editFirstName" type="text" class="form-control" id="editFirstName">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="field">
+                <label class="inputTitle">Last Name</label>
+                <input formControlName="editLastName" type="text" class="form-control" id="editLastName">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="field">
+                <label class="inputTitle">Email</label>
+                <input formControlName="editEmail" type="text" class="form-control" id="editEmail">
+              </div>
+            </div>
+            <div class="form-group">
+                <button class="ui button" id="edit-button" type="submit" (click)="editUserProfile()">Submit</button>
+            </div>
+        </form>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="ui grid">
+    <div class="row">
+      <h2 class="profile-header">MY PROFILE</h2>
+    </div>
+    <div class="row">
+      <div class="four wide column align-right">First Name:</div>
+      <div class="twelve wide column">{{userFirstName}}</div>
+    </div>
+    <div class="row">
+      <div class="four wide column align-right">Last Name:</div>
+      <div class="twelve wide column">{{userLastName}}</div>
+    </div>
+    <div class="row">
+      <div class="four wide column align-right">User Name:</div>
+      <div class="twelve wide column">{{userName}}</div>
+    </div>
+    <div class="row">
+      <div class="four wide column align-right">Email:</div>
+      <div class="twelve wide column">{{userEmail}}</div>
+    </div>
+    <div class="row">
+      <div class="sixteen wide column align-right">
+        <button (click)="displayModal()" class="ui button float-right">Edit Information</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+

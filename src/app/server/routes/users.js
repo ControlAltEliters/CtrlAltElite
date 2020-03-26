@@ -2,7 +2,7 @@ let express = require('express');
 let router = express.Router();
 let User = require('../models/User');
 let passport = require('passport');
-
+let mongoose = require('mongoose');
 
 router.post('/register', function (req, res, next) {
   addToDB(req, res);
@@ -52,6 +52,32 @@ router.get('/user',isValidUser,function(req,res,next){
 router.get('/logout',isValidUser, function(req,res,next){
   req.logout();
   return res.status(200).json({message:'Logout Success'});
+})
+
+router.post('/editprofile',isValidUser, function(req,res,next){
+  try {
+    User.findOneAndUpdate(
+    {_id: req.body.userId }, {
+      $set: {
+        firstname: req.body.editFirstName,
+        lastname: req.body.editLastName,
+        email: req.body.editEmail
+      }
+    }, function (err,doc) {
+        if (err) {
+          console.log('Profile edit error: ' + err)
+          return res.status(500).json({message:'Updated user failed'});
+        } else {
+          console.log('Updated profile: ' + doc)
+          return res.status(200).json({message:'Updated user', userObject: doc});
+        }
+      }
+    )
+  }
+  catch (err) {
+    console.log(err);
+    return res.status(500).json({message:'Updated user failed'});
+  }
 })
 
 function isValidUser(req,res,next){

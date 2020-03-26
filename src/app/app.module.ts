@@ -20,6 +20,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { AccountPageComponent } from './views/account-page/account-page.component';
 import { ProfileComponent } from './views/partials/profile/profile.component';
 import { UserEventsComponent } from './views/partials/user-events/user-events.component';
+import { FaqPageComponent } from './views/faq-page/faq-page.component';
 import { CommonUtils } from './utils/common-utils';
 import { ChatBoxComponent } from './views/partials/chat-box/chat-box.component';
 
@@ -36,6 +37,7 @@ import { ChatBoxComponent } from './views/partials/chat-box/chat-box.component';
     AccountPageComponent,
     ProfileComponent,
     UserEventsComponent,
+    FaqPageComponent,
     ChatBoxComponent,
   ],
   imports: [

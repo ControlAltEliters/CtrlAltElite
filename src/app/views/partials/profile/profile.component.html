@@ -1,4 +1,4 @@
-<div *ngIf="showModal">
+<div *ngIf="showInfoModal">
   <div class="modal">
     <div class="ui active modal">
         <i class="close icon" (click)="hideModal()"></i>
@@ -31,6 +31,41 @@
     </div>
   </div>
 </div>
+
+<div *ngIf="showPasswordModal">
+  <div class="modal">
+    <div class="ui active modal">
+      <i class="close icon" (click)="hideModal()"></i>
+      <div class="header">Update Password</div>
+      <div class="content">
+        <form [formGroup]="updatePassword" class="ui form">
+          <div class="form-group">
+            <div class="field">
+              <label class="inputTitle">Old Password</label>
+              <input formControlName="editFirstName" type="text" class="form-control" id="editFirstName">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="field">
+              <label class="inputTitle">New Password</label>
+              <input formControlName="editLastName" type="text" class="form-control" id="editLastName">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="field">
+              <label class="inputTitle">Re-enter New Password</label>
+              <input formControlName="editEmail" type="text" class="form-control" id="editEmail">
+            </div>
+          </div>
+          <div class="form-group">
+            <button class="ui button" id="edit-button" type="submit" (click)="editUserProfile()">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="content">
   <div class="ui grid">
     <div class="row">
@@ -54,17 +89,9 @@
     </div>
     <div class="row">
       <div class="sixteen wide column align-right">
-        <button (click)="displayModal()" class="ui button float-right">Edit Information</button>
+        <button (click)="displayInfoModal()" class="ui button float-right">Edit Information</button>
+        <button (click)="displayPasswordModal()" class="ui button float-right">Update Password</button>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-

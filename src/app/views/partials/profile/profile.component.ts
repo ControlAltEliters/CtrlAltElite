@@ -11,17 +11,24 @@ import { CommonUtils } from 'src/app/utils/common-utils';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  public showModal = false;
+  public showInfoModal = false;
+  public showPasswordModal = false;
   userFirstName: string;
   userLastName: string;
   userName: string;
   userEmail: string;
+  userPassword: string;
   editProfileError: String;
 
   editProfile: FormGroup = new FormGroup({
     editFirstName:new FormControl(null),
     editLastName:new FormControl(null),
     editEmail:new FormControl(null),
+    userId: new FormControl(null)
+  })
+
+  updatePassword: FormGroup = new FormGroup({
+    editPassword:new FormControl(null),
     userId: new FormControl(null)
   })
 
@@ -45,12 +52,16 @@ export class ProfileComponent implements OnInit {
     this._commonUtils.setFormFieldValue(this.editProfile, 'userId', this._commonUtils.readSessionField('userId'));
   }
 
-  displayModal(){
-    this.showModal = true;
+  displayInfoModal(){
+    this.showInfoModal = true;
+  }
+
+  displayPasswordModal() {
+    this.showPasswordModal = true;
   }
 
   hideModal(){
-    this.showModal = false;
+    this.showInfoModal, this.showPasswordModal = false;
   }
 
   editUserProfile(){
@@ -76,6 +87,6 @@ export class ProfileComponent implements OnInit {
         this.editProfileError = error.error.message;
       }
     )
-    this.showModal = false;
+    this.showInfoModal = false;
   }
 }

@@ -46,4 +46,12 @@ export class UserService {
       withCredentials:true
     })
   }
+
+  // updatePassword(body: any) {
+  //   return this._http.post(environment.baseurl + '/users/updatepassword', body, {
+  //     observe: 'body',
+  //     headers: new HttpHeaders().append('Content-Type', 'application/json'),
+  //     withCredentials:true
+  //   })
+  // }
 }

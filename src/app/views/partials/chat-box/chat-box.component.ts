@@ -6,8 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat-box.component.css']
 })
 export class ChatBoxComponent implements OnInit {
-
+  isCollapsed : boolean = true;
   constructor() { }
+
+  toggleChat()
+  {
+    this.isCollapsed = !this.isCollapsed;
+  }
 
   ngOnInit(): void {
   }

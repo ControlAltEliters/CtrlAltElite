@@ -1,7 +1,16 @@
 <div class="chatBox">
-    <button class="button emoji"><img src="../../assets/images/blinky_ghost_icon.png"></button>
-    <!-- <form [formGroup]="chatForm"> -->
-        <input type="text" class="chatInputBox" id="chatInputText" name="chatInputText">
-    <!-- </form> -->
-    <button class="button expandChat"><img src="../../assets/images/angle_up.png"></button>
+    <div *ngIf="!isCollapsed" class="expandedChatContent" id="expandedContent">
+        <p>expandedContent</p>
+    </div>
+    <div *ngIf="isCollapsed" class="popUpChatContent" id="popUpContent">
+        <p>[eventName][Day/Month][Username]: This function of chat will flash new messages to the screen</p>
+        <p>PotatoTossing-03/02[TSalad]: ie. I just sent a message!</p>
+    </div>
+    <div class="collapsedChatContent" id="collapsedContent">
+        <button class="button emoji"><img src="../../assets/images/blinky_ghost_icon.png"></button>
+        <!-- <form [formGroup]="chatForm"> -->
+            <input type="text" class="chatInputBox" id="chatInputText" name="chatInputText">
+        <!-- </form> -->
+        <button (click)="toggleChat()" class="button expandChat" id="expandChatButton"><img src="../../assets/images/angle_up.png"></button>
+    </div>
 </div>

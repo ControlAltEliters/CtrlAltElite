@@ -10,6 +10,8 @@ import { UserService } from '../../services/user.service';
 })
 
 export class RegisterComponent implements OnInit {
+  public ownerRegistration = false;
+
   registerError: String
   @Input() on: boolean;
 
@@ -30,6 +32,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register(){
+    // need to add ability to set up owner account since now have input for admin code
     if(!this.registerForm.valid || (this.registerForm.controls.password.value != this.registerForm.controls.cpass.value)){
       this.registerError = "Invalid Form";
       console.log('Invalid Form');
@@ -46,5 +49,9 @@ export class RegisterComponent implements OnInit {
       }
     )
     // console.log(JSON.stringify(this.registerForm.value));
+  }
+
+  toggleForm(){
+    this.ownerRegistration = !this.ownerRegistration;
   }
 }

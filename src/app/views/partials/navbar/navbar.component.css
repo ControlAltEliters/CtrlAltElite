@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=VT323&display=swap');
+
 .title {
     padding: .5em 0 .5em .75em;
 }
@@ -21,4 +23,21 @@
 img {
   max-width: 30%;
   height: auto;
+}
+
+a {
+  height: 50%;
+  top: -25px !important;
+  padding-bottom: 5px !important;
+}
+
+.greeting {
+  font-family: 'VT323';
+  font-size: 2.5vw;
+  color: white !important;
+}
+
+.loggedIn {
+  top: 0 !important;
+  padding-bottom: 20px !important;
 }

@@ -5,7 +5,7 @@ p {
 img {
     width: auto;
     height: 2.5em;
-    padding: .5em .5em 0 .5em;
+    padding: 1em .5em 0 .5em;
 }
 
 .ui.footer.segment {

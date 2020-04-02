@@ -23,6 +23,7 @@ import { UserEventsComponent } from './views/partials/user-events/user-events.co
 import { FaqPageComponent } from './views/faq-page/faq-page.component';
 import { CommonUtils } from './utils/common-utils';
 import { ChatBoxComponent } from './views/partials/chat-box/chat-box.component';
+import { ContactFooterAbsoluteComponent } from './views/partials/contact-footer-absolute/contact-footer-absolute.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ChatBoxComponent } from './views/partials/chat-box/chat-box.component';
     UserEventsComponent,
     FaqPageComponent,
     ChatBoxComponent,
+    ContactFooterAbsoluteComponent,
   ],
   imports: [
     BrowserModule,

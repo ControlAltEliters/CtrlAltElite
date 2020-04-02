@@ -15,7 +15,7 @@ img {
     padding: 2.5em 0em;
     /* margin: 0em; */
     height: 12rem;
-    position: static;
+    position: absolute;
     background-color: rgb(46, 163, 184);
 }
 

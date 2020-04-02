@@ -45,6 +45,37 @@ router.get('/events', function(req,res,next){
   });
 });
 
+router.get('/event-puller', function(req,res,next){
+  let today = new Date();
+  let tomorrow4 = new Date();
+  today.setTime(today.getTime() - 1 * 86400000);
+  today.setHours(0,0,0,0);
+  tomorrow4.setTime(today.getTime() + 5 * 86400000);
+  tomorrow4.setHours(0,0,0,0);
+
+  console.log('Yay! You made it to the backend!');
+  console.log('This is what today\'s date looks like: ' + today);
+  console.log('This is what the other date looks like: ' + tomorrow4);
+  try {
+    Event.find(
+      {
+        date: {"$gt": today, "$lt": tomorrow4}
+      }, function (err, events) {
+      if(err){
+        res.send('something went wrong')
+        next()
+      }
+      res.json(events);
+    });
+
+  }
+  catch (err) {
+    console.log(err);
+    return res.status(500).json({message:'The try failed'});
+  }
+});
+
+
 router.get('/:eventTitle', (req, res, next) => {
   const eventTitle = req.params.eventTitle
   Event.find(eventTitle)

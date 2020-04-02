@@ -50,7 +50,7 @@
           <!-- TODO: Conditionally render date/events -->
           <div class="holder">
             <div class="date day-one">
-              <h1>5 THURSDAY</h1>
+              <h1>{{today.getDate()}} {{day1}}</h1>
             </div>
 
             <div class="events">
@@ -61,7 +61,7 @@
           </div>
           <div class="holder">
             <div class="date day-one">
-              <h1>6 FRIDAY</h1>
+              <h1>{{tomorrow1.getDate()}} {{day2}}</h1>
             </div>
 
             <div class="events">
@@ -72,7 +72,7 @@
           </div>
           <div class="holder">
             <div class="date day-one">
-              <h1>7 SATURDAY</h1>
+              <h1>{{tomorrow2.getDate()}} {{day3}}</h1>
             </div>
 
             <div class="events">
@@ -83,7 +83,7 @@
           </div>
           <div class="holder">
             <div class="date day-one">
-              <h1>8 SUNDAY</h1>
+              <h1>{{tomorrow3.getDate()}} {{day4}}</h1>
             </div>
 
             <div class="events">

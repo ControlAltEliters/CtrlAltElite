@@ -53,9 +53,6 @@ router.get('/event-puller', function(req,res,next){
   tomorrow4.setTime(today.getTime() + 5 * 86400000);
   tomorrow4.setHours(0,0,0,0);
 
-  console.log('Yay! You made it to the backend!');
-  console.log('This is what today\'s date looks like: ' + today);
-  console.log('This is what the other date looks like: ' + tomorrow4);
   try {
     Event.find(
       {

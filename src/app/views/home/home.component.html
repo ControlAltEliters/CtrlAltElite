@@ -6,7 +6,7 @@
         <div class="content-block content-left">
             <div class="ui card">
               <div class="content top">
-                <h1>RETRO FREEPLAY ARCADE</h1>
+                <h1 class="retro">RETRO FREEPLAY ARCADE</h1>
               </div>
               <div class="content">
                 <img class="right floated ghost" style="margin-top:2em;" src="../../assets/images/pinkghost.gif">
@@ -19,7 +19,7 @@
 
             <div class="ui card">
               <div class="content top">
-                <h1>TABLETOP GAMING LOUNGE</h1>
+                <h1 class="retro">TABLETOP GAMING LOUNGE</h1>
               </div>
               <div class="content">
                 <img class="right floated magic" src="../../assets/images/magic.png">
@@ -33,7 +33,7 @@
 
             <div class="ui card">
               <div class="content top">
-                <h1>ITEM SHOP</h1>
+                <h1 class="retro">ITEM SHOP</h1>
               </div>
               <div class="content">
                 <img class="right floated ghost" src="../../assets/images/potion.png">
@@ -47,53 +47,84 @@
       </div>
       <div class="six wide column">
         <div class="content-block content-right">
-          <!-- TODO: Conditionally render date/events -->
+
           <div class="holder">
             <div class="date day-one">
-              <h1>5 THURSDAY</h1>
+              <h1>{{today.getDate()}} {{day1}}</h1>
             </div>
-
             <div class="events">
-              <button class="ui inverted teal button">4:30PM</button>
-              <button class="ui inverted teal button">5:30PM</button>
-              <button class="ui inverted teal button">6:30PM</button>
+              <div *ngIf="array1.length > 0">
+                <button (click)="displayModal(elem)" class="ui inverted teal button sidebar-event" *ngFor="let elem of array1">
+                  {{elem.eventTitle}}
+              </button>
+              </div>
             </div>
           </div>
+
+
           <div class="holder">
             <div class="date day-one">
-              <h1>6 FRIDAY</h1>
+              <h1>{{tomorrow1.getDate()}} {{day2}}</h1>
             </div>
-
             <div class="events">
-              <button class="ui inverted teal button">4:30PM</button>
-              <button class="ui inverted teal button">5:30PM</button>
-              <button class="ui inverted teal button">6:30PM</button>
+              <div *ngIf="array2.length > 0">
+                <button (click)="displayModal(elem)" class="ui inverted teal button sidebar-event" *ngFor="let elem of array2">
+                  {{elem.eventTitle}}
+              </button>
+              </div>
             </div>
           </div>
+
+
           <div class="holder">
             <div class="date day-one">
-              <h1>7 SATURDAY</h1>
+              <h1>{{tomorrow2.getDate()}} {{day3}}</h1>
             </div>
-
             <div class="events">
-              <button class="ui inverted teal button">4:30PM</button>
-              <button class="ui inverted teal button">5:30PM</button>
-              <button class="ui inverted teal button">6:30PM</button>
+              <div *ngIf="array3.length > 0">
+                <button (click)="displayModal(elem)" class="ui inverted teal button sidebar-event" *ngFor="let elem of array3">
+                  {{elem.eventTitle}}
+              </button>
+              </div>
             </div>
           </div>
+
+
           <div class="holder">
             <div class="date day-one">
-              <h1>8 SUNDAY</h1>
+              <h1>{{tomorrow3.getDate()}} {{day4}}</h1>
             </div>
-
             <div class="events">
-              <button class="ui inverted teal button">4:30PM</button>
-              <button class="ui inverted teal button">5:30PM</button>
-              <button class="ui inverted teal button">6:30PM</button>
+              <div *ngIf="array4.length > 0">
+                <button (click)="displayModal(elem)" class="ui inverted teal button sidebar-event" *ngFor="let elem of array4">
+                  {{elem.eventTitle}}
+              </button>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
   </div>
+
+  <div id="eventModal" class="ui tiny modal">
+    <i class="close icon cancel"></i>
+    <div class="header">
+      <p>{{currentEvent}}</p>
+      <p class="small-p">{{eventDate}}</p>
+    </div>
+    <div class="content">
+      <p>Time: {{eventStart}} to {{eventEnd}}</p>
+      <p>Description: {{eventDescription}}</p>
+    </div>
+    <div class="actions">
+      <div class="ui approve button">Join Game</div>
+      <!-- Additional button options if needed -->
+      <!-- <div class="ui button">Neutral</div>
+      <div class="ui cancel button">Cancel</div> -->
+    </div>
+  </div>
+
 </div>
+

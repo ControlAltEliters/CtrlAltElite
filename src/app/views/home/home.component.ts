@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { EventService } from '../../services/event.service';
 import { Router } from '@angular/router';
+
+declare let $: any;
 
 
 @Component({
@@ -8,8 +10,10 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements OnInit {
 
+  // handling events
   public today = new Date();
   public tomorrow1 = new Date();
   public tomorrow2 = new Date();
@@ -18,13 +22,17 @@ export class HomeComponent implements OnInit {
   public day2: string;
   public day3: string;
   public day4: string;
-  events = [];
   array1 = [];
   array2 = [];
   array3 = [];
   array4 = [];
 
-
+  // modals
+  public currentEvent: string;
+  public eventDate: string;
+  public eventStart: string;
+  public eventEnd: string;
+  public eventDescription: string;
 
   constructor(
     private _eventService:EventService,
@@ -33,17 +41,14 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.today = new Date();
-    this.today.setHours(-5,0,0,0);
-    console.log(JSON.stringify(this.today));
-    this.today.setTime(this.today.getTime() + 1 * 86400000);
     this.tomorrow1.setTime(this.today.getTime() + 1 * 86400000);
     this.tomorrow2.setTime(this.today.getTime() + 2 * 86400000);
     this.tomorrow3.setTime(this.today.getTime() + 3 * 86400000);
 
-    this.day1 = this.transform(this.today.getDay());
-    this.day2 = this.transform(this.tomorrow1.getDay());
-    this.day3 = this.transform(this.tomorrow2.getDay());
-    this.day4 = this.transform(this.tomorrow3.getDay());
+    this.day1 = this.transformDayOfWeek(this.today.getDay());
+    this.day2 = this.transformDayOfWeek(this.tomorrow1.getDay());
+    this.day3 = this.transformDayOfWeek(this.tomorrow2.getDay());
+    this.day4 = this.transformDayOfWeek(this.tomorrow3.getDay());
 
 
     this._eventService.eventPuller()
@@ -51,6 +56,10 @@ export class HomeComponent implements OnInit {
       data => {
         // console.log('Events: ' + data);
         this.addEventsFromDB(data);
+        this.array1 = this.sortArrayAsc(this.array1, 'startTime');
+        this.array2 = this.sortArrayAsc(this.array2, 'startTime');
+        this.array3 = this.sortArrayAsc(this.array3, 'startTime');
+        this.array4 = this.sortArrayAsc(this.array4, 'startTime');
       },
       error => {
         console.log('Nothing is being returned yet');
@@ -58,73 +67,91 @@ export class HomeComponent implements OnInit {
     )
 
     console.log(this.array1);
+
   }
 
+  sortArrayAsc(arr, key) {
+    return arr.sort((a, b) => a[key] - b[key])
+  }
 
-  transform(num){
+  transformDayOfWeek(num){
     if(num == 0){
-      return 'SUN'
+      return 'SUNDAY'
     }
     if(num == 1){
-      return 'MON'
+      return 'MONDAY'
     }
     if(num == 2){
-      return 'TUES';
+      return 'TUESDAY';
     }
     if(num == 3){
-      return 'WED'
+      return 'WEDNESDAY'
     }
     if(num == 4){
-      return 'THURS'
+      return 'THURSDAY'
     }
     if(num == 5){
-      return 'FRI'
+      return 'FRIDAY'
     }
     if(num == 6){
-      return 'SAT'
+      return 'SATURDAY'
     }
   }
 
 
   addEventsFromDB(data){
-    console.log('All events:')
-    console.log(data)
-
     data.forEach(event => {
 
-      // let eventDate = this.convertDateToCST(new Date(event.date));
-      // let now = this.convertDateToCST(new Date());
-
       let eventDate = new Date(event.date);
+      eventDate.setTime(eventDate.getTime() + 1 * 86400000); // the date has to be incremented by one to be correct
       let now = new Date();
 
-      console.log('evt: ' + event.eventTitle + eventDate.getDate())
-      console.log('now: ' + now.getDate())
-
       if(eventDate.getDate() === now.getDate()){
-        this.array1.push(event);
-
-
+        this.array1.push(event)
       }
-      // if(JSON.stringify(event.date) === JSON.stringify(this.tomorrow1)){
-      //   this.array2.push(event);
-      // }
-      // if(JSON.stringify(event.date) === JSON.stringify(this.tomorrow2)){
-      //   this.array3.push(event);
-      // }
-      // if(JSON.stringify(event.date) === JSON.stringify(this.tomorrow3)){
-      //   this.array4.push(event);
-      // }
-
-      // else{
-      //   this.events.push(event);
-      // }
+      if(eventDate.getDate() === this.tomorrow1.getDate()){
+        this.array2.push(event)
+      }
+      if(eventDate.getDate() === this.tomorrow2.getDate()){
+        this.array3.push(event)
+      }
+      if(eventDate.getDate() === this.tomorrow3.getDate()){
+        this.array4.push(event)
+      }
     });
   }
 
-  // convertDateToCST(date) {
-  //   return date.toLocaleString("en-US", {timeZone: "America/Chicago"})
-  // }
+  convertDateToCST(date) {
+    return date.toLocaleString("en-US", {timeZone: "America/Chicago"})
+  }
+
+  //TODO: Are events ever not going to be on the hour?
+  formatTime(time){
+    let newTime = time - 12;
+    return `${newTime}:00 pm`;
+  }
+
+  displayModal(event){
+    let date = new Date(event.date);
+
+    this.eventDate = `${date.getUTCMonth()+1}/${date.getUTCDate()}/${date.getUTCFullYear()}`;
+    this.currentEvent = event.eventTitle;
+
+    if(event.startTime > 12){
+      this.eventStart = this.formatTime(event.startTime);
+    }
+    else{
+      this.eventStart = `${event.startTime}:00 am`
+    }
+    if(event.endTime > 12){
+      this.eventEnd = this.formatTime(event.endTime);
+    }
+    else{
+      this.eventEnd = `${event.endTime}:00 am`
+    }
+
+    this.eventDescription = event.description;
+    $('#eventModal').modal('show');
+  }
 
 }
-

@@ -2,11 +2,6 @@
 <div class="ui container">
   <div class="ui grid">
     <div class="row">
-      <div class="ten wide column">
-        <div class="content-block content-left">
-          <router-outlet></router-outlet>
-        </div>
-      </div>
       <div class="six wide column">
         <div class="content-block content-right">
           <div class="ui card centered">
@@ -15,8 +10,8 @@
             </div>
             <div class="content">
               <a class="header">{{activeUser}}</a>
-                <!-- TODO: Conditionally render joined date? -->
-                <!-- <span class="date">Joined in 2013</span> -->
+              <!-- TODO: Conditionally render joined date? -->
+              <!-- <span class="date">Joined in 2013</span> -->
               <div class="ui secondary vertical menu">
                 <!-- TODO: Add active class for current path -->
                 <a class="active item" [routerLink]="['profile']">
@@ -41,6 +36,11 @@
               </a>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="ten wide column">
+        <div class="content-block content-left">
+          <router-outlet></router-outlet>
         </div>
       </div>
     </div>

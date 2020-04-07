@@ -47,7 +47,7 @@ export class EventsPageComponent implements OnInit {
   table2checked = false;
   table3checked = false;
   table4checked = false;
-
+  table
   calendarEvents = [];
   tables = [];
 
@@ -70,7 +70,7 @@ export class EventsPageComponent implements OnInit {
 
   ngOnInit(): void {
     this._eventsService.event().subscribe(
-      data=> {this.addEventsFromDB(data)},
+      data=> {this.addEventsFromDB(data);},
       error=>console.error(error)
     )
 
@@ -87,6 +87,27 @@ export class EventsPageComponent implements OnInit {
 
 
     }
+
+  seeIfTableIsAvailable(table, date, startTime, endTime): boolean{
+    let available = true;
+    console.log("TABLE: " + table)
+    console.log("DATE:" + date)
+    console.log("START TIME:" + startTime)
+    console.log("END TIME: " + endTime)
+    this.events.forEach(event => {
+      console.log("event:")
+      console.log(event.table)
+      console.log(event.date)
+      event.date = event.date.slice(0, 10);
+      console.log(event.startTime)
+      console.log(event.endTime)
+      if(event.date == date && event.table == table && event.startTime == startTime && event.endTime == endTime){
+        console.log("Found a matching event")
+        available = false;
+      }
+    })
+    return available;
+  }
 
     dealWithUser(data){
       this.userID = data._id;
@@ -121,9 +142,38 @@ export class EventsPageComponent implements OnInit {
     });
   }
 
+  renderTables(){
+    if((this.seeIfTableIsAvailable("1", this.eventsForm.value.date, this.eventsForm.value.startTime, this.eventsForm.value.endTime)) == false){
+      this.table1 = false
+    } else {
+      this.table1 = true
+    }
+
+    if((this.seeIfTableIsAvailable("2", this.eventsForm.value.date, this.eventsForm.value.startTime, this.eventsForm.value.endTime)) == false){
+      this.table2 = false
+    } else {
+      this.table2 = true
+    }
+
+    if((this.seeIfTableIsAvailable("3", this.eventsForm.value.date, this.eventsForm.value.startTime, this.eventsForm.value.endTime)) == false){
+      this.table3 = false
+    } else {
+      this.table3 = true
+    }
+
+    if((this.seeIfTableIsAvailable("4", this.eventsForm.value.date, this.eventsForm.value.startTime, this.eventsForm.value.endTime)) == false){
+      this.table4 = false
+    } else {
+      this.table4 = true
+    }
+
+  }
+
   clickedTable1(){
     console.log("Clicked Table 1!")
-    if(this.table1checked == false){
+    if(this.table1 == false){
+      this.table1checked == false
+    } else if(this.table1checked == false){
       this.table1checked = true
     }else{
       this.table1checked = false
@@ -132,7 +182,9 @@ export class EventsPageComponent implements OnInit {
 
   clickedTable2(){
     console.log("Clicked Table 2!")
-    if(this.table2checked == false){
+    if(this.table2 == false){
+      this.table2checked = false;
+    } else if(this.table2checked == false){
       this.table2checked = true
     }else{
       this.table2checked = false
@@ -141,7 +193,9 @@ export class EventsPageComponent implements OnInit {
 
   clickedTable3(){
     console.log("Clicked Table 3!")
-    if(this.table3checked == false){
+    if(this.table3 == false){
+      this.table3checked = false;
+    }else if(this.table3checked == false){
       this.table3checked = true
     }else{
       this.table3checked = false
@@ -150,7 +204,9 @@ export class EventsPageComponent implements OnInit {
 
   clickedTable4(){
     console.log("Clicked Table 4!")
-    if(this.table4checked == false){
+    if(this.table4 == false){
+      this.table4checked = false;
+    }else if(this.table4checked == false){
       this.table4checked = true
     }else{
       this.table4checked = false
@@ -238,6 +294,7 @@ export class EventsPageComponent implements OnInit {
         event = theEvent;
         this.eventTitle = this.eventTitle
         this.startTime = theEvent.startTime
+        this.table = theEvent.table
         this.endTime = theEvent.endTime
         this.eventID = theEvent.id
         this.currentPlayers = theEvent.currentPlayers
@@ -315,6 +372,7 @@ export class EventsPageComponent implements OnInit {
 
   chooseTable(){
     this.showModal = false;
+    this.renderTables();
     this.tableModal = true;
   }
 

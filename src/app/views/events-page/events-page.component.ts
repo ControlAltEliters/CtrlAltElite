@@ -90,17 +90,8 @@ export class EventsPageComponent implements OnInit {
 
   seeIfTableIsAvailable(table, date, startTime, endTime): boolean{
     let available = true;
-    console.log("TABLE: " + table)
-    console.log("DATE:" + date)
-    console.log("START TIME:" + startTime)
-    console.log("END TIME: " + endTime)
     this.events.forEach(event => {
-      console.log("event:")
-      console.log(event.table)
-      console.log(event.date)
       event.date = event.date.slice(0, 10);
-      console.log(event.startTime)
-      console.log(event.endTime)
       if(event.date == date && event.table == table && event.startTime == startTime && event.endTime == endTime){
         console.log("Found a matching event")
         available = false;
@@ -350,7 +341,6 @@ export class EventsPageComponent implements OnInit {
     if(this.check1 === false){
       startTime += 12
     }
-    console.log(startTime)
     var endTime = this.eventsForm.value.endTime
     if(this.check2 === false){
       endTime += 12

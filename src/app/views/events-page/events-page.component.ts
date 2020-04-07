@@ -13,7 +13,7 @@ import { ThrowStmt } from '@angular/compiler';
   styleUrls: ['./events-page.component.css']
 })
 export class EventsPageComponent implements OnInit {
-  
+
   calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
   public showModal = false;
   public tableModal = false;
@@ -28,7 +28,7 @@ export class EventsPageComponent implements OnInit {
   events = []
   check1 = false
   check2 = false
-  clickedEvent 
+  clickedEvent
   clickedDate
   user
   userID
@@ -62,11 +62,11 @@ export class EventsPageComponent implements OnInit {
     minPlayers:new FormControl(null),
     table:new FormControl(null),
   })
-  
+
   constructor(
     private _eventsService:EventService,
-     private elementRef: ElementRef,
-     private _userService: UserService ) { }
+    private elementRef: ElementRef,
+    private _userService: UserService ) { }
 
   ngOnInit(): void {
     this._eventsService.event().subscribe(
@@ -111,6 +111,7 @@ export class EventsPageComponent implements OnInit {
 
     dealWithUser(data){
       this.userID = data._id;
+
     }
 
   addEventsFromDB(data){
@@ -126,15 +127,15 @@ export class EventsPageComponent implements OnInit {
         title: event.eventTitle, start: startDate, end: endDate }
         );
         this.events = this.events.concat({
-          title: event.eventTitle, 
-          date: event.date, 
+          title: event.eventTitle,
+          date: event.date,
           description: event.description,
-          startTime: event.startTime, 
-          endTime: event.endTime, 
+          startTime: event.startTime,
+          endTime: event.endTime,
           resources: event.resources,
           currentPlayers: event.currentPlayers,
-          maxPlayers: event.maxPlayers, 
-          minPlayers: event.minPlayers, 
+          maxPlayers: event.maxPlayers,
+          minPlayers: event.minPlayers,
           table: event.table,
           id: event._id
         });
@@ -227,7 +228,7 @@ export class EventsPageComponent implements OnInit {
     )
     */
   }
-  
+
   handleChecked1(){
     if(this.check1 === false){
       this.check1 = true;
@@ -289,7 +290,7 @@ export class EventsPageComponent implements OnInit {
       if(eventDate != null){
         eventDate = eventDate.slice(0, 10)
       }
-      
+
       if(theEvent.title === this.eventTitle && eventDate === dateAsString){
         event = theEvent;
         this.eventTitle = this.eventTitle
@@ -301,7 +302,7 @@ export class EventsPageComponent implements OnInit {
         console.log(this.currentPlayers)
       }
     })
-    
+
     this.eventModal = true;
     this.clickedDate = dateAsString
   }
@@ -344,7 +345,7 @@ export class EventsPageComponent implements OnInit {
   }
 
   putEventOnCalendar(){
-    
+
     var startTime = this.eventsForm.value.startTime
     if(this.check1 === false){
       startTime += 12

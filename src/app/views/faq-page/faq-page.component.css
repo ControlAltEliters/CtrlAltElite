@@ -1,4 +1,14 @@
 .ui.styled.accordion{
     margin: auto;
-    height: 65%;
+}
+
+.custom {
+  width: 100%;
+  min-height: 500px;
+
+}
+
+.padded {
+  padding-top: 30px;
+  padding-bottom: 30px;
 }

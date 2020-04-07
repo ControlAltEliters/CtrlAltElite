@@ -45,6 +45,34 @@ router.get('/events', function(req,res,next){
   });
 });
 
+router.get('/event-puller', function(req,res,next){
+  let today = new Date();
+  let tomorrow4 = new Date();
+  today.setTime(today.getTime() - 1 * 86400000);
+  today.setHours(0,0,0,0);
+  tomorrow4.setTime(today.getTime() + 5 * 86400000);
+  tomorrow4.setHours(0,0,0,0);
+
+  try {
+    Event.find(
+      {
+        date: {"$gt": today, "$lt": tomorrow4}
+      }, function (err, events) {
+      if(err){
+        res.send('something went wrong')
+        next()
+      }
+      res.json(events);
+    });
+
+  }
+  catch (err) {
+    console.log(err);
+    return res.status(500).json({message:'The try failed'});
+  }
+});
+
+
 router.get('/:eventTitle', (req, res, next) => {
   const eventTitle = req.params.eventTitle
   Event.find(eventTitle)

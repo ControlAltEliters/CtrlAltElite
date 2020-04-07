@@ -39,8 +39,17 @@ export class EventsPageComponent implements OnInit {
   eventTitle
   startTime
   endTime
+  table1 = false;
+  table2 = true;
+  table3 = true;
+  table4 = false;
+  table1checked = false;
+  table2checked = false;
+  table3checked = false;
+  table4checked = false;
 
   calendarEvents = [];
+  tables = [];
 
   eventsForm:FormGroup = new FormGroup({
     eventTitle:new FormControl(null),
@@ -74,7 +83,8 @@ export class EventsPageComponent implements OnInit {
       data => this.dealWithUser(data),
       error => {}
     )
-      console.log("User info")
+    
+
 
     }
 
@@ -107,9 +117,44 @@ export class EventsPageComponent implements OnInit {
           table: event.table,
           id: event._id
         });
+        console.log(event)
     });
+  }
 
+  clickedTable1(){
+    console.log("Clicked Table 1!")
+    if(this.table1checked == false){
+      this.table1checked = true
+    }else{
+      this.table1checked = false
+    }
+  }
 
+  clickedTable2(){
+    console.log("Clicked Table 2!")
+    if(this.table2checked == false){
+      this.table2checked = true
+    }else{
+      this.table2checked = false
+    }
+  }
+
+  clickedTable3(){
+    console.log("Clicked Table 3!")
+    if(this.table3checked == false){
+      this.table3checked = true
+    }else{
+      this.table3checked = false
+    }
+  }
+
+  clickedTable4(){
+    console.log("Clicked Table 4!")
+    if(this.table4checked == false){
+      this.table4checked = true
+    }else{
+      this.table4checked = false
+    }
   }
 
   joinEvent(){
@@ -205,7 +250,17 @@ export class EventsPageComponent implements OnInit {
   }
 
   createEvent(){
-  
+    
+    if(this.table1checked){
+      this.eventsForm.value.table = "1";
+    }else if(this.table2checked){
+      this.eventsForm.value.table = "2";
+    }else if(this.table3checked){
+      this.eventsForm.value.table = "3";
+    }else if(this.table4checked){
+      this.eventsForm.value.table = "4";
+    }
+
     if(!this.eventsForm.valid){
       console.log('Invalid Form'); return;
     }

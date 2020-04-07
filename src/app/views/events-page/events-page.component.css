@@ -79,3 +79,33 @@ button:active {
   justify-content: center;
   padding: 1em;
 }
+
+.tables{
+    display: flex;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.table{
+    padding: 10px;
+}
+
+.examples{
+    size: 20%;
+}
+
+.con {
+    height: 50px;
+    width: 50px;
+    margin: 4px;
+    display: flex;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    margin: 0 auto;
+}

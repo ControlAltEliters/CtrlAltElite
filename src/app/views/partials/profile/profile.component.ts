@@ -118,6 +118,7 @@ export class ProfileComponent implements OnInit {
           {
             // find more elegant error display solution
             alert("New password and re-entered password not the same. Please try again.");
+            this.updatePassword.reset();
           }
         },
         error => {

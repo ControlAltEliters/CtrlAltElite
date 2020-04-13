@@ -91,7 +91,10 @@ export class EventsPageComponent implements OnInit {
   seeIfTableIsAvailable(table, date, startTime, endTime): boolean{
     let available = true;
     this.events.forEach(event => {
-      event.date = event.date.slice(0, 10);
+      if(event.date){
+        event.date = event.date.slice(0, 10);
+      }
+      
       if(event.date == date && event.table == table && event.startTime == startTime && event.endTime == endTime){
         console.log("Found a matching event")
         available = false;
@@ -212,12 +215,12 @@ export class EventsPageComponent implements OnInit {
     this.userJoin.event = this.eventID;
     this.userJoin.user = this.user;
     this.userJoin.userID = this.userID;
-    /*
+    
     this._eventsService.join(this.userJoin).subscribe(
       data=> {console.log(data);},
       error=>console.error(error)
     )
-    */
+    
   }
 
   handleChecked1(){

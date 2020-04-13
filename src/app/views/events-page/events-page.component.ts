@@ -7,6 +7,8 @@ import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
 import { UserService } from 'src/app/services/user.service';
 import { ThrowStmt } from '@angular/compiler';
 
+declare let $: any;
+
 @Component({
   selector: 'app-events-page',
   templateUrl: './events-page.component.html',
@@ -15,9 +17,6 @@ import { ThrowStmt } from '@angular/compiler';
 export class EventsPageComponent implements OnInit {
 
   calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
-  public showModal = false;
-  public tableModal = false;
-  public eventModal = false;
   public today = new Date();
   public testDate = '2020-03-22'
   public testTitle = 'Test Title'
@@ -83,18 +82,20 @@ export class EventsPageComponent implements OnInit {
       data => this.dealWithUser(data),
       error => {}
     )
-    
+
 
 
     }
 
   seeIfTableIsAvailable(table, date, startTime, endTime): boolean{
     let available = true;
+    console.log('------' + this.events)
+    console.log(this.events)
     this.events.forEach(event => {
       if(event.date){
         event.date = event.date.slice(0, 10);
       }
-      
+
       if(event.date == date && event.table == table && event.startTime == startTime && event.endTime == endTime){
         console.log("Found a matching event")
         available = false;
@@ -208,19 +209,19 @@ export class EventsPageComponent implements OnInit {
     }
   }
 
-  joinEvent(){
+  joinEvent(eventID, user, userID){
     console.log("Join Event")
     console.log(this.eventID)
     console.log(this.user)
-    this.userJoin.event = this.eventID;
-    this.userJoin.user = this.user;
-    this.userJoin.userID = this.userID;
-    
+    this.userJoin.event = eventID;
+    this.userJoin.user = user;
+    this.userJoin.userID = userID;
+
     this._eventsService.join(this.userJoin).subscribe(
       data=> {console.log(data);},
       error=>console.error(error)
     )
-    
+
   }
 
   handleChecked1(){
@@ -245,20 +246,8 @@ export class EventsPageComponent implements OnInit {
     console.log(event)
   }
 
-  displayModal(){
-    this.showModal = true;
-  }
-
-  hideModal(){
-    this.showModal = false;
-  }
-
-  hideTableModal(){
-    this.tableModal = false;
-  }
-
-  hideEventModal(){
-    this.eventModal = false;
+  showCreateEventModal(){
+    $('#createEventModal').modal('show');
   }
 
   handleEventClick(arg){
@@ -297,12 +286,12 @@ export class EventsPageComponent implements OnInit {
       }
     })
 
-    this.eventModal = true;
+    $('#singleEventModal').modal('show');
     this.clickedDate = dateAsString
   }
 
   createEvent(){
-    
+
     if(this.table1checked){
       this.eventsForm.value.table = "1";
     }else if(this.table2checked){
@@ -330,10 +319,7 @@ export class EventsPageComponent implements OnInit {
       error=>console.error(error)
     )
 
-   this.tableModal = false;
-
    this.putEventOnCalendar()
-
    this.eventsForm.reset();
    window.location.reload()
   }
@@ -365,9 +351,8 @@ export class EventsPageComponent implements OnInit {
   }
 
   chooseTable(){
-    this.showModal = false;
+    $('#createEventTableModal').modal('show');
     this.renderTables();
-    this.tableModal = true;
   }
 
 }

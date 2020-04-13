@@ -1,1 +1,8 @@
-<p>user-events works!</p>
+<div class="events-title">
+    <header>Registered events: </header>
+</div>
+<div >
+        <ul *ngFor="let event of userEvents">
+            <li class="events">{{event.eventTitle}} on {{event.date}} from {{event.startTime}} to {{event.endTime}}</li>
+        </ul>
+</div>

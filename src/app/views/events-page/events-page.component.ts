@@ -278,9 +278,13 @@ export class EventsPageComponent implements OnInit {
       if(theEvent.title === this.eventTitle && eventDate === dateAsString){
         event = theEvent;
         this.eventTitle = this.eventTitle
-        this.startTime = theEvent.startTime
+        if(theEvent.startTime > 12){
+          this.startTime = theEvent.startTime - 12;
+        }
+        if(theEvent.endTime > 12){
+          this.endTime = theEvent.endTime - 12;
+        }
         this.table = theEvent.table
-        this.endTime = theEvent.endTime
         this.eventID = theEvent.id
         this.currentPlayers = theEvent.currentPlayers
         console.log(this.currentPlayers)

@@ -221,6 +221,7 @@ export class EventsPageComponent implements OnInit {
       data=> {console.log(data);},
       error=>console.error(error)
     )
+    window.location.reload()
 
   }
 

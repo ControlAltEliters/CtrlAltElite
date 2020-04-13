@@ -1,8 +1,11 @@
 <div class="events-title">
     <header>Registered events: </header>
 </div>
-<div >
+<div>
         <ul *ngFor="let event of userEvents">
-            <li class="events">{{event.eventTitle}} on {{event.date}} from {{event.startTime}} to {{event.endTime}}</li>
+            <div *ngIf="!eventIsInFuture(event)">
+                <li class="events">{{event.eventTitle}} on {{event.date}} from {{event.startTime}} to {{event.endTime}}</li>
+
+            </div>
         </ul>
 </div>

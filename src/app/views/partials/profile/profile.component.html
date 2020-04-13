@@ -1,4 +1,4 @@
-<div *ngIf="showInfoModal">
+<!-- <div *ngIf="showInfoModal">
   <div class="modal">
     <div class="ui active modal">
         <i class="close icon" (click)="hideModal()"></i>
@@ -30,9 +30,9 @@
         </div>
     </div>
   </div>
-</div>
+</div> -->
 
-<div *ngIf="showPasswordModal">
+<!-- <div *ngIf="showPasswordModal">
   <div class="modal">
     <div class="ui active modal">
       <i class="close icon" (click)="hideModal()"></i>
@@ -64,7 +64,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <div class="content">
   <div class="ui grid">
@@ -94,4 +94,69 @@
       </div>
     </div>
   </div>
+
+  <div id="editProfileModal" class="ui tiny modal">
+    <i class="close icon cancel"></i>
+    <div class="header">
+      <p>Edit Information</p>
+    </div>
+    <div class="content">
+      <form [formGroup]="editProfile" class="ui form">
+        <div class="form-group">
+          <div class="field">
+            <label class="inputTitle">First Name</label>
+            <input formControlName="editFirstName" type="text" class="form-control" id="editFirstName">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="field">
+            <label class="inputTitle">Last Name</label>
+            <input formControlName="editLastName" type="text" class="form-control" id="editLastName">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="field">
+            <label class="inputTitle">Email</label>
+            <input formControlName="editEmail" type="text" class="form-control" id="editEmail">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="actions">
+      <div class="ui approve button" id="edit-button" (click)="editUserProfile()">Update</div>
+    </div>
+  </div>
+
+  <div id="editPasswordModal" class="ui tiny modal">
+    <i class="close icon cancel"></i>
+    <div class="header">
+      <p>Update Password</p>
+    </div>
+    <div class="content">
+      <form [formGroup]="updatePassword" class="ui form">
+        <div class="form-group">
+          <div class="field">
+            <label class="inputTitle">Old Password</label>
+            <input formControlName="oldPassword" type="password" class="form-control" id="oldPassword">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="field">
+            <label class="inputTitle">New Password</label>
+            <input formControlName="newPassword" type="password" class="form-control" id="newPassword">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="field">
+            <label class="inputTitle">Re-enter New Password</label>
+            <input formControlName="confirmedNewPassword" type="password" class="form-control" id="confirmedNewPassword">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="actions">
+      <div class="ui approve button" id="edit-button" (click)="updateUserPassword()">Update</div>
+    </div>
+  </div>
+
 </div>

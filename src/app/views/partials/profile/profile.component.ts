@@ -4,14 +4,14 @@ import { FormGroup,FormControl,Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonUtils } from 'src/app/utils/common-utils';
 
+declare let $: any;
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  public showInfoModal = false;
-  public showPasswordModal = false;
   userFirstName: string;
   userLastName: string;
   userName: string;
@@ -56,16 +56,11 @@ export class ProfileComponent implements OnInit {
   }
 
   displayInfoModal(){
-    this.showInfoModal = true;
+    $('#editProfileModal').modal('show');
   }
 
   displayPasswordModal() {
-    this.showPasswordModal = true;
-  }
-
-  hideModal(){
-    this.showInfoModal = false;
-    this.showPasswordModal = false;
+    $('#editPasswordModal').modal('show');
   }
 
   editUserProfile(){
@@ -91,7 +86,6 @@ export class ProfileComponent implements OnInit {
         this.editProfileError = error.error.message;
       }
     )
-    this.showInfoModal = false;
   }
 
   updateUserPassword(){
@@ -124,6 +118,5 @@ export class ProfileComponent implements OnInit {
           this.updatePasswordError = error.error.message;
         }
       )
-    this.showPasswordModal = false;
   }
 }

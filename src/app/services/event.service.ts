@@ -33,11 +33,18 @@ export class EventService {
     }
 
 
-    join(user){
+    join(user: any){
         return this._http.post(environment.baseurl + '/events/join', user, {
             observe: 'body',
             headers: new HttpHeaders().append('Content-Type', 'application/json')
         })
+    }
+
+    leave(user: any){
+      return this._http.post(environment.baseurl + '/events/leave', user, {
+        observe: 'body',
+        headers: new HttpHeaders().append('Content-Type', 'application/json')
+    })
     }
 
 }

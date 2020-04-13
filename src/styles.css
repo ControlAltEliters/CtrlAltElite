@@ -19,3 +19,35 @@ a:active,
 a:hover {
   color: rgb(218, 218, 218);
 } */
+
+
+.fc-today {
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.fc .fc-button-group>* {
+  background: rgba(52, 222, 252, 0.721) !important;
+}
+
+.fc .fc-toolbar>*>:first-child {
+  color: white !important;
+}
+
+.fc-icon-chevron-left:before {
+  content: "‹";
+  color: white;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.fc-icon-chevron-right:before {
+  content: "›";
+  color: white;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+
+
+
+

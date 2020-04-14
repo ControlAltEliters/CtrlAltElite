@@ -16,7 +16,12 @@
           <div class="schedule-button">
             <div *ngIf="user">
               <button (click)="showCreateEventModal()" class="ui button" style="margin-top: 2em;">
-                Schedule event
+                Schedule Event
+              </button>
+            </div>
+            <div *ngIf="!user">
+              <button (click)="showCreateEventModal()" class="ui disabled button" style="margin-top: 2em;">
+                Schedule Event
               </button>
             </div>
           </div>
@@ -282,8 +287,14 @@
       </div>
     </div>
     <div class="actions">
-      <div class="ui approve button" (click)="joinEvent(eventID, user, userID)">Join Event</div>
-      <div class="ui cancel button">Cancel</div>
+      <div *ngIf="user">
+        <div class="ui approve button" (click)="joinEvent(eventID, user, userID)">Join Event</div>
+        <div class="ui cancel button">Cancel</div>
+      </div>
+      <div *ngIf="!user">
+        <div class="ui approve disabled button" (click)="joinEvent(eventID, user, userID)">Join Event</div>
+        <div class="ui cancel button">Cancel</div>
+      </div>
     </div>
   </div>
 

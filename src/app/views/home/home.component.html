@@ -119,7 +119,12 @@
       <p>Description: {{eventDescription}}</p>
     </div>
     <div class="actions">
-      <div class="ui approve button">Join Game</div>
+      <div *ngIf="user">
+        <div class="ui approve button">Join Event</div>
+      </div>
+      <div *ngIf="!user">
+        <div class="ui approve disabled button">Join Event</div>
+      </div>
       <!-- Additional button options if needed -->
       <!-- <div class="ui button">Neutral</div>
       <div class="ui cancel button">Cancel</div> -->

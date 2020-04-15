@@ -31,13 +31,7 @@ a {
   padding-bottom: 5px !important;
 }
 
-.greeting {
-  font-family: 'VT323';
-  font-size: 2.5vw;
-  color: white !important;
-}
-
-.loggedIn {
+.item {
   top: 0 !important;
   padding-bottom: 20px !important;
 }

@@ -40,14 +40,16 @@ export class EventsPageComponent implements OnInit {
   eventTitle
   startTime
   endTime
-  table1 = false;
+  table1 = true;
   table2 = true;
   table3 = true;
-  table4 = false;
+  table4 = true;
+  table5 = true;
   table1checked = false;
   table2checked = false;
   table3checked = false;
   table4checked = false;
+  table5checked = false;
   table
   calendarEvents = [];
   tables = [];
@@ -76,40 +78,42 @@ export class EventsPageComponent implements OnInit {
     )
 
     this.user = sessionStorage.getItem('activeUser')
-    console.log("USER!")
-    console.log(this.user)
 
     this._userService.user()
     .subscribe(
       data => this.dealWithUser(data),
       error => {}
     )
-
-
-
-    }
+  }
 
   seeIfTableIsAvailable(table, date, startTime, endTime): boolean{
     let available = true;
-    console.log('------' + this.events)
-    console.log(this.events)
-    this.events.forEach(event => {
-      if(event.date){
-        event.date = event.date.slice(0, 10);
-      }
 
-      if(event.date == date && event.table == table && event.startTime == startTime && event.endTime == endTime){
-        console.log("Found a matching event")
-        available = false;
-      }
-    })
+    this.events.forEach(event => {
+      let eventStartTime = startTime;
+      let eventEndTime = endTime;
+
+      event.date = event.date ? event.date.slice(0, 10) : null;
+      eventStartTime = this.check1 ? eventStartTime += 12 : eventStartTime;
+      eventEndTime = this.check2 ? eventEndTime += 12 : eventEndTime;
+
+      if(event.date == date &&
+        event.table == table &&
+        !(
+          ((eventStartTime < event.startTime) && (eventEndTime <= event.startTime)) ||
+          ((eventStartTime >= event.endTime) && (eventEndTime > event.endTime))
+        )
+        ) {
+            available = false;
+          }
+        })
     return available;
   }
 
-    dealWithUser(data){
-      this.userID = data._id;
+  dealWithUser(data){
+    this.userID = data._id;
 
-    }
+  }
 
   addEventsFromDB(data){
 
@@ -137,7 +141,6 @@ export class EventsPageComponent implements OnInit {
           table: event.table,
           id: event._id
         });
-        console.log(event)
     });
   }
 
@@ -164,6 +167,12 @@ export class EventsPageComponent implements OnInit {
       this.table4 = false
     } else {
       this.table4 = true
+    }
+
+    if((this.seeIfTableIsAvailable("5", this.eventsForm.value.date, this.eventsForm.value.startTime, this.eventsForm.value.endTime)) == false){
+      this.table5 = false
+    } else {
+      this.table5 = true
     }
 
   }
@@ -212,10 +221,18 @@ export class EventsPageComponent implements OnInit {
     }
   }
 
+  clickedTable5(){
+    console.log("Clicked Table 5!")
+    if(this.table5 == false){
+      this.table5checked = false;
+    }else if(this.table5checked == false){
+      this.table5checked = true
+    }else{
+      this.table5checked = false
+    }
+  }
+
   joinEvent(eventID, user, userID){
-    console.log("Join Event")
-    console.log(this.eventID)
-    console.log(this.user)
     this.userJoin.event = eventID;
     this.userJoin.user = user;
     this.userJoin.userID = userID;
@@ -229,7 +246,7 @@ export class EventsPageComponent implements OnInit {
     }else{
       this.errorMessageModal = true
     }
-    
+
   }
 
   undoErrorMessage(){
@@ -280,6 +297,7 @@ export class EventsPageComponent implements OnInit {
   }
 
   handleEventClick(arg){
+    console.log(arg)
     this.eventTitle = arg.event._def.title
     var date = new Date(arg.event.start)
     var dateAsString = ''
@@ -306,12 +324,20 @@ export class EventsPageComponent implements OnInit {
       if(theEvent.title === this.eventTitle && eventDate === dateAsString){
         event = theEvent;
         this.eventTitle = this.eventTitle
+
         if(theEvent.startTime > 12){
-          this.startTime = theEvent.startTime - 12;
+          this.startTime = this.formatTime(theEvent.startTime);
+        }
+        else{
+          this.startTime = `${theEvent.startTime}:00 am`
         }
         if(theEvent.endTime > 12){
-          this.endTime = theEvent.endTime - 12;
+          this.endTime = this.formatTime(theEvent.endTime);
         }
+        else{
+          this.endTime= `${theEvent.endTime}:00 am`
+        }
+
         this.table = theEvent.table
         this.eventID = theEvent.id
         this.currentPlayers = theEvent.currentPlayers
@@ -321,6 +347,11 @@ export class EventsPageComponent implements OnInit {
 
     $('#singleEventModal').modal('show');
     this.clickedDate = dateAsString
+  }
+
+  formatTime(time){
+    let newTime = time - 12;
+    return `${newTime}:00 pm`;
   }
 
   createEvent(){
@@ -333,6 +364,8 @@ export class EventsPageComponent implements OnInit {
       this.eventsForm.value.table = "3";
     }else if(this.table4checked){
       this.eventsForm.value.table = "4";
+    }else if(this.table5checked){
+      this.eventsForm.value.table = "5";
     }
 
     if(!this.eventsForm.valid){

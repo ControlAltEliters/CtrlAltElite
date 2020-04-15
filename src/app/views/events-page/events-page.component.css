@@ -45,8 +45,6 @@ button:active {
   transform: translateY(1px);
 }
 
-
-
 #submit {
   background: rgb(122, 122, 122);
 }
@@ -62,6 +60,40 @@ button:active {
   padding: 1% 0% 5% 0%;
 }
 
+.holder {
+  float: right;
+  margin-top: 15px;
+}
+
+.descriptor {
+  float: left;
+  margin-right: 5px;
+  font-size: 14px;
+  text-align: center;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+.calendar-title {
+  height: auto;
+  margin-left: 4em;
+  margin-top: .75em;
+  margin-bottom: .75em;
+}
+
+.schedule-button {
+  float: right;
+  margin-right: 4em;
+  margin-bottom: 2em;
+}
+
+/* ----EVERYTHING FOR TABLES AND MAP---- */
+
 .tableContent {
   justify-content: center;
   padding: 1em;
@@ -75,39 +107,118 @@ button:active {
   margin-bottom: 20px;
 }
 
+.arcade-background {
+  /* outline: green dashed 1px; */
+  background-color: rgb(97,103,111);
+  height: 400px;
+  width: 980px;
+}
+
 .table {
   padding: 10px;
 }
 
-.examples {
-  size: 20%;
+.available {
+  background-color: #CDD7E2;
+  height: 15px;
+  width: 15px;
+  float: left;
+  margin: 10px 0px 0px 0px;
 }
 
-.con {
-  height: 50px;
-  width: 50px;
-  margin: 4px;
+.unavailable {
+  background-color: #A88C9F;
+  height: 15px;
+  width: 15px;
+  float: left;
+  margin: 10px 0px 0px 0px;
+}
+
+.selected {
+  background-color: #4D67A2;
+  height: 15px;
+  width: 15px;
+  float: left;
+  margin: 10px 0px 0px 0px;
+}
+
+.table-item {
   display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  background-color: #52C3C5;
+  color: white;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+
 }
 
-img {
+.snack-bar {
+  height: 100px;
+  width: 100px;
+  margin-top: 50%;
+  margin-left: 10%;
+
+}
+
+.items-shop {
+  height: 150px;
+  width: 50px;
+  margin-top: 0%;
+  margin-left: 10%;
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+}
+
+.arcade {
+  height: 400px;
   max-width: 100%;
-  max-height: 100%;
-  display: block;
-  margin: 0 auto;
 }
 
-.calendar-title {
-  height: auto;
-  margin-left: 1.5em;
-  margin-top: .75em;
-  font-size: 3em;
+.table1 {
+  margin-top: 225px;
 }
 
-.schedule-button {
-  float: right;
-  margin-right: 4em;
-  margin-bottom: 2em;
+.table2 {
+  margin-top: 50px;
+}
+
+.table3 {
+  margin-top: 75px;
+}
+
+.table4 {
+  margin-top: 50px;
+}
+
+.table5 {
+  margin-top: 75px;
+}
+
+.unavailable-table {
+  background-color: #A88C9F;
+  border-radius: 5px;
+  height: 100px;
+  width: 75px;
+}
+
+.available-table {
+  background-color: #CDD7E2;
+  border-radius: 5px;
+
+  height: 100px;
+  width: 75px;
+}
+
+.selected-table {
+  background-color: #4D67A2;
+  border: white solid 1px;
+  border-radius: 5px;
+  height: 100px;
+  width: 75px;
 }
 
 .ui.modal>.header {

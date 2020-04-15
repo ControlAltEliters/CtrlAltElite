@@ -1,133 +1,290 @@
 <app-navbar></app-navbar>
-<app-chat-box></app-chat-box>
+<!-- <app-chat-box></app-chat-box> -->
 <script src="../../calendar//caleandar.js"></script>
 
 <div class="ui container">
-    <div *ngIf="user" class="content">
-        <button (click)="displayModal()" class="ui button" style="margin-top: 2em;">Schedule event</button>
-    </div>
-    <div *ngIf="showModal">
-        <div class="modal">
-        <div class="ui active modal">
-            <i class="close icon" (click)="hideModal()"></i>
-            <div class="header">CREATE NEW GAME</div>
-            <div class="content">
-                <form [formGroup]="eventsForm">
-                    <div class="form-group">
-                        <label class="inputTitle">Event Title</label>
-                        <input formControlName="eventTitle" type="text" class="form-control" id="inputTitle"
-                         placeholder="Enter type of game">
-                    </div>
-                    <div class="form-group">
-                        <label class="inputTitle">Date</label>
-                        <input formControlName="date" type="date" class="form-control" id="inputDate"
-                            placeholder="enter date">
-                    </div>
-                    <div class="form-group">
-                        <label class="inputTitle">Start time</label>
-                        <input formControlName="startTime" type="number" class="form-control" id="inputStartTime"
-                         placeholder="Enter starting time ( ex. 4 ) ">
-                         <div class="ui checkbox">
-                            <input id="example-id" type="checkbox" (click)="handleChecked1()">
-                            <label for="example-id">PM</label>
-                          </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="inputTitle">End time</label>
-                        <input formControlName="endTime" type="number" class="form-control" id="inputEndTime"
-                         placeholder="Enter end time ( ex. 6 ) ">
-                         <div class="ui checkbox">
-                            <input id="example-id2" type="checkbox" (click)="handleChecked2()">
-                            <label for="example-id2">PM</label>
-                          </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="inputTitle">Resources required</label>
-                        <input formControlName="resources" type="text" class="form-control" id="inputResources"
-                         placeholder="Dice, cards, etc">
-                    </div>
-                    <div class="form-group">
-                        <label class="inputTitle">Description of event</label>
-                        <input formControlName="description" type="text" class="form-control" id="inputDescription"
-                         placeholder="Short description of play style or what the event is for">
-                    </div>
-                    <div class="form-group">
-                        <label class="inputTitle">Max number of Players</label>
-                        <input formControlName="maxPlayers" type="number" class="form-control" id="inputMax">
-                    </div>
-                    <div class="form-group">
-                        <label class="inputTitle">Min number of Players</label>
-                        <input formControlName="minPlayers" type="number" class="form-control" id="inputMin">
-                    </div>
-                    <div class="form-group" style="text-align:center; margin-left: 10rm;">
-                        <div class="ui black button" (click)="chooseTable()">Choose Table</div>
-                    </div>
-                </form>
-            </div>
-            <div class="actions">
-            </div>
-        </div>
-        </div>
-    </div>
-    <div *ngIf="tableModal">
-      <div class="modal">
-      <div class="ui active modal">
-          <i class="close icon" (click)="hideTableModal()"></i>
-          <div class="header">SELECT TABLE</div>
-          <div class="tableContent">
-              <form [formGroup]="eventsForm">
-                  <div class="form-group">
-                      <label class="inputTitle">Table</label>
-                       <select id="inputGame" class="form-control" formControlName="table">
-                          <option value="1">Table 1</option>
-                          <option value="2">Table 2</option>
-                          <option value="3">Table 3</option>
-                          <option value="4">Table 4</option>
-                        </select>
-                  </div>
-                  <div class="form-group" style="text-align:center; margin-left: 10rm;">
-                      <div class="ui black button" (click)="createEvent()">Choose Table</div>
-                  </div>
-              </form>
+
+  <div class="content-block">
+    <div class="ui grid">
+      <div class="row">
+        <div class="twelve wide column">
+          <div class="calendar-title">
+            <h1>Event Calendar</h1>
           </div>
-          <div class="actions">
+        </div>
+        <div class="four wide column">
+          <div class="schedule-button">
+            <div *ngIf="user">
+              <button (click)="showCreateEventModal()" class="ui button" style="margin-top: 2em;">
+                Schedule event
+              </button>
+            </div>
           </div>
+        </div>
       </div>
+    </div>
+    <div class="ui card centered">
+      <div class="content">
+        <full-calendar
+          defaultView="dayGridMonth"
+          [plugins]="calendarPlugins"
+          [events]="calendarEvents"
+          (eventClick)="handleEventClick($event)"
+          (dateClick)="handleClick($event)"
+        >
+        </full-calendar>
       </div>
+    </div>
   </div>
 
-  <div *ngIf="eventModal">
-      <div class="modal">
-      <div class="ui active modal">
-          <i class="close icon" (click)="hideEventModal()"></i>
-          <div class="header">EVENT: {{eventTitle}}</div>
-          <div class="tableContent">
-              <p>DATE: {{clickedDate}}</p>
-              <p>TIME: {{startTime}} to {{endTime}}</p>
+  <!-- MODALS -->
+  <div id="createEventModal" class="ui tiny modal">
+    <i class="close icon cancel"></i>
+    <div class="header">
+      <p>Create New Event</p>
+    </div>
+    <div class="content">
+      <form [formGroup]="eventsForm">
+        <div class="form-group">
+          <label class="inputTitle">Game Name</label>
+          <input
+            formControlName="eventTitle"
+            type="text"
+            class="form-control"
+            id="inputTitle"
+            placeholder="Enter type of game"
+          />
+        </div>
+        <div class="form-group">
+          <label class="inputTitle">Date</label>
+          <input
+            formControlName="date"
+            type="date"
+            class="form-control"
+            id="inputDate"
+            placeholder="enter date"
+          />
+        </div>
+        <div class="form-group">
+          <label class="inputTitle">Start time</label>
+          <input
+            formControlName="startTime"
+            type="number"
+            class="form-control"
+            id="inputStartTime"
+            placeholder="Enter starting time ( ex. 4 ) "
+          />
+          <div class="ui checkbox">
+            <input id="example-id" type="checkbox" (click)="handleChecked1()" />
+            <label for="example-id">PM</label>
           </div>
-          <div *ngFor="let player of currentPlayers">
-              <p>{{player}}</p>
+        </div>
+        <div class="form-group">
+          <label class="inputTitle">End time</label>
+          <input
+            formControlName="endTime"
+            type="number"
+            class="form-control"
+            id="inputEndTime"
+            placeholder="Enter end time ( ex. 6 ) "
+          />
+          <div class="ui checkbox">
+            <input
+              id="example-id2"
+              type="checkbox"
+              (click)="handleChecked2()"
+            />
+            <label for="example-id2">PM</label>
           </div>
-          <div class="actions">
-              <div *ngIf="user">
-                  <button (click)="joinEvent()" class="ui button">Join Event</button>
+        </div>
+        <div class="form-group">
+          <label class="inputTitle">Resources required</label>
+          <input
+            formControlName="resources"
+            type="text"
+            class="form-control"
+            id="inputResources"
+            placeholder="Dice, cards, etc"
+          />
+        </div>
+        <div class="form-group">
+          <label class="inputTitle">Description of event</label>
+          <input
+            formControlName="description"
+            type="text"
+            class="form-control"
+            id="inputDescription"
+            placeholder="Short description of play style or what the event is for"
+          />
+        </div>
+        <div class="form-group">
+          <label class="inputTitle">Max number of Players</label>
+          <input
+            formControlName="maxPlayers"
+            type="number"
+            class="form-control"
+            id="inputMax"
+          />
+        </div>
+        <div class="form-group">
+          <label class="inputTitle">Min number of Players</label>
+          <input
+            formControlName="minPlayers"
+            type="number"
+            class="form-control"
+            id="inputMin"
+          />
+        </div>
+      </form>
+    </div>
+    <div class="actions">
+      <div class="ui approve button" (click)="chooseTable()">Choose Table</div>
+      <div class="ui cancel button">Cancel</div>
+    </div>
+  </div>
+
+  <div id="createEventTableModal" class="ui large modal">
+    <i class="close icon cancel"></i>
+    <div class="header">
+      Please click a table to reserve
+
+      <div class="ui grid">
+        <div class="row">
+          <div class="three wide column">
+          </div>
+          <div class="four wide column">
+            <div class="holder">
+              <div class="descriptor">Available:</div>
+              <div class="available"></div>
+            </div>
+          </div>
+          <div class="five wide column">
+            <div class="holder">
+              <div class="descriptor">Unavailable:</div>
+              <div class="unavailable"></div>
+            </div>
+          </div>
+          <div class="four wide column">
+            <div class="holder">
+              <div class="descriptor">Selected:</div>
+              <div class="selected"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Full arcade map -->
+    <div class="content">
+      <div class="tables">
+        <div class="arcade-background">
+          <div class="ui grid">
+            <div class="row">
+              <div class="three wide column">
+                <div class="table-item snack-bar">SNACK BAR</div>
+                <div class="table-item items-shop">ITEMS SHOP</div>
               </div>
+              <div class="three wide column">
+                <div class="table1">
+                  <div *ngIf="table1checked == true">
+                    <div (click)="clickedTable1()" class="selected-table"></div>
+                  </div>
+                  <div *ngIf="table1 == true && table1checked == false">
+                    <div (click)="clickedTable1()" class="available-table"></div>
+                  </div>
+                  <div *ngIf="table1 == false && table1checked == false">
+                    <div (click)="clickedTable1()" class="unavailable-table"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="three wide column">
+                <div class="table2">
+                  <div *ngIf="table2checked == true">
+                    <div (click)="clickedTable2()" class="selected-table"></div>
+                  </div>
+                  <div *ngIf="table2 == true && table2checked == false">
+                    <div (click)="clickedTable2()" class="available-table"></div>
+                  </div>
+                  <div *ngIf="table2 == false && table2checked == false">
+                    <div (click)="clickedTable2()" class="unavailable-table"></div>
+                  </div>
+                </div>
+                <div class="table3">
+                  <div *ngIf="table3checked == true">
+                    <div (click)="clickedTable3()" class="selected-table"></div>
+                  </div>
+                  <div *ngIf="table3 == true && table3checked == false">
+                    <div (click)="clickedTable3()" class="available-table"></div>
+                  </div>
+                  <div *ngIf="table3 == false && table3checked == false">
+                    <div (click)="clickedTable3()" class="unavailable-table"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="three wide column">
+                <div class="table4">
+                  <div *ngIf="table4checked == true">
+                    <div (click)="clickedTable4()" class="selected-table"></div>
+                  </div>
+                  <div *ngIf="table4 == true && table4checked == false">
+                    <div (click)="clickedTable4()" class="available-table"></div>
+                  </div>
+                  <div *ngIf="table4 == false && table4checked == false">
+                    <div (click)="clickedTable4()" class="unavailable-table"></div>
+                  </div>
+                </div>
+                <div class="table5">
+                  <div *ngIf="table5checked == true">
+                    <div (click)="clickedTable5()" class="selected-table"></div>
+                  </div>
+                  <div *ngIf="table5 == true && table5checked == false">
+                    <div (click)="clickedTable5()" class="available-table"></div>
+                  </div>
+                  <div *ngIf="table5 == false && table5checked == false">
+                    <div (click)="clickedTable5()" class="unavailable-table"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="four wide column">
+                <div class="table-item arcade">ARCADE</div>
+              </div>
+            </div>
           </div>
+        </div>
       </div>
-      </div>
+    </div>
+    <div class="actions">
+      <div class="ui approve button" (click)="createEvent()">Create Event</div>
+      <div class="ui cancel button">Cancel</div>
+    </div>
   </div>
 
-    <div class="content-block">
-		<div class="ui card centered">
-			<div class="content">
-				<full-calendar
-				defaultView="dayGridMonth"
-				[plugins]="calendarPlugins"
-				[events]="calendarEvents"
-				(eventClick)="handleEventClick($event)"
-				(dateClick)="handleClick($event)"
-				></full-calendar>
-			</div>
-		</div>
+  <div id="singleEventModal" class="ui tiny modal">
+    <i class="close icon cancel"></i>
+    <div class="header">
+      <p>EVENT: {{ eventTitle }}</p>
     </div>
+    <div class="content">
+      <div class="tableContent">
+        <p>DATE: {{clickedDate}}</p>
+        <p>TIME: {{startTime}} to {{endTime}}</p>
+        <p>TABLE: {{table}}</p>
+        <p>PLAYERS SIGNED UP FOR EVENT: </p>
+        <div *ngFor="let player of currentPlayers">
+            <p>{{player}}</p>
+        </div>
+      </div>
+      <div *ngIf="errorMessageModal">
+        <div class="ui error message">
+            <div class="header">Registration Error</div>
+            <p>User is already registered for event</p>
+        </div>
+    </div>
+    </div>
+    <div class="actions">
+      <div class="ui button" (click)="joinEvent(eventID, user, userID)">Join Event</div>
+      <div class="ui cancel button" (click)="undoErrorMessage()">Cancel</div>
+    </div>
+  </div>
+
 </div>

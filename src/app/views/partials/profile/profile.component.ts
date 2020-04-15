@@ -4,14 +4,14 @@ import { FormGroup,FormControl,Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonUtils } from 'src/app/utils/common-utils';
 
+declare let $: any;
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  public showInfoModal = false;
-  public showPasswordModal = false;
   userFirstName: string;
   userLastName: string;
   userName: string;
@@ -56,16 +56,11 @@ export class ProfileComponent implements OnInit {
   }
 
   displayInfoModal(){
-    this.showInfoModal = true;
+    $('#editProfileModal').modal('show');
   }
 
   displayPasswordModal() {
-    this.showPasswordModal = true;
-  }
-
-  hideModal(){
-    this.showInfoModal = false;
-    this.showPasswordModal = false;
+    $('#editPasswordModal').modal('show');
   }
 
   editUserProfile(){
@@ -91,11 +86,9 @@ export class ProfileComponent implements OnInit {
         this.editProfileError = error.error.message;
       }
     )
-    this.showInfoModal = false;
   }
 
   updateUserPassword(){
-    console.log("start id: " + this.updatePassword.value.userId);
     if (!this.updatePassword.valid) {
       this.updatePasswordError = "Invalid Form";
       console.log('Invalid Form');
@@ -109,11 +102,8 @@ export class ProfileComponent implements OnInit {
     this._userService.verifyPassword(this.updatePassword.value.oldPassword, this.updatePassword.value.newPassword, this.updatePassword.value.confirmedNewPassword, this.updatePassword.value.userId).subscribe((resp)=>{
       if (resp.body["result"]) {
         if (resp.body["newpass"] === resp.body["confnewpass"]) {
-          // console.log("updating password");
           this._commonUtils.setSessionField('flag', "1");
           alert("password updated");
-          // this._userService.updatePassword(this.updatePassword.value.newPassword);
-          // console.log("updated password");
         }
         else {
           this._commonUtils.setSessionField('flag', "0");
@@ -127,24 +117,19 @@ export class ProfileComponent implements OnInit {
     });
 
     setTimeout(()=>{
-      console.log("flag: " + this._commonUtils.readSessionField('flag'));
-      console.log("id: " + this._commonUtils.readSessionField('id'));
-      console.log("newpass: " + this._commonUtils.readSessionField('newpass'));
       if (this._commonUtils.readSessionField('flag')) {
+        this._commonUtils.setSessionField('flag', "0");
         this.update();
       }
     }, 1000);
 
     this.updatePassword.reset();
-    this.showPasswordModal = false;
   }
 
   update(){
-    console.log("2id: " + this._commonUtils.readSessionField('id'));
-    console.log("2newpass: " + this._commonUtils.readSessionField('newpass'));
     this._userService.updatePassword(this._commonUtils.readSessionField('id'), this._commonUtils.readSessionField('newpass'))
       .subscribe(
-      data => { console.log(data); }
+        () => { this._router.navigate(['/login']); }
     );
   }
 }

@@ -81,9 +81,6 @@ router.post('/editprofile',isValidUser, function(req,res,next){
 })
 
 router.get('/updatepassword', isValidUser, function (req, res, next) {
-  console.log("in!: " + JSON.parse(req.query.id));
-  // console.log("in!: " + JSON.parse(req.query.newpass));
-
   try {
     User.findOneAndUpdate(
       { _id: JSON.parse(req.query.id) }, {

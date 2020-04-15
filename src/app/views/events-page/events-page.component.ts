@@ -6,6 +6,9 @@ import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
 import { UserService } from 'src/app/services/user.service';
 import { ThrowStmt } from '@angular/compiler';
+import { environment } from 'src/environments/environment';
+
+declare let $: any;
 
 @Component({
   selector: 'app-events-page',
@@ -15,9 +18,6 @@ import { ThrowStmt } from '@angular/compiler';
 export class EventsPageComponent implements OnInit {
 
   calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
-  public showModal = false;
-  public tableModal = false;
-  public eventModal = false;
   public today = new Date();
   public testDate = '2020-03-22'
   public testTitle = 'Test Title'
@@ -30,6 +30,7 @@ export class EventsPageComponent implements OnInit {
   check2 = false
   clickedEvent
   clickedDate
+  errorMessageModal = false
   user
   userID
   eventID
@@ -39,8 +40,19 @@ export class EventsPageComponent implements OnInit {
   eventTitle
   startTime
   endTime
-
+  table1 = true;
+  table2 = true;
+  table3 = true;
+  table4 = true;
+  table5 = true;
+  table1checked = false;
+  table2checked = false;
+  table3checked = false;
+  table4checked = false;
+  table5checked = false;
+  table
   calendarEvents = [];
+  tables = [];
 
   eventsForm:FormGroup = new FormGroup({
     eventTitle:new FormControl(null),
@@ -61,27 +73,47 @@ export class EventsPageComponent implements OnInit {
 
   ngOnInit(): void {
     this._eventsService.event().subscribe(
-      data=> {this.addEventsFromDB(data)},
+      data=> {this.addEventsFromDB(data);},
       error=>console.error(error)
     )
 
     this.user = sessionStorage.getItem('activeUser')
-    console.log("USER!")
-    console.log(this.user)
 
     this._userService.user()
     .subscribe(
       data => this.dealWithUser(data),
       error => {}
     )
-      console.log("User info")
+  }
 
-    }
+  seeIfTableIsAvailable(table, date, startTime, endTime): boolean{
+    let available = true;
 
-    dealWithUser(data){
-      this.userID = data._id;
+    this.events.forEach(event => {
+      let eventStartTime = startTime;
+      let eventEndTime = endTime;
 
-    }
+      event.date = event.date ? event.date.slice(0, 10) : null;
+      eventStartTime = this.check1 ? eventStartTime += 12 : eventStartTime;
+      eventEndTime = this.check2 ? eventEndTime += 12 : eventEndTime;
+
+      if(event.date == date &&
+        event.table == table &&
+        !(
+          ((eventStartTime < event.startTime) && (eventEndTime <= event.startTime)) ||
+          ((eventStartTime >= event.endTime) && (eventEndTime > event.endTime))
+        )
+        ) {
+            available = false;
+          }
+        })
+    return available;
+  }
+
+  dealWithUser(data){
+    this.userID = data._id;
+
+  }
 
   addEventsFromDB(data){
 
@@ -105,28 +137,138 @@ export class EventsPageComponent implements OnInit {
           currentPlayers: event.currentPlayers,
           maxPlayers: event.maxPlayers,
           minPlayers: event.minPlayers,
+          playersIDs: event.playersIDs,
           table: event.table,
           id: event._id
         });
     });
+  }
 
+  renderTables(){
+    if((this.seeIfTableIsAvailable("1", this.eventsForm.value.date, this.eventsForm.value.startTime, this.eventsForm.value.endTime)) == false){
+      this.table1 = false
+    } else {
+      this.table1 = true
+    }
+
+    if((this.seeIfTableIsAvailable("2", this.eventsForm.value.date, this.eventsForm.value.startTime, this.eventsForm.value.endTime)) == false){
+      this.table2 = false
+    } else {
+      this.table2 = true
+    }
+
+    if((this.seeIfTableIsAvailable("3", this.eventsForm.value.date, this.eventsForm.value.startTime, this.eventsForm.value.endTime)) == false){
+      this.table3 = false
+    } else {
+      this.table3 = true
+    }
+
+    if((this.seeIfTableIsAvailable("4", this.eventsForm.value.date, this.eventsForm.value.startTime, this.eventsForm.value.endTime)) == false){
+      this.table4 = false
+    } else {
+      this.table4 = true
+    }
+
+    if((this.seeIfTableIsAvailable("5", this.eventsForm.value.date, this.eventsForm.value.startTime, this.eventsForm.value.endTime)) == false){
+      this.table5 = false
+    } else {
+      this.table5 = true
+    }
 
   }
 
-  joinEvent(){
-    console.log("Join Event")
-    console.log(this.eventID)
-    console.log(this.user)
-    this.userJoin.event = this.eventID;
-    this.userJoin.user = this.user;
-    this.userJoin.userID = this.userID;
-    /*
-    this._eventsService.join(this.userJoin).subscribe(
-      data=> {console.log(data);},
-      error=>console.error(error)
-    )
-    */
+  clickedTable1(){
+    console.log("Clicked Table 1!")
+    if(this.table1 == false){
+      this.table1checked == false
+    } else if(this.table1checked == false){
+      this.table1checked = true
+    }else{
+      this.table1checked = false
+    }
   }
+
+  clickedTable2(){
+    console.log("Clicked Table 2!")
+    if(this.table2 == false){
+      this.table2checked = false;
+    } else if(this.table2checked == false){
+      this.table2checked = true
+    }else{
+      this.table2checked = false
+    }
+  }
+
+  clickedTable3(){
+    console.log("Clicked Table 3!")
+    if(this.table3 == false){
+      this.table3checked = false;
+    }else if(this.table3checked == false){
+      this.table3checked = true
+    }else{
+      this.table3checked = false
+    }
+  }
+
+  clickedTable4(){
+    console.log("Clicked Table 4!")
+    if(this.table4 == false){
+      this.table4checked = false;
+    }else if(this.table4checked == false){
+      this.table4checked = true
+    }else{
+      this.table4checked = false
+    }
+  }
+
+  clickedTable5(){
+    console.log("Clicked Table 5!")
+    if(this.table5 == false){
+      this.table5checked = false;
+    }else if(this.table5checked == false){
+      this.table5checked = true
+    }else{
+      this.table5checked = false
+    }
+  }
+
+  joinEvent(eventID, user, userID){
+    this.userJoin.event = eventID;
+    this.userJoin.user = user;
+    this.userJoin.userID = userID;
+
+    if(this.alreadySignedUpForEvent(eventID, userID) == false){
+      this._eventsService.join(this.userJoin).subscribe(
+        data=> {console.log(data);},
+        error=>console.error(error)
+      )
+      window.location.reload()
+    }else{
+      this.errorMessageModal = true
+    }
+
+  }
+
+  undoErrorMessage(){
+    this.errorMessageModal = false
+  }
+
+  alreadySignedUpForEvent(eventID, userID): boolean{
+    var signedup = false
+    this.events.forEach(event => {
+      if(event.id == eventID){
+        console.log("Found event")
+        event.playersIDs.forEach(player =>{
+          console.log(this.userID)
+          if(player == this.userID){
+            signedup = true
+          }
+        })
+      }
+    })
+    return signedup
+  }
+
 
   handleChecked1(){
     if(this.check1 === false){
@@ -150,23 +292,12 @@ export class EventsPageComponent implements OnInit {
     console.log(event)
   }
 
-  displayModal(){
-    this.showModal = true;
-  }
-
-  hideModal(){
-    this.showModal = false;
-  }
-
-  hideTableModal(){
-    this.tableModal = false;
-  }
-
-  hideEventModal(){
-    this.eventModal = false;
+  showCreateEventModal(){
+    $('#createEventModal').modal('show');
   }
 
   handleEventClick(arg){
+    console.log(arg)
     this.eventTitle = arg.event._def.title
     var date = new Date(arg.event.start)
     var dateAsString = ''
@@ -193,19 +324,49 @@ export class EventsPageComponent implements OnInit {
       if(theEvent.title === this.eventTitle && eventDate === dateAsString){
         event = theEvent;
         this.eventTitle = this.eventTitle
-        this.startTime = theEvent.startTime
-        this.endTime = theEvent.endTime
+
+        if(theEvent.startTime > 12){
+          this.startTime = this.formatTime(theEvent.startTime);
+        }
+        else{
+          this.startTime = `${theEvent.startTime}:00 am`
+        }
+        if(theEvent.endTime > 12){
+          this.endTime = this.formatTime(theEvent.endTime);
+        }
+        else{
+          this.endTime= `${theEvent.endTime}:00 am`
+        }
+
+        this.table = theEvent.table
         this.eventID = theEvent.id
         this.currentPlayers = theEvent.currentPlayers
         console.log(this.currentPlayers)
       }
     })
 
-    this.eventModal = true;
+    $('#singleEventModal').modal('show');
     this.clickedDate = dateAsString
   }
 
+  formatTime(time){
+    let newTime = time - 12;
+    return `${newTime}:00 pm`;
+  }
+
   createEvent(){
+
+    if(this.table1checked){
+      this.eventsForm.value.table = "1";
+    }else if(this.table2checked){
+      this.eventsForm.value.table = "2";
+    }else if(this.table3checked){
+      this.eventsForm.value.table = "3";
+    }else if(this.table4checked){
+      this.eventsForm.value.table = "4";
+    }else if(this.table5checked){
+      this.eventsForm.value.table = "5";
+    }
 
     if(!this.eventsForm.valid){
       console.log('Invalid Form'); return;
@@ -224,10 +385,7 @@ export class EventsPageComponent implements OnInit {
       error=>console.error(error)
     )
 
-   this.tableModal = false;
-
    this.putEventOnCalendar()
-
    this.eventsForm.reset();
    window.location.reload()
   }
@@ -238,7 +396,6 @@ export class EventsPageComponent implements OnInit {
     if(this.check1 === false){
       startTime += 12
     }
-    console.log(startTime)
     var endTime = this.eventsForm.value.endTime
     if(this.check2 === false){
       endTime += 12
@@ -260,8 +417,8 @@ export class EventsPageComponent implements OnInit {
   }
 
   chooseTable(){
-    this.showModal = false;
-    this.tableModal = true;
+    $('#createEventTableModal').modal('show');
+    this.renderTables();
   }
 
 }

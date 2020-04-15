@@ -37,6 +37,7 @@ label {
 }
 
 .ui.modal>.header,
+.ui.modal>.actions,
 .ui.modal>.content {
   background: rgb(52, 186, 209, 0.9);
   color: white;

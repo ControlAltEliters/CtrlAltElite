@@ -55,14 +55,14 @@ export class EventsPageComponent implements OnInit {
   tables = [];
 
   eventsForm:FormGroup = new FormGroup({
-    eventTitle:new FormControl(null),
-    date:new FormControl(null),
-    startTime:new FormControl(null),
-    endTime:new FormControl(null),
-    resources: new FormControl(null),
+    eventTitle:new FormControl(null, Validators.required),
+    date:new FormControl(null, Validators.required),
+    startTime:new FormControl(null, Validators.required),
+    endTime:new FormControl(null, Validators.required),
+    resources: new FormControl(null, Validators.required),
     description: new FormControl(null),
-    maxPlayers:new FormControl(null),
-    minPlayers:new FormControl(null),
+    maxPlayers:new FormControl(null, Validators.required),
+    minPlayers:new FormControl(null, Validators.required),
     table:new FormControl(null),
   })
 
@@ -145,6 +145,7 @@ export class EventsPageComponent implements OnInit {
   }
 
   renderTables(){
+
     if((this.seeIfTableIsAvailable("1", this.eventsForm.value.date, this.eventsForm.value.startTime, this.eventsForm.value.endTime)) == false){
       this.table1 = false
     } else {

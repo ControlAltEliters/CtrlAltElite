@@ -251,95 +251,6 @@
             </div>
           </div>
         </div>
-
-
-        <!-- <h1>Table 1</h1>
-        <div class="table">
-          <div *ngIf="table1checked == true">
-            <img
-              (click)="clickedTable1()"
-              src="../../../assets/images/selected.png"
-            />
-          </div>
-          <div *ngIf="table1 == true && table1checked == false">
-            <img
-              (click)="clickedTable1()"
-              src="../../../assets/images/available.png"
-            />
-          </div>
-          <div *ngIf="table1 == false && table1checked == false">
-            <img
-              (click)="clickedTable1()"
-              src="../../../assets//images//unavailable.png"
-            />
-          </div>
-        </div>
-
-        <h1>Table 2</h1>
-        <div class="table">
-          <div *ngIf="table2checked == true">
-            <img
-              (click)="clickedTable2()"
-              src="../../../assets/images/selected.png"
-            />
-          </div>
-          <div *ngIf="table2 == true && table2checked == false">
-            <img
-              (click)="clickedTable2()"
-              src="../../../assets/images/available.png"
-            />
-          </div>
-          <div *ngIf="table2 == false && table2checked == false">
-            <img
-              (click)="clickedTable2()"
-              src="../../../assets//images//unavailable.png"
-            />
-          </div>
-        </div>
-
-        <h1>Table 3</h1>
-        <div class="table">
-          <div *ngIf="table3checked == true">
-            <img
-              (click)="clickedTable3()"
-              src="../../../assets/images/selected.png"
-            />
-          </div>
-          <div *ngIf="table3 == true && table3checked == false">
-            <img
-              (click)="clickedTable3()"
-              src="../../../assets/images/available.png"
-            />
-          </div>
-          <div *ngIf="table3 == false && table3checked == false">
-            <img
-              (click)="clickedTable3()"
-              src="../../../assets//images//unavailable.png"
-            />
-          </div>
-        </div>
-
-        <h1>Table 4</h1>
-        <div class="table">
-          <div *ngIf="table4checked == true">
-            <img
-              (click)="clickedTable4()"
-              src="../../../assets/images/selected.png"
-            />
-          </div>
-          <div *ngIf="table4 == true && table4checked == false">
-            <img
-              (click)="clickedTable4()"
-              src="../../../assets/images/available.png"
-            />
-          </div>
-          <div *ngIf="table4 == false && table4checked == false">
-            <img
-              (click)="clickedTable4()"
-              src="../../../assets//images//unavailable.png"
-            />
-          </div>
-        </div> -->
       </div>
     </div>
     <div class="actions">
@@ -363,10 +274,16 @@
             <p>{{player}}</p>
         </div>
       </div>
+      <div *ngIf="errorMessageModal">
+        <div class="ui error message">
+            <div class="header">Registration Error</div>
+            <p>User is already registered for event</p>
+        </div>
+    </div>
     </div>
     <div class="actions">
-      <div class="ui approve button" (click)="joinEvent(eventID, user, userID)">Join Event</div>
-      <div class="ui cancel button">Cancel</div>
+      <div class="ui button" (click)="joinEvent(eventID, user, userID)">Join Event</div>
+      <div class="ui cancel button" (click)="undoErrorMessage()">Cancel</div>
     </div>
   </div>
 

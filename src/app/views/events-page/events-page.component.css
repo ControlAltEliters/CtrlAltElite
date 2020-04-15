@@ -62,6 +62,7 @@ button:active {
 
 .holder {
   float: right;
+  margin-top: 15px;
 }
 
 .descriptor {
@@ -122,7 +123,7 @@ img {
   height: 15px;
   width: 15px;
   float: left;
-  margin: 4px;
+  margin: 10px 0px 0px 0px;
 }
 
 .unavailable {
@@ -130,7 +131,7 @@ img {
   height: 15px;
   width: 15px;
   float: left;
-  margin: 4px;
+  margin: 10px 0px 0px 0px;
 }
 
 .selected {
@@ -138,7 +139,7 @@ img {
   height: 15px;
   width: 15px;
   float: left;
-  margin: 4px;
+  margin: 10px 0px 0px 0px;
 }
 
 .table-item {
@@ -149,6 +150,9 @@ img {
   background-color: #52C3C5;
   color: white;
   text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+
 }
 
 .snack-bar {
@@ -156,6 +160,7 @@ img {
   width: 100px;
   margin-top: 50%;
   margin-left: 10%;
+
 }
 
 .items-shop {
@@ -163,6 +168,9 @@ img {
   width: 50px;
   margin-top: 0%;
   margin-left: 10%;
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  transform: rotate(180deg);
 }
 
 .arcade {
@@ -213,3 +221,42 @@ img {
   width: 75px;
 }
 
+.ui.modal>.header {
+  background: rgb(65, 161, 161);
+  color: white;
+  border-bottom: 1px solid white;
+}
+.ui.modal>.header:not(.ui) {
+  font-size: 2rem;
+  line-height: 1.28571429em;
+  font-weight: 700;
+  text-align: center;
+}
+
+.ui.modal>.content,
+.ui.modal>.actions {
+  background: rgb(199, 211, 211);
+  color: white;
+  font-size: 2em;
+  font-weight: 200;
+  text-align: center;
+}
+
+.ui.button {
+  background: #FE019A;
+  color: white;
+}
+
+.ui.button:hover {
+  background: rgb(206, 1, 124);
+}
+
+/* .ui.modal>.content {
+  font-size: 2em;
+  font-weight: 200;
+  text-align: center;
+} */
+
+.small-p {
+  font-size: .60em;
+}

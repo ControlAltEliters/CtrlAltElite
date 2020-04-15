@@ -19,6 +19,9 @@ export class ProfileComponent implements OnInit {
   userPassword: string;
   editProfileError: string;
   updatePasswordError: string;
+  showErrorMessage: Boolean;
+  successMessage: string;
+  showSuccessMessage: Boolean;
 
   editProfile: FormGroup = new FormGroup({
     editFirstName:new FormControl(null),
@@ -53,6 +56,9 @@ export class ProfileComponent implements OnInit {
     this._commonUtils.setFormFieldValue(this.editProfile, 'editEmail', this.userEmail);
     this._commonUtils.setFormFieldValue(this.editProfile, 'userId', this._commonUtils.readSessionField('userId'));
     this._commonUtils.setFormFieldValue(this.updatePassword, 'userId', this._commonUtils.readSessionField('userId'));
+
+    this.showErrorMessage = false;
+    this.showSuccessMessage = false;
   }
 
   displayInfoModal(){
@@ -99,27 +105,41 @@ export class ProfileComponent implements OnInit {
     this._commonUtils.setSessionField('id', JSON.stringify(this.updatePassword.value.userId));
     this._commonUtils.setSessionField('newpass', JSON.stringify(this.updatePassword.value.newPassword));
 
-    this._userService.verifyPassword(this.updatePassword.value.oldPassword, this.updatePassword.value.newPassword, this.updatePassword.value.confirmedNewPassword, this.updatePassword.value.userId).subscribe((resp)=>{
-      if (resp.body["result"]) {
-        if (resp.body["newpass"] === resp.body["confnewpass"]) {
-          this._commonUtils.setSessionField('flag', "1");
-          alert("password updated");
+    this._userService.verifyPassword(this.updatePassword.value.oldPassword, this.updatePassword.value.newPassword, this.updatePassword.value.confirmedNewPassword, this.updatePassword.value.userId).subscribe((resp) => {
+        console.log("result: " + resp.body["result"]);
+        if (resp.body["result"])
+        {
+          console.log("newpass: " + resp.body["newpass"]);
+          console.log("confnewpass: " + resp.body["confnewpass"]);
+          if (resp.body["newpass"] === resp.body["confnewpass"])
+          {
+            this._commonUtils.setSessionField('flag', "1");
+            this.showErrorMessage = false;
+            this.successMessage = "Successfully updated password!";
+            this.showSuccessMessage = true;
+          }
+          else
+          {
+            this._commonUtils.setSessionField('flag', "0");
+            this.updatePasswordError = "Fields 2 and 3 do not match. Please try again.";
+            this.showErrorMessage = true;
+          }
         }
-        else {
+        else
+        {
           this._commonUtils.setSessionField('flag', "0");
-          alert("New password and re-entered password not the same. Please try again.");
+          this.updatePasswordError = "Field 1 does not match current password. Please try again.";
+          this.showErrorMessage = true;
         }
-      }
-      else {
-        this._commonUtils.setSessionField('flag', "0");
-        alert("Entered old password doesn't match current password.");
-      }
-    });
+      })
 
     setTimeout(()=>{
-      if (this._commonUtils.readSessionField('flag')) {
+      console.log("flag: " + this._commonUtils.readSessionField('flag'));
+      if (this._commonUtils.readSessionField('flag') === "1") {
         this._commonUtils.setSessionField('flag', "0");
         this.update();
+        $('#editPasswordModal').modal('hide');
+        this._router.navigate(['/login']);
       }
     }, 1000);
 
@@ -129,7 +149,8 @@ export class ProfileComponent implements OnInit {
   update(){
     this._userService.updatePassword(this._commonUtils.readSessionField('id'), this._commonUtils.readSessionField('newpass'))
       .subscribe(
-        () => { this._router.navigate(['/login']); }
+        data => { console.log(data); },
+        error => { this.updatePasswordError = error.error.message; this.showErrorMessage = true; }
     );
   }
 }

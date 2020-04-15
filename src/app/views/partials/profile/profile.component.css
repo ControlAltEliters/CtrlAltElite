@@ -55,3 +55,12 @@ i {
   margin-top: 2.5em;
   margin-right: 3em;
 }
+
+.ui.message {
+  width: 90%;
+  margin: 0 auto;
+}
+
+#center {
+  padding: 1em;
+}

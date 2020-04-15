@@ -157,13 +157,15 @@
     <div class="actions">
       <div class="ui button" id="edit-button" (click)="updateUserPassword()">Update</div>
     </div>
-    <div class="ui error message" *ngIf="showErrorMessage">
-      <div class="header">Update Error</div>
-      <p>{{updatePasswordError}}</p>
-    </div>
-    <div class="ui success message" *ngIf="showSuccessMessage">
-      <div class="header">Success!</div>
-      <p>{{successMessage}}</p>
+    <div id="center" *ngIf="showErrorMessage || showSuccessMessage">
+      <div class="ui error message" *ngIf="showErrorMessage">
+        <div class="header">Update Error</div>
+        <p>{{updatePasswordError}}</p>
+      </div>
+      <div class="ui success message" *ngIf="showSuccessMessage">
+        <div class="header">Success!</div>
+        <p>{{successMessage}}</p>
+      </div>
     </div>
   </div>
 

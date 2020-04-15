@@ -139,7 +139,8 @@ export class ProfileComponent implements OnInit {
         this._commonUtils.setSessionField('flag', "0");
         this.update();
         $('#editPasswordModal').modal('hide');
-        this._router.navigate(['/login']);
+        this.logout();
+        // this._router.navigate(['/login']);
       }
     }, 1000);
 
@@ -153,4 +154,17 @@ export class ProfileComponent implements OnInit {
         error => { this.updatePasswordError = error.error.message; this.showErrorMessage = true; }
     );
   }
+
+  logout(){
+    console.log("logging user out");
+    this._userService.logout().subscribe(
+      data => {
+        sessionStorage.setItem('activeUser', '');
+        this._router.navigate(['login']);
+      },
+      error => {
+        console.error(error)
+      })
+  }
+    // pull from remote dev, delete console.logs, push changes for pr
 }

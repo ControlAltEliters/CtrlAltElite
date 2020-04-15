@@ -138,9 +138,7 @@ export class ProfileComponent implements OnInit {
       if (this._commonUtils.readSessionField('flag') === "1") {
         this._commonUtils.setSessionField('flag', "0");
         this.update();
-        $('#editPasswordModal').modal('hide');
         this.logout();
-        // this._router.navigate(['/login']);
       }
     }, 1000);
 
@@ -150,7 +148,7 @@ export class ProfileComponent implements OnInit {
   update(){
     this._userService.updatePassword(this._commonUtils.readSessionField('id'), this._commonUtils.readSessionField('newpass'))
       .subscribe(
-        data => { console.log(data); },
+        data => { $('#editPasswordModal').modal('hide'); },
         error => { this.updatePasswordError = error.error.message; this.showErrorMessage = true; }
     );
   }

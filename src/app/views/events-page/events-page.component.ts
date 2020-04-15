@@ -6,6 +6,7 @@ import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
 import { UserService } from 'src/app/services/user.service';
 import { ThrowStmt } from '@angular/compiler';
+import { environment } from 'src/environments/environment';
 
 declare let $: any;
 
@@ -29,6 +30,7 @@ export class EventsPageComponent implements OnInit {
   check2 = false
   clickedEvent
   clickedDate
+  errorMessageModal = false
   user
   userID
   eventID
@@ -131,6 +133,7 @@ export class EventsPageComponent implements OnInit {
           currentPlayers: event.currentPlayers,
           maxPlayers: event.maxPlayers,
           minPlayers: event.minPlayers,
+          playersIDs: event.playersIDs,
           table: event.table,
           id: event._id
         });
@@ -217,12 +220,38 @@ export class EventsPageComponent implements OnInit {
     this.userJoin.user = user;
     this.userJoin.userID = userID;
 
-    this._eventsService.join(this.userJoin).subscribe(
-      data=> {console.log(data);},
-      error=>console.error(error)
-    )
-
+    if(this.alreadySignedUpForEvent(eventID, userID) == false){
+      this._eventsService.join(this.userJoin).subscribe(
+        data=> {console.log(data);},
+        error=>console.error(error)
+      )
+      window.location.reload()
+    }else{
+      this.errorMessageModal = true
+    }
+    
   }
+
+  undoErrorMessage(){
+    this.errorMessageModal = false
+  }
+
+  alreadySignedUpForEvent(eventID, userID): boolean{
+    var signedup = false
+    this.events.forEach(event => {
+      if(event.id == eventID){
+        console.log("Found event")
+        event.playersIDs.forEach(player =>{
+          console.log(this.userID)
+          if(player == this.userID){
+            signedup = true
+          }
+        })
+      }
+    })
+    return signedup
+  }
+
 
   handleChecked1(){
     if(this.check1 === false){
@@ -277,9 +306,13 @@ export class EventsPageComponent implements OnInit {
       if(theEvent.title === this.eventTitle && eventDate === dateAsString){
         event = theEvent;
         this.eventTitle = this.eventTitle
-        this.startTime = theEvent.startTime
+        if(theEvent.startTime > 12){
+          this.startTime = theEvent.startTime - 12;
+        }
+        if(theEvent.endTime > 12){
+          this.endTime = theEvent.endTime - 12;
+        }
         this.table = theEvent.table
-        this.endTime = theEvent.endTime
         this.eventID = theEvent.id
         this.currentPlayers = theEvent.currentPlayers
         console.log(this.currentPlayers)

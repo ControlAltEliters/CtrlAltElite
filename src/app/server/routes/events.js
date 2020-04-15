@@ -118,6 +118,7 @@ router.post('/join', (req, res) => {
       res.json(join.event + "Not Found")
     }else {
       joinEvent.currentPlayers.push(join.user)
+      joinEvent.playersIDs.push(join.userID)
       joinEvent.save()
     }
   })

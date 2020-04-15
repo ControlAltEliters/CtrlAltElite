@@ -280,10 +280,16 @@
             <p>{{player}}</p>
         </div>
       </div>
+      <div *ngIf="errorMessageModal">
+        <div class="ui error message">
+            <div class="header">Registration Error</div>
+            <p>User is already registered for event</p>
+        </div>
+    </div>
     </div>
     <div class="actions">
-      <div class="ui approve button" (click)="joinEvent(eventID, user, userID)">Join Event</div>
-      <div class="ui cancel button">Cancel</div>
+      <div class="ui button" (click)="joinEvent(eventID, user, userID)">Join Event</div>
+      <div class="ui cancel button" (click)="undoErrorMessage()">Cancel</div>
     </div>
   </div>
 

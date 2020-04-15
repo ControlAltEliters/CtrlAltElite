@@ -38,108 +38,151 @@
   </div>
 
   <!-- MODALS -->
-  <div id="createEventModal" class="ui tiny modal">
+  <div id="createEventModal" class="ui small modal">
     <i class="close icon cancel"></i>
     <div class="header">
       <p>Create New Event</p>
     </div>
     <div class="content">
-      <form [formGroup]="eventsForm">
-        <div class="form-group">
-          <label class="inputTitle">Game Name</label>
-          <input
-            formControlName="eventTitle"
-            type="text"
-            class="form-control"
-            id="inputTitle"
-            placeholder="Enter type of game"
-          />
-        </div>
-        <div class="form-group">
-          <label class="inputTitle">Date</label>
-          <input
-            formControlName="date"
-            type="date"
-            class="form-control"
-            id="inputDate"
-            placeholder="enter date"
-          />
-        </div>
-        <div class="form-group">
-          <label class="inputTitle">Start time</label>
-          <input
-            formControlName="startTime"
-            type="number"
-            class="form-control"
-            id="inputStartTime"
-            placeholder="Enter starting time ( ex. 4 ) "
-          />
-          <div class="ui checkbox">
-            <input id="example-id" type="checkbox" (click)="handleChecked1()" />
-            <label for="example-id">PM</label>
+      <form class="ui form" [formGroup]="eventsForm" name="eventsForm">
+        <div class="field">
+          <div class="three fields">
+            <div class="ten wide field">
+              <label>Game Name*</label>
+              <input
+                formControlName="eventTitle"
+                type="text"
+                class="form-control"
+                id="inputTitle"
+                placeholder="Enter type of game"
+              />
+            </div>
+            <div class="three wide field">
+              <label>Player Min*</label>
+              <select
+                class="ui fluid dropdown"
+                formControlName="minPlayers"
+                id="inputMin"
+              >
+                <option [ngValue]="1">1</option>
+                <option [ngValue]="2">2</option>
+                <option [ngValue]="3">3</option>
+                <option [ngValue]="4">4</option>
+                <option [ngValue]="5">5</option>
+                <option [ngValue]="6">6</option>
+                <option [ngValue]="7">7</option>
+                <option [ngValue]="8">8</option>
+              </select>
+            </div>
+            <div class="three wide field">
+              <label>Player Max*</label>
+              <select
+                class="ui fluid dropdown"
+                formControlName="maxPlayers"
+                id="inputMax"
+              >
+                <option [ngValue]="1">1</option>
+                <option [ngValue]="2">2</option>
+                <option [ngValue]="3">3</option>
+                <option [ngValue]="4">4</option>
+                <option [ngValue]="5">5</option>
+                <option [ngValue]="6">6</option>
+                <option [ngValue]="7">7</option>
+                <option [ngValue]="8">8</option>
+              </select>
+            </div>
           </div>
         </div>
-        <div class="form-group">
-          <label class="inputTitle">End time</label>
-          <input
-            formControlName="endTime"
-            type="number"
-            class="form-control"
-            id="inputEndTime"
-            placeholder="Enter end time ( ex. 6 ) "
-          />
-          <div class="ui checkbox">
+        <div class="five fields">
+          <div class="six wide field">
+            <label>Event Date*</label>
             <input
-              id="example-id2"
-              type="checkbox"
-              (click)="handleChecked2()"
+              formControlName="date"
+              type="date"
+              id="inputDate"
+              placeholder="enter date"
             />
-            <label for="example-id2">PM</label>
+          </div>
+          <div class="three wide field">
+            <label>Start Time*</label>
+            <select
+              class="ui fluid dropdown"
+              formControlName="startTime"
+              id="inputStartTime"
+            >
+              <option [ngValue]="1">1</option>
+              <option [ngValue]="2">2</option>
+              <option [ngValue]="3">3</option>
+              <option [ngValue]="4">4</option>
+              <option [ngValue]="5">5</option>
+              <option [ngValue]="6">6</option>
+              <option [ngValue]="7">7</option>
+              <option [ngValue]="8">8</option>
+              <option [ngValue]="9">9</option>
+              <option [ngValue]="10">10</option>
+              <option [ngValue]="11">11</option>
+              <option [ngValue]="12">12</option>
+            </select>
+          </div>
+          <div class="two wide field">
+            <div class="ui checkbox">
+              <input id="checked1" type="checkbox" (click)="handleChecked1()" />
+              <label for="checked1">PM</label>
+            </div>
+          </div>
+          <div class="three wide field">
+            <label>End Time*</label>
+            <select
+              class="ui fluid dropdown"
+              formControlName="endTime"
+              id="inputEndTime"
+            >
+              <option [ngValue]="1">1</option>
+              <option [ngValue]="2">2</option>
+              <option [ngValue]="3">3</option>
+              <option [ngValue]="4">4</option>
+              <option [ngValue]="5">5</option>
+              <option [ngValue]="6">6</option>
+              <option [ngValue]="7">7</option>
+              <option [ngValue]="8">8</option>
+              <option [ngValue]="9">9</option>
+              <option [ngValue]="10">10</option>
+              <option [ngValue]="11">11</option>
+              <option [ngValue]="12">12</option>
+            </select>
+          </div>
+          <div class="two wide field">
+            <div class="ui checkbox">
+              <input id="checked2" type="checkbox" (click)="handleChecked2()" />
+              <label for="checked2">PM</label>
+            </div>
           </div>
         </div>
-        <div class="form-group">
-          <label class="inputTitle">Resources required</label>
+        <div class="field">
+          <label>Required Resources*</label>
           <input
             formControlName="resources"
             type="text"
-            class="form-control"
             id="inputResources"
             placeholder="Dice, cards, etc"
           />
         </div>
-        <div class="form-group">
-          <label class="inputTitle">Description of event</label>
-          <input
+        <div class="field">
+          <label>Event Description</label>
+          <textarea
+            rows="2"
             formControlName="description"
-            type="text"
-            class="form-control"
+            type="textarea"
             id="inputDescription"
             placeholder="Short description of play style or what the event is for"
-          />
-        </div>
-        <div class="form-group">
-          <label class="inputTitle">Max number of Players</label>
-          <input
-            formControlName="maxPlayers"
-            type="number"
-            class="form-control"
-            id="inputMax"
-          />
-        </div>
-        <div class="form-group">
-          <label class="inputTitle">Min number of Players</label>
-          <input
-            formControlName="minPlayers"
-            type="number"
-            class="form-control"
-            id="inputMin"
-          />
+          >
+          </textarea>
         </div>
       </form>
     </div>
     <div class="actions">
-      <div class="ui approve button" (click)="chooseTable()">Choose Table</div>
-      <div class="ui cancel button">Cancel</div>
+      <button class="ui approve button" [disabled]="eventsForm.invalid" (click)="chooseTable()">Choose Table</button>
+      <button class="ui cancel button">Cancel</button>
     </div>
   </div>
 
@@ -187,61 +230,61 @@
               <div class="three wide column">
                 <div class="table1">
                   <div *ngIf="table1checked == true">
-                    <div (click)="clickedTable1()" class="selected-table"></div>
+                    <div (click)="clickedTable1()" class="arcade-table selected-table">1</div>
                   </div>
                   <div *ngIf="table1 == true && table1checked == false">
-                    <div (click)="clickedTable1()" class="available-table"></div>
+                    <div (click)="clickedTable1()" class="arcade-table available-table">1</div>
                   </div>
                   <div *ngIf="table1 == false && table1checked == false">
-                    <div (click)="clickedTable1()" class="unavailable-table"></div>
+                    <div (click)="clickedTable1()" class="arcade-table unavailable-table">1</div>
                   </div>
                 </div>
               </div>
               <div class="three wide column">
                 <div class="table2">
                   <div *ngIf="table2checked == true">
-                    <div (click)="clickedTable2()" class="selected-table"></div>
+                    <div (click)="clickedTable2()" class="arcade-table selected-table">2</div>
                   </div>
                   <div *ngIf="table2 == true && table2checked == false">
-                    <div (click)="clickedTable2()" class="available-table"></div>
+                    <div (click)="clickedTable2()" class="arcade-table available-table">2</div>
                   </div>
                   <div *ngIf="table2 == false && table2checked == false">
-                    <div (click)="clickedTable2()" class="unavailable-table"></div>
+                    <div (click)="clickedTable2()" class="arcade-table unavailable-table">2</div>
                   </div>
                 </div>
                 <div class="table3">
                   <div *ngIf="table3checked == true">
-                    <div (click)="clickedTable3()" class="selected-table"></div>
+                    <div (click)="clickedTable3()" class="arcade-table selected-table">3</div>
                   </div>
                   <div *ngIf="table3 == true && table3checked == false">
-                    <div (click)="clickedTable3()" class="available-table"></div>
+                    <div (click)="clickedTable3()" class="arcade-table available-table">3</div>
                   </div>
                   <div *ngIf="table3 == false && table3checked == false">
-                    <div (click)="clickedTable3()" class="unavailable-table"></div>
+                    <div (click)="clickedTable3()" class="arcade-table unavailable-table">3</div>
                   </div>
                 </div>
               </div>
               <div class="three wide column">
                 <div class="table4">
                   <div *ngIf="table4checked == true">
-                    <div (click)="clickedTable4()" class="selected-table"></div>
+                    <div (click)="clickedTable4()" class="arcade-table selected-table">4</div>
                   </div>
                   <div *ngIf="table4 == true && table4checked == false">
-                    <div (click)="clickedTable4()" class="available-table"></div>
+                    <div (click)="clickedTable4()" class="arcade-table available-table">4</div>
                   </div>
                   <div *ngIf="table4 == false && table4checked == false">
-                    <div (click)="clickedTable4()" class="unavailable-table"></div>
+                    <div (click)="clickedTable4()" class="arcade-table unavailable-table">4</div>
                   </div>
                 </div>
                 <div class="table5">
                   <div *ngIf="table5checked == true">
-                    <div (click)="clickedTable5()" class="selected-table"></div>
+                    <div (click)="clickedTable5()" class="arcade-table selected-table">5</div>
                   </div>
                   <div *ngIf="table5 == true && table5checked == false">
-                    <div (click)="clickedTable5()" class="available-table"></div>
+                    <div (click)="clickedTable5()" class="arcade-table available-table">5</div>
                   </div>
                   <div *ngIf="table5 == false && table5checked == false">
-                    <div (click)="clickedTable5()" class="unavailable-table"></div>
+                    <div (click)="clickedTable5()" class="arcade-table unavailable-table">5</div>
                   </div>
                 </div>
               </div>
@@ -252,9 +295,10 @@
           </div>
         </div>
       </div>
+      <p class="player-info">* Each table seats a maximum of 8 players</p>
     </div>
     <div class="actions">
-      <div class="ui approve button" (click)="createEvent()">Create Event</div>
+      <button class="ui approve button" (click)="createEvent()">Create Event</button>
       <div class="ui cancel button">Cancel</div>
     </div>
   </div>
@@ -270,9 +314,11 @@
         <p>TIME: {{startTime}} to {{endTime}}</p>
         <p>TABLE: {{table}}</p>
         <p>PLAYERS SIGNED UP FOR EVENT: </p>
-        <div *ngFor="let player of currentPlayers">
-            <p>{{player}}</p>
-        </div>
+        <ul class="player-list">
+          <li *ngFor="let player of currentPlayers">
+            {{player}}
+          </li>
+        </ul>
       </div>
       <div *ngIf="errorMessageModal">
         <div class="ui error message">

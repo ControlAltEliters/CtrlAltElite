@@ -18,3 +18,7 @@ img {
 .ui.inverted.segment, .ui.primary.inverted.segment {
     background: rgb(46, 163, 184);
 }
+
+agm-map {
+    height: 200px;
+}

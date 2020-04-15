@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormGroup, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AgmCoreModule } from '@agm/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -51,6 +52,9 @@ import { ChatBoxComponent } from './views/partials/chat-box/chat-box.component';
     BrowserAnimationsModule,
     HttpClientModule,
     FullCalendarModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDPCqTojGOZeQ1X-tLz4oHmEOJaI_Adoy0'
+    })
   ],
   providers: [
     UserService,

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 
-
 @Injectable()
 export class UserService {
 
@@ -40,18 +39,36 @@ export class UserService {
   }
 
   editProfile(body:any){
-    return this._http.post(environment.baseurl + '/users/editprofile',body,{
+    return this._http.post(environment.baseurl + '/users/editprofile', body, {
       observe:'body',
       headers:new HttpHeaders().append('Content-Type','application/json'),
       withCredentials:true
     })
   }
 
-  updatePassword(body: any) {
-    return this._http.post(environment.baseurl + '/users/updatepassword', body, {
+  updatePassword(id: any, newpass: string) {
+    return this._http.get(environment.baseurl + '/users/updatepassword', {
       observe: 'body',
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
-      withCredentials:true
+      withCredentials: true,
+      params: {
+        id: id,
+        newpass: newpass
+      }
+    })
+  }
+
+  verifyPassword(password: string, newpass: string, confnewpass: string, id: any) {
+    return this._http.get(environment.baseurl + '/users/verifypassword', {
+      observe: 'response',
+      headers: new HttpHeaders().append('Content-Type', 'application/json'),
+      withCredentials: true,
+      params: {
+        password: password,
+        newpass: newpass,
+        confnewpass: confnewpass,
+        id: id
+      }
     })
   }
 }

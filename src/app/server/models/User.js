@@ -15,6 +15,10 @@ schema.statics.hashPassword = function hashPassword(password){
     return bcrypt.hashSync(password,10);
 }
 
+schema.statics.verify = function verify(password1, password2) {
+  return bcrypt.compareSync(password1, password2);
+}
+
 schema.methods.isValid = function(hashedpassword){
     return  bcrypt.compareSync(hashedpassword, this.password);
 }

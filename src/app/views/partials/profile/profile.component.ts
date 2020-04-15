@@ -95,36 +95,56 @@ export class ProfileComponent implements OnInit {
   }
 
   updateUserPassword(){
+    console.log("start id: " + this.updatePassword.value.userId);
     if (!this.updatePassword.valid) {
       this.updatePasswordError = "Invalid Form";
       console.log('Invalid Form');
       return;
     }
 
-    this._userService.updatePassword(JSON.stringify(this.updatePassword.value))
-      .subscribe(
-        data => {
-          // set local state
-          // if oldPass == currPass && newPass == confirmedNewPass:
-          if (this.updatePassword.value.newPassword === this.updatePassword.value.confirmedNewPassword)
-          {
-            this.userPassword = this.updatePassword.value.confirmedNewPassword;
-            // set session values
-            // issue here as well potentially?
-            this._commonUtils.setSessionField('password', this.updatePassword.value.newPassword);
-            // clear out the input values
-          }
-          else
-          {
-            // find more elegant error display solution
-            alert("New password and re-entered password not the same. Please try again.");
-            this.updatePassword.reset();
-          }
-        },
-        error => {
-          this.updatePasswordError = error.error.message;
+    this._commonUtils.setSessionField('flag', "0");
+    this._commonUtils.setSessionField('id', JSON.stringify(this.updatePassword.value.userId));
+    this._commonUtils.setSessionField('newpass', JSON.stringify(this.updatePassword.value.newPassword));
+
+    this._userService.verifyPassword(this.updatePassword.value.oldPassword, this.updatePassword.value.newPassword, this.updatePassword.value.confirmedNewPassword, this.updatePassword.value.userId).subscribe((resp)=>{
+      if (resp.body["result"]) {
+        if (resp.body["newpass"] === resp.body["confnewpass"]) {
+          // console.log("updating password");
+          this._commonUtils.setSessionField('flag', "1");
+          alert("password updated");
+          // this._userService.updatePassword(this.updatePassword.value.newPassword);
+          // console.log("updated password");
         }
-      )
+        else {
+          this._commonUtils.setSessionField('flag', "0");
+          alert("New password and re-entered password not the same. Please try again.");
+        }
+      }
+      else {
+        this._commonUtils.setSessionField('flag', "0");
+        alert("Entered old password doesn't match current password.");
+      }
+    });
+
+    setTimeout(()=>{
+      console.log("flag: " + this._commonUtils.readSessionField('flag'));
+      console.log("id: " + this._commonUtils.readSessionField('id'));
+      console.log("newpass: " + this._commonUtils.readSessionField('newpass'));
+      if (this._commonUtils.readSessionField('flag')) {
+        this.update();
+      }
+    }, 1000);
+
+    this.updatePassword.reset();
     this.showPasswordModal = false;
+  }
+
+  update(){
+    console.log("2id: " + this._commonUtils.readSessionField('id'));
+    console.log("2newpass: " + this._commonUtils.readSessionField('newpass'));
+    this._userService.updatePassword(this._commonUtils.readSessionField('id'), this._commonUtils.readSessionField('newpass'))
+      .subscribe(
+      data => { console.log(data); }
+    );
   }
 }

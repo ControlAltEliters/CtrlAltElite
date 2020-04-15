@@ -33,6 +33,7 @@ export class EventsPageComponent implements OnInit {
   userID
   eventID
   currentPlayers = []
+  messages = ["hello 1", "hello2", "hello3"]
   userJoin = { user:"", userID:"", event: "" };
   userQuit = { userID:"", event: "" };
   eventTitle

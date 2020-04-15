@@ -1,5 +1,4 @@
 <app-navbar></app-navbar>
-<!-- <app-chat-box></app-chat-box> -->
 <script src="../../calendar//caleandar.js"></script>
 
 <div class="ui container">
@@ -285,6 +284,10 @@
             <p>{{player}}</p>
         </div>
       </div>
+    </div>
+    <div *ngFor="let message of messages">
+      <p>{{messages}}</p>
+      <!-- <app-chat-box></app-chat-box> -->
     </div>
     <div class="actions">
       <div *ngIf="user">

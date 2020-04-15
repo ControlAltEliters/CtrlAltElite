@@ -9,7 +9,6 @@
 form {
   color: white;
   font-weight: 800;
-  text-align: center;
 }
 .inputTitle {
   color: rgb(167, 161, 161);
@@ -18,7 +17,6 @@ input {
   width: 100%;
   padding: 0.5em;
   font-size: 1.95vh;
-  text-align: center;
   border-radius: 0.5em;
   margin: 0.5em 0 1em 0;
   color: rgb(167, 161, 161);
@@ -29,7 +27,6 @@ input:focus {
 }
 
 ::-webkit-input-placeholder {
-  text-align: center;
   color: rgb(216, 211, 211) !important;
 }
 
@@ -92,6 +89,31 @@ img {
   margin-bottom: 2em;
 }
 
+.player-list {
+  background-color: rgb(169, 182, 182);
+  box-shadow: skyblue;
+  list-style:none;
+  max-height:100px;
+  margin:0;
+  overflow:auto;
+  padding:0;
+  text-indent:10px;
+  border-radius: 5px;
+}
+
+li{
+  line-height:25px;
+}
+
+.player-info {
+  font-size: 14px;
+  margin-left: 5%;
+}
+
+label {
+  color: white !important;
+}
+
 /* ----EVERYTHING FOR TABLES AND MAP---- */
 
 .tableContent {
@@ -119,7 +141,7 @@ img {
 }
 
 .available {
-  background-color: #CDD7E2;
+  background-color: rgb(175, 179, 184);
   height: 15px;
   width: 15px;
   float: left;
@@ -149,9 +171,9 @@ img {
   flex-direction: column;
   background-color: #52C3C5;
   color: white;
-  text-align: center;
   font-size: 14px;
   font-weight: bold;
+  text-align: center;
 
 }
 
@@ -230,16 +252,14 @@ img {
   font-size: 2rem;
   line-height: 1.28571429em;
   font-weight: 700;
-  text-align: center;
 }
 
 .ui.modal>.content,
 .ui.modal>.actions {
-  background: rgb(199, 211, 211);
+  background: rgb(120, 128, 128);
   color: white;
-  font-size: 2em;
+  font-size: 1.5em;
   font-weight: 200;
-  text-align: center;
 }
 
 .ui.button {
@@ -259,4 +279,17 @@ img {
 
 .small-p {
   font-size: .60em;
+}
+
+.checkbox {
+  margin-top: 32px;
+}
+
+
+.arcade-table {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  text-align: center;
 }

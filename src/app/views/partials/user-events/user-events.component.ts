@@ -13,7 +13,7 @@ export class UserEventsComponent implements OnInit {
   user
   userEvents = []
   today
-  
+
   constructor(
     private _eventsService:EventService,
     private elementRef: ElementRef,
@@ -22,10 +22,7 @@ export class UserEventsComponent implements OnInit {
 
   ngOnInit(): void {
     this.today = new Date();
-    console.log("Today " + this.today)
     this.user = sessionStorage.getItem('activeUser')
-    console.log("USER!")
-    console.log(this.user)
     this._eventsService.event().subscribe(
       data=> {this.findEventsForUser(data);},
       error=>console.error(error)

@@ -119,10 +119,15 @@
       <p>Description: {{eventDescription}}</p>
     </div>
     <div class="actions">
-      <div class="ui approve button">Join Game</div>
-      <!-- Additional button options if needed -->
-      <!-- <div class="ui button">Neutral</div>
-      <div class="ui cancel button">Cancel</div> -->
+      <div *ngIf="user">
+        <div class="ui approve button">Join Event</div>
+        <!-- Additional button options if needed -->
+        <!-- <div class="ui button">Neutral</div>
+        <div class="ui cancel button">Cancel</div> -->
+      </div>
+      <div *ngIf="!user">
+        <div class="ui button" [routerLink]="['/login']" (click)="hideModal()">Join Event</div>
+      </div>
     </div>
   </div>
 

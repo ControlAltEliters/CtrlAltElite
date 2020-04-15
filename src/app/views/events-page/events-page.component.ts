@@ -422,4 +422,7 @@ export class EventsPageComponent implements OnInit {
     this.renderTables();
   }
 
+  hideModal(){
+    $('#singleEventModal').modal('hide');
+  }
 }

@@ -9,7 +9,7 @@
       <div class="row">
         <div class="twelve wide column">
           <div class="calendar-title">
-            <header>Event Calendar</header>
+            <h1>Event Calendar</h1>
           </div>
         </div>
         <div class="four wide column">
@@ -143,34 +143,117 @@
     </div>
   </div>
 
-  <div id="createEventTableModal" class="ui tiny modal">
+  <div id="createEventTableModal" class="ui large modal">
     <i class="close icon cancel"></i>
     <div class="header">
-      PLEASE CLICK A TABLE TO RESERVE
-      <div class="con">
-        <div class="table">
-          <h3>Available:</h3>
-          <img
-            class="examples"
-            src="../../../assets/images/available.png"
-          />
-        </div>
-        <div class="table">
-          <h3>Unavilable:</h3>
-          <img
-            class="examples"
-            src="../../../assets/images/unavailable.png"
-          />
-        </div>
-        <div class="table">
-          <h3>Selected:</h3>
-          <img class="examples" src="../../../assets/images/selected.png" />
+      Please click a table to reserve
+
+      <div class="ui grid">
+        <div class="row">
+          <div class="three wide column">
+          </div>
+          <div class="four wide column">
+            <div class="holder">
+              <div class="descriptor">Available:</div>
+              <div class="available"></div>
+            </div>
+          </div>
+          <div class="five wide column">
+            <div class="holder">
+              <div class="descriptor">Unavailable:</div>
+              <div class="unavailable"></div>
+            </div>
+          </div>
+          <div class="four wide column">
+            <div class="holder">
+              <div class="descriptor">Selected:</div>
+              <div class="selected"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- Full arcade map -->
     <div class="content">
       <div class="tables">
-        <h1>Table 1</h1>
+        <div class="arcade-background">
+          <div class="ui grid">
+            <div class="row">
+              <div class="three wide column">
+                <div class="table-item snack-bar">SNACK BAR</div>
+                <div class="table-item items-shop">ITEMS SHOP</div>
+              </div>
+              <div class="three wide column">
+                <div class="table1">
+                  <div *ngIf="table1checked == true">
+                    <div (click)="clickedTable1()" class="selected-table"></div>
+                  </div>
+                  <div *ngIf="table1 == true && table1checked == false">
+                    <div (click)="clickedTable1()" class="available-table"></div>
+                  </div>
+                  <div *ngIf="table1 == false && table1checked == false">
+                    <div (click)="clickedTable1()" class="unavailable-table"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="three wide column">
+                <div class="table2">
+                  <div *ngIf="table2checked == true">
+                    <div (click)="clickedTable2()" class="selected-table"></div>
+                  </div>
+                  <div *ngIf="table2 == true && table2checked == false">
+                    <div (click)="clickedTable2()" class="available-table"></div>
+                  </div>
+                  <div *ngIf="table2 == false && table2checked == false">
+                    <div (click)="clickedTable2()" class="unavailable-table"></div>
+                  </div>
+                </div>
+                <div class="table3">
+                  <div *ngIf="table3checked == true">
+                    <div (click)="clickedTable3()" class="selected-table"></div>
+                  </div>
+                  <div *ngIf="table3 == true && table3checked == false">
+                    <div (click)="clickedTable3()" class="available-table"></div>
+                  </div>
+                  <div *ngIf="table3 == false && table3checked == false">
+                    <div (click)="clickedTable3()" class="unavailable-table"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="three wide column">
+                <div class="table4">
+                  <div *ngIf="table4checked == true">
+                    <div (click)="clickedTable4()" class="selected-table"></div>
+                  </div>
+                  <div *ngIf="table4 == true && table4checked == false">
+                    <div (click)="clickedTable4()" class="available-table"></div>
+                  </div>
+                  <div *ngIf="table4 == false && table4checked == false">
+                    <div (click)="clickedTable4()" class="unavailable-table"></div>
+                  </div>
+                </div>
+                <div class="table5">
+                  <div *ngIf="table5checked == true">
+                    <div (click)="clickedTable5()" class="selected-table"></div>
+                  </div>
+                  <div *ngIf="table5 == true && table5checked == false">
+                    <div (click)="clickedTable5()" class="available-table"></div>
+                  </div>
+                  <div *ngIf="table5 == false && table5checked == false">
+                    <div (click)="clickedTable5()" class="unavailable-table"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="four wide column">
+                <div class="table-item arcade">ARCADE</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- <h1>Table 1</h1>
         <div class="table">
           <div *ngIf="table1checked == true">
             <img
@@ -256,11 +339,11 @@
               src="../../../assets//images//unavailable.png"
             />
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="actions">
-      <div class="ui approve button" (click)="createEvent()">Choose Table</div>
+      <div class="ui approve button" (click)="createEvent()">Create Event</div>
       <div class="ui cancel button">Cancel</div>
     </div>
   </div>

@@ -24,6 +24,20 @@
             <!-- are we doing a sub service or just pointing them to the socials? -->
             <!-- TODO: Add email subscription box -->
             <h4 class="ui inverted header">Subscribe</h4>
+            <!-- Begin Mailchimp Signup Form -->
+            <form #subscribeForm='ngForm' (ngSubmit)='subscribe(subscribeForm)'>
+              <mat-form-field>
+                <input pattern="\S+@\S+\.\S+" matInput placeholder="Email" required #email='ngModel' name='userName'
+                    [(ngModel)]='subscribeData.email'>
+                <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
+                    <div *ngIf="email.errors.required">
+                        Email is required.
+                    </div>
+                </mat-error>
+              </mat-form-field>
+              <button mat-raised-button type='submit'>Subscribe to My Email List</button>
+            </form> 
+            <!--End mc_embed_signup-->
             <p>Follow us on social media!</p>
             <div class="row centered">
               <img src="assets/images/social-instagram.png">

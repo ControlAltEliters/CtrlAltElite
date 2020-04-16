@@ -37,6 +37,7 @@ label {
 }
 
 .ui.modal>.header,
+.ui.modal>.actions,
 .ui.modal>.content {
   background: rgb(52, 186, 209, 0.9);
   color: white;
@@ -53,4 +54,13 @@ label {
 i {
   margin-top: 2.5em;
   margin-right: 3em;
+}
+
+.ui.message {
+  width: 90%;
+  margin: 0 auto;
+}
+
+#center {
+  padding: 1em;
 }

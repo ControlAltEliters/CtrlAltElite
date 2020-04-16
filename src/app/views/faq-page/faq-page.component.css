@@ -1,14 +1,29 @@
+#faqWrapper {
+  position: relative;
+  height: 100%;
+}
+
 .ui.styled.accordion{
     margin: auto;
+    background: rgba(20,9,9,.8);
+    color: white;
+}
+
+.ui.styled.accordion .title{
+  color: white;
 }
 
 .custom {
   width: 100%;
   min-height: 500px;
-
 }
 
 .padded {
   padding-top: 30px;
   padding-bottom: 30px;
+}
+
+.faq-title {
+  color: white;
+  text-align: center;
 }

@@ -1,1 +1,10 @@
-<p>user-events works!</p>
+<div class="events-title">
+    <h1>Registered events: </h1>
+</div>
+<div>
+        <ul *ngFor="let event of userEvents">
+            <div *ngIf="!eventIsInFuture(event)">
+                <li class="events">{{event.eventTitle}} on {{event.date}} from {{event.startTime}} to {{event.endTime}}</li>
+            </div>
+        </ul>
+</div>

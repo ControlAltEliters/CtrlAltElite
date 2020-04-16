@@ -13,11 +13,6 @@
   height: 100% !important;
 }
 
-/* div {
-  outline: 1px dashed red;
-} */
-
-
 .card {
   margin-top: 5% !important;
   margin-bottom: 5% !important;
@@ -64,7 +59,7 @@
   height: 25%
 }
 
-h1 {
+.retro {
   padding: 3%;
   text-shadow: 2px 2px 5px #0ff;
 }
@@ -72,4 +67,48 @@ h1 {
 .top {
   border-bottom: 1px solid #0ff !important;
   height: 20%
+}
+
+.sidebar-event {
+  margin: 5px;
+}
+
+.ui.modal>.header {
+  background: rgb(65, 161, 161);
+  color: white;
+  border-bottom: 1px solid white;
+}
+.ui.modal>.header:not(.ui) {
+  font-size: 2rem;
+  line-height: 1.28571429em;
+  font-weight: 700;
+  text-align: center;
+}
+
+.ui.modal>.content,
+.ui.modal>.actions {
+  background: rgb(120, 128, 128);
+  color: white;
+  font-size: 2em;
+  font-weight: 200;
+  text-align: center;
+}
+
+.ui.button {
+  background: #FE019A;
+  color: white;
+}
+
+.ui.button:hover {
+  background: rgb(206, 1, 124);
+}
+
+/* .ui.modal>.content {
+  font-size: 2em;
+  font-weight: 200;
+  text-align: center;
+} */
+
+.small-p {
+  font-size: .60em;
 }

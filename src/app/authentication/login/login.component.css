@@ -2,7 +2,7 @@
 
 #loginWrapper {
     position: relative;
-    min-height: 64vh;
+    height: 100%;
 }
 
 .top20 {

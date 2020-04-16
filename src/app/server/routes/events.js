@@ -7,6 +7,40 @@ router.post('/createEvent', function (req, res, next) {
   addToDB(req, res);
 });
 
+router.post('/editEvent', function (req, res, next) {
+  console.log('Made it to the backend! Event body:');
+  console.log(req.body);
+  try {
+    Event.findOneAndUpdate(
+    {_id: req.body.eventId }, {
+      $set: {
+        eventTitle: req.body.editEventTitle,
+        date: req.body.editDate,
+        startTime: req.body.editStartTime,
+        endTime: req.body.editEndTime,
+        resources: req.body.editResources,
+        description: req.body.editDescription,
+        maxPlayers: req.body.editMaxPlayers,
+        minPlayers: req.body.editMinPlayers,
+        eventCreator: req.body.eventCreator
+      }
+    }, function (err,doc) {
+        if (err) {
+          console.log('Event edit error: ' + err)
+          return res.status(500).json({message:'Updating event failed'});
+        } else {
+          console.log('Updated profile: ' + doc)
+          return res.status(200).json({message:'Updated event', eventObject: doc});
+        }
+      }
+    )
+  }
+  catch (err) {
+    console.log(err);
+    return res.status(500).json({message:'Updated user failed'});
+  }
+});
+
 async function addToDB(req, res) {
 
   var event = new Event({
@@ -23,7 +57,8 @@ async function addToDB(req, res) {
     currentPlayers: [],
     isOpen: true,
     playersIDs: [],
-    creation_dt: Date.now()
+    creation_dt: Date.now(),
+    eventCreator: req.body.eventCreator
   });
 
   try {
@@ -138,5 +173,12 @@ router.post('/leave', (req, res) => {
     }
   })
 })
+
+function isValidUser(req,res,next){
+  if(req.isAuthenticated()) next();
+  else {
+    return res.status(401).json({message:'Unauthorized Request'})
+  };
+}
 
 module.exports = router;

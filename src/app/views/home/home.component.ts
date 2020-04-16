@@ -157,8 +157,12 @@ export class HomeComponent implements OnInit {
     this.eventDescription = event.description;
     $('#eventModal').modal('show');
   }
-  
+
   hideModal(){
     $('#eventModal .close').click();
+  }
+
+  joinEvent(){
+    alert("add code to join event");
   }
 }

@@ -44,11 +44,11 @@ iframe {
   height: 2em !important;
   padding: 1em 2em 0 2em !important;
   display: inline-block;
-  margin: .5em 0 0 2em;
+  margin: .5em 0 0 1em;
 }
 
 input {
-  width: 55% !important;
+  width: 15vw !important;
 }
 
 button {

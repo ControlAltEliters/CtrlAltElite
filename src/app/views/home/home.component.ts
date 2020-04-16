@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { EventService } from '../../services/event.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 declare let $: any;
 
@@ -26,6 +27,7 @@ export class HomeComponent implements OnInit {
   array2 = [];
   array3 = [];
   array4 = [];
+  user;
 
   // modals
   public currentEvent: string;
@@ -36,7 +38,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private _eventService:EventService,
-    private _router:Router
+    private _router:Router,
+    private _userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -50,7 +53,7 @@ export class HomeComponent implements OnInit {
     this.day3 = this.transformDayOfWeek(this.tomorrow2.getDay());
     this.day4 = this.transformDayOfWeek(this.tomorrow3.getDay());
 
-
+    this.user = sessionStorage.getItem('activeUser')
     this._eventService.eventPuller()
     .subscribe(
       data => {
@@ -133,6 +136,7 @@ export class HomeComponent implements OnInit {
 
   displayModal(event){
     let date = new Date(event.date);
+    this.user = sessionStorage.getItem('activeUser')
 
     this.eventDate = `${date.getUTCMonth()+1}/${date.getUTCDate()}/${date.getUTCFullYear()}`;
     this.currentEvent = event.eventTitle;
@@ -153,5 +157,8 @@ export class HomeComponent implements OnInit {
     this.eventDescription = event.description;
     $('#eventModal').modal('show');
   }
-
+  
+  hideModal(){
+    $('#eventModal .close').click();
+  }
 }

@@ -6,6 +6,7 @@ import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
 import { UserService } from 'src/app/services/user.service';
 import { CommonUtils } from 'src/app/utils/common-utils';
+import { Router } from '@angular/router';
 import { ThrowStmt } from '@angular/compiler';
 import { environment } from 'src/environments/environment';
 
@@ -100,7 +101,8 @@ export class EventsPageComponent implements OnInit {
     private _eventsService:EventService,
     private elementRef: ElementRef,
     private _userService: UserService,
-    private _commonUtils: CommonUtils ) { }
+    private _commonUtils: CommonUtils,
+    private _router: Router) { }
 
   ngOnInit(): void {
     this._eventsService.event().subscribe(
@@ -576,5 +578,4 @@ export class EventsPageComponent implements OnInit {
     $('#createEventTableModal').modal('show');
     this.renderTables();
   }
-
 }

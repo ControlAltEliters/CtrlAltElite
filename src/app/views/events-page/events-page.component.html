@@ -457,6 +457,7 @@
         <p>DATE: {{clickedDate}}</p>
         <p>TIME: {{startTime}} to {{endTime}}</p>
         <p>TABLE: {{table}}</p>
+        <p>DESCRIPTION: {{desc}}</p>
         <p>PLAYERS SIGNED UP FOR EVENT: </p>
         <ul class="player-list">
           <li *ngFor="let player of currentPlayers">
@@ -466,15 +467,22 @@
       </div>
       <div *ngIf="errorMessageModal">
         <div class="ui error message">
-            <div class="header">Registration Error</div>
-            <p>User is already registered for event</p>
+            <div class="header">Error</div>
+            <p>{{errorMessage}}</p>
         </div>
+    </div>
+    <div *ngIf="successMessageModal">
+      <div class="ui message">
+        <div class="header">Success!</div>
+        <p>Action Successful</p>
+      </div>
     </div>
     </div>
     <div class="actions">
       <div *ngIf="createdEvent" class ="ui button" (click)="displayEditEvent()">Edit Event</div>
       <div *ngIf="user" class="ui button" (click)="joinEvent(eventID, user, userID)">Join Event</div>
       <div *ngIf="!user" class="ui cancel button" [routerLink]="['/login']">Join Event</div>
+      <div *ngIf="user" class="ui button" (click)="leaveEvent(eventID, user, userID)">Leave Event</div>
       <div class="ui cancel button" (click)="undoErrorMessage()">Cancel</div>
     </div>
   </div>

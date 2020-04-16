@@ -18,7 +18,6 @@ declare let $: any;
   styleUrls: ['./events-page.component.css']
 })
 export class EventsPageComponent implements OnInit {
-
   calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
   public today = new Date();
   public testDate = '2020-03-22'
@@ -32,13 +31,17 @@ export class EventsPageComponent implements OnInit {
   check2 = false
   clickedEvent
   clickedDate
+  desc
+  errorMessage:string;
   errorMessageModal = false
+  successMessageModal = false
   user
   userID
   eventID
   currentPlayers = []
+  inEvent = false;
   userJoin = { user:"", userID:"", event: "" };
-  userQuit = { userID:"", event: "" };
+  userQuit = { user:"", userID:"", event: "" };
   eventTitle
   startTime
   endTime
@@ -145,7 +148,6 @@ export class EventsPageComponent implements OnInit {
 
   dealWithUser(data){
     this.userID = data._id;
-
   }
 
   addEventsFromDB(data){
@@ -286,11 +288,34 @@ export class EventsPageComponent implements OnInit {
         data=> {console.log(data);},
         error=>console.error(error)
       )
-      window.location.reload()
-    }else{
-      this.errorMessageModal = true
+      this.successMessageModal = true;
+      setTimeout(()=>{ window.location.reload() }, 1000);
     }
+    else{
+      this.errorMessage = "User already registered.";
+      this.errorMessageModal = true
+      setTimeout(()=>{ this.errorMessageModal = false }, 3000)
+    }
+  }
 
+  leaveEvent(eventID, user, userID){
+    this.userQuit.event = eventID;
+    this.userQuit.user = user;
+    this.userQuit.userID = userID;
+
+    if (this.alreadySignedUpForEvent(eventID, userID) == true) {
+      this._eventsService.leave(this.userQuit).subscribe(
+        data => { console.log(data); },
+        error => console.error(error)
+      )
+      this.successMessageModal = true;
+      setTimeout(() => { window.location.reload() }, 1000);
+    }
+    else {
+      this.errorMessage = "User not registered.";
+      this.errorMessageModal = true;
+      setTimeout(() => { this.errorMessageModal = false }, 3000)
+    }
   }
 
   undoErrorMessage(){
@@ -397,6 +422,7 @@ export class EventsPageComponent implements OnInit {
         this.table = theEvent.table
         this.eventID = theEvent.id
         this.currentPlayers = theEvent.currentPlayers
+        this.desc = theEvent.description
       }
     })
 

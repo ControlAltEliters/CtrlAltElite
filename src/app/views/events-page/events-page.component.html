@@ -303,6 +303,150 @@
     </div>
   </div>
 
+  <div id="editEventModal" class="ui small modal">
+    <i class="close icon cancel"></i>
+    <div class="header">
+      <p>Edit This Event</p>
+    </div>
+    <div class="content">
+      <form class="ui form" [formGroup]="editEventForm" name="editEventForm">
+        <div class="field">
+          <div class="three fields">
+            <div class="ten wide field">
+              <label>Game Name*</label>
+              <input
+                formControlName="editEventTitle"
+                type="text"
+                class="form-control"
+                id="inputTitle"
+              />
+            </div>
+            <div class="three wide field">
+              <label>Player Min*</label>
+              <select
+                class="ui fluid dropdown"
+                formControlName="editMinPlayers"
+                id="inputMin"
+              >
+                <option [ngValue]="1">1</option>
+                <option [ngValue]="2">2</option>
+                <option [ngValue]="3">3</option>
+                <option [ngValue]="4">4</option>
+                <option [ngValue]="5">5</option>
+                <option [ngValue]="6">6</option>
+                <option [ngValue]="7">7</option>
+                <option [ngValue]="8">8</option>
+              </select>
+            </div>
+            <div class="three wide field">
+              <label>Player Max*</label>
+              <select
+                class="ui fluid dropdown"
+                formControlName="editMaxPlayers"
+                id="inputMax"
+              >
+                <option [ngValue]="1">1</option>
+                <option [ngValue]="2">2</option>
+                <option [ngValue]="3">3</option>
+                <option [ngValue]="4">4</option>
+                <option [ngValue]="5">5</option>
+                <option [ngValue]="6">6</option>
+                <option [ngValue]="7">7</option>
+                <option [ngValue]="8">8</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="five fields">
+          <div class="six wide field">
+            <label>Event Date*</label>
+            <input
+              formControlName="editDate"
+              type="date"
+              id="inputDate"
+            />
+          </div>
+          <div class="three wide field">
+            <label>Start Time*</label>
+            <select
+              class="ui fluid dropdown"
+              formControlName="editStartTime"
+              id="inputStartTime"
+            >
+              <option [ngValue]="1">1</option>
+              <option [ngValue]="2">2</option>
+              <option [ngValue]="3">3</option>
+              <option [ngValue]="4">4</option>
+              <option [ngValue]="5">5</option>
+              <option [ngValue]="6">6</option>
+              <option [ngValue]="7">7</option>
+              <option [ngValue]="8">8</option>
+              <option [ngValue]="9">9</option>
+              <option [ngValue]="10">10</option>
+              <option [ngValue]="11">11</option>
+              <option [ngValue]="12">12</option>
+            </select>
+          </div>
+          <div class="two wide field">
+            <div class="ui checkbox">
+              <input id="checked1" type="checkbox" (click)="handleChecked1()" [checked]="initialPM1" />
+              <label for="checked1">PM</label>
+            </div>
+          </div>
+          <div class="three wide field">
+            <label>End Time*</label>
+            <select
+              class="ui fluid dropdown"
+              formControlName="editEndTime"
+              id="inputEndTime"
+            >
+              <option [ngValue]="1">1</option>
+              <option [ngValue]="2">2</option>
+              <option [ngValue]="3">3</option>
+              <option [ngValue]="4">4</option>
+              <option [ngValue]="5">5</option>
+              <option [ngValue]="6">6</option>
+              <option [ngValue]="7">7</option>
+              <option [ngValue]="8">8</option>
+              <option [ngValue]="9">9</option>
+              <option [ngValue]="10">10</option>
+              <option [ngValue]="11">11</option>
+              <option [ngValue]="12">12</option>
+            </select>
+          </div>
+          <div class="two wide field">
+            <div class="ui checkbox">
+              <input id="checked2" type="checkbox" (click)="handleChecked2()" [checked]="initialPM2" />
+              <label for="checked2">PM</label>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Required Resources*</label>
+          <input
+            formControlName="editResources"
+            type="text"
+            id="inputResources"
+          />
+        </div>
+        <div class="field">
+          <label>Event Description</label>
+          <textarea
+            rows="2"
+            formControlName="editDescription"
+            type="textarea"
+            id="inputDescription"
+          >
+          </textarea>
+        </div>
+      </form>
+    </div>
+    <div class="actions">
+      <button class="ui approve button" (click)="updateEvent()">Save</button>
+      <button class="ui cancel button">Cancel</button>
+    </div>
+  </div>
+
   <div id="singleEventModal" class="ui tiny modal">
     <i class="close icon cancel"></i>
     <div class="header">
@@ -328,6 +472,7 @@
     </div>
     </div>
     <div class="actions">
+      <div *ngIf="createdEvent" class ="ui button" (click)="displayEditEvent()">Edit Event</div>
       <div class="ui button" (click)="joinEvent(eventID, user, userID)">Join Event</div>
       <div class="ui cancel button" (click)="undoErrorMessage()">Cancel</div>
     </div>

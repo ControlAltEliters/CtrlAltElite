@@ -29,6 +29,14 @@ export class ContactFooterComponent implements OnInit {
 
   subscribe(subscribeForm: NgForm) {
     if (subscribeForm.invalid) {
+      this.subscribeData.email = "";
+      document.getElementById("email-box").setAttribute("placeholder", "Requires valid email");
+      document.getElementById("email-box").setAttribute("style", "border-color:rgb(219, 125, 125) !important; border-width:.2em !important;");
+
+      setTimeout(()=>{
+        document.getElementById("email-box").setAttribute("placeholder", "Email");
+        document.getElementById("email-box").setAttribute("style", "border-color:none !important;");
+      }, 3000);
       return;
     }
     // work on notifying if successfuly subscribed, clearing after success, moving subscribe button up, add margins

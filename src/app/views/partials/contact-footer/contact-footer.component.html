@@ -6,7 +6,7 @@
     <div class="ui center aligned container">
       <div class="ui stackable inverted divided grid">
         <div class="row">
-          <div class="four wide column">
+          <div class="three wide column">
             <h4 class="ui inverted header">Contact</h4>
             <div class="ui inverted link list">
               <p>(940) 453-9064</p>
@@ -14,35 +14,38 @@
               <p>Highland Village, TX 75077</p>
             </div>
           </div>
-          <div class="five wide column">
+          <div class="four wide column">
             <h4 class="ui inverted header">Hours</h4>
             <p><strong>Monday-Thursday:</strong> 1pm-11pm</p>
             <p><strong>Friday-Saturday:</strong> 10am-12am</p>
             <p><strong>Sunday:</strong> 12pm-10pm</p>
           </div>
-          <div class="seven wide column">
-            <!-- are we doing a sub service or just pointing them to the socials? -->
-            <!-- TODO: Add email subscription box -->
-            <h4 class="ui inverted header">Subscribe</h4>
+          <div class="six wide column">
+            <h4 class="ui inverted header">Subscribe to our email list!</h4>
             <!-- Begin Mailchimp Signup Form -->
-            <form #subscribeForm='ngForm' (ngSubmit)='subscribe(subscribeForm)'>
-              <mat-form-field>
-                <input pattern="\S+@\S+\.\S+" matInput placeholder="Email" required #email='ngModel' name='userName'
-                    [(ngModel)]='subscribeData.email'>
-                <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
-                    <div *ngIf="email.errors.required">
-                        Email is required.
-                    </div>
-                </mat-error>
-              </mat-form-field>
-              <button mat-raised-button type='submit'>Subscribe to My Email List</button>
-            </form> 
-            <!--End mc_embed_signup-->
-            <p>Follow us on social media!</p>
-            <div class="row centered">
-              <img src="assets/images/social-instagram.png">
-              <img src="assets/images/social-facebook.png">
-              <img src="assets/images/social-twitter.png">
+            <form class="ui form" #subscribeForm='ngForm' (ngSubmit)='subscribe(subscribeForm)'>
+              <div class="ui grid">
+                <div class="row email-box">
+                    <input pattern="\S+@\S+\.\S+" placeholder="Email" required #email='ngModel' name='userName'
+                        [(ngModel)]='subscribeData.email'>
+                      <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                        <div *ngIf="(email.errors.required)">
+                            Email is required.
+                        </div>
+                      </div>
+                  </div>
+                  <div class="row centered subscribe-button">
+                    <button class="ui approve button" type='submit'>Subscribe</button>
+                  </div>
+              </div>
+            </form>
+          </div>
+          <div class="three wide column">
+            <h4 class="ui inverted header">Follow us on social media!</h4>
+            <div class="row centered social-icons">
+              <img class="social-icon" src="assets/images/social-instagram.png">
+              <img class="social-icon" src="assets/images/social-facebook.png">
+              <img class="social-icon" src="assets/images/social-twitter.png">
             </div>
           </div>
         </div>

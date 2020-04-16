@@ -25,6 +25,7 @@ export class ContactFooterComponent implements OnInit {
     this.subscribeService.subscribeToList(this.subscribeData)
       .subscribe(res => {
         alert('Subscribed!');
+        console.log('Success');
       }, err => {
         console.log(err);
       })

@@ -31,6 +31,7 @@ export class ContactFooterComponent implements OnInit {
     if (subscribeForm.invalid) {
       return;
     }
+    // work on notifying if successfuly subscribed, clearing after success, moving subscribe button up, add margins
     this.subscribeService.subscribeToList(this.subscribeData)
       .subscribe(res => {
         alert('Subscribed!');

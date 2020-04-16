@@ -32,6 +32,7 @@ export class EventsPageComponent implements OnInit {
   clickedEvent
   clickedDate
   desc
+  errorMessage:string;
   errorMessageModal = false
   successMessageModal = false
   user
@@ -291,6 +292,7 @@ export class EventsPageComponent implements OnInit {
       setTimeout(()=>{ window.location.reload() }, 1000);
     }
     else{
+      this.errorMessage = "User already registered.";
       this.errorMessageModal = true
       setTimeout(()=>{ this.errorMessageModal = false }, 3000)
     }
@@ -307,10 +309,11 @@ export class EventsPageComponent implements OnInit {
         error => console.error(error)
       )
       this.successMessageModal = true;
-      setTimeout(() => { window.location.reload() }, 3000); // change back to 1000
+      setTimeout(() => { window.location.reload() }, 1000);
     }
     else {
-      this.errorMessageModal = true
+      this.errorMessage = "User not registered.";
+      this.errorMessageModal = true;
       setTimeout(() => { this.errorMessageModal = false }, 3000)
     }
   }

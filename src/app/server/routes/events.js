@@ -161,7 +161,7 @@ router.post('/join', (req, res) => {
 
 router.post('/leave', (req, res) => {
   let quit = req.body;
-  Event.findOne({eventTitle: quit.event}, (err, quitEvent) => {
+  Event.findOne({_id: quit.event}, (err, quitEvent) => {
     if(!quitEvent){
       res.json(quit.event + "Not Found")
     } else {

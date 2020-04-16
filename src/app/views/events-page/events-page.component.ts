@@ -5,6 +5,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
 import { UserService } from 'src/app/services/user.service';
+import { CommonUtils } from 'src/app/utils/common-utils';
 import { ThrowStmt } from '@angular/compiler';
 import { environment } from 'src/environments/environment';
 
@@ -53,6 +54,20 @@ export class EventsPageComponent implements OnInit {
   table
   calendarEvents = [];
   tables = [];
+  createdEvent = false
+
+  // For editing event
+  currentEvent;
+  initialTitle = '';
+  initialStart;
+  initialEnd;
+  initialDateAsString = '';
+  initialPM1 = false;
+  initialPM2 = false;
+  initialMin;
+  initialMax;
+  initialResources = '';
+  initialDescription = '';
 
   eventsForm:FormGroup = new FormGroup({
     eventTitle:new FormControl(null, Validators.required),
@@ -64,12 +79,28 @@ export class EventsPageComponent implements OnInit {
     maxPlayers:new FormControl(null, Validators.required),
     minPlayers:new FormControl(null, Validators.required),
     table:new FormControl(null),
+    eventCreator:new FormControl(null),
+  })
+
+  editEventForm:FormGroup = new FormGroup({
+    editEventTitle:new FormControl(null, Validators.required),
+    editDate:new FormControl(null, Validators.required),
+    editStartTime:new FormControl(null, Validators.required),
+    editEndTime:new FormControl(null, Validators.required),
+    editResources: new FormControl(null, Validators.required),
+    editDescription: new FormControl(null),
+    editMaxPlayers:new FormControl(null, Validators.required),
+    editMinPlayers:new FormControl(null, Validators.required),
+    // table:new FormControl(null),
+    eventCreator:new FormControl(null),
+    eventId: new FormControl(null)
   })
 
   constructor(
     private _eventsService:EventService,
     private elementRef: ElementRef,
-    private _userService: UserService ) { }
+    private _userService: UserService,
+    private _commonUtils: CommonUtils ) { }
 
   ngOnInit(): void {
     this._eventsService.event().subscribe(
@@ -125,7 +156,16 @@ export class EventsPageComponent implements OnInit {
       var startDate = new Date(year, month, day, event.startTime, 0)
       var endDate = new Date(year, month, day, event.endTime, 0)
       this.calendarEvents = this.calendarEvents.concat({
-        title: event.eventTitle, start: startDate, end: endDate }
+        title: event.eventTitle,
+        start: startDate,
+        end: endDate,
+        creator: event.eventCreator,
+        min: event.minPlayers,
+        max: event.maxPlayers,
+        resources: event.resources,
+        description: event.description,
+        id: event._id
+      }
         );
         this.events = this.events.concat({
           title: event.eventTitle,
@@ -139,7 +179,8 @@ export class EventsPageComponent implements OnInit {
           minPlayers: event.minPlayers,
           playersIDs: event.playersIDs,
           table: event.table,
-          id: event._id
+          id: event._id,
+          creator: event.eventCreator
         });
     });
   }
@@ -277,6 +318,7 @@ export class EventsPageComponent implements OnInit {
     } else {
       this.check1 = false;
     }
+
     console.log(this.check1)
   }
 
@@ -286,6 +328,7 @@ export class EventsPageComponent implements OnInit {
     } else {
       this.check2 = false;
     }
+
     console.log(this.check2)
   }
 
@@ -298,7 +341,17 @@ export class EventsPageComponent implements OnInit {
   }
 
   handleEventClick(arg){
-    console.log(arg)
+    this.currentEvent = arg.event;
+    this.createdEvent = false;
+    // check if current user is user that created event
+    console.log(this.user);
+    console.log(arg.event._def.extendedProps.creator);
+    let eventCreator = arg.event._def.extendedProps.creator;
+    if(this.user === eventCreator) {
+      this.createdEvent = true;
+    }
+    console.log(this.createdEvent)
+
     this.eventTitle = arg.event._def.title
     var date = new Date(arg.event.start)
     var dateAsString = ''
@@ -342,7 +395,6 @@ export class EventsPageComponent implements OnInit {
         this.table = theEvent.table
         this.eventID = theEvent.id
         this.currentPlayers = theEvent.currentPlayers
-        console.log(this.currentPlayers)
       }
     })
 
@@ -380,6 +432,8 @@ export class EventsPageComponent implements OnInit {
       this.eventsForm.value.endTime += 12
     }
 
+    this.eventsForm.value.eventCreator = this.user;
+
     this._eventsService.createEvent(JSON.stringify(this.eventsForm.value))
     .subscribe(
       data=> {console.log(data);},
@@ -389,6 +443,110 @@ export class EventsPageComponent implements OnInit {
    this.putEventOnCalendar()
    this.eventsForm.reset();
    window.location.reload()
+  }
+
+  // Makes call to backend to change event information
+  updateEvent() {
+
+    console.log('--- event before start ---')
+    console.log('check1: ' + this.check1)
+    console.log('check2: ' + this.check2)
+    console.log('start: ' + this.editEventForm.value.editStartTime)
+    console.log('end: ' + this.editEventForm.value.editEndTime)
+    console.log('--- event before end ---')
+
+    if(this.check1 === true){
+      this.editEventForm.value.editStartTime += 12
+    }
+    if(this.check2 === true){
+      this.editEventForm.value.editEndTime += 12
+    }
+
+    console.log('--- event after start ---')
+    console.log('check1: ' + this.check1)
+    console.log('check2: ' + this.check2)
+    console.log('start: ' + this.editEventForm.value.editStartTime)
+    console.log('end: ' + this.editEventForm.value.editEndTime)
+    console.log('--- event after end ---')
+
+    this.editEventForm.value.eventCreator = this.user;
+
+    this._eventsService.editEvent(JSON.stringify(this.editEventForm.value))
+    .subscribe(
+      data=> {
+        console.log('It worked')
+        console.log(data);
+      },
+      error=>console.error(error)
+    )
+
+    this.putEventOnCalendar()
+    this.editEventForm.reset();
+    window.location.reload()
+
+  }
+
+  // Show edit event modal and sets + prefills information from current event
+  displayEditEvent() {
+    let initialTitle = this.currentEvent.title;
+
+    // Date variables
+    let date = new Date(this.currentEvent.start)
+
+    // Time variables
+    let start;
+    let timeStart = new Date(this.currentEvent.start);
+    let end;
+    let timeEnd = new Date(this.currentEvent.end);
+
+    // Min and max players
+    let min = this.currentEvent.extendedProps.min;
+    let max = this.currentEvent.extendedProps.max;
+
+    // // Resources and description
+    let resources = this.currentEvent.extendedProps.resources;
+    let description = this.currentEvent.extendedProps.description;
+
+    // Put start and end times in correct format
+    console.log('---ts: ' + timeStart.getHours())
+    if(timeStart.getHours() > 12) {
+      start = timeStart.getHours() - 12;
+      this.initialPM1 = true;
+      this.check1 = true;
+    }
+    else {
+      start = timeStart.getHours();
+    }
+
+    console.log('---ts: ' + timeEnd.getHours())
+    if(timeEnd.getHours() > 12) {
+      end = timeEnd.getHours() - 12;
+      this.initialPM2 = true;
+      this.check2 = true;
+
+    }
+    else {
+      end = timeEnd.getHours();
+    }
+
+    console.log('---')
+    console.log('initialPM1: ' + this.initialPM1)
+    console.log('initialPM2: ' + this.initialPM2)
+    console.log('---')
+
+    // Set form values
+    this._commonUtils.setFormFieldValue(this.editEventForm, 'editEventTitle', initialTitle);
+    this._commonUtils.setFormFieldValue(this.editEventForm, 'editDate', date.toISOString().slice(0,10));
+    this._commonUtils.setFormFieldValue(this.editEventForm, 'editStartTime', start);
+    this._commonUtils.setFormFieldValue(this.editEventForm, 'editEndTime', end);
+    this._commonUtils.setFormFieldValue(this.editEventForm, 'editResources', resources);
+    this._commonUtils.setFormFieldValue(this.editEventForm, 'editDescription', description);
+    this._commonUtils.setFormFieldValue(this.editEventForm, 'editMaxPlayers', max);
+    this._commonUtils.setFormFieldValue(this.editEventForm, 'editMinPlayers', min);
+    this._commonUtils.setFormFieldValue(this.editEventForm, 'eventId', this.currentEvent.id);
+
+    $('#editEventModal').modal('show');
+
   }
 
   putEventOnCalendar(){
@@ -401,10 +559,7 @@ export class EventsPageComponent implements OnInit {
     if(this.check2 === false){
       endTime += 12
     }
-    // 2020-03-05
-    // new Date(y, m, d, 12, 0)
-  //  console.log(endTime)
-  //  console.log((this.eventsForm.value.date))
+
     var date = this.eventsForm.value.date
     var testDate = new Date(date)
     var year = testDate.getFullYear()

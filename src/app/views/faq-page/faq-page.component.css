@@ -1,6 +1,6 @@
 #faqWrapper {
   position: relative;
-  min-height: 73.5vh;
+  height: 100%;
 }
 
 .ui.styled.accordion{
@@ -21,4 +21,9 @@
 .padded {
   padding-top: 30px;
   padding-bottom: 30px;
+}
+
+.faq-title {
+  color: white;
+  text-align: center;
 }

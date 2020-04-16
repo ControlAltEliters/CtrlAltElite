@@ -31,14 +31,16 @@ export class EventsPageComponent implements OnInit {
   check2 = false
   clickedEvent
   clickedDate
+  desc
   errorMessageModal = false
   successMessageModal = false
   user
   userID
   eventID
   currentPlayers = []
+  inEvent = false;
   userJoin = { user:"", userID:"", event: "" };
-  userQuit = { userID:"", event: "" };
+  userQuit = { user:"", userID:"", event: "" };
   eventTitle
   startTime
   endTime
@@ -145,7 +147,6 @@ export class EventsPageComponent implements OnInit {
 
   dealWithUser(data){
     this.userID = data._id;
-
   }
 
   addEventsFromDB(data){
@@ -295,6 +296,25 @@ export class EventsPageComponent implements OnInit {
     }
   }
 
+  leaveEvent(eventID, user, userID){
+    this.userQuit.event = eventID;
+    this.userQuit.user = user;
+    this.userQuit.userID = userID;
+
+    if (this.alreadySignedUpForEvent(eventID, userID) == true) {
+      this._eventsService.leave(this.userQuit).subscribe(
+        data => { console.log(data); },
+        error => console.error(error)
+      )
+      this.successMessageModal = true;
+      setTimeout(() => { window.location.reload() }, 3000); // change back to 1000
+    }
+    else {
+      this.errorMessageModal = true
+      setTimeout(() => { this.errorMessageModal = false }, 3000)
+    }
+  }
+
   undoErrorMessage(){
     this.errorMessageModal = false
   }
@@ -399,6 +419,7 @@ export class EventsPageComponent implements OnInit {
         this.table = theEvent.table
         this.eventID = theEvent.id
         this.currentPlayers = theEvent.currentPlayers
+        this.desc = theEvent.description
       }
     })
 

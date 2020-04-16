@@ -33,4 +33,17 @@ iframe {
     height: 200px;
     border: 0;
     display: flex;
-  }
+}
+
+.social-icon {
+  padding: 0em .5em 0 .5em !important;
+}
+
+.email-box,
+.subscribe-button {
+  text-align: center;
+  padding: .5em 2em 0 2em !important;
+}
+
+
+

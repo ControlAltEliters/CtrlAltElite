@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormGroup, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -51,6 +51,7 @@ import { ChatBoxComponent } from './views/partials/chat-box/chat-box.component';
     BrowserAnimationsModule,
     HttpClientModule,
     FullCalendarModule,
+    HttpClientJsonpModule,
   ],
   providers: [
     UserService,

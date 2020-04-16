@@ -18,7 +18,6 @@ declare let $: any;
   styleUrls: ['./events-page.component.css']
 })
 export class EventsPageComponent implements OnInit {
-
   calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
   public today = new Date();
   public testDate = '2020-03-22'
@@ -33,6 +32,7 @@ export class EventsPageComponent implements OnInit {
   clickedEvent
   clickedDate
   errorMessageModal = false
+  successMessageModal = false
   user
   userID
   eventID
@@ -286,11 +286,13 @@ export class EventsPageComponent implements OnInit {
         data=> {console.log(data);},
         error=>console.error(error)
       )
-      window.location.reload()
-    }else{
-      this.errorMessageModal = true
+      this.successMessageModal = true;
+      setTimeout(()=>{ window.location.reload() }, 1000);
     }
-
+    else{
+      this.errorMessageModal = true
+      setTimeout(()=>{ this.errorMessageModal = false }, 3000)
+    }
   }
 
   undoErrorMessage(){

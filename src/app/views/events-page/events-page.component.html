@@ -457,6 +457,7 @@
         <p>DATE: {{clickedDate}}</p>
         <p>TIME: {{startTime}} to {{endTime}}</p>
         <p>TABLE: {{table}}</p>
+        <!-- add event desc here? -->
         <p>PLAYERS SIGNED UP FOR EVENT: </p>
         <ul class="player-list">
           <li *ngFor="let player of currentPlayers">
@@ -469,6 +470,12 @@
             <div class="header">Registration Error</div>
             <p>User is already registered for event</p>
         </div>
+    </div>
+    <div *ngIf="successMessageModal">
+      <div class="ui message">
+        <div class="header">Success!</div>
+        <p>Successfully joined event</p>
+      </div>
     </div>
     </div>
     <div class="actions">

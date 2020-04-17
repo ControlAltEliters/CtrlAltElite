@@ -154,4 +154,8 @@ export class HomeComponent implements OnInit {
   hideModal() {
     $('#eventModal .close').click();
   }
+
+  joinEvent() {
+    alert('add code to join event');
+  }
 }

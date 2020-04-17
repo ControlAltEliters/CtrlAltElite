@@ -128,38 +128,25 @@ export class ProfileComponent implements OnInit {
       console.log('Invalid Form');
       return;
     }
-
     this._commonUtils.setSessionField('flag', '0');
-    this._commonUtils.setSessionField(
-      'id',
-      JSON.stringify(this.updatePassword.value.userId)
-    );
-    this._commonUtils.setSessionField(
-      'newpass',
-      JSON.stringify(this.updatePassword.value.newPassword)
-    );
-
-    this._userService
-      .verifyPassword(
-        this.updatePassword.value.oldPassword,
-        this.updatePassword.value.newPassword,
-        this.updatePassword.value.confirmedNewPassword,
-        this.updatePassword.value.userId
-      )
-      .subscribe((resp: any) => {
-        console.log('result: ' + resp.body.result);
+    this._commonUtils.setSessionField('id', JSON.stringify(this.updatePassword.value.userId));
+    this._commonUtils.setSessionField('newpass', JSON.stringify(this.updatePassword.value.newPassword));
+    this._userService.verifyPassword(this.updatePassword.value.oldPassword, this.updatePassword.value.newPassword, this.updatePassword.value.confirmedNewPassword, this.updatePassword.value.userId).subscribe((resp: any) => {
         if (resp.body.result) {
-          console.log('newpass: ' + resp.body.newpass);
-          console.log('confnewpass: ' + resp.body.confnewpass);
           if (resp.body.newpass === resp.body.confnewpass) {
-            this._commonUtils.setSessionField('flag', '1');
-            this.showErrorMessage = false;
-            this.successMessage = 'Successfully updated password!';
-            this.showSuccessMessage = true;
+            if (resp.body.newpass != 'null') {
+              this._commonUtils.setSessionField('flag', '1');
+              this.showErrorMessage = false;
+              this.successMessage = 'Successfully updated password!';
+              this.showSuccessMessage = true;
+            } else {
+              this._commonUtils.setSessionField('flag', '0');
+              this.updatePasswordError = 'Fields 2 and 3 cannot be empty. Please try again.';
+              this.showErrorMessage = true;
+            }
           } else {
             this._commonUtils.setSessionField('flag', '0');
-            this.updatePasswordError =
-              'Fields 2 and 3 do not match. Please try again.';
+            this.updatePasswordError = 'Fields 2 and 3 do not match. Please try again.';
             this.showErrorMessage = true;
           }
         } else {
@@ -168,10 +155,11 @@ export class ProfileComponent implements OnInit {
             'Field 1 does not match current password. Please try again.';
           this.showErrorMessage = true;
         }
+        setTimeout(() => {
+          this.showErrorMessage = false;
+        }, 2000);
       });
-
     setTimeout(() => {
-      console.log('flag: ' + this._commonUtils.readSessionField('flag'));
       if (this._commonUtils.readSessionField('flag') === '1') {
         this._commonUtils.setSessionField('flag', '0');
         this.update();
@@ -189,18 +177,14 @@ export class ProfileComponent implements OnInit {
         this._commonUtils.readSessionField('newpass')
       )
       .subscribe(
-        (data) => {
-          $('#editPasswordModal').modal('hide');
-        },
-        (error) => {
-          this.updatePasswordError = error.error.message;
-          this.showErrorMessage = true;
-        }
-      );
+        data => { console.log(data); },
+        error => { this.updatePasswordError = error.error.message; this.showErrorMessage = true; this.showSuccessMessage = false; }
+    );
   }
 
   logout() {
-    console.log('logging user out');
+    $('#editPasswordModal').modal('hide');
+    // this doesn't hide the modal after the first passw change, although passw update successful
     this._userService.logout().subscribe(
       (data) => {
         sessionStorage.setItem('activeUser', '');
@@ -211,5 +195,4 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
-  // pull from remote dev, delete console.logs, push changes for pr
 }

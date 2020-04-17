@@ -26,22 +26,22 @@
             <form class="ui form" #subscribeForm='ngForm' (ngSubmit)='subscribe(subscribeForm)'>
               <div class="ui grid">
                 <div class="row email-box">
-                    <input pattern="\S+@\S+\.\S+" placeholder="Email" required #email='ngModel' name='userName'
+                    <input pattern="\S+@\S+\.\S+" placeholder="Email" required #email='ngModel' name='userName' id="email-box"
                         [(ngModel)]='subscribeData.email'>
-                      <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                      <!-- <div *ngIf="email.invalid && (email.dirty || email.touched)">
                         <div *ngIf="(email.errors.required)">
                             Email is required.
                         </div>
+                      </div> -->
+                      <div class="row centered subscribe-button">
+                        <button class="ui approve button" type='submit'>Subscribe</button>
                       </div>
-                  </div>
-                  <div class="row centered subscribe-button">
-                    <button class="ui approve button" type='submit'>Subscribe</button>
                   </div>
               </div>
             </form>
           </div>
           <div class="three wide column">
-            <h4 class="ui inverted header">Follow us on social media!</h4>
+            <h4 class="ui inverted header">Follow us on social media</h4>
             <div class="row centered social-icons">
               <img class="social-icon" src="assets/images/social-instagram.png">
               <img class="social-icon" src="assets/images/social-facebook.png">

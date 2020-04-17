@@ -38,7 +38,7 @@ export class ContactFooterComponent implements OnInit {
         this.toggleMessage("Successfully subscribed!", true);
       }, err => {
           console.log(err);
-
+          // address this issue later
           if (err.error.message === "JSONP injected script did not invoke callback.") { this.toggleMessage("Successfully subscribed!", true); }
           else { this.toggleMessage("Error occurred", false); }
       })

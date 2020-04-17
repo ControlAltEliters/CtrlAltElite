@@ -22,3 +22,42 @@
   padding-top: 30px;
   padding-bottom: 30px;
 }
+
+.content {
+  padding-left: 4em !important;
+}
+
+button {
+    all: unset;
+    color: #fff !important;
+    margin: .5em 0 1.5vw 0;
+    border-radius: .25em;
+    padding: .5em 1em .5em 1em;
+    background: #FE019A;
+    box-shadow: 2.5px 2.5px rgb(255, 199, 233);
+}
+
+button:hover {
+  background: rgb(206, 1, 124);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+textarea {
+  resize: none !important;
+}
+
+label {
+  margin: 1em 0 1em 0!important;
+}
+
+.ui.message {
+  width: 100%;
+  margin: 0 auto;
+}
+
+#center {
+  padding: 1em;
+}

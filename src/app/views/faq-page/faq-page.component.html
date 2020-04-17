@@ -52,9 +52,58 @@
           Can I have my birthday party here?
         </div>
         <div class="content">
-          <p>Yes, we host birthday's. We only ask that you do not bring outside food or drinks.</p>
+          <p>Yes, we host birthdays. We only ask that you do not bring outside food or drinks.</p>
         </div>
+        <div class="title">
+          <i class="dropdown icon"></i>
+          I have a question not on here! What do I do?
+        </div>
+        <div class="content">
+          <button type="submit" (click)="toggleModal()">Feel free to send us an email!</button>
     </div>
   </div>
 </div>
 <!-- add ability to send store owner an email -->
+
+<div id="emailModal" class="ui tiny modal">
+  <i class="close icon cancel"></i>
+  <div class="header">
+    <p>Email Us!</p>
+  </div>
+  <div style="padding:1em 2em 2em 2em !important;">
+    <form [formGroup]="emailOwner" class="ui form">
+      <div class="form-group">
+        <div class="field">
+          <label class="inputTitle">Your Email</label>
+          <input formControlName="userEmail" type="email" class="form-control" id="userEmail" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="field">
+          <label class="inputTitle">Subject Line</label>
+          <input formControlName="subjectLine" type="text" class="form-control" id="subjectLine" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="field">
+          <label class="inputTitle">Content</label>
+          <textarea formControlName="content" type="text" class="form-control" id="content" wrap="soft" required></textarea>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="actions">
+    <div class="ui button" id="edit-button" (click)="sendEmail()">Send</div>
+    <div class="ui button" id="edit-button" (click)="toggleModal()">Cancel</div>
+  </div>
+  <div id="center" *ngIf="showErrorMessage || showSuccessMessage">
+    <div class="ui error message" *ngIf="showErrorMessage">
+      <div class="header">Send Error</div>
+      <p>{{sendError}}</p>
+    </div>
+    <div class="ui success message" *ngIf="showSuccessMessage">
+      <div class="header">Success!</div>
+      <p>{{successMessage}}</p>
+    </div>
+  </div>
+</div>

@@ -21,7 +21,7 @@
       </div>
       <div class="right menu" *ngIf="readSession('activeUser')">
 
-          <a class="item greeting">
+          <a class="item greeting" style="pointer-events: none; font-style: italic;">
             <img class="ui avatar image" src="./assets/images/icon1.png">
             Welcome, {{readSession('activeUser')}}!
           </a>

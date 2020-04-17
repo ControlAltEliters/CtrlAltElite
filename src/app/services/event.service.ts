@@ -24,34 +24,34 @@ export class EventService {
       });
   }
 
-    event(){
-        return this._http.get(environment.baseurl + '/events/events',{
-          observe:'body',
-          headers:new HttpHeaders().append('Content-Type','application/json'),
+    event() {
+        return this._http.get(environment.baseurl + '/events/events', {
+          observe: 'body',
+          headers: new HttpHeaders().append('Content-Type', 'application/json'),
           withCredentials: true
-        })
+        });
     }
 
-    eventPuller(){
-      return this._http.get(environment.baseurl + '/events/event-puller',{
-        observe:'body',
-        headers:new HttpHeaders().append('Content-Type','application/json'),
-      })
+    eventPuller() {
+      return this._http.get(environment.baseurl + '/events/event-puller', {
+        observe: 'body',
+        headers: new HttpHeaders().append('Content-Type', 'application/json'),
+      });
     }
 
 
-    join(user: any){
+    join(user: any) {
         return this._http.post(environment.baseurl + '/events/join', user, {
             observe: 'body',
             headers: new HttpHeaders().append('Content-Type', 'application/json')
-        })
+        });
     }
 
-    leave(user: any){
+    leave(user: any) {
       return this._http.post(environment.baseurl + '/events/leave', user, {
         observe: 'body',
         headers: new HttpHeaders().append('Content-Type', 'application/json')
-    })
+    });
     }
 
 }

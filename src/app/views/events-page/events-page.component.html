@@ -126,7 +126,7 @@
           </div>
           <div class="two wide field">
             <div class="ui checkbox">
-              <input id="checked1" type="checkbox" (click)="handleChecked1()" />
+              <input id="checked1" type="checkbox" (click)="handleChecked(1)" />
               <label for="checked1">PM</label>
             </div>
           </div>
@@ -153,7 +153,7 @@
           </div>
           <div class="two wide field">
             <div class="ui checkbox">
-              <input id="checked2" type="checkbox" (click)="handleChecked2()" />
+              <input id="checked2" type="checkbox" (click)="handleChecked(2)" />
               <label for="checked2">PM</label>
             </div>
           </div>
@@ -190,7 +190,6 @@
     <i class="close icon cancel"></i>
     <div class="header">
       Please click a table to reserve
-
       <div class="ui grid">
         <div class="row">
           <div class="three wide column">
@@ -230,61 +229,61 @@
               <div class="three wide column">
                 <div class="table1">
                   <div *ngIf="table1checked == true">
-                    <div (click)="clickedTable1()" class="arcade-table selected-table">1</div>
+                    <div (click)="clickedTable(1)" class="arcade-table selected-table">1</div>
                   </div>
                   <div *ngIf="table1 == true && table1checked == false">
-                    <div (click)="clickedTable1()" class="arcade-table available-table">1</div>
+                    <div (click)="clickedTable(1)" class="arcade-table available-table">1</div>
                   </div>
                   <div *ngIf="table1 == false && table1checked == false">
-                    <div (click)="clickedTable1()" class="arcade-table unavailable-table">1</div>
+                    <div (click)="clickedTable(1)" class="arcade-table unavailable-table">1</div>
                   </div>
                 </div>
               </div>
               <div class="three wide column">
                 <div class="table2">
                   <div *ngIf="table2checked == true">
-                    <div (click)="clickedTable2()" class="arcade-table selected-table">2</div>
+                    <div (click)="clickedTable(2)" class="arcade-table selected-table">2</div>
                   </div>
                   <div *ngIf="table2 == true && table2checked == false">
-                    <div (click)="clickedTable2()" class="arcade-table available-table">2</div>
+                    <div (click)="clickedTable(2)" class="arcade-table available-table">2</div>
                   </div>
                   <div *ngIf="table2 == false && table2checked == false">
-                    <div (click)="clickedTable2()" class="arcade-table unavailable-table">2</div>
+                    <div (click)="clickedTable(2)" class="arcade-table unavailable-table">2</div>
                   </div>
                 </div>
                 <div class="table3">
                   <div *ngIf="table3checked == true">
-                    <div (click)="clickedTable3()" class="arcade-table selected-table">3</div>
+                    <div (click)="clickedTable(3)" class="arcade-table selected-table">3</div>
                   </div>
                   <div *ngIf="table3 == true && table3checked == false">
-                    <div (click)="clickedTable3()" class="arcade-table available-table">3</div>
+                    <div (click)="clickedTable(3)" class="arcade-table available-table">3</div>
                   </div>
                   <div *ngIf="table3 == false && table3checked == false">
-                    <div (click)="clickedTable3()" class="arcade-table unavailable-table">3</div>
+                    <div (click)="clickedTable(3)" class="arcade-table unavailable-table">3</div>
                   </div>
                 </div>
               </div>
               <div class="three wide column">
                 <div class="table4">
                   <div *ngIf="table4checked == true">
-                    <div (click)="clickedTable4()" class="arcade-table selected-table">4</div>
+                    <div (click)="clickedTable(4)" class="arcade-table selected-table">4</div>
                   </div>
                   <div *ngIf="table4 == true && table4checked == false">
-                    <div (click)="clickedTable4()" class="arcade-table available-table">4</div>
+                    <div (click)="clickedTable(4)" class="arcade-table available-table">4</div>
                   </div>
                   <div *ngIf="table4 == false && table4checked == false">
-                    <div (click)="clickedTable4()" class="arcade-table unavailable-table">4</div>
+                    <div (click)="clickedTable(4)" class="arcade-table unavailable-table">4</div>
                   </div>
                 </div>
                 <div class="table5">
                   <div *ngIf="table5checked == true">
-                    <div (click)="clickedTable5()" class="arcade-table selected-table">5</div>
+                    <div (click)="clickedTable(5)" class="arcade-table selected-table">5</div>
                   </div>
                   <div *ngIf="table5 == true && table5checked == false">
-                    <div (click)="clickedTable5()" class="arcade-table available-table">5</div>
+                    <div (click)="clickedTable(5)" class="arcade-table available-table">5</div>
                   </div>
                   <div *ngIf="table5 == false && table5checked == false">
-                    <div (click)="clickedTable5()" class="arcade-table unavailable-table">5</div>
+                    <div (click)="clickedTable(5)" class="arcade-table unavailable-table">5</div>
                   </div>
                 </div>
               </div>
@@ -389,7 +388,7 @@
           </div>
           <div class="two wide field">
             <div class="ui checkbox">
-              <input id="checked1" type="checkbox" (click)="handleChecked1()" [checked]="initialPM1" />
+              <input id="checked1" type="checkbox" (click)="handleChecked(1)" [checked]="initialPM1" />
               <label for="checked1">PM</label>
             </div>
           </div>
@@ -416,7 +415,7 @@
           </div>
           <div class="two wide field">
             <div class="ui checkbox">
-              <input id="checked2" type="checkbox" (click)="handleChecked2()" [checked]="initialPM2" />
+              <input id="checked2" type="checkbox" (click)="handleChecked(2)" [checked]="initialPM2" />
               <label for="checked2">PM</label>
             </div>
           </div>
@@ -483,7 +482,7 @@
       <div *ngIf="user" class="ui button" (click)="joinEvent(eventID, user, userID)">Join Event</div>
       <div *ngIf="!user" class="ui cancel button" [routerLink]="['/login']">Join Event</div>
       <div *ngIf="user" class="ui button" (click)="leaveEvent(eventID, user, userID)">Leave Event</div>
-      <div class="ui cancel button" (click)="undoErrorMessage()">Cancel</div>
+      <div class="ui cancel button">Cancel</div>
     </div>
   </div>
 </div>

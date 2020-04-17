@@ -5,15 +5,12 @@ import { UserService } from 'src/app/services/user.service';
 
 declare let $: any;
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
-
 export class HomeComponent implements OnInit {
-
   // handling events
   public today = new Date();
   public tomorrow1 = new Date();
@@ -37,8 +34,8 @@ export class HomeComponent implements OnInit {
   public eventDescription: string;
 
   constructor(
-    private _eventService:EventService,
-    private _router:Router,
+    private _eventService: EventService,
+    private _router: Router,
     private _userService: UserService
   ) {}
 
@@ -53,10 +50,9 @@ export class HomeComponent implements OnInit {
     this.day3 = this.transformDayOfWeek(this.tomorrow2.getDay());
     this.day4 = this.transformDayOfWeek(this.tomorrow3.getDay());
 
-    this.user = sessionStorage.getItem('activeUser')
-    this._eventService.eventPuller()
-    .subscribe(
-      data => {
+    this.user = sessionStorage.getItem('activeUser');
+    this._eventService.eventPuller().subscribe(
+      (data) => {
         // console.log('Events: ' + data);
         this.addEventsFromDB(data);
         this.array1 = this.sortArrayAsc(this.array1, 'startTime');
@@ -64,101 +60,98 @@ export class HomeComponent implements OnInit {
         this.array3 = this.sortArrayAsc(this.array3, 'startTime');
         this.array4 = this.sortArrayAsc(this.array4, 'startTime');
       },
-      error => {
+      (error) => {
         console.log('Nothing is being returned yet');
       }
-    )
+    );
 
     console.log(this.array1);
-
   }
 
   sortArrayAsc(arr, key) {
-    return arr.sort((a, b) => a[key] - b[key])
+    return arr.sort((a, b) => a[key] - b[key]);
   }
 
-  transformDayOfWeek(num){
-    if(num == 0){
-      return 'SUNDAY'
+  transformDayOfWeek(num) {
+    if (num == 0) {
+      return 'SUNDAY';
     }
-    if(num == 1){
-      return 'MONDAY'
+    if (num == 1) {
+      return 'MONDAY';
     }
-    if(num == 2){
+    if (num == 2) {
       return 'TUESDAY';
     }
-    if(num == 3){
-      return 'WEDNESDAY'
+    if (num == 3) {
+      return 'WEDNESDAY';
     }
-    if(num == 4){
-      return 'THURSDAY'
+    if (num == 4) {
+      return 'THURSDAY';
     }
-    if(num == 5){
-      return 'FRIDAY'
+    if (num == 5) {
+      return 'FRIDAY';
     }
-    if(num == 6){
-      return 'SATURDAY'
+    if (num == 6) {
+      return 'SATURDAY';
     }
   }
 
-
-  addEventsFromDB(data){
-    data.forEach(event => {
-
-      let eventDate = new Date(event.date);
+  addEventsFromDB(data) {
+    data.forEach((event) => {
+      const eventDate = new Date(event.date);
       eventDate.setTime(eventDate.getTime() + 1 * 86400000); // the date has to be incremented by one to be correct
-      let now = new Date();
+      const now = new Date();
 
-      if(eventDate.getDate() === now.getDate()){
-        this.array1.push(event)
+      if (eventDate.getDate() === now.getDate()) {
+        this.array1.push(event);
       }
-      if(eventDate.getDate() === this.tomorrow1.getDate()){
-        this.array2.push(event)
+      if (eventDate.getDate() === this.tomorrow1.getDate()) {
+        this.array2.push(event);
       }
-      if(eventDate.getDate() === this.tomorrow2.getDate()){
-        this.array3.push(event)
+      if (eventDate.getDate() === this.tomorrow2.getDate()) {
+        this.array3.push(event);
       }
-      if(eventDate.getDate() === this.tomorrow3.getDate()){
-        this.array4.push(event)
+      if (eventDate.getDate() === this.tomorrow3.getDate()) {
+        this.array4.push(event);
       }
     });
   }
 
   convertDateToCST(date) {
-    return date.toLocaleString("en-US", {timeZone: "America/Chicago"})
+    return date.toLocaleString('en-US', { timeZone: 'America/Chicago' });
   }
 
-  //TODO: Are events ever not going to be on the hour?
-  formatTime(time){
-    let newTime = time - 12;
+  // TODO: Are events ever not going to be on the hour?
+  formatTime(time) {
+    const newTime = time - 12;
     return `${newTime}:00 pm`;
   }
 
-  displayModal(event){
-    let date = new Date(event.date);
-    this.user = sessionStorage.getItem('activeUser')
+  displayModal(event) {
+    const date = new Date(event.date);
+    this.user = sessionStorage.getItem('activeUser');
 
-    this.eventDate = `${date.getUTCMonth()+1}/${date.getUTCDate()}/${date.getUTCFullYear()}`;
+    this.eventDate = `${
+      date.getUTCMonth() + 1
+    }/${date.getUTCDate()}/${date.getUTCFullYear()}`;
     this.currentEvent = event.eventTitle;
 
-    if(event.startTime > 12){
+    if (event.startTime > 12) {
       this.eventStart = this.formatTime(event.startTime);
+    } else {
+      this.eventStart = `${event.startTime}:00 am`;
     }
-    else{
-      this.eventStart = `${event.startTime}:00 am`
-    }
-    if(event.endTime > 12){
+    if (event.endTime > 12) {
       this.eventEnd = this.formatTime(event.endTime);
-    }
-    else{
-      this.eventEnd = `${event.endTime}:00 am`
+    } else {
+      this.eventEnd = `${event.endTime}:00 am`;
     }
 
     this.eventDescription = event.description;
     $('#eventModal').modal('show');
   }
-  
-  hideModal(){
+
+  hideModal() {
     $('#eventModal .close').click();
   }
 }

@@ -11,15 +11,14 @@ import { Router, Event, NavigationStart, NavigationEnd, NavigationError } from '
 })
 
 export class ContactFooterComponent implements OnInit {
-  subscribeData: any = <any>{};
+  subscribeData: any = {} as any;
 
   showMap = false;
 
   constructor(private subscribeService: SubscribeService, private _router: Router) {
 
     this._router.events.subscribe((event: Event) => {
-      if (this._router.url === "/home" || this._router.url === "/events" || this._router.url === "/faq" || this._router.url === "/") { this.showMap = true; }
-      else { this.showMap = false; }
+      if (this._router.url === '/home' || this._router.url === '/events' || this._router.url === '/faq' || this._router.url === '/') { this.showMap = true; } else { this.showMap = false; }
     });
   }
 
@@ -37,7 +36,7 @@ export class ContactFooterComponent implements OnInit {
         console.log('Success');
       }, err => {
         console.log(err);
-      })
+      });
   }
 
 }

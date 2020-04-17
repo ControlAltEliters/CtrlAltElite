@@ -47,7 +47,8 @@ a:hover {
   font-size: 22px;
 }
 
-
-
-
-
+/* prevent labels from triggering input events */
+label {
+  pointer-events: none;
+  cursor: default;
+}

@@ -1,6 +1,6 @@
 #accountWrapper {
   position: relative;
-  min-height: 74.9vh;
+  height: 100%;
 }
 
 .content-block {

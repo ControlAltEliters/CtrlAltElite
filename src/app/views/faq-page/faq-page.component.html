@@ -74,7 +74,7 @@
     <form [formGroup]="emailOwner" class="ui form">
       <div class="form-group">
         <div class="field">
-          <label class="inputTitle">Your Email</label>
+          <label class="inputTitle">Your Email Address</label>
           <input formControlName="userEmail" type="email" class="form-control" id="userEmail" required>
         </div>
       </div>
@@ -96,7 +96,7 @@
     <div class="ui button" id="edit-button" (click)="sendEmail()">Send</div>
     <div class="ui button" id="edit-button" (click)="toggleModal()">Cancel</div>
   </div>
-  <div id="center" *ngIf="showErrorMessage || showSuccessMessage">
+  <div id="center">
     <div class="ui error message" *ngIf="showErrorMessage">
       <div class="header">Send Error</div>
       <p>{{sendError}}</p>

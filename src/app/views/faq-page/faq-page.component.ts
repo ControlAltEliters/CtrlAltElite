@@ -32,6 +32,7 @@ export class FaqPageComponent implements OnInit {
 
   toggleModal() {
     $('#emailModal').modal('toggle');
+    this.emailOwner.reset();
   }
 
   sendEmail() {
@@ -48,7 +49,5 @@ export class FaqPageComponent implements OnInit {
     this.showErrorMessage = true;
     setTimeout(() => { this.showErrorMessage = false; this.showSuccessMessage = true; }, 2000);
     setTimeout(() => { this.showSuccessMessage = false; this.toggleModal(); }, 4000);
-
-    this.emailOwner.reset();
   }
 }

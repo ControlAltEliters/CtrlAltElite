@@ -39,11 +39,19 @@ iframe {
   padding: 0em .5em 0 .5em !important;
 }
 
-.email-box,
-.subscribe-button {
+.email-box {
   text-align: center;
-  padding: .5em 2em 0 2em !important;
+  height: 2em !important;
+  padding: 1em 2em 0 2em !important;
+  display: inline-block;
+  margin: .5em 0 0 1em;
 }
 
+input {
+  width: 15vw !important;
+}
 
-
+button {
+  height: 40px !important;
+  margin-left: 1.5em !important;
+}

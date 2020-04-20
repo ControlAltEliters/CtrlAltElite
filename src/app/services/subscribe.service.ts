@@ -14,6 +14,6 @@ export class SubscribeService {
       .set('group[56908][1]', 'true')
       .set('b_c6d013547c538d10928b345aa_bd29ee260e', '');
     const mailChimpUrl = `${this.mailChimpEndpoint}&${params.toString()}`;
-    return this.http.jsonp(mailChimpUrl, 'c')
+    return this.http.jsonp(mailChimpUrl, 'c');
   }
 }

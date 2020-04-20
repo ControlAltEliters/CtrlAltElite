@@ -5,45 +5,45 @@ import {environment} from '../../environments/environment';
 @Injectable()
 export class UserService {
 
-  constructor(private _http:HttpClient) { }
+  constructor(private _http: HttpClient) { }
 
-  register(body:any){
-    return this._http.post(environment.baseurl + '/users/register',body,{
-      observe:'body',
-      headers:new HttpHeaders().append('Content-Type','application/json')
+  register(body: any) {
+    return this._http.post(environment.baseurl + '/users/register', body, {
+      observe: 'body',
+      headers: new HttpHeaders().append('Content-Type', 'application/json')
     });
   }
 
-  login(body:any){
-    return this._http.post(environment.baseurl + '/users/login',body,{
-      observe:'body',
-      headers:new HttpHeaders().append('Content-Type','application/json'),
-      withCredentials:true,
+  login(body: any) {
+    return this._http.post(environment.baseurl + '/users/login', body, {
+      observe: 'body',
+      headers: new HttpHeaders().append('Content-Type', 'application/json'),
+      withCredentials: true,
     });
   }
 
-  user(){
-    return this._http.get(environment.baseurl + '/users/user',{
-      observe:'body',
-      headers:new HttpHeaders().append('Content-Type','application/json'),
+  user() {
+    return this._http.get(environment.baseurl + '/users/user', {
+      observe: 'body',
+      headers: new HttpHeaders().append('Content-Type', 'application/json'),
       withCredentials: true
-    })
+    });
   }
 
-  logout(){
-    return this._http.get(environment.baseurl + '/users/logout',{
-      observe:'body',
-      headers:new HttpHeaders().append('Content-Type','application/json'),
-      withCredentials:true
-    })
+  logout() {
+    return this._http.get(environment.baseurl + '/users/logout', {
+      observe: 'body',
+      headers: new HttpHeaders().append('Content-Type', 'application/json'),
+      withCredentials: true
+    });
   }
 
-  editProfile(body:any){
+  editProfile(body: any) {
     return this._http.post(environment.baseurl + '/users/editprofile', body, {
-      observe:'body',
-      headers:new HttpHeaders().append('Content-Type','application/json'),
-      withCredentials:true
-    })
+      observe: 'body',
+      headers: new HttpHeaders().append('Content-Type', 'application/json'),
+      withCredentials: true
+    });
   }
 
   updatePassword(id: any, newpass: string) {
@@ -52,10 +52,10 @@ export class UserService {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
       withCredentials: true,
       params: {
-        id: id,
-        newpass: newpass
+        id,
+        newpass
       }
-    })
+    });
   }
 
   verifyPassword(password: string, newpass: string, confnewpass: string, id: any) {
@@ -64,11 +64,11 @@ export class UserService {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
       withCredentials: true,
       params: {
-        password: password,
-        newpass: newpass,
-        confnewpass: confnewpass,
-        id: id
+        password,
+        newpass,
+        confnewpass,
+        id
       }
-    })
+    });
   }
 }

@@ -11,15 +11,14 @@ import { Router, Event, NavigationStart, NavigationEnd, NavigationError } from '
 })
 
 export class ContactFooterComponent implements OnInit {
-  subscribeData: any = <any>{};
+  subscribeData: any = {} as any;
 
   showMap = false;
 
   constructor(private subscribeService: SubscribeService, private _router: Router) {
 
     this._router.events.subscribe((event: Event) => {
-      if (this._router.url === "/home" || this._router.url === "/events" || this._router.url === "/faq" || this._router.url === "/") { this.showMap = true; }
-      else { this.showMap = false; }
+      if (this._router.url === '/home' || this._router.url === '/events' || this._router.url === '/faq' || this._router.url === '/') { this.showMap = true; } else { this.showMap = false; }
     });
   }
 
@@ -29,15 +28,34 @@ export class ContactFooterComponent implements OnInit {
 
   subscribe(subscribeForm: NgForm) {
     if (subscribeForm.invalid) {
+      this.toggleMessage('Requires valid email', false);
       return;
     }
+
     this.subscribeService.subscribeToList(this.subscribeData)
       .subscribe(res => {
-        alert('Subscribed!');
-        console.log('Success');
+        this.toggleMessage('Successfully subscribed!', true);
       }, err => {
-        console.log(err);
-      })
+          console.log(err);
+          // address this issue later
+          if (err.error.message === 'JSONP injected script did not invoke callback.') { this.toggleMessage('Successfully subscribed!', true); } else { this.toggleMessage('Error occurred', false); }
+      });
+  }
+
+  toggleMessage(msg: string, success: boolean) {
+    this.subscribeData.email = '';
+    document.getElementById('email-box').setAttribute('placeholder', msg);
+
+    if (success) { document.getElementById('email-box').setAttribute('style', 'border-color:rgb(101, 197, 101) !important; border-width:.2em !important;'); } else { document.getElementById('email-box').setAttribute('style', 'border-color:rgb(219, 125, 125) !important; border-width:.2em !important;'); }
+
+    this.reset();
+  }
+
+  reset() {
+    setTimeout(() => {
+      document.getElementById('email-box').setAttribute('placeholder', 'Email');
+      document.getElementById('email-box').setAttribute('style', 'border-color:none !important;');
+    }, 3000);
   }
 
 }

@@ -120,7 +120,7 @@
     </div>
     <div class="actions">
       <div *ngIf="user">
-        <div class="ui approve button">Join Event</div>
+        <div class="ui approve button" (click)="joinEvent()">Join Event</div>
         <!-- Additional button options if needed -->
         <!-- <div class="ui button">Neutral</div>
         <div class="ui cancel button">Cancel</div> -->
@@ -132,4 +132,3 @@
   </div>
 
 </div>
-

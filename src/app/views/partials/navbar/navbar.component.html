@@ -5,7 +5,7 @@
         <img src="../../assets/images/logo.png">
       </div>
 
-      <div class="right menu" *ngIf="!readSession('activeUser')">
+      <div class="right menu" *ngIf="inactive">
           <a class="item" [ngClass]="{'active': href === '/home'}" [routerLink]="['/home']">
           Home
           </a>
@@ -19,27 +19,44 @@
           Login
           </a>
       </div>
-      <div class="right menu" *ngIf="readSession('activeUser')">
-
-          <a class="item greeting" style="pointer-events: none; font-style: italic;">
-            <img class="ui avatar image" src="./assets/images/icon1.png">
-            Welcome, {{readSession('activeUser')}}!
-          </a>
-          <a class="item loggedIn" [ngClass]="{'active': href === '/home'}" [routerLink]="['/home']">
-          Home
-          </a>
-          <a class="item loggedIn" [ngClass]="{'active': href === '/events'}" [routerLink]="['/events']">
+      <div class="right menu" *ngIf="user">
+        <a class="item greeting" style="pointer-events: none; font-style: italic;">
+          <img class="ui avatar image" src="./assets/images/icon1.png">
+          Welcome, {{readSession('activeUser')}}!
+        </a>
+        <a class="item loggedIn" [ngClass]="{'active': href === '/home'}" [routerLink]="['/home']">
+        Home
+        </a>
+        <a class="item loggedIn" [ngClass]="{'active': href === '/events'}" [routerLink]="['/events']">
+        Events
+        </a>
+        <a class="item loggedIn" [ngClass]="{'active': href === '/faq'}" [routerLink]="['/faq']">
+        FAQ
+        </a>
+        <a class="item loggedIn" [ngClass]="{'active': href === '/account'}" [routerLink]="['/account/profile']">
+        My Account
+        </a>
+        <a class="item loggedIn" (click)="logout()">
+        Logout
+        </a>
+      </div>
+      <div class="right menu" *ngIf="admin">
+        <a class="item greeting" style="pointer-events: none; font-style: italic;">
+          <img class="ui avatar image" src="./assets/images/icon1.png">
+          Welcome, {{readSession('activeUser')}}!
+        </a>
+        <a class="item loggedIn" [ngClass]="{'active': href === '/adminDashboard'}" [routerLink]="['/adminDashboard']">
+          Admin Dashboard
+        </a>
+        <a class="item loggedIn" [ngClass]="{'active': href === '/events'}" [routerLink]="['/events']">
           Events
-          </a>
-          <a class="item loggedIn" [ngClass]="{'active': href === '/faq'}" [routerLink]="['/faq']">
-          FAQ
-          </a>
-          <a class="item loggedIn" [ngClass]="{'active': href === '/account'}" [routerLink]="['/account/profile']">
+        </a>
+        <a class="item loggedIn" [ngClass]="{'active': href === '/account'}" [routerLink]="['/account/profile']">
           My Account
-          </a>
-          <a class="item loggedIn" (click)="logout()">
+        </a>
+        <a class="item loggedIn" (click)="logout()">
           Logout
-          </a>
+        </a>
       </div>
     </div>
   </div>

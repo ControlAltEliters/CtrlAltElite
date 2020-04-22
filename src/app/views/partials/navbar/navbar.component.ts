@@ -9,7 +9,9 @@ import { CommonUtils } from 'src/app/utils/common-utils';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  activeUser: string;
+  admin = false;
+  user = false;
+  inactive = true;
   href = '';
 
   constructor(
@@ -34,7 +36,15 @@ export class NavbarComponent implements OnInit {
     this._commonutils.setSessionField('userEmail', data.email);
     this._commonutils.setSessionField('userId', data._id);
 
-    this.activeUser = this._commonutils.readSessionField('activeUser');
+    if(this.readSession("activeUser")) {
+      if(data.role == "Admin") {
+        this.admin = true;
+      }
+      else {
+        this.user = true;
+      }
+      this.inactive = false;
+    }
   }
 
   readSession(key) {

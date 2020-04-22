@@ -14,6 +14,13 @@ export class UserService {
     });
   }
 
+  registerAdmin(body: any){
+    return this._http.post(environment.baseurl + '/users/registerAdmin', body, {
+      observe: 'body',
+      headers: new HttpHeaders().append('Content-Type', 'application/json')
+    });
+  }
+
   login(body: any) {
     return this._http.post(environment.baseurl + '/users/login', body, {
       observe: 'body',

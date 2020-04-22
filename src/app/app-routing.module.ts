@@ -13,7 +13,7 @@ import { AdminDashboardComponent } from './views/admin-dashboard/admin-dashboard
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: localStorage.getItem("path"),
     pathMatch: 'full'
   },
   {

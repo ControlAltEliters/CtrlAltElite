@@ -8,6 +8,7 @@ import { FaqPageComponent } from './views/faq-page/faq-page.component';
 import { AccountPageComponent } from './views/account-page/account-page.component';
 import { ProfileComponent } from './views/partials/profile/profile.component';
 import { UserEventsComponent } from './views/partials/user-events/user-events.component';
+import { AdminDashboardComponent } from './views/admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,11 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent,
     data: { title: 'Home' }
+  },
+  {
+    path: 'adminDashboard',
+    component: AdminDashboardComponent,
+    data: { title: 'Admin Dashboard' }
   },
   {
     path: 'login',

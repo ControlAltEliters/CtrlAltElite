@@ -7,6 +7,7 @@ import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
 import { UserService } from 'src/app/services/user.service';
 import { CommonUtils } from 'src/app/utils/common-utils';
 import { Router } from '@angular/router';
+import { NotifierService } from "angular-notifier";
 
 declare let $: any;
 
@@ -73,6 +74,9 @@ export class EventsPageComponent implements OnInit {
   initialResources = '';
   initialDescription = '';
 
+  // For notifications
+  private readonly notifier: NotifierService;
+
   // Forms
   eventsForm: FormGroup = new FormGroup({
     eventTitle: new FormControl(null, Validators.required),
@@ -106,8 +110,9 @@ export class EventsPageComponent implements OnInit {
     private elementRef: ElementRef,
     private _userService: UserService,
     private _commonUtils: CommonUtils,
-    private _router: Router
-  ) {}
+    private _router: Router,
+    private notifierService: NotifierService
+  ) {this.notifier = notifierService;}
 
   ngOnInit(): void {
     this._eventsService.event().subscribe(
@@ -123,7 +128,9 @@ export class EventsPageComponent implements OnInit {
     );
   }
 
-  handleClick(event) {}
+  handleClick(event) {
+    this.notifier.notify("success", "You clicked a date!");
+  }
 
   dealWithUser(data) {
     this.userID = data._id;
@@ -393,21 +400,20 @@ export class EventsPageComponent implements OnInit {
     if (this.check2 === true) {
       this.eventsForm.value.endTime += 12;
     }
-
     this.eventsForm.value.eventCreator = this.user;
-
     this._eventsService
       .createEvent(JSON.stringify(this.eventsForm.value))
       .subscribe(
         (data) => {
-          console.log(data);
+          this.notifier.notify("success", "Event created!");
+          this.putEventOnCalendar();
         },
-        (error) => console.error(error)
+        (error) => {
+          this.notifier.notify("error", "Unable to create event");
+          console.error(error)
+        }
       );
-
-    this.putEventOnCalendar();
     this.eventsForm.reset();
-    window.location.reload();
   }
 
   // Makes call to backend to change event information
@@ -418,21 +424,20 @@ export class EventsPageComponent implements OnInit {
     if (this.check2 === true) {
       this.editEventForm.value.editEndTime += 12;
     }
-
     this.editEventForm.value.eventCreator = this.user;
-
     this._eventsService
       .editEvent(JSON.stringify(this.editEventForm.value))
       .subscribe(
         (data) => {
-          console.log('Event updated');
+          this.notifier.notify("success", "Event updated!");
+          this.putEditEventOnCalendar();
         },
-        (error) => console.error(error)
+        (error) => {
+          this.notifier.notify("error", "Unable to update event");
+          console.error(error)
+        }
       );
-
-    this.putEventOnCalendar();
     this.editEventForm.reset();
-    window.location.reload();
   }
 
   // Show edit event modal and sets + prefills information from current event
@@ -500,24 +505,53 @@ export class EventsPageComponent implements OnInit {
 
   putEventOnCalendar() {
     let startTime = this.eventsForm.value.startTime;
+    let endTime = this.eventsForm.value.endTime;
+    const date = new Date(this.eventsForm.value.date);
+    const dateCST = new Date(date.getTime() + Math.abs(date.getTimezoneOffset()*60000));
+
     if (this.check1 === false) {
       startTime += 12;
     }
-    let endTime = this.eventsForm.value.endTime;
     if (this.check2 === false) {
       endTime += 12;
     }
 
-    const date = this.eventsForm.value.date;
-    const testDate = new Date(date);
-    const year = testDate.getFullYear();
-    const month = testDate.getMonth();
-    const day = testDate.getDate();
-    const startDate = new Date(year, month, day, startTime, 0);
-    const endDate = new Date(year, month, day, endTime, 0);
+    const startDate = new Date(dateCST.getFullYear(), dateCST.getMonth(), dateCST.getDate(), startTime, 0);
+    const endDate = new Date(dateCST.getFullYear(), dateCST.getMonth(), dateCST.getDate(), endTime, 0);
+
+    console.log('start: ' + startDate)
+    console.log('end: ' + endDate)
 
     this.calendarEvents = this.calendarEvents.concat({
       title: this.eventsForm.value.eventTitle,
+      start: startDate,
+      end: endDate,
+    });
+  }
+
+  putEditEventOnCalendar() {
+    let startTime = this.editEventForm.value.editStartTime;
+    let endTime = this.editEventForm.value.editEndTime;
+    const date = new Date(this.editEventForm.value.editDate);
+    const dateCST = new Date(date.getTime() + Math.abs(date.getTimezoneOffset()*60000));
+
+    if (this.check1 === false) {
+      startTime += 12;
+    }
+    if (this.check2 === false) {
+      endTime += 12;
+    }
+
+    const startDate = new Date(dateCST.getFullYear(), dateCST.getMonth(), dateCST.getDate(), startTime, 0);
+    const endDate = new Date(dateCST.getFullYear(), dateCST.getMonth(), dateCST.getDate(), endTime, 0);
+
+    console.log('start: ' + startDate)
+    console.log('end: ' + endDate)
+
+    //TODO REMOVE DUPLICATE EVENT ON UPDATE BEFORE CONCAT
+
+    this.calendarEvents = this.calendarEvents.concat({
+      title: this.editEventForm.value.editEventTitle,
       start: startDate,
       end: endDate,
     });

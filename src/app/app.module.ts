@@ -28,6 +28,8 @@ import { UserEventsComponent } from './views/partials/user-events/user-events.co
 import { FaqPageComponent } from './views/faq-page/faq-page.component';
 import { CommonUtils } from './utils/common-utils';
 import { ChatBoxComponent } from './views/partials/chat-box/chat-box.component';
+import { NotifierModule } from "angular-notifier";
+import { NotifierContainerComponent } from './views/partials/notifier-container/notifier-container.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { ChatBoxComponent } from './views/partials/chat-box/chat-box.component';
     UserEventsComponent,
     FaqPageComponent,
     ChatBoxComponent,
+    NotifierContainerComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +60,12 @@ import { ChatBoxComponent } from './views/partials/chat-box/chat-box.component';
     HttpClientModule,
     FullCalendarModule,
     HttpClientJsonpModule,
+    NotifierModule.withConfig({
+      behaviour: {
+        autoHide: 3000,
+        stacking: 3
+    },
+    })
   ],
   providers: [UserService, EventService, CommonUtils],
   bootstrap: [AppComponent],

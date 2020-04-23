@@ -1,51 +1,53 @@
-<div *ngIf="showMap" class="row map-row">
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3343.3946361495364!2d-97.04723818481659!3d33.07240088088383!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864c3382b2ff4345%3A0x59f28bdeebb8252a!2sThe%20Realms%20of%20Arcadia!5e0!3m2!1sen!2sus!4v1586968451391!5m2!1sen!2sus" ></iframe>
-</div>
-<div id="wrapfooter">
-  <div class="ui inverted vertical footer segment">
-    <div class="ui center aligned container">
-      <div class="ui stackable inverted divided grid">
-        <div class="row">
-          <div class="three wide column">
-            <h4 class="ui inverted header">Contact</h4>
-            <div class="ui inverted link list">
-              <p>(940) 453-9064</p>
-              <p>1842 Justin Rd</p>
-              <p>Highland Village, TX 75077</p>
-            </div>
-          </div>
-          <div class="four wide column">
-            <h4 class="ui inverted header">Hours</h4>
-            <p><strong>Monday-Thursday:</strong> 1pm-11pm</p>
-            <p><strong>Friday-Saturday:</strong> 10am-12am</p>
-            <p><strong>Sunday:</strong> 12pm-10pm</p>
-          </div>
-          <div class="six wide column">
-            <h4 class="ui inverted header">Subscribe to our email list!</h4>
-            <!-- Begin Mailchimp Signup Form -->
-            <form class="ui form" #subscribeForm='ngForm' (ngSubmit)='subscribe(subscribeForm)'>
-              <div class="ui grid">
-                <div class="row email-box">
-                    <input pattern="\S+@\S+\.\S+" placeholder="Email" required #email='ngModel' name='userName' id="email-box"
-                        [(ngModel)]='subscribeData.email'>
-                      <!-- <div *ngIf="email.invalid && (email.dirty || email.touched)">
-                        <div *ngIf="(email.errors.required)">
-                            Email is required.
-                        </div>
-                      </div> -->
-                      <div class="row centered subscribe-button">
-                        <button class="ui approve button" type='submit'>Subscribe</button>
-                      </div>
-                  </div>
+<div class="stickyfooter">
+  <div *ngIf="showMap" class="row map-row">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3343.3946361495364!2d-97.04723818481659!3d33.07240088088383!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864c3382b2ff4345%3A0x59f28bdeebb8252a!2sThe%20Realms%20of%20Arcadia!5e0!3m2!1sen!2sus!4v1586968451391!5m2!1sen!2sus" ></iframe>
+  </div>
+  <div id="wrapfooter">
+    <div class="ui inverted vertical footer segment">
+      <div class="ui center aligned container">
+        <div class="ui stackable inverted divided grid">
+          <div class="row">
+            <div class="three wide column">
+              <h4 class="ui inverted header">Contact</h4>
+              <div class="ui inverted link list">
+                <p>(940) 453-9064</p>
+                <p>1842 Justin Rd</p>
+                <p>Highland Village, TX 75077</p>
               </div>
-            </form>
-          </div>
-          <div class="three wide column">
-            <h4 class="ui inverted header">Follow us on social media</h4>
-            <div class="row centered social-icons">
-              <img class="social-icon" src="assets/images/social-instagram.png">
-              <img class="social-icon" src="assets/images/social-facebook.png">
-              <img class="social-icon" src="assets/images/social-twitter.png">
+            </div>
+            <div class="four wide column">
+              <h4 class="ui inverted header">Hours</h4>
+              <p><strong>Monday-Thursday:</strong> 1pm-11pm</p>
+              <p><strong>Friday-Saturday:</strong> 10am-12am</p>
+              <p><strong>Sunday:</strong> 12pm-10pm</p>
+            </div>
+            <div class="six wide column">
+              <h4 class="ui inverted header">Subscribe to our email list!</h4>
+              <!-- Begin Mailchimp Signup Form -->
+              <form class="ui form" #subscribeForm='ngForm' (ngSubmit)='subscribe(subscribeForm)'>
+                <div class="ui grid">
+                  <div class="row email-box">
+                      <input pattern="\S+@\S+\.\S+" placeholder="Email" required #email='ngModel' name='userName' id="email-box"
+                          [(ngModel)]='subscribeData.email'>
+                        <!-- <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                          <div *ngIf="(email.errors.required)">
+                              Email is required.
+                          </div>
+                        </div> -->
+                        <div class="row centered subscribe-button">
+                          <button class="ui approve button" type='submit'>Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+              </form>
+            </div>
+            <div class="three wide column">
+              <h4 class="ui inverted header">Follow us on social media</h4>
+              <div class="row centered social-icons">
+                <img class="social-icon" src="assets/images/social-instagram.png">
+                <img class="social-icon" src="assets/images/social-facebook.png">
+                <img class="social-icon" src="assets/images/social-twitter.png">
+              </div>
             </div>
           </div>
         </div>

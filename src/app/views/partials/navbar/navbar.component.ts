@@ -9,9 +9,7 @@ import { CommonUtils } from 'src/app/utils/common-utils';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  admin = false;
-  user = false;
-  inactive = true;
+  activeUser: string;
   href = '';
 
   constructor(
@@ -27,7 +25,6 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.href = this._router.url;
-    localStorage.setItem("path", "home");
   }
 
   setUser(data) {
@@ -36,18 +33,8 @@ export class NavbarComponent implements OnInit {
     this._commonutils.setSessionField('activeUser', data.username);
     this._commonutils.setSessionField('userEmail', data.email);
     this._commonutils.setSessionField('userId', data._id);
-    this._commonutils.setSessionField('role', data.role);
 
-    if(this.readSession("activeUser")) {
-      if(data.role == "Admin") {
-        this.admin = true;
-        localStorage.setItem("path", "adminDashboard");
-      }
-      else {
-        this.user = true;
-      }
-      this.inactive = false;
-    }
+    this.activeUser = this._commonutils.readSessionField('activeUser');
   }
 
   readSession(key) {

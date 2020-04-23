@@ -40,24 +40,11 @@ export class LoginComponent implements OnInit {
     this._userService.login(JSON.stringify(this.loginForm.value))
     .subscribe(
       data => {
-        this._userService.user().subscribe(
-          (data) => this.dealWithUser(data),
-          (error) => {}
-        ); 
+        this._router.navigate(['/home']);
       },
       error => {
         this.loginError = error.error.message;
       }
     );
   }
-
-  dealWithUser(data){
-    if(data.role === 'Admin'){
-      this._router.navigate(['/adminDashboard'])
-    } else {
-      this._router.navigate(['/home']);
-    }
-    
-  }
-
 }

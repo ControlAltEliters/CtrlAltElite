@@ -1,8 +1,6 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 let bcrypt = require('bcrypt');
-const Role = require('../helpers/role');
-
 
 let schema = new Schema({
     firstname :   {type:String, require:true},
@@ -10,7 +8,6 @@ let schema = new Schema({
     email :       {type:String, require:true, index: true, unique: true},
     username :    {type:String, require:true, index: true, unique: true},
     password :    {type:String, require:true},
-    role: {type:Role, require: true},
     creation_dt : {type:Date, require:true}
 });
 

@@ -15,7 +15,6 @@ declare let $: any;
   templateUrl: './events-page.component.html',
   styleUrls: ['./events-page.component.css'],
 })
-
 export class EventsPageComponent implements OnInit {
   calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
   public today = new Date();

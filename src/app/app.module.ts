@@ -28,7 +28,6 @@ import { UserEventsComponent } from './views/partials/user-events/user-events.co
 import { FaqPageComponent } from './views/faq-page/faq-page.component';
 import { CommonUtils } from './utils/common-utils';
 import { ChatBoxComponent } from './views/partials/chat-box/chat-box.component';
-import { AdminDashboardComponent } from './views/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +44,6 @@ import { AdminDashboardComponent } from './views/admin-dashboard/admin-dashboard
     UserEventsComponent,
     FaqPageComponent,
     ChatBoxComponent,
-    AdminDashboardComponent,
   ],
   imports: [
     BrowserModule,

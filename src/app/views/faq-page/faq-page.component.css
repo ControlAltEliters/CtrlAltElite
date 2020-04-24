@@ -27,7 +27,7 @@
   padding-left: 4em !important;
 }
 
-button {
+#email-button {
     all: unset;
     color: #fff !important;
     margin: .5em 0 1.5vw 0;
@@ -50,16 +50,12 @@ textarea {
 }
 
 label {
-  margin: 1em 0 1em 0!important;
+  margin: 1em 0 1em 0 !important;
 }
 
 .ui.message {
-  width: 100%;
-  margin: 0 auto;
-}
-
-#center {
-  padding: 1em;
+  width: 90%;
+  margin: 0em 0em 1em 5%;
 }
 
 .faq-title {

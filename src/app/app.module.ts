@@ -28,6 +28,7 @@ import { UserEventsComponent } from './views/partials/user-events/user-events.co
 import { FaqPageComponent } from './views/faq-page/faq-page.component';
 import { CommonUtils } from './utils/common-utils';
 import { ChatBoxComponent } from './views/partials/chat-box/chat-box.component';
+import { DiscussionBoardModalComponent } from './views/partials/discussion-board-modal/discussion-board-modal.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ChatBoxComponent } from './views/partials/chat-box/chat-box.component';
     UserEventsComponent,
     FaqPageComponent,
     ChatBoxComponent,
+    DiscussionBoardModalComponent,
   ],
   imports: [
     BrowserModule,

@@ -17,6 +17,7 @@ let schema = new Schema({
     creation_dt:{type:Date, require:true},
     eventID: {type: String},
     eventCreator: {type: String},
+    messageBoard: [],
 });
 
 module.exports = mongoose.model('Event',schema, 'events');

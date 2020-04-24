@@ -1,8 +1,25 @@
+.dashboard {
+  height: 40em;
+}
+
 #dashboardWrapper {
   position: relative;
   height: 100%;
+  margin: auto;
 }
 
-.dashboard {
-  height: 40em;
+/* .ui.top.attached.tabular.menu{
+  margin: auto;
+  background: rgba(20,9,9,.8);
+  color: white;
+} */
+
+.ui.top.attached.tabular.menu .item{
+  color:white;
+  background: rgba(20,9,9,.8);
+}
+
+.ui.bottom.attached.tab.segment{
+  color:white;
+  background: rgba(20,9,9,.8);
 }

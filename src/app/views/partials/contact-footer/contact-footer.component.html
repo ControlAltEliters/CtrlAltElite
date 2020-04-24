@@ -27,8 +27,7 @@
               <form class="ui form" #subscribeForm='ngForm' (ngSubmit)='subscribe(subscribeForm)'>
                 <div class="ui grid">
                   <div class="row email-box">
-                      <input pattern="\S+@\S+\.\S+" placeholder="Email" required #email='ngModel' name='userName' id="email-box"
-                          [(ngModel)]='subscribeData.email'>
+                      <input pattern="\S+@\S+\.\S+" placeholder="Email" required #email='ngModel' name='userName' id="email-box" [(ngModel)]='subscribeData.email'>
                         <!-- <div *ngIf="email.invalid && (email.dirty || email.touched)">
                           <div *ngIf="(email.errors.required)">
                               Email is required.

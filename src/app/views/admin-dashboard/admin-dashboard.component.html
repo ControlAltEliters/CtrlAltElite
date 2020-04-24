@@ -15,6 +15,11 @@
         </div>
         <div class="ui divider"></div>
         <br />
+        <full-calendar 
+            defaultView="listWeek" 
+            [plugins]="calendarPlugins"
+            [events]="calendarEvents">
+        </full-calendar>
         This is the Events tab.
     </div>
     <div class="ui bottom attached tab segment" data-tab="users">
@@ -46,6 +51,7 @@
                 </div>
                 <div class="ui divider"></div>
                 <br />
+    <!-- insert fullcalendar here -->
                 This is the Events tab.
             </div>
             <div class="ui tab segment" data-tab="users">

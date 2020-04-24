@@ -1,21 +1,26 @@
 .dashboard {
   height: 40em;
-  width: 75%;
+  width: 80%;
   margin: 0 auto;
   position:relative;
 }
 
-/* #dashboardWrapper {
-  position: relative;
-  height: 100%;
-  margin: auto;
+/* .ui.transparent.icon.input{
+  margin-left: auto;
+  margin-right: 0;
+  float: right;
+  display: inline;
 } */
 
-/* .ui.top.attached.tabular.menu{
-  margin: auto;
+.ui.vertical.fluid.tabular.menu .item{
+  color:white;
   background: rgba(20,9,9,.8);
-  color: white;
-} */
+}
+
+.ui.tab.segment{
+  color:white;
+  background: rgba(20,9,9,.8);
+}
 
 .ui.top.attached.tabular.menu .item{
   color:white;

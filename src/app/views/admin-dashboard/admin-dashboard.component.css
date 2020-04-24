@@ -1,12 +1,15 @@
 .dashboard {
   height: 40em;
+  width: 75%;
+  margin: 0 auto;
+  position:relative;
 }
 
-#dashboardWrapper {
+/* #dashboardWrapper {
   position: relative;
   height: 100%;
   margin: auto;
-}
+} */
 
 /* .ui.top.attached.tabular.menu{
   margin: auto;

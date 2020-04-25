@@ -29,6 +29,7 @@ import { FaqPageComponent } from './views/faq-page/faq-page.component';
 import { CommonUtils } from './utils/common-utils';
 import { ChatBoxComponent } from './views/partials/chat-box/chat-box.component';
 import { AdminDashboardComponent } from './views/admin-dashboard/admin-dashboard.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { AdminDashboardComponent } from './views/admin-dashboard/admin-dashboard
     FaqPageComponent,
     ChatBoxComponent,
     AdminDashboardComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,

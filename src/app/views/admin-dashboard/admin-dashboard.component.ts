@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { EventService } from 'src/app/services/event.service';
 import { UserService } from 'src/app/services/user.service';
 import { Calendar } from '@fullcalendar/core';
@@ -29,6 +29,7 @@ export class AdminDashboardComponent implements OnInit {
   tables = [];
   calendarEvents = [];
   currentPlayers = [];
+  searchString: string;
 
   errorMessage: string;
 

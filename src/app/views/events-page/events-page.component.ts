@@ -37,7 +37,6 @@ export class EventsPageComponent implements OnInit {
   check1 = false;
   check2 = false;
   errorMessageModal = false;
-  successMessageModal = false;
   inEvent = false;
   table1 = true;
   table2 = true;
@@ -262,7 +261,7 @@ export class EventsPageComponent implements OnInit {
         },
         (error) => console.error(error)
       );
-      this.successMessageModal = true;
+      this.notifier.notify("success", "Joined!");
       setTimeout(() => {
         window.location.reload();
       }, 1000);
@@ -273,6 +272,7 @@ export class EventsPageComponent implements OnInit {
         this.errorMessageModal = false;
       }, 3000);
     }
+
   }
 
   // leave joined event
@@ -288,7 +288,7 @@ export class EventsPageComponent implements OnInit {
         },
         (error) => console.error(error)
       );
-      this.successMessageModal = true;
+      this.notifier.notify("success", "Left event!");
       setTimeout(() => {
         window.location.reload();
       }, 1000);
@@ -405,7 +405,6 @@ export class EventsPageComponent implements OnInit {
       .createEvent(JSON.stringify(this.eventsForm.value))
       .subscribe(
         (data) => {
-          this.notifier.notify("success", "Event created!");
           this.putEventOnCalendar();
         },
         (error) => {
@@ -414,6 +413,11 @@ export class EventsPageComponent implements OnInit {
         }
       );
     this.eventsForm.reset();
+    this.notifier.notify("success", "Event created!");
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+
   }
 
   // Makes call to backend to change event information
@@ -429,7 +433,6 @@ export class EventsPageComponent implements OnInit {
       .editEvent(JSON.stringify(this.editEventForm.value))
       .subscribe(
         (data) => {
-          this.notifier.notify("success", "Event updated!");
           this.putEditEventOnCalendar();
         },
         (error) => {
@@ -437,7 +440,11 @@ export class EventsPageComponent implements OnInit {
           console.error(error)
         }
       );
-    this.editEventForm.reset();
+      this.editEventForm.reset();
+      this.notifier.notify("success", "Event updated!");
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
   }
 
   // Show edit event modal and sets + prefills information from current event

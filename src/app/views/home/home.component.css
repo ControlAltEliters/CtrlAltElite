@@ -54,7 +54,9 @@
 .date {
   height: 30%;
   background: rgba(55,13,25,1.0);
+  padding: 1em 0 0 1em !important;
 }
+
 .holder {
   height: 25%
 }

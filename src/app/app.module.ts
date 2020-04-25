@@ -30,6 +30,8 @@ import { CommonUtils } from './utils/common-utils';
 import { ChatBoxComponent } from './views/partials/chat-box/chat-box.component';
 import { NotifierModule } from "angular-notifier";
 import { NotifierContainerComponent } from './views/partials/notifier-container/notifier-container.component';
+import { AdminDashboardComponent } from './views/admin-dashboard/admin-dashboard.component';
+
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { NotifierContainerComponent } from './views/partials/notifier-container/
     FaqPageComponent,
     ChatBoxComponent,
     NotifierContainerComponent,
+    AdminDashboardComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,9 +3,14 @@ let router = express.Router();
 let User = require('../models/User');
 let passport = require('passport');
 let mongoose = require('mongoose');
+const Role = require('../helpers/role');
 
 router.post('/register', function (req, res, next) {
   addToDB(req, res);
+});
+
+router.post('/registerAdmin', function (req, res, next) {
+  addToDBAdmin(req, res);
 });
 
 async function addToDB(req, res) {
@@ -15,6 +20,28 @@ async function addToDB(req, res) {
     email: req.body.email,
     username: req.body.username,
     password: User.hashPassword(req.body.password),
+    role: Role.User,
+    creation_dt: Date.now()
+  });
+
+  try {
+    doc = await user.save();
+    return res.status(201).json(doc);
+  }
+  catch (err) {
+    console.log(err);
+    return res.status(500).json({message:'Registration error occured.'});
+  }
+}
+
+async function addToDBAdmin(req, res) {
+  let user = new User({
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    email: req.body.email,
+    username: req.body.username,
+    password: User.hashPassword(req.body.password),
+    role: Role.Admin,
     creation_dt: Date.now()
   });
 

@@ -7,6 +7,17 @@ router.post('/createEvent', function (req, res, next) {
   addToDB(req, res);
 });
 
+router.delete('/removeEvent/:id', async (req, res) => {
+  try {
+    const id = await Event.findByIdAndDelete(req.params.id)
+
+    if (!id) res.status(404).send("No event found")
+    res.status(200).send()
+  } catch (err) {
+    res.status(500).send(err)
+  }
+})
+
 router.post('/editEvent', function (req, res, next) {
   console.log('Made it to the backend! Event body:');
   console.log(req.body);

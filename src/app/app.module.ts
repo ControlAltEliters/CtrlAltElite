@@ -28,9 +28,12 @@ import { UserEventsComponent } from './views/partials/user-events/user-events.co
 import { FaqPageComponent } from './views/faq-page/faq-page.component';
 import { CommonUtils } from './utils/common-utils';
 import { ChatBoxComponent } from './views/partials/chat-box/chat-box.component';
+import { NotifierModule } from "angular-notifier";
+import { NotifierContainerComponent } from './views/partials/notifier-container/notifier-container.component';
 import { AdminDashboardComponent } from './views/admin-dashboard/admin-dashboard.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { DatePipe } from '@angular/common';
+
 
 @NgModule({
   declarations: [
@@ -47,6 +50,7 @@ import { DatePipe } from '@angular/common';
     UserEventsComponent,
     FaqPageComponent,
     ChatBoxComponent,
+    NotifierContainerComponent,
     AdminDashboardComponent,
     FilterPipe,
   ],
@@ -62,6 +66,12 @@ import { DatePipe } from '@angular/common';
     HttpClientModule,
     FullCalendarModule,
     HttpClientJsonpModule,
+    NotifierModule.withConfig({
+      behaviour: {
+        autoHide: 3000,
+        stacking: 3
+    },
+    })
   ],
   providers: [UserService, EventService, CommonUtils, DatePipe],
   bootstrap: [AppComponent],

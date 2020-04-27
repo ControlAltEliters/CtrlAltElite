@@ -3,6 +3,8 @@ import { UserService } from '../../../services/user.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonUtils } from 'src/app/utils/common-utils';
+import { NotifierService } from "angular-notifier";
+
 
 declare let $: any;
 
@@ -23,6 +25,9 @@ export class ProfileComponent implements OnInit {
   successMessage: string;
   showSuccessMessage: Boolean;
 
+  private readonly notifier: NotifierService;
+
+
   editProfile: FormGroup = new FormGroup({
     editFirstName: new FormControl(null),
     editLastName: new FormControl(null),
@@ -40,8 +45,9 @@ export class ProfileComponent implements OnInit {
   constructor(
     private _router: Router,
     private _userService: UserService,
-    private _commonUtils: CommonUtils
-  ) {}
+    private _commonUtils: CommonUtils,
+    private notifierService: NotifierService
+  ) {this.notifier = notifierService;}
 
   ngOnInit(): void {
     // set local state
@@ -120,6 +126,7 @@ export class ProfileComponent implements OnInit {
           this.editProfileError = error.error.message;
         }
       );
+      this.notifier.notify("success", "Information updated!");
   }
 
   updateUserPassword() {
@@ -137,7 +144,8 @@ export class ProfileComponent implements OnInit {
             if (resp.body.newpass != 'null') {
               this._commonUtils.setSessionField('flag', '1');
               this.showErrorMessage = false;
-              this.successMessage = 'Successfully updated password!';
+              // this.successMessage = 'Successfully updated password!';
+              this.notifier.notify("success", "Password updated! Please login with new password.");
               this.showSuccessMessage = true;
             } else {
               this._commonUtils.setSessionField('flag', '0');

@@ -1,16 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { EventService } from 'src/app/services/event.service';
 import { UserService } from 'src/app/services/user.service';
-import { Calendar } from '@fullcalendar/core';
-import listPlugin from '@fullcalendar/list';
+
 import { DatePipe } from '@angular/common';
 
 declare let $: any;
-
-// let calendar = new Calendar(calendarEl, {
-//   plugins: [ listPlugin ],
-//   defaultView: 'listWeek'
-// });
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -18,7 +12,7 @@ declare let $: any;
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent implements OnInit {
-  calendarPlugins = [listPlugin];
+
   public today = new Date();
   public testDate = '2020-03-22';
   public testTitle = 'Test Title';

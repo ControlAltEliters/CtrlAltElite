@@ -129,7 +129,7 @@ export class EventsPageComponent implements OnInit {
   }
 
   handleClick(event) {
-    this.notifier.notify("success", "You clicked a date!");
+    // this.notifier.notify("success", "You clicked a date!");
   }
 
   dealWithUser(data) {
@@ -262,16 +262,13 @@ export class EventsPageComponent implements OnInit {
         },
         (error) => console.error(error)
       );
-      this.notifier.notify("success", "Joined!");
+      this.notifier.notify("success", "Joined event!");
       setTimeout(() => {
         window.location.reload();
       }, 1000);
     } else {
-      this.errorMessage = 'User already registered.';
-      this.errorMessageModal = true;
-      setTimeout(() => {
-        this.errorMessageModal = false;
-      }, 3000);
+      this.notifier.notify("error", 'User already registered.');
+
     }
 
   }
@@ -294,11 +291,7 @@ export class EventsPageComponent implements OnInit {
         window.location.reload();
       }, 1000);
     } else {
-      this.errorMessage = 'User not registered.';
-      this.errorMessageModal = true;
-      setTimeout(() => {
-        this.errorMessageModal = false;
-      }, 3000);
+      this.notifier.notify("error", 'User not registered.');
     }
   }
 
@@ -442,7 +435,7 @@ export class EventsPageComponent implements OnInit {
         }
       );
       this.editEventForm.reset();
-      this.notifier.notify("success", "Event updated!");
+      this.notifier.notify("success", "Updated event!");
       setTimeout(() => {
         window.location.reload();
       }, 1000);

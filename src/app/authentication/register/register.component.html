@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <div class="ui card centered">
-  <form [formGroup]="registerForm" class="ui form" [ngClass]="{'error': registerError}">
+  <form [formGroup]="registerForm" class="ui form">
     <div class="content">
       <div class="center aligned description grid">
         <h2 class="register-header">Get Started</h2>
@@ -37,7 +37,7 @@
         <div *ngIf="ownerRegistration">
           <div class="row padded">
             <div class="field">
-              <input formControlName="code" type="text" name="" placeholder="Admin Code">
+              <input formControlName="code" type="password" name="" placeholder="Admin Code">
             </div>
           </div>
         </div>
@@ -53,10 +53,10 @@
           <div *ngIf="ownerRegistration">
             <br><a (click)="toggleForm()">Go Back</a>
           </div>
-          <div class="ui error message">
+          <!-- <div class="ui error message">
             <div class="header">Registration Error</div>
             <p>{{registerError}}</p>
-          </div>
+          </div> -->
         </div>
     </div>
   </form>

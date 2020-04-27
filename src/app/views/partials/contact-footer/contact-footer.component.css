@@ -1,38 +1,36 @@
 #wrapfooter {
-    width:100%;
-    /* height:80px; */
-    position: relative;
-    bottom:0;
-    left:0;
-    background:rgb(250, 250, 2);
+  width:100%;
+  position: relative;
+  bottom:0;
+  left:0;
 }
 
 p {
-    margin-bottom: .25em;
+  margin-bottom: .25em;
 }
 
 img {
-    width: auto;
-    height: 2.5em;
-    padding: 1em .5em 0 .5em;
+  width: auto;
+  height: 2.5em;
+  padding: 1em .5em 0 .5em;
 }
 
 .ui.footer.segment {
-    bottom: 0px;
-    width: 100%;
-    padding: 2.5em 0em;
-    margin: 0em;
+  bottom: 0;
+  width: 100%;
+  padding: 2.5em 0em;
+  margin: 0em;
 }
 
 .ui.inverted.segment, .ui.primary.inverted.segment {
-    background: rgb(46, 163, 184);
+  background: rgb(46, 163, 184);
 }
 
 iframe {
-    width: 100%;
-    height: 200px;
-    border: 0;
-    display: flex;
+  width: 100%;
+  height: 200px;
+  border: 0;
+  display: flex;
 }
 
 .social-icon {
@@ -41,17 +39,17 @@ iframe {
 
 .email-box {
   text-align: center;
-  height: 2em !important;
-  padding: 1em 2em 0 2em !important;
+  width: 100% !important;
+  padding-left: 20% !important;
+}
+
+input, button {
+  margin: 0 auto;
   display: inline-block;
-  margin: .5em 0 0 1em;
+  height: 40px !important;
 }
 
 input {
-  width: 15vw !important;
-}
-
-button {
-  height: 40px !important;
-  margin-left: 1.5em !important;
+  width: 45% !important;
+  margin: 0% 3% 0% 0% !important;
 }

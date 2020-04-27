@@ -36,6 +36,7 @@
     "@fullcalendar/interaction": "^4.4.0",
     "@fullcalendar/timegrid": "^4.4.0",
     "@types/jquery": "^3.3.33",
+    "angular-notifier": "^6.0.1",
     "ansi-colors": "^4.1.1",
     "bcrypt": "^4.0.0",
     "bluebird": "^3.7.2",

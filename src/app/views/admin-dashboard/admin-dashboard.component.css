@@ -60,7 +60,7 @@ td {
 
 #desc {
   width: 22em;
-  height: 4.5em;
+  max-height: 4.5em;
   overflow-y: scroll;
 }
 

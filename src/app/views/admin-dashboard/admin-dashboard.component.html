@@ -9,7 +9,7 @@
         </a>
     </div>
     <div class="ui bottom attached tab segment active" data-tab="events">
-        
+
         This is the Events tab.
     </div>
     <div class="ui bottom attached tab segment" data-tab="users">
@@ -53,32 +53,37 @@
                         </div>
                     </div>
                   </form>
-                  
+                <div class="table-bg">
                   <table class="table">
                     <tr>
-                      <th>Title</th>
-                      <th>Date</th>
+                      <th id="th-title">Title</th>
+                      <th id="th-date">Date</th>
                       <th>Description</th>
                       <th>Current Players</th>
-                      <th class="text-right">Actions</th>
+                      <th id="th-actions">Actions</th>
                     </tr>
-                    <tr
-                      *ngFor="let event of events | filter : 'title' : searchString; let i = index"
-                    >
-                      <td class="text-left">
+                    <tr *ngFor="let event of events | filter : 'title' : searchString; let i = index">
+                      <td id="td-title" class="text-left">
                         {{event.title}}
                       </td>
-                      <td class="text-left">
-                        {{event.date}}
+                      <td id="td-date" class="text-left">
+                        {{event.date}}<br>{{event.startTime}} to {{event.endTime}}
                       </td>
                       <td class="text-left">
-                        {{event.description}}
+                        <div id="desc">{{event.description}}</div>
                       </td>
-                      <td class="text-left">
-                        {{event.currentPlayers}}
-                      </td>
+                        <td id="currPlayers" class="text-left">
+                          <li *ngFor="let player of event.currentPlayers" style="list-style-type: none;">
+                            {{player}}
+                          </li>
+                        </td>
+                        <td id="td-title" class="text-left">
+                          <button>Action 1</button>
+                          <button>Action 2</button>
+                        </td>
                     </tr>
                   </table>
+                </div>
             </div>
             <div class="ui tab segment" data-tab="users">
                 <div class="ui transparent icon input">

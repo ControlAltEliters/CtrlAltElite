@@ -30,6 +30,7 @@ import { CommonUtils } from './utils/common-utils';
 import { ChatBoxComponent } from './views/partials/chat-box/chat-box.component';
 import { AdminDashboardComponent } from './views/admin-dashboard/admin-dashboard.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import { FilterPipe } from './pipes/filter.pipe';
     FullCalendarModule,
     HttpClientJsonpModule,
   ],
-  providers: [UserService, EventService, CommonUtils],
+  providers: [UserService, EventService, CommonUtils, DatePipe],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

@@ -3,6 +3,7 @@ import { EventService } from 'src/app/services/event.service';
 import { UserService } from 'src/app/services/user.service';
 import { Calendar } from '@fullcalendar/core';
 import listPlugin from '@fullcalendar/list';
+import { DatePipe } from '@angular/common';
 
 declare let $: any;
 
@@ -36,6 +37,7 @@ export class AdminDashboardComponent implements OnInit {
   constructor(
     private _eventsService: EventService,
     private _userService: UserService,
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit(): void {
@@ -69,9 +71,21 @@ export class AdminDashboardComponent implements OnInit {
         description: event.description,
         id: event._id,
       });
+
+      if (event.startTime > 12) {
+        event.startTime = this.formatTime(event.startTime);
+      } else {
+        event.startTime = `${event.startTime}am`;
+      }
+      if (event.endTime > 12) {
+        event.endTime = this.formatTime(event.endTime);
+      } else {
+        event.endTime = `${event.endTime}am`;
+      }
+
       this.events = this.events.concat({
         title: event.eventTitle,
-        date: event.date,
+        date: this.datePipe.transform(event.date, "M/d/yy"),
         description: event.description,
         startTime: event.startTime,
         endTime: event.endTime,
@@ -87,6 +101,8 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
-  
-
+  formatTime(time) {
+    const newTime = time - 12;
+    return `${newTime}pm`;
+  }
 }

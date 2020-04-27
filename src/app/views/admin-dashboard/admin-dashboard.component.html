@@ -1,2 +1,79 @@
 <app-navbar></app-navbar>
-<div class="dashboard"></div>
+<div class="dashboard">
+    <div class="ui grid">
+        <div class="two wide column">
+            <div class="ui vertical fluid tabular menu">
+                <a class="item active" data-tab="events">
+                    Events
+                </a>
+                <a class="item" data-tab="users">
+                    Users
+                </a>
+            </div>
+        </div>
+        <div class="fourteen wide column">
+            <div class="ui tab segment active" data-tab="events">
+                <!-- Input form to filter the table of events -->
+                <form>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="ui transparent icon input">
+                                <input
+                                type="text"
+                                class="form-control"
+                                name="searchString"
+                                placeholder="Search events..."
+                                [(ngModel)]="searchString"
+                                />
+                                <i class="search link icon"></i>
+                            </div>
+                            <div class="ui divider"></div>
+                            <br />
+                        </div>
+                    </div>
+                  </form>
+                <!-- List the table of events -->
+                <div class="table-bg">
+                  <table class="table">
+                    <tr>
+                      <th id="th-title">Title</th>
+                      <th id="th-date">Date</th>
+                      <th>Description</th>
+                      <th>Current Players</th>
+                      <th id="th-actions">Actions</th>
+                    </tr>
+                    <tr *ngFor="let event of events | filter : 'title' : searchString; let i = index">
+                      <td id="td-title" class="text-left">
+                        {{event.title}}
+                      </td>
+                      <td id="td-date" class="text-left">
+                        {{event.date}}<br>{{event.startTime}} to {{event.endTime}}
+                      </td>
+                      <td class="text-left">
+                        <div id="desc">{{event.description}}</div>
+                      </td>
+                        <td id="currPlayers" class="text-left">
+                          <li *ngFor="let player of event.currentPlayers" style="list-style-type: none;">
+                            {{player}}
+                          </li>
+                        </td>
+                        <td id="td-title" class="text-left">
+                          <button>Action 1</button>
+                          <button>Action 2</button>
+                        </td>
+                    </tr>
+                  </table>
+                </div>
+            </div>
+            <div class="ui tab segment" data-tab="users">
+                <div class="ui transparent icon input">
+                    <input type="text" placeholder="Search users...">
+                    <i class="search link icon"></i>
+                </div>
+                <div class="ui divider"></div>
+                <br />
+                This is the User tab.
+            </div>
+        </div>
+    </div>
+</div>

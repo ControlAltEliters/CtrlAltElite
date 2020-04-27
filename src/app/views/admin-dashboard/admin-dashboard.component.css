@@ -1,3 +1,92 @@
+*, input::selection, .form-group:hover {
+  color: white !important;
+}
+
 .dashboard {
-  height: 40em;
+  width: 80%;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.ui.vertical.fluid.tabular.menu {
+  margin: 2em 0 0 1.5em !important;
+}
+
+/* tabular menu */
+.ui.vertical.fluid.tabular.menu .item, .ui.tab.segment, .ui.top.attached.tabular.menu .item, .ui.bottom.attached.tab.segment {
+  background: rgba(55, 13, 25,.8);
+}
+
+/* event calendar list */
+.fourteen.wide.column {
+  margin-top: 1em;
+}
+
+.table-bg {
+  overflow-y: scroll;
+  height: 40em !important;
+  max-height: 40em !important;
+}
+
+table {
+  min-width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+th {
+  height: 1em;
+  font-size: 1vw;
+  font-weight: 900;
+  padding: 0em 2em 1em 2em;
+  text-decoration: underline;
+  border-bottom: 1px solid white;
+}
+
+td {
+  height: 9em;
+  width: 15em;
+  border-bottom: 1px solid white;
+}
+
+#td-title {
+  padding: 0em 1em 0em 1em;
+}
+
+#td-date {
+  padding: 0em 2em 0em 2em;
+}
+
+#desc {
+  width: 22em;
+  height: 4.5em;
+  overflow-y: scroll;
+}
+
+#currPlayers {
+  overflow-y: scroll;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+button {
+  all: unset;
+  padding: .5em;
+  display: block;
+  font-size: .5em;
+  margin: 1.5em auto;
+  border-radius: .5em;
+  background: rgb(201, 85, 105);
+  box-shadow: 2.5px 2.5px rgb(233, 208, 223);
+}
+
+button:hover {
+  background: rgb(179, 68, 87);
+}
+
+button:active {
+  transform: translateY(1px);
 }

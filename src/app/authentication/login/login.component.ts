@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
       },
       error => {
         this.notifier.notify("error", error.error.message);
+        this.loginForm.reset();
       }
     );
   }

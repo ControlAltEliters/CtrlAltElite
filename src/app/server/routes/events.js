@@ -9,9 +9,9 @@ router.post('/createEvent', function (req, res, next) {
 
 router.delete('/removeEvent/:id', async (req, res) => {
   try {
-    const id = await Event.findByIdAndDelete(req.params.id)
+    const event = await Event.findByIdAndDelete(req)
 
-    if (!id) res.status(404).send("No event found")
+    if (!event) res.status(404).send("No event found")
     res.status(200).send()
   } catch (err) {
     res.status(500).send(err)

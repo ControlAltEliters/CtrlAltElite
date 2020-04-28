@@ -121,12 +121,14 @@ export class ProfileComponent implements OnInit {
             'userEmail',
             this.editProfile.value.editEmail
           );
+          this.notifier.notify("success", "Information updated!");
         },
         (error) => {
           this.editProfileError = error.error.message;
+          this.notifier.notify("error", "There was an error updating your information.");
+          this.notifier.notify("warning", "If updating email, email might already be in use.");
         }
       );
-      this.notifier.notify("success", "Information updated!");
   }
 
   updateUserPassword() {
@@ -143,29 +145,19 @@ export class ProfileComponent implements OnInit {
           if (resp.body.newpass === resp.body.confnewpass) {
             if (resp.body.newpass != 'null') {
               this._commonUtils.setSessionField('flag', '1');
-              this.showErrorMessage = false;
-              // this.successMessage = 'Successfully updated password!';
               this.notifier.notify("success", "Password updated! Please login with new password.");
-              this.showSuccessMessage = true;
             } else {
               this._commonUtils.setSessionField('flag', '0');
-              this.updatePasswordError = 'Fields 2 and 3 cannot be empty. Please try again.';
-              this.showErrorMessage = true;
+              this.notifier.notify('error', 'Fields 2 and 3 cannot be empty. Please try again.');
             }
           } else {
             this._commonUtils.setSessionField('flag', '0');
-            this.updatePasswordError = 'Fields 2 and 3 do not match. Please try again.';
-            this.showErrorMessage = true;
+            this.notifier.notify('error', 'Fields 2 and 3 do not match. Please try again.');
           }
         } else {
           this._commonUtils.setSessionField('flag', '0');
-          this.updatePasswordError =
-            'Field 1 does not match current password. Please try again.';
-          this.showErrorMessage = true;
+          this.notifier.notify('error', 'Field 1 does not match current password. Please try again.');
         }
-        setTimeout(() => {
-          this.showErrorMessage = false;
-        }, 2000);
       });
     setTimeout(() => {
       if (this._commonUtils.readSessionField('flag') === '1') {
@@ -186,7 +178,7 @@ export class ProfileComponent implements OnInit {
       )
       .subscribe(
         data => { console.log(data); },
-        error => { this.updatePasswordError = error.error.message; this.showErrorMessage = true; this.showSuccessMessage = false; }
+        error => { this.notifier.notify('error', error.error.message); }
     );
   }
 

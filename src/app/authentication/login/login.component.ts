@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { NotifierService } from "angular-notifier";
 
 @Component({
   selector: 'app-login',
@@ -12,11 +13,14 @@ export class LoginComponent implements OnInit {
   loginError: String;
   @Input() on: boolean;
 
+  private readonly notifier: NotifierService;
+
   loginForm: FormGroup = new FormGroup({
     email: new FormControl(null, Validators.required),
     password: new FormControl(null, Validators.required)
   });
-  constructor(private _router: Router, private _userService: UserService) { }
+  constructor(private _router: Router, private _userService: UserService, private notifierService: NotifierService
+  ) { this.notifier = notifierService; }
 
   ngOnInit(): void {
     let i = 0;
@@ -43,10 +47,11 @@ export class LoginComponent implements OnInit {
         this._userService.user().subscribe(
           (data) => this.dealWithUser(data),
           (error) => {}
-        ); 
+        );
       },
       error => {
-        this.loginError = error.error.message;
+        this.notifier.notify("error", error.error.message);
+        this.loginForm.reset();
       }
     );
   }
@@ -57,7 +62,7 @@ export class LoginComponent implements OnInit {
     } else {
       this._router.navigate(['/home']);
     }
-    
+
   }
 
 }

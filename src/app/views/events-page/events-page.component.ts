@@ -129,7 +129,7 @@ export class EventsPageComponent implements OnInit {
   }
 
   handleClick(event) {
-    this.notifier.notify("success", "You clicked a date!");
+    // this.notifier.notify("success", "You clicked a date!");
   }
 
   dealWithUser(data) {
@@ -267,13 +267,13 @@ export class EventsPageComponent implements OnInit {
         window.location.reload();
       }, 1000);
     } else {
-      this.errorMessage = 'User already registered.';
-      this.errorMessageModal = true;
-      setTimeout(() => {
-        this.errorMessageModal = false;
-      }, 3000);
+      this.notifier.notify("error", 'User already registered.');
     }
+  }
 
+  // pop up message while routing not logged in user to login page
+  notLoggedIn(){
+    this.notifier.notify("success", "You must be logged in to do that!");
   }
 
   // leave joined event

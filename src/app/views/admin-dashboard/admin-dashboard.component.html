@@ -43,7 +43,7 @@
                       <th>Current Players</th>
                       <th id="th-actions">Actions</th>
                     </tr>
-                    <tr *ngFor="let event of events | filter : 'title' : searchString; let i = index">
+                    <tr *ngFor="let event of events | filter : 'title' : searchString | sortBy : 'asc' : 'date'; let i = index">
                       <td id="td-title" class="text-left">
                         {{event.title}}
                       </td>

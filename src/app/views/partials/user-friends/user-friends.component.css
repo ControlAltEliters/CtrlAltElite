@@ -1,0 +1,25 @@
+.friends-title {
+    height: auto;
+    margin-left: 1em;
+    margin-top: .75em;
+    font-size: 3em;
+  }
+  
+  .ui.modal>.header {
+    background: rgb(65, 161, 161);
+    color: white;
+    border-bottom: 1px solid white;
+  }
+  .ui.modal>.header:not(.ui) {
+    font-size: 2rem;
+    line-height: 1.28571429em;
+    font-weight: 700;
+  }
+  
+  .ui.modal>.content,
+  .ui.modal>.actions {
+    background: rgb(120, 128, 128);
+    color: white;
+    font-size: 1.5em;
+    font-weight: 200;
+  }

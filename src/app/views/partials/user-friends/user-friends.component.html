@@ -1,0 +1,22 @@
+<div class="friends-title">
+    <h1>My Friends </h1>
+    <div>
+
+    </div>
+    <button (click)="displayFriendModal()" class="ui button float-right">Find Friends</button>
+</div>
+<div>
+
+</div>
+
+<!-- MODALS -->
+<div id="friendModal" class="ui small modal">
+    <div class="header">
+        <p>Select a user profile to view:</p>
+    </div>
+    <div class="content">
+        <div *ngFor="let player of users; let i = index" (click)="selectUser(i)">
+            {{i+1}}. {{player.firstname}} {{player.lastname}}
+        </div>
+    </div>
+</div>

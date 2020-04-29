@@ -455,6 +455,7 @@
         <p>DATE: {{clickedDate}}</p>
         <p>TIME: {{startTime}} to {{endTime}}</p>
         <p>TABLE: {{table}}</p>
+        <p>MAX PLAYERS: {{maxPlayers}}</p>
         <p>DESCRIPTION: {{desc}}</p>
         <p>PLAYERS SIGNED UP FOR EVENT: </p>
         <ul class="player-list">
@@ -473,7 +474,7 @@
     <div class="actions">
       <div *ngIf="createdEvent" class ="ui button" (click)="displayEditEvent()">Edit Event</div>
       <div *ngIf="user" class="ui button" (click)="joinEvent(eventID, user, userID)">Join Event</div>
-      <div *ngIf="!user" class="ui cancel button" (click)="notLoggedIn()" [routerLink]="['/login']" >Join Event</div>
+      <div *ngIf="!user" class="ui button" (click)="notLoggedIn()" [routerLink]="['/login']" >Join Event</div>
       <div *ngIf="user" class="ui button" (click)="leaveEvent(eventID, user, userID)">Leave Event</div>
       <div class="ui cancel button">Cancel</div>
     </div>

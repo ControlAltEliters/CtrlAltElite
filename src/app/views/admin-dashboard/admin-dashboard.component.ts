@@ -142,6 +142,7 @@ export class AdminDashboardComponent implements OnInit {
         event.endTime = `${event.endTime}am`;
       }
 
+      if(event.date >= this.today){
       this.events = this.events.concat({
         title: event.eventTitle,
         date: this.datePipe.transform(event.date.slice(0, 10), 'M/d/yy'),
@@ -157,6 +158,7 @@ export class AdminDashboardComponent implements OnInit {
         id: event._id,
         creator: event.eventCreator,
       });
+    }
     });
   }
 

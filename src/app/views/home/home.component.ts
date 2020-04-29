@@ -2,6 +2,8 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { EventService } from '../../services/event.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { NotifierService } from "angular-notifier";
+
 
 declare let $: any;
 
@@ -24,7 +26,13 @@ export class HomeComponent implements OnInit {
   array2 = [];
   array3 = [];
   array4 = [];
+
+  // joining events
+  userJoin = { user: '', userID: '', event: '' };
   user;
+  userID;
+  eventID;
+  events = [];
 
   // modals
   public currentEvent: string;
@@ -32,12 +40,18 @@ export class HomeComponent implements OnInit {
   public eventStart: string;
   public eventEnd: string;
   public eventDescription: string;
+  public eventMaxPlayers: string;
+  public eventCurrentPlayers: any;
+
+  // notifications
+  private readonly notifier: NotifierService;
 
   constructor(
     private _eventService: EventService,
     private _router: Router,
-    private _userService: UserService
-  ) {}
+    private _userService: UserService,
+    private notifierService: NotifierService
+  ) {this.notifier = notifierService;}
 
   ngOnInit(): void {
     this.today = new Date();
@@ -65,7 +79,6 @@ export class HomeComponent implements OnInit {
       }
     );
 
-    console.log(this.array1);
   }
 
   sortArrayAsc(arr, key) {
@@ -98,6 +111,9 @@ export class HomeComponent implements OnInit {
 
   addEventsFromDB(data) {
     data.forEach((event) => {
+
+      this.events.push(event);
+
       const eventDate = new Date(event.date);
       eventDate.setTime(eventDate.getTime() + 1 * 86400000); // the date has to be incremented by one to be correct
       const now = new Date();
@@ -130,6 +146,8 @@ export class HomeComponent implements OnInit {
   displayModal(event) {
     const date = new Date(event.date);
     this.user = sessionStorage.getItem('activeUser');
+    this.userID = sessionStorage.getItem('userId');
+    this.eventID = event._id;
 
     this.eventDate = `${
       date.getUTCMonth() + 1
@@ -148,14 +166,65 @@ export class HomeComponent implements OnInit {
     }
 
     this.eventDescription = event.description;
+    this.eventMaxPlayers = event.maxPlayers;
+    this.eventCurrentPlayers = event.currentPlayers;
+
     $('#eventModal').modal('show');
   }
 
   hideModal() {
     $('#eventModal .close').click();
+    this.notifier.notify("warning", "You must be logged in to do that!");
   }
 
-  joinEvent() {
-    alert('add code to join event');
+  joinEvent(){
+    let eventID = this.eventID;
+    let userID = this.userID;
+
+    this.userJoin.event = eventID;
+    this.userJoin.user = this.user;
+    this.userJoin.userID = userID;
+
+    this.events.forEach((theEvent)=>{
+      if (theEvent._id == eventID) {
+        if(theEvent.maxPlayers <= theEvent.currentPlayers.length) {
+          this.notifier.notify("error", "Event full, could not join.");
+          return;
+        }
+        else {
+          if (this.alreadySignedUpForEvent(eventID, userID) == false) {
+            this._eventService.join(this.userJoin).subscribe(
+              (data) => {
+                console.log(data);
+              },
+              (error) => console.error(error)
+            );
+            this.notifier.notify("success", "Joined event!");
+            setTimeout(() => {
+              window.location.reload();
+            }, 1000);
+          } else {
+            this.notifier.notify("error", 'You\'re already registered for this event!');
+          }
+        }
+      }
+    })
+  }
+
+  alreadySignedUpForEvent(eventID, userID): boolean {
+    let signedup = false;
+    this.events.forEach((event) => {
+      if (event._id == eventID) {
+        console.log(event);
+        console.log(event.playersIDs);
+        console.log(userID);
+        event.playersIDs.forEach((player) => {
+          if (player == userID) {
+            signedup = true;
+          }
+        });
+      }
+    });
+    return signedup;
   }
 }

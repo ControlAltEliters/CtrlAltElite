@@ -22,39 +22,42 @@
     <div class="row">
       <div class="four wide column align-right">Profile Picture:</div>
       <span>
-        Choose one of the following icons
         <div class="ui inline dropdown">
           <div class="text">
-            <img class="ui avatar image" src="../../../../assets/images/icon1.png">
-            Default
+            <img class="ui avatar image" src="{{profilePic}}">
+            {{profilePic.slice(26, -4).charAt(0).toUpperCase() + profilePic.slice(26, -4).slice(1)}}
           </div>
           <i class="dropdown icon"></i>
           <div class="menu">
-            <div class="item" data-value="1">
-              <img class="ui avatar image" src="../../../../assets/images/bullbasaur.png">
-              Bullbasaur
+            <div class="item" data-value="0" (click)="selectPic(0)">
+              <img class="ui avatar image" src="../../../../assets/images/icon1.png">
+              Default
             </div>
-            <div class="item" data-value="2">
+            <div class="item" data-value="1" (click)="selectPic(1)">
+              <img class="ui avatar image" src="../../../../assets/images/bullbasaur.png">
+              Bulbasaur
+            </div>
+            <div class="item" data-value="2" (click)="selectPic(2)">
               <img class="ui avatar image" src="../../../../assets/images/charmander.png">
               Charmander
             </div>
-            <div class="item" data-value="3">
+            <div class="item" data-value="3" (click)="selectPic(3)">
               <img class="ui avatar image" src="../../../../assets/images/eevee.png">
               Eevee
             </div>
-            <div class="item" data-value="4">
+            <div class="item" data-value="4" (click)="selectPic(4)">
               <img class="ui avatar image" src="../../../../assets/images/jigglypuff.png">
               Jigglypuff
             </div>
-            <div class="item" data-value="5">
+            <div class="item" data-value="5" (click)="selectPic(5)">
               <img class="ui avatar image" src="../../../../assets/images/meowth.png">
               Meowth
             </div>
-            <div class="item" data-value="6">
+            <div class="item" data-value="6" (click)="selectPic(6)">
               <img class="ui avatar image" src="../../../../assets/images/pikachu-2.png">
               Pikachu
             </div>
-            <div class="item" data-value = "7">
+            <div class="item" data-value = "7" (click)="selectPic(7)">
               <img class="ui avatar image" src="../../../../assets/images/snorlax.png">
               Snorlax
             </div>

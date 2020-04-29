@@ -321,8 +321,10 @@ export class EventsPageComponent implements OnInit {
     let signedup = false;
     this.events.forEach((event) => {
       if (event.id == eventID) {
+        console.log(event.playersIDs);
+        console.log(event.currentPlayers);
         event.playersIDs.forEach((player) => {
-          if (player == this.userID) {
+          if (player == userID) {
             signedup = true;
           }
         });

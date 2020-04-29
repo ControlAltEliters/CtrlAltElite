@@ -1,4 +1,4 @@
-*, input::selection, .form-group:hover {
+.dashboard, i, input::selection, .form-group:hover, .ui.vertical.fluid.tabular.menu .item, #search {
   color: white !important;
 }
 
@@ -23,10 +23,15 @@
   margin-top: 1em;
 }
 
-.table-bg {
+.table-bg, #users-tab {
   overflow-y: scroll;
   height: 40em !important;
   max-height: 40em !important;
+  min-height: 40em !important;
+}
+
+#users-tab {
+  margin: 1em auto;
 }
 
 table {
@@ -60,11 +65,14 @@ td {
 
 #desc {
   width: 22em;
-  height: 4.5em;
+  max-height: 4.5em;
   overflow-y: scroll;
 }
 
 #currPlayers {
+  width: 10em;
+  margin: 0 auto;
+  max-height: 4.75em;
   overflow-y: scroll;
 }
 
@@ -89,4 +97,13 @@ button:hover {
 
 button:active {
   transform: translateY(1px);
+}
+
+.toggleEvents, .ui.toggle.button.active {
+  height: .5em;
+  float: right;
+  color: white !important;
+  font-size: .75em !important;
+  margin: -2.5em 1em 0 0 !important;
+  background: rgb(30, 94, 114) !important;
 }

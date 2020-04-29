@@ -142,7 +142,11 @@ export class AdminDashboardComponent implements OnInit {
         event.endTime = `${event.endTime}am`;
       }
 
-      if(event.date >= this.today){
+      // console.log("DATE: " + this.datePipe.transform(event.date.slice(0, 10), 'M/d/yy') + "\nTODAY: " + this.datePipe.transform(this.today.toISOString().slice(0, 10), 'M/d/yy'));
+      var eventDate = this.datePipe.transform(event.date.slice(0, 10), 'M/d/yy');
+      var todayDate = this.datePipe.transform(this.today.toISOString().slice(0, 10), 'M/d/yy');
+
+      if (eventDate >= todayDate){
       this.events = this.events.concat({
         title: event.eventTitle,
         date: this.datePipe.transform(event.date.slice(0, 10), 'M/d/yy'),

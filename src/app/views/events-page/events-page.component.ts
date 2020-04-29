@@ -78,6 +78,9 @@ export class EventsPageComponent implements OnInit {
   // For notifications
   private readonly notifier: NotifierService;
 
+  // For messages
+  messageContent;
+
   // Forms
   eventsForm: FormGroup = new FormGroup({
     eventTitle: new FormControl(null, Validators.required),
@@ -109,6 +112,7 @@ export class EventsPageComponent implements OnInit {
   addMessageForm: FormGroup = new FormGroup({
     messageContent: new FormControl(null, Validators.required),
     messageCreator: new FormControl(null, Validators.required),
+    eventId: new FormControl(null, Validators.required),
   });
 
   constructor(
@@ -574,5 +578,26 @@ export class EventsPageComponent implements OnInit {
       start: startDate,
       end: endDate,
     });
+  }
+
+  sendMessage() {
+    this._commonUtils.setFormFieldValue( this.addMessageForm, 'eventId', this.currentEvent.id); 
+    this._commonUtils.setFormFieldValue( this.addMessageForm, 'messageCreator', this.user);
+    console.log("messageCreator = " + this.addMessageForm.value.messageCreator);
+    console.log("messageContent = " + this.addMessageForm.value.messageContent);
+    console.log("eventId = " + this.addMessageForm.value.eventId);
+    this._eventsService
+      .addMessage(JSON.stringify(this.addMessageForm.value))
+      .subscribe(
+        (data) => {
+          this.appendMessage();
+        },
+        (error) => console.error(error)
+      );
+      this.notifier.notify("success", "Message sent!");
+  }
+
+  appendMessage() {
+    console.log("appendMessage()");
   }
 }

@@ -54,4 +54,11 @@ export class EventService {
     });
     }
 
+    addMessage(user: any){
+      return this._http.post(environment.baseurl + '/events/addMessage', user, {
+        observe: 'body',
+        headers: new HttpHeaders().append('Content-Type', 'application/json')
+      });
+    }
+
 }

@@ -498,8 +498,14 @@
     <div class="actions">
       <div class="textBox">
         <div class="ui action input">
-          <input type="text" placeholder="...">
-          <button class="ui button">Send</button>
+          <form class="ui form" [formGroup]="addMessageForm" name="addMessageForm">
+            <input
+            formControlName="messageContent"
+            type="text"
+            class="form-control"
+            id="inputMessage"/>
+          </form>
+          <button class="ui button" (click)="sendMessage()">Send</button>
         </div>
       </div>
         <button class="ui button" (click)="returnToEventModal()">Cancel</button>

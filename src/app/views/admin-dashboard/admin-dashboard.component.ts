@@ -28,6 +28,7 @@ export class AdminDashboardComponent implements OnInit {
   calendarEvents = [];
   currentPlayers = [];
   searchString: string;
+  toggleString: string;
 
   errorMessage: string;
 
@@ -85,13 +86,39 @@ export class AdminDashboardComponent implements OnInit {
   ngOnInit(): void {
     $('.menu .item').tab();
 
+    this.toggleString = "Display All";
+
     this._eventsService.event().subscribe(
       (data) => {
-        this.addEventsFromDB(data);
+        this.addEventsFromDB(false, data);
       },
       (error) => console.error(error)
     );
+  }
 
+  toggle(){
+    $(".ui.toggle.button").toggleClass('active');
+    this.events = [];
+
+    if ($(".ui.toggle.button").hasClass('active')) {
+      this.toggleString = "Display All";
+
+      this._eventsService.event().subscribe(
+        (data) => {
+          this.addEventsFromDB(false, data);
+        },
+        (error) => console.error(error)
+      );
+    }
+    else {
+      this.toggleString = "Display Current/Future";
+      this._eventsService.event().subscribe(
+        (data) => {
+          this.addEventsFromDB(true, data);
+        },
+        (error) => console.error(error)
+      );
+    }
   }
 
   // remove event
@@ -111,7 +138,7 @@ export class AdminDashboardComponent implements OnInit {
       }, 1000);
   }
 
-  addEventsFromDB(data) {
+  addEventsFromDB(showAll, data) {
     data.forEach((event) => {
       const date = new Date(event.date);
       const year = date.getFullYear();
@@ -146,7 +173,7 @@ export class AdminDashboardComponent implements OnInit {
       var eventDate = this.datePipe.transform(event.date.slice(0, 10), 'M/d/yy');
       var todayDate = this.datePipe.transform(this.today.toISOString().slice(0, 10), 'M/d/yy');
 
-      if (eventDate >= todayDate){
+      if ((eventDate >= todayDate) || showAll){
       this.events = this.events.concat({
         title: event.eventTitle,
         date: this.datePipe.transform(event.date.slice(0, 10), 'M/d/yy'),

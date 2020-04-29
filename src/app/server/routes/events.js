@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Event = require('../models/Event');
+var Message = require('../models/Message');
 var passport = require('passport');
 
 router.post('/createEvent', function (req, res, next) {
@@ -41,6 +42,34 @@ router.post('/editEvent', function (req, res, next) {
   }
 });
 
+// Goal: save strings from a modal window
+router.post('/addMessage', function (req, res, next) {
+  console.log('/addMessage: Made it to the backend! Event body:');
+  console.log(req.body);
+  try {
+    Event.messageBoard.update(
+    {_id: req.body.eventId }, {
+      $push: {
+        sender : req.body.addMessageSender,
+        messageContent : req.body.addMessageContent,
+      }
+    }, function (err,doc) {
+        if (err) {
+          console.log('Add message error: ' + err)
+          return res.status(500).json({message:'Adding message failed'});
+        } else {
+          console.log('Add Message: ' + doc)
+          return res.status(200).json({message:'Added Message', eventObject: doc});
+        }
+      }
+    )
+  }
+  catch (err) {
+    console.log(err);
+    return res.status(500).json({message:'Add message failed'});
+  }
+});
+
 async function addToDB(req, res) {
 
   var event = new Event({
@@ -58,7 +87,8 @@ async function addToDB(req, res) {
     isOpen: true,
     playersIDs: [],
     creation_dt: Date.now(),
-    eventCreator: req.body.eventCreator
+    eventCreator: req.body.eventCreator,
+    messageBoard: []
   });
 
   try {

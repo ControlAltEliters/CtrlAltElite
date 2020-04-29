@@ -490,6 +490,23 @@
     <div class="header">
       <p>EVENT: {{ eventTitle }}</p>
     </div>
+    <div class="messagesBody">
+      <div class="message">      
+        <code>Username </code>
+        <time>@ 02-14 20:00 : </time>
+        <p>Piqued favour stairs it enable exeter as seeing. Remainder met improving but engrossed sincerity age.</p>
+      </div>
+      <div class="message">      
+        <code>Username </code>
+        <time>@ 02-14 20:00 : </time>
+        <p>He oppose at thrown desire of no. Him hard find read are you sang.</p>
+      </div>
+      <div class="message">      
+        <code>Username </code>
+        <time>@ 02-14 20:00 : </time>
+        <p>Any delicate you how kindness horrible outlived servants.</p>
+      </div>
+    </div>
     <ul class="message-list">
       <li *ngFor="let message of messages">
         {{message}}
@@ -497,13 +514,14 @@
     </ul>
     <div class="actions">
       <div class="textBox">
-        <div class="ui action input">
+        <div class="ui fluid action input">
           <form class="ui form" [formGroup]="addMessageForm" name="addMessageForm">
             <input
             formControlName="messageContent"
             type="text"
             class="form-control"
-            id="inputMessage"/>
+            id="inputMessage"
+            (keyup.enter)="sendMessage()"/>
           </form>
           <button class="ui button" (click)="sendMessage()">Send</button>
         </div>

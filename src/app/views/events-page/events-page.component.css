@@ -298,7 +298,6 @@ label {
 .textBox {
   position: relative;
   text-align: left;
-  margin-top: -8px;
   float: left;
   width: 70%;
 }
@@ -312,4 +311,18 @@ label {
   display: inline-block;
   text-align: right;
   width: 30%;
+}
+
+.messagesBody {
+  background: rgb(120, 128, 128);
+  color: white;
+  font-size: 1.5em;
+  font-weight: 200;
+  height: 400px;
+  margin: 12px;
+}
+
+.message {
+  float: left;
+  margin: 8px;
 }

@@ -595,6 +595,7 @@ export class EventsPageComponent implements OnInit {
         (error) => console.error(error)
       );
       this.notifier.notify("success", "Message sent!");
+      this.addMessageForm.reset();
   }
 
   appendMessage() {

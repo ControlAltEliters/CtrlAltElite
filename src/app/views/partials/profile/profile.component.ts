@@ -15,6 +15,7 @@ declare let $: any;
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
+  profilePic: string;
   userFirstName: string;
   userLastName: string;
   userName: string;
@@ -87,6 +88,8 @@ export class ProfileComponent implements OnInit {
 
     this.showErrorMessage = false;
     this.showSuccessMessage = false;
+
+    this.profilePic = this._commonUtils.readSessionField('profilePic');
   }
 
   selectPic(val) {

@@ -103,11 +103,10 @@ export class AdminDashboardComponent implements OnInit {
         },
         (error) => console.error(error)
       );
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 1000);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
       // this.notifier.notify("error", 'Event not removed.');
-    
   }
 
   addEventsFromDB(data) {

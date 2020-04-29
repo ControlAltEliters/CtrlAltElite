@@ -52,10 +52,11 @@
                       <td class="text-left">
                         <div id="desc">{{event.description}}</div>
                       </td>
-                        <td id="currPlayers" class="text-left">
-                          <li *ngFor="let player of event.currentPlayers" style="list-style-type: none;">
-                            {{player}}
-                          </li>
+                        <td class="text-left">
+                          <div id="currPlayers">
+                            <li *ngFor="let player of event.currentPlayers" style="list-style-type: none;">
+                            {{player}}</li>
+                          </div>
                         </td>
                         <td id="td-title" class="text-left">
                           <button (click)="displayEditEvent($event)">Edit Event</button>
@@ -76,7 +77,7 @@
             </div>
         </div>
     </div>
-    
+
   <!-- MODALS -->
     <div id="editEventModal" class="ui small modal">
       <i class="close icon cancel"></i>
@@ -250,7 +251,7 @@
           </div>
         </div>
       </div> -->
-  
+
       <!-- Full arcade map -->
       <!-- <div class="content">
         <div class="tables">

@@ -17,12 +17,15 @@ export class EventService {
         });
     }
 
-    removeEvent(body: any) {
-      return this._http.post(environment.baseurl + '/events/removeEvent/:id', body, {
-          observe: 'body',
-          headers: new HttpHeaders().append('Content-Type', 'application/json')
+    removeEvent(id: any) {
+      return this._http.post(environment.baseurl + '/events/removeEvent', {
+        observe: 'body',
+        headers: new HttpHeaders().append('Content-Type', 'application/json'),
+        params: {
+          id
+        }
       });
-  }
+    }
 
     editEvent(body: any) {
       return this._http.post(environment.baseurl + '/events/editEvent', body, {

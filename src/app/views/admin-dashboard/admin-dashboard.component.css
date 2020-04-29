@@ -60,11 +60,14 @@ td {
 
 #desc {
   width: 22em;
-  height: 4.5em;
+  max-height: 4.5em;
   overflow-y: scroll;
 }
 
 #currPlayers {
+  width: 10em;
+  margin: 0 auto;
+  max-height: 4.75em;
   overflow-y: scroll;
 }
 

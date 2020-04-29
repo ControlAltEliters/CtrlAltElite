@@ -7,17 +7,6 @@ router.post('/createEvent', function (req, res, next) {
   addToDB(req, res);
 });
 
-// router.delete('/removeEvent/:id', async (req, res) => {
-  // try {
-  //   const event = await Event.findByIdAndDelete(req)
-
-  //   if (!event) res.status(404).send("No event found")
-  //   res.status(200).send()
-  // } catch (err) {
-  //   res.status(500).send(err)
-  // }
-// })
-
 router.post('/removeEvent', function (req, res, next) {
   console.log("made it to remove event: " + req.body.params.id);
   try {

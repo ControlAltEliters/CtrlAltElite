@@ -217,21 +217,22 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   displayEditEvent(arg) {
+    // console.log(JSON.stringify(arg));
     this.currentEvent = arg;
     const initialTitle = this.currentEvent.title;
 
     // Date variables
-    const date = new Date(this.currentEvent.start);
+    const date = new Date(this.currentEvent.date);
 
     // Time variables
     let start;
-    const timeStart = new Date(this.currentEvent.start);
+    const timeStart = new Date(this.currentEvent.startTime.slice(0, -2));
     let end;
-    const timeEnd = new Date(this.currentEvent.end);
+    const timeEnd = new Date(this.currentEvent.endTime.slice(0, -2));
 
     // Min and max players
-    const min = this.currentEvent.min;
-    const max = this.currentEvent.max;
+    const min = this.currentEvent.minPlayers;
+    const max = this.currentEvent.maxPlayers;
 
     // // Resources and description
     const resources = this.currentEvent.resources;
@@ -262,7 +263,7 @@ export class AdminDashboardComponent implements OnInit {
     this._commonUtils.setFormFieldValue(
       this.editEventForm,
       'editDate',
-      date
+      date.toISOString().slice(0, 10)
     );
     this._commonUtils.setFormFieldValue(
       this.editEventForm,

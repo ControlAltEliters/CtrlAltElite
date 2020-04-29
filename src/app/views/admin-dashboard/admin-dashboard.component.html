@@ -19,6 +19,7 @@
                         <div class="input-group">
                             <div class="ui transparent icon input">
                                 <input
+                                id="search"
                                 type="text"
                                 class="form-control"
                                 name="searchString"
@@ -59,20 +60,20 @@
                           </div>
                         </td>
                         <td id="td-title" class="text-left">
-                          <button (click)="displayEditEvent($event)">Edit Event</button>
+                          <button (click)="displayEditEvent(event)">Edit Event</button>
                           <button (click)="removeEvent(event.id)">Delete Event</button>
                         </td>
                     </tr>
                   </table>
                 </div>
             </div>
-            <div class="ui tab segment" data-tab="users">
+            <div class="ui tab segment" data-tab="users" id="users-tab">
                 <div class="ui transparent icon input">
                     <input type="text" placeholder="Search users...">
                     <i class="search link icon"></i>
                 </div>
                 <div class="ui divider"></div>
-                <br />
+                <br/>
                 This is the User tab.
             </div>
         </div>
@@ -82,7 +83,7 @@
     <div id="editEventModal" class="ui small modal">
       <i class="close icon cancel"></i>
       <div class="header">
-        <p>Edit This Event</p>
+        <p>Edit Event</p>
       </div>
       <div class="content">
         <form class="ui form" [formGroup]="editEventForm" name="editEventForm">

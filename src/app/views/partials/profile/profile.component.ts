@@ -122,13 +122,13 @@ export class ProfileComponent implements OnInit {
         this._commonUtils.setSessionField("profilePic", "../../../../assets/images/meowth.png");
         break;
       case "6":
-        this._commonUtils.setSessionField("profilePic", "../../../../assets/images/pikachu-2.png");
+        this._commonUtils.setSessionField("profilePic", "../../../../assets/images/pikachu.png");
         break;
       case "7":
         this._commonUtils.setSessionField("profilePic", "../../../../assets/images/snorlax.png");
         break;
       default:
-        this._commonUtils.setSessionField("profilePic", "../../../../assets/images/icon1.png");
+        this._commonUtils.setSessionField("profilePic", "../../../../assets/images/default.png");
         break;
     }
 

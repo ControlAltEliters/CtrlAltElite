@@ -25,7 +25,7 @@
         <div class="ui inline dropdown">
           <div class="text">
             <img class="ui avatar image" src="{{profilePic}}">
-            Current
+            {{profilePic.slice(26, -4).charAt(0).toUpperCase() + profilePic.slice(26, -4).slice(1)}}
           </div>
           <i class="dropdown icon"></i>
           <div class="menu">

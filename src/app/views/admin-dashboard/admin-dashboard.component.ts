@@ -144,7 +144,7 @@ export class AdminDashboardComponent implements OnInit {
 
       this.events = this.events.concat({
         title: event.eventTitle,
-        date: this.datePipe.transform(event.date, "M/d/yy"),
+        date: this.datePipe.transform(event.date.slice(0, 10), 'M/d/yy'),
         description: event.description,
         startTime: event.startTime,
         endTime: event.endTime,

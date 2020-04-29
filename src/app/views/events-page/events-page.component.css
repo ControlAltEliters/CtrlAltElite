@@ -294,3 +294,22 @@ label {
   flex-direction: column;
   text-align: center;
 }
+
+.textBox {
+  position: relative;
+  text-align: left;
+  margin-top: -8px;
+  float: left;
+  width: 70%;
+}
+
+.eventTitle {
+  display: inline-block;
+  width: 70%;
+}
+
+.messageBoardButton {
+  display: inline-block;
+  text-align: right;
+  width: 30%;
+}

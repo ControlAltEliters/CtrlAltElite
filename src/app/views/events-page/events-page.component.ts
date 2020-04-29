@@ -30,6 +30,7 @@ export class EventsPageComponent implements OnInit {
   tables = [];
   calendarEvents = [];
   currentPlayers = [];
+  messages = [];
   userJoin = { user: '', userID: '', event: '' };
   userQuit = { user: '', userID: '', event: '' };
 
@@ -105,6 +106,11 @@ export class EventsPageComponent implements OnInit {
     eventId: new FormControl(null),
   });
 
+  addMessageForm: FormGroup = new FormGroup({
+    messageContent: new FormControl(null, Validators.required),
+    messageCreator: new FormControl(null, Validators.required),
+  });
+
   constructor(
     private _eventsService: EventService,
     private elementRef: ElementRef,
@@ -150,6 +156,13 @@ export class EventsPageComponent implements OnInit {
     $('#createEventModal').modal('show');
   }
 
+  showMessageBoardModal(){
+    $('#messageBoardModal').modal('show');
+  }
+
+  returnToEventModal(){
+    $('#singleEventModal').modal('show');
+  }
 
   addEventsFromDB(data) {
     data.forEach((event) => {
@@ -184,6 +197,7 @@ export class EventsPageComponent implements OnInit {
         table: event.table,
         id: event._id,
         creator: event.eventCreator,
+        messages: event.messages
       });
     });
   }
@@ -367,6 +381,7 @@ export class EventsPageComponent implements OnInit {
         this.eventID = theEvent.id;
         this.currentPlayers = theEvent.currentPlayers;
         this.desc = theEvent.description;
+        this.messages = theEvent.messages;
       }
     });
 

@@ -8,7 +8,6 @@ router.post('/createEvent', function (req, res, next) {
 });
 
 router.post('/removeEvent', function (req, res, next) {
-  console.log("made it to remove event: " + req.body.params.id);
   try {
     Event.findOneAndDelete(
       { _id: req.body.params.id }, {
@@ -22,14 +21,11 @@ router.post('/removeEvent', function (req, res, next) {
     )
   }
   catch (err) {
-    // console.log(err);
     return res.status(500).json({ message: 'Event deletion failed' });
   }
 })
 
 router.post('/editEvent', function (req, res, next) {
-  console.log('Made it to the backend! Event body:');
-  console.log(req.body);
   try {
     Event.findOneAndUpdate(
     {_id: req.body.eventId }, {
@@ -46,10 +42,8 @@ router.post('/editEvent', function (req, res, next) {
       }
     }, function (err,doc) {
         if (err) {
-          console.log('Event edit error: ' + err)
           return res.status(500).json({message:'Updating event failed'});
         } else {
-          console.log('Updated profile: ' + doc)
           return res.status(200).json({message:'Updated event', eventObject: doc});
         }
       }

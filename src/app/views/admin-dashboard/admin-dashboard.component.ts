@@ -101,12 +101,14 @@ export class AdminDashboardComponent implements OnInit {
           console.log(data);
           this.notifier.notify("success", "Removed event!");
         },
-        (error) => console.error(error)
+        (error) => {
+          console.error(error);
+          this.notifier.notify("error", 'Event not removed.');
+        }
       );
       setTimeout(() => {
         window.location.reload();
       }, 1000);
-      // this.notifier.notify("error", 'Event not removed.');
   }
 
   addEventsFromDB(data) {
@@ -217,8 +219,6 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   displayEditEvent(arg) {
-    // console.log(JSON.stringify(arg));
-    // this.check1, this.check2, this.initialPM1, this.initialPM2 = false;
 
     this.currentEvent = arg;
     const initialTitle = this.currentEvent.title;
@@ -235,12 +235,10 @@ export class AdminDashboardComponent implements OnInit {
     const description = this.currentEvent.description;
 
     // Put start and end times in correct format
-    const start = +this.currentEvent.startTime.slice(0, -2); // "7pm" "10am"
+    const start = +this.currentEvent.startTime.slice(0, -2);
     var dayOrNight1 = this.currentEvent.startTime[this.currentEvent.startTime.length - 2];
-    // console.log("start: " + timeStart + this.currentEvent.startTime[this.currentEvent.startTime.length - 2]);
     const end = +this.currentEvent.endTime.slice(0, -2);
     var dayOrNight2 = this.currentEvent.endTime[this.currentEvent.endTime.length - 2];
-    // console.log("end: " + timeEnd + this.currentEvent.endTime[this.currentEvent.endTime.length - 2]);
 
     if(dayOrNight1 == "p") {
       this.initialPM1 = true;
@@ -285,63 +283,6 @@ export class AdminDashboardComponent implements OnInit {
 
     $('#editEventModal').modal('show');
   }
-  // handleEventClick(arg) {
-  //   this.currentEvent = arg.event;
-  //   this.createdEvent = false;
-  //   // check if current user is user that created event
-  //   const eventCreator = arg.event._def.extendedProps.creator;
-  //   if (this.user === eventCreator) {
-  //     this.createdEvent = true;
-  //   }
-
-  //   this.eventTitle = arg.event._def.title;
-  //   const date = new Date(arg.event.start);
-  //   let dateAsString = '';
-  //   dateAsString += date.getFullYear() + '-';
-  //   const month = date.getMonth() + 1;
-  //   const day = date.getDate();
-  //   if (month < 10) {
-  //     dateAsString += '0' + month + '-';
-  //   } else {
-  //     dateAsString += month + '-';
-  //   }
-  //   if (day < 10) {
-  //     dateAsString += '0' + day;
-  //   } else {
-  //     dateAsString += day;
-  //   }
-
-  //   this.events.forEach((theEvent) => {
-  //     let eventDate = theEvent.date;
-  //     if (eventDate != null) {
-  //       eventDate = eventDate.slice(0, 10);
-  //     }
-
-  //     if (theEvent.title === this.eventTitle && eventDate === dateAsString) {
-  //       event = theEvent;
-  //       this.eventTitle = this.eventTitle;
-
-  //       if (theEvent.startTime > 12) {
-  //         this.startTime = this.formatTime(theEvent.startTime);
-  //       } else {
-  //         this.startTime = `${theEvent.startTime}:00 am`;
-  //       }
-  //       if (theEvent.endTime > 12) {
-  //         this.endTime = this.formatTime(theEvent.endTime);
-  //       } else {
-  //         this.endTime = `${theEvent.endTime}:00 am`;
-  //       }
-
-  //       this.table = theEvent.table;
-  //       this.eventID = theEvent.id;
-  //       this.currentPlayers = theEvent.currentPlayers;
-  //       this.desc = theEvent.description;
-  //     }
-  //   });
-
-  //   $('#singleEventModal').modal('show');
-  //   this.clickedDate = dateAsString;
-  // }
 
   formatTime(time) {
     const newTime = time - 12;

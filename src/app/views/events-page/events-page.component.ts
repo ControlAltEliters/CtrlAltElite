@@ -60,6 +60,7 @@ export class EventsPageComponent implements OnInit {
   startTime;
   endTime;
   table;
+  maxPlayers;
 
   // For editing event
   currentEvent;
@@ -89,6 +90,7 @@ export class EventsPageComponent implements OnInit {
     minPlayers: new FormControl(null, Validators.required),
     table: new FormControl(null),
     eventCreator: new FormControl(null),
+    eventCreatorID: new FormControl(null)
   });
 
   editEventForm: FormGroup = new FormGroup({
@@ -255,25 +257,42 @@ export class EventsPageComponent implements OnInit {
     this.userJoin.user = user;
     this.userJoin.userID = userID;
 
-    if (this.alreadySignedUpForEvent(eventID, userID) == false) {
-      this._eventsService.join(this.userJoin).subscribe(
-        (data) => {
-          console.log(data);
-        },
-        (error) => console.error(error)
-      );
-      this.notifier.notify("success", "Joined event!");
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
-    } else {
-      this.notifier.notify("error", 'User already registered.');
-    }
+      this.events.forEach((theEvent) => {
+        if(theEvent.id == eventID)
+        {
+          if (this.currentEvent.extendedProps.max <= theEvent.currentPlayers.length)
+          {
+            console.log(theEvent.currentPlayers.length);
+            this.notifier.notify("error", "Event full, could not join.");
+            setTimeout(() => { $('#singleEventModal').modal('hide'); }, 1000);
+            return;
+          }
+          else
+          {
+            if (this.alreadySignedUpForEvent(eventID, userID) == false) {
+              this._eventsService.join(this.userJoin).subscribe(
+                (data) => {
+                  console.log(data);
+                },
+                (error) => console.error(error)
+              );
+              this.notifier.notify("success", "Joined event!");
+              setTimeout(() => {
+                window.location.reload();
+              }, 1000);
+            }
+            else
+            {
+              this.notifier.notify("error", 'User already registered.');
+            }
+          }
+        }
+      })
   }
 
   // pop up message while routing not logged in user to login page
   notLoggedIn(){
-    this.notifier.notify("success", "You must be logged in to do that!");
+    this.notifier.notify("warning", "You must be logged in to do that!");
   }
 
   // leave joined event
@@ -302,8 +321,10 @@ export class EventsPageComponent implements OnInit {
     let signedup = false;
     this.events.forEach((event) => {
       if (event.id == eventID) {
+        console.log(event.playersIDs);
+        console.log(event.currentPlayers);
         event.playersIDs.forEach((player) => {
-          if (player == this.userID) {
+          if (player == userID) {
             signedup = true;
           }
         });
@@ -366,6 +387,7 @@ export class EventsPageComponent implements OnInit {
         this.table = theEvent.table;
         this.eventID = theEvent.id;
         this.currentPlayers = theEvent.currentPlayers;
+        this.maxPlayers = theEvent.maxPlayers;
         this.desc = theEvent.description;
       }
     });
@@ -398,6 +420,8 @@ export class EventsPageComponent implements OnInit {
       this.eventsForm.value.endTime += 12;
     }
     this.eventsForm.value.eventCreator = this.user;
+    this.eventsForm.value.eventCreatorID = this.userID;
+
     this._eventsService
       .createEvent(JSON.stringify(this.eventsForm.value))
       .subscribe(

@@ -68,9 +68,9 @@ async function addToDB(req, res) {
     minPlayers: req.body.minPlayers,
     table: req.body.table,
     eventID: req.body.id,
-    currentPlayers: [],
+    currentPlayers: [req.body.eventCreator],
     isOpen: true,
-    playersIDs: [],
+    playersIDs: [req.body.eventCreatorID],
     creation_dt: Date.now(),
     eventCreator: req.body.eventCreator
   });

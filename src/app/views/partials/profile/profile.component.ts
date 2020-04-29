@@ -29,7 +29,6 @@ export class ProfileComponent implements OnInit {
 
   private readonly notifier: NotifierService;
 
-
   editProfile: FormGroup = new FormGroup({
     editFirstName: new FormControl(null),
     editLastName: new FormControl(null),
@@ -90,16 +89,47 @@ export class ProfileComponent implements OnInit {
     this.showSuccessMessage = false;
   }
 
-  selectPicture(picture){
-    console.log(picture)
-    switch(picture){
-      case "Bullbasaur":
-        console.log("Got Bullbasaur")
+  selectPic(val) {
+    // need to pass in user id
+    this._userService
+      .updatePic(this._commonUtils.readSessionField('userId'), JSON.stringify(val))
+      .subscribe(
+        (data) => {
+          this.notifier.notify("success", "Updated your profile picture!");
+        },
+        (error) => {
+          this.notifier.notify("error", "There was an error updating your profile picture.");
+        }
+      );
+
+    switch (val.toString()) {
+      case "1":
+        this._commonUtils.setSessionField("profilePic", "../../../../assets/images/bulbasaur.png");
+        break;
+      case "2":
+        this._commonUtils.setSessionField("profilePic", "../../../../assets/images/charmander.png");
+        break;
+      case "3":
+        this._commonUtils.setSessionField("profilePic", "../../../../assets/images/eevee.png");
+        break;
+      case "4":
+        this._commonUtils.setSessionField("profilePic", "../../../../assets/images/jigglypuff.png");
+        break;
+      case "5":
+        this._commonUtils.setSessionField("profilePic", "../../../../assets/images/meowth.png");
+        break;
+      case "6":
+        this._commonUtils.setSessionField("profilePic", "../../../../assets/images/pikachu-2.png");
+        break;
+      case "7":
+        this._commonUtils.setSessionField("profilePic", "../../../../assets/images/snorlax.png");
         break;
       default:
+        this._commonUtils.setSessionField("profilePic", "../../../../assets/images/icon1.png");
         break;
     }
-  
+
+    window.location.reload();
   }
 
   displayInfoModal() {
@@ -110,22 +140,22 @@ export class ProfileComponent implements OnInit {
     $('#editPasswordModal').modal('show');
   }
 
-  selectImage(event){
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.images = file;
-    }
-  }
-  
-  onSubmit(){
-    const formData = new FormData();
-    formData.append('file', this.images);
+  // selectImage(event){
+  //   if (event.target.files.length > 0) {
+  //     const file = event.target.files[0];
+  //     this.images = file;
+  //   }
+  // }
 
-    this.http.post<any>('http://localhost:3000/file', formData).subscribe(
-      (res) => console.log(res),
-      (err) => console.log(err)
-    );
-  }
+  // onSubmit(){
+  //   const formData = new FormData();
+  //   formData.append('file', this.images);
+
+  //   this.http.post<any>('http://localhost:3000/file', formData).subscribe(
+  //     (res) => console.log(res),
+  //     (err) => console.log(err)
+  //   );
+  // }
 
   editUserProfile() {
     if (!this.editProfile.valid) {

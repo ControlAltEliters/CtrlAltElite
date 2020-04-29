@@ -107,6 +107,28 @@ router.post('/editprofile',isValidUser, function(req,res,next){
   }
 })
 
+router.get('/updatepic', isValidUser, function (req, res, next) {
+  try {
+    User.findOneAndUpdate(
+      { _id: req.query.id }, {
+      $set: {
+        userImage: JSON.parse(req.query.value),
+      }
+    }, function (err, doc) {
+      if (err) {
+        return res.status(500).json({ message: 'Updated profile picture failed' });
+      } else {
+        return res.status(200).json({ message: 'Updated profile picture', userObject: doc });
+      }
+    }
+    )
+  }
+  catch (err) {
+    // console.log(err);
+    return res.status(500).json({ message: 'Updated password failed' });
+  }
+})
+
 router.get('/updatepassword', isValidUser, function (req, res, next) {
   try {
     User.findOneAndUpdate(

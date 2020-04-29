@@ -9,10 +9,12 @@ import { CommonUtils } from 'src/app/utils/common-utils';
 })
 export class AccountPageComponent implements OnInit {
   activeUser: string;
+  profilePic: string;
 
   constructor(private _router: Router, private _commonUtils: CommonUtils) {}
 
   ngOnInit(): void {
     this.activeUser = this._commonUtils.readSessionField('activeUser');
+    this.profilePic = this._commonUtils.readSessionField('profilePic');
   }
 }

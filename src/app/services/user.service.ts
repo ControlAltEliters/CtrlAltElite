@@ -45,6 +45,18 @@ export class UserService {
     });
   }
 
+  updatePic(id: any, value: string) {
+    return this._http.get(environment.baseurl + '/users/updatepic', {
+      observe: 'body',
+      headers: new HttpHeaders().append('Content-Type', 'application/json'),
+      withCredentials: true,
+      params: {
+        id,
+        value
+      }
+    });
+  }
+
   editProfile(body: any) {
     return this._http.post(environment.baseurl + '/users/editprofile', body, {
       observe: 'body',

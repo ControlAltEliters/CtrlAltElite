@@ -170,13 +170,13 @@ export class AdminDashboardComponent implements OnInit {
       }
 
       // console.log("DATE: " + this.datePipe.transform(event.date.slice(0, 10), 'M/d/yy') + "\nTODAY: " + this.datePipe.transform(this.today.toISOString().slice(0, 10), 'M/d/yy'));
-      var eventDate = this.datePipe.transform(event.date.slice(0, 10), 'M/d/yy');
-      var todayDate = this.datePipe.transform(this.today.toISOString().slice(0, 10), 'M/d/yy');
+      var eventDate = this.datePipe.transform(event.date.slice(0, 10), 'MM/d/yyyy');
+      var todayDate = this.datePipe.transform(this.today.toISOString().slice(0, 10), 'MM/d/yyyy');
 
       if ((eventDate >= todayDate) || showAll){
       this.events = this.events.concat({
         title: event.eventTitle,
-        date: this.datePipe.transform(event.date.slice(0, 10), 'M/d/yy'),
+        date: this.datePipe.transform(event.date.slice(0, 10), 'MM/d/yyyy'),
         description: event.description,
         startTime: event.startTime,
         endTime: event.endTime,

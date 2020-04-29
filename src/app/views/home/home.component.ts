@@ -40,6 +40,8 @@ export class HomeComponent implements OnInit {
   public eventStart: string;
   public eventEnd: string;
   public eventDescription: string;
+  public eventMaxPlayers: string;
+  public eventCurrentPlayers: any;
 
   // notifications
   private readonly notifier: NotifierService;
@@ -164,6 +166,9 @@ export class HomeComponent implements OnInit {
     }
 
     this.eventDescription = event.description;
+    this.eventMaxPlayers = event.maxPlayers;
+    this.eventCurrentPlayers = event.currentPlayers;
+
     $('#eventModal').modal('show');
   }
 

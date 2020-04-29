@@ -54,6 +54,8 @@
     "mat-contenteditable": "^9.1.0",
     "moment": "^2.24.0",
     "mongoose": "^5.9.2",
+    "mongoose-friends": "^0.2.5",
+    "mongoose-friends-plugin": "^0.7.3",
     "ngp-sort-pipe": "0.0.4",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",

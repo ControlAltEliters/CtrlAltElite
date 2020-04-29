@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
       data => {
         this._userService.user().subscribe(
           (data) => this.dealWithUser(data),
-          (error) => {}
+          (error) => { this.notifier.notify("error", error.error.message); }
         );
       },
       error => {

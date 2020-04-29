@@ -20,6 +20,50 @@
       <div class="twelve wide column">{{userEmail}}</div>
     </div>
     <div class="row">
+      <div class="four wide column align-right">Profile Picture:</div>
+      <span>
+        Choose one of the following icons
+        <div class="ui inline dropdown">
+          <div class="text">
+            <img class="ui avatar image" src="../../../../assets/images/icon1.png">
+            Default
+          </div>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="item" data-value="1">
+              <img class="ui avatar image" src="../../../../assets/images/bullbasaur.png">
+              Bullbasaur
+            </div>
+            <div class="item" data-value="2">
+              <img class="ui avatar image" src="../../../../assets/images/charmander.png">
+              Charmander
+            </div>
+            <div class="item" data-value="3">
+              <img class="ui avatar image" src="../../../../assets/images/eevee.png">
+              Eevee
+            </div>
+            <div class="item" data-value="4">
+              <img class="ui avatar image" src="../../../../assets/images/jigglypuff.png">
+              Jigglypuff
+            </div>
+            <div class="item" data-value="5">
+              <img class="ui avatar image" src="../../../../assets/images/meowth.png">
+              Meowth
+            </div>
+            <div class="item" data-value="6">
+              <img class="ui avatar image" src="../../../../assets/images/pikachu-2.png">
+              Pikachu
+            </div>
+            <div class="item" data-value = "7">
+              <img class="ui avatar image" src="../../../../assets/images/snorlax.png">
+              Snorlax
+            </div>
+          </div>
+        </div>
+      </span>
+
+    </div>
+    <div class="row">
       <div class="sixteen wide column align-right">
         <button (click)="displayInfoModal()" class="ui button float-right">Edit Information</button>
         <button (click)="displayPasswordModal()" class="ui button float-right">Update Password</button>
@@ -90,5 +134,4 @@
       <div class="ui button" id="edit-button" (click)="updateUserPassword()">Update</div>
     </div>
   </div>
-
 </div>

@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonUtils } from 'src/app/utils/common-utils';
 import { NotifierService } from "angular-notifier";
+import { HttpClient } from '@angular/common/http';
 
 
 declare let $: any;
@@ -24,6 +25,7 @@ export class ProfileComponent implements OnInit {
   showErrorMessage: Boolean;
   successMessage: string;
   showSuccessMessage: Boolean;
+  images
 
   private readonly notifier: NotifierService;
 
@@ -46,10 +48,12 @@ export class ProfileComponent implements OnInit {
     private _router: Router,
     private _userService: UserService,
     private _commonUtils: CommonUtils,
-    private notifierService: NotifierService
+    private notifierService: NotifierService,
+    private http: HttpClient,
   ) {this.notifier = notifierService;}
 
   ngOnInit(): void {
+    $('.ui.dropdown').dropdown();
     // set local state
     this.userFirstName = this._commonUtils.readSessionField('userFirst');
     this.userLastName = this._commonUtils.readSessionField('userLast');
@@ -86,12 +90,41 @@ export class ProfileComponent implements OnInit {
     this.showSuccessMessage = false;
   }
 
+  selectPicture(picture){
+    console.log(picture)
+    switch(picture){
+      case "Bullbasaur":
+        console.log("Got Bullbasaur")
+        break;
+      default:
+        break;
+    }
+  
+  }
+
   displayInfoModal() {
     $('#editProfileModal').modal('show');
   }
 
   displayPasswordModal() {
     $('#editPasswordModal').modal('show');
+  }
+
+  selectImage(event){
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.images = file;
+    }
+  }
+  
+  onSubmit(){
+    const formData = new FormData();
+    formData.append('file', this.images);
+
+    this.http.post<any>('http://localhost:3000/file', formData).subscribe(
+      (res) => console.log(res),
+      (err) => console.log(err)
+    );
   }
 
   editUserProfile() {

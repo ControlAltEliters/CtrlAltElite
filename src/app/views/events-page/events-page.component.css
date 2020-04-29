@@ -320,9 +320,13 @@ label {
   font-weight: 200;
   height: 400px;
   margin: 12px;
+  padding-right:10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .message {
   float: left;
   margin: 8px;
+  width: 100%;
 }

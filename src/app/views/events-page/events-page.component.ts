@@ -590,15 +590,24 @@ export class EventsPageComponent implements OnInit {
       .addMessage(JSON.stringify(this.addMessageForm.value))
       .subscribe(
         (data) => {
-          this.appendMessage();
+          this.appendMessage(this.addMessageForm.value.messageContent);
         },
         (error) => console.error(error)
       );
+      this.appendMessage(this.addMessageForm.value.messageContent);
       this.notifier.notify("success", "Message sent!");
       this.addMessageForm.reset();
   }
 
-  appendMessage() {
+  appendMessage(inputText) {
     console.log("appendMessage()");
+    var date = this.today.getMonth() + '-' + this.today.getDate() + " " + this.today.getHours() + ":" + this.today.getMinutes();
+    var newDiv = document.createElement("div");
+    newDiv.setAttribute('class', 'message');
+    newDiv.setAttribute('style','float: left; margin: 8px; width: 100%');
+    newDiv.innerHTML += '<code>' + this.user + ' </code><time>@ ' + date + ' : </time><p>'+ inputText + '</p>';
+    document.getElementById("messagesBody1").appendChild(newDiv);
+
+
   }
 }

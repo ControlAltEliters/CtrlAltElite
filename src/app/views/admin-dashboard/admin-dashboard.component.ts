@@ -218,17 +218,13 @@ export class AdminDashboardComponent implements OnInit {
 
   displayEditEvent(arg) {
     // console.log(JSON.stringify(arg));
+    // this.check1, this.check2, this.initialPM1, this.initialPM2 = false;
+
     this.currentEvent = arg;
     const initialTitle = this.currentEvent.title;
 
     // Date variables
     const date = new Date(this.currentEvent.date);
-
-    // Time variables
-    let start;
-    const timeStart = new Date(this.currentEvent.startTime.slice(0, -2));
-    let end;
-    const timeEnd = new Date(this.currentEvent.endTime.slice(0, -2));
 
     // Min and max players
     const min = this.currentEvent.minPlayers;
@@ -239,19 +235,29 @@ export class AdminDashboardComponent implements OnInit {
     const description = this.currentEvent.description;
 
     // Put start and end times in correct format
-    if (timeStart.getHours() > 12) {
-      start = timeStart.getHours() - 12;
+    const start = +this.currentEvent.startTime.slice(0, -2); // "7pm" "10am"
+    var dayOrNight1 = this.currentEvent.startTime[this.currentEvent.startTime.length - 2];
+    // console.log("start: " + timeStart + this.currentEvent.startTime[this.currentEvent.startTime.length - 2]);
+    const end = +this.currentEvent.endTime.slice(0, -2);
+    var dayOrNight2 = this.currentEvent.endTime[this.currentEvent.endTime.length - 2];
+    // console.log("end: " + timeEnd + this.currentEvent.endTime[this.currentEvent.endTime.length - 2]);
+
+    if(dayOrNight1 == "p") {
       this.initialPM1 = true;
       this.check1 = true;
-    } else {
-      start = timeStart.getHours();
     }
-    if (timeEnd.getHours() > 12) {
-      end = timeEnd.getHours() - 12;
+    else {
+      this.initialPM1 = false;
+      this.check1 = false;
+    }
+
+    if (dayOrNight2 == "p") {
       this.initialPM2 = true;
       this.check2 = true;
-    } else {
-      end = timeEnd.getHours();
+    }
+    else {
+      this.initialPM2 = false;
+      this.check2 = false;
     }
 
     // Set form values

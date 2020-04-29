@@ -451,8 +451,10 @@ export class EventsPageComponent implements OnInit {
     // Time variables
     let start;
     const timeStart = new Date(this.currentEvent.start);
+    // console.log("EDIT EVENT 1: " + timeStart);
     let end;
     const timeEnd = new Date(this.currentEvent.end);
+    // console.log("EDIT EVENT 2: " + timeEnd);
 
     // Min and max players
     const min = this.currentEvent.extendedProps.min;

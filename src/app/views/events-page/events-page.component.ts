@@ -268,9 +268,12 @@ export class EventsPageComponent implements OnInit {
       }, 1000);
     } else {
       this.notifier.notify("error", 'User already registered.');
-
     }
+  }
 
+  // pop up message while routing not logged in user to login page
+  notLoggedIn(){
+    this.notifier.notify("success", "You must be logged in to do that!");
   }
 
   // leave joined event

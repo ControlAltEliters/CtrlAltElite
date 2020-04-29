@@ -28,8 +28,11 @@
                                 />
                                 <i class="search link icon"></i>
                             </div>
+                            <div class="ui transparent">
+                              <button class="ui toggle button active toggleEvents" (click)="toggle()">{{toggleString}}</button>
+                            </div>
                             <div class="ui divider"></div>
-                            <br />
+                            <br/>
                         </div>
                     </div>
                   </form>
@@ -43,7 +46,7 @@
                       <th>Current Players</th>
                       <th id="th-actions">Actions</th>
                     </tr>
-                    <tr *ngFor="let event of events | filter : 'title' : searchString; let i = index">
+                    <tr *ngFor="let event of events | filter : 'title' : searchString | sortBy : 'asc' : 'date'; let i = index">
                       <td id="td-title" class="text-left">
                         {{event.title}}
                       </td>
@@ -74,7 +77,34 @@
                 </div>
                 <div class="ui divider"></div>
                 <br/>
-                This is the User tab.
+                <table class="table">
+                  <th>Username</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Events Created</th>
+                  <th>Actions</th>
+                  <tr *ngFor="let event of events | filter : 'title' : searchString | sortBy : 'asc' : 'date'; let i = index">
+                    <td class="text-left">
+                      <!-- {{event.title}} -->
+                    </td>
+                    <td class="text-left">
+                      <!-- {{event.date}}<br>{{event.startTime}} to {{event.endTime}} -->
+                    </td>
+                    <td class="text-left">
+                      <!-- {{event.description}} -->
+                    </td>
+                    <td class="text-left">
+                      <div id="eventsCreated">
+                        <!-- <li *ngFor="let player of event.currentPlayers" style="list-style-type: none;">
+                          {{player}}</li> -->
+                      </div>
+                    </td>
+                    <td class="text-left">
+                      <button>Contact</button>
+                      <button>Delete Account</button>
+                    </td>
+                  </tr>
+                </table>
             </div>
         </div>
     </div>

@@ -8,6 +8,7 @@ import { UserService } from 'src/app/services/user.service';
 import { CommonUtils } from 'src/app/utils/common-utils';
 import { Router } from '@angular/router';
 import { NotifierService } from "angular-notifier";
+import { DatePipe } from '@angular/common';
 
 declare let $: any;
 
@@ -113,6 +114,7 @@ export class EventsPageComponent implements OnInit {
     private _userService: UserService,
     private _commonUtils: CommonUtils,
     private _router: Router,
+    private datePipe: DatePipe,
     private notifierService: NotifierService
   ) {this.notifier = notifierService;}
 
@@ -393,7 +395,8 @@ export class EventsPageComponent implements OnInit {
     });
 
     $('#singleEventModal').modal('show');
-    this.clickedDate = dateAsString;
+    // this.clickedDate = dateAsString
+    this.clickedDate = this.datePipe.transform(dateAsString, 'MM/dd/yyyy');
   }
 
   createEvent() {

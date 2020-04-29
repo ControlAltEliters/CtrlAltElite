@@ -33,6 +33,7 @@ import { NotifierContainerComponent } from './views/partials/notifier-container/
 import { AdminDashboardComponent } from './views/admin-dashboard/admin-dashboard.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { DatePipe } from '@angular/common';
+import { NgpSortModule }from "ngp-sort-pipe";
 
 
 
@@ -67,6 +68,7 @@ import { DatePipe } from '@angular/common';
     HttpClientModule,
     FullCalendarModule,
     HttpClientJsonpModule,
+    NgpSortModule,
     NotifierModule.withConfig({
       behaviour: {
         autoHide: 3000,

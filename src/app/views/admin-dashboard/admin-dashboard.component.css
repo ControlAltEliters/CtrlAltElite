@@ -98,3 +98,12 @@ button:hover {
 button:active {
   transform: translateY(1px);
 }
+
+.toggleEvents, .ui.toggle.button.active {
+  height: .5em;
+  float: right;
+  color: white !important;
+  font-size: .75em !important;
+  margin: -2.5em 1em 0 0 !important;
+  background: rgb(30, 94, 114) !important;
+}

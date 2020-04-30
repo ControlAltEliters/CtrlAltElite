@@ -52,6 +52,7 @@ export class UserFriendsComponent implements OnInit {
   }
 
   addFriend(){
+    // add friend to user friendArray
     this._userService.addfriend(this._commonUtils.readSessionField('userId'), this.username).subscribe(
       (data)=>{
         window.location.reload();
@@ -59,6 +60,14 @@ export class UserFriendsComponent implements OnInit {
     (error)=>{
       console.log(error);
     })
+    // add user to friend's friendArray
+    this._userService.addfriend(this.friendID, this._commonUtils.readSessionField('activeUser')).subscribe(
+      (data) => {
+        window.location.reload();
+      },
+      (error) => {
+        console.log(error);
+      })
   }
 
   findFriends(data){

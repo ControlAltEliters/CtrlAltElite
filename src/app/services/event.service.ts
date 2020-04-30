@@ -39,6 +39,22 @@ export class EventService {
       });
     }
 
+    findMessages(eventID: string) {
+      return this._http.get(environment.baseurl + '/events/messages', {
+        observe: 'body',
+        headers: new HttpHeaders().append('Content-Type', 'application/json'),
+        params: {
+          eventID
+        }
+      });
+    }
+
+    addMessage(body: any) {
+      return this._http.post(environment.baseurl + '/events/add-message', body, {
+          observe: 'body',
+          headers: new HttpHeaders().append('Content-Type', 'application/json')
+      });
+  }
 
     join(user: any) {
         return this._http.post(environment.baseurl + '/events/join', user, {
@@ -52,13 +68,6 @@ export class EventService {
         observe: 'body',
         headers: new HttpHeaders().append('Content-Type', 'application/json')
     });
-    }
-
-    addMessage(user: any){
-      return this._http.post(environment.baseurl + '/events/addMessage', user, {
-        observe: 'body',
-        headers: new HttpHeaders().append('Content-Type', 'application/json')
-      });
     }
 
 }

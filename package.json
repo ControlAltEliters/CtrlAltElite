@@ -16,7 +16,8 @@
     "angular-forever": "forever start node_modules/@angular/cli/bin/ng serve --host 0.0.0.0 --configuration=production",
     "kill-angular": "lsof -t -i tcp:4200 | xargs kill -9",
     "kill-express": "lsof -t -i tcp:3000 | xargs kill -9",
-    "kill-all": "npm run kill-angular && npm run kill-express"
+    "kill-all": "npm run kill-angular && npm run kill-express",
+    "cypress": "npx cypress open"
   },
   "private": true,
   "dependencies": {
@@ -68,10 +69,11 @@
     "@angular/cli": "~9.0.2",
     "@angular/compiler-cli": "~9.0.1",
     "@angular/language-service": "~9.0.1",
-    "@types/node": "^12.11.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.11.1",
     "codelyzer": "^5.1.2",
+    "cypress": "^4.5.0",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.3.0",

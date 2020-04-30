@@ -451,9 +451,7 @@
           <p>EVENT: {{ eventTitle }}</p>
         </div>
         <div class="child messageBoardButton">
-          <button (click)="showMessageBoardModal()" class="ui button" style="margin-top: 2em;">
-            Messages
-          </button>
+          <a class="ui cancel button" style="margin-top: 2em;" href="/messages">Messages</a>
         </div>
     </div>
     <div class="content">
@@ -482,51 +480,6 @@
       <div *ngIf="!user" class="ui cancel button" (click)="notLoggedIn()" [routerLink]="['/login']" >Join Event</div>
       <div *ngIf="user" class="ui button" (click)="leaveEvent(eventID, user, userID)">Leave Event</div>
       <div class="ui cancel button">Cancel</div>
-    </div>
-  </div>
-
-  <div id="messageBoardModal" class="ui small modal">
-    <i class="close icon cancel"></i>
-    <div class="header">
-      <p>EVENT: {{ eventTitle }}</p>
-    </div>
-    <div class="messagesBody" id="messagesBody1">
-      <div class="message">      
-        <code>Username </code>
-        <time>@ 2-14 20:00 : </time>
-        <p>Piqued favour stairs it enable exeter as seeing. Remainder met improving but engrossed sincerity age.</p>
-      </div>
-      <div class="message">      
-        <code>Username </code>
-        <time>@ 2-14 20:00 : </time>
-        <p>He oppose at thrown desire of no. Him hard find read are you sang.</p>
-      </div>
-      <div class="message">      
-        <code>Username </code>
-        <time>@ 2-14 20:00 : </time>
-        <p>Any delicate you how kindness horrible outlived servants.</p>
-      </div>
-    </div>
-    <ul class="message-list">
-      <li *ngFor="let message of messages">
-        {{message}}
-      </li>
-    </ul>
-    <div class="actions">
-      <div class="textBox">
-        <div class="ui fluid action input">
-          <form class="ui form" [formGroup]="addMessageForm" name="addMessageForm">
-            <input
-            formControlName="messageContent"
-            type="text"
-            class="form-control"
-            id="inputMessage"
-            (keyup.enter)="sendMessage()"/>
-          </form>
-          <button class="ui button" (click)="sendMessage()">Send</button>
-        </div>
-      </div>
-        <button class="ui button" (click)="returnToEventModal()">Cancel</button>
     </div>
   </div>
 

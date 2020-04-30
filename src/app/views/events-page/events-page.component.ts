@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ResolvedReflectiveFactory } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { EventService } from 'src/app/services/event.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -78,9 +78,6 @@ export class EventsPageComponent implements OnInit {
   // For notifications
   private readonly notifier: NotifierService;
 
-  // For messages
-  messageContent;
-
   // Forms
   eventsForm: FormGroup = new FormGroup({
     eventTitle: new FormControl(null, Validators.required),
@@ -109,11 +106,6 @@ export class EventsPageComponent implements OnInit {
     eventId: new FormControl(null),
   });
 
-  addMessageForm: FormGroup = new FormGroup({
-    messageContent: new FormControl(null, Validators.required),
-    messageCreator: new FormControl(null, Validators.required),
-    eventId: new FormControl(null, Validators.required),
-  });
 
   constructor(
     private _eventsService: EventService,
@@ -158,10 +150,6 @@ export class EventsPageComponent implements OnInit {
 
   showCreateEventModal() {
     $('#createEventModal').modal('show');
-  }
-
-  showMessageBoardModal(){
-    $('#messageBoardModal').modal('show');
   }
 
   returnToEventModal(){
@@ -335,6 +323,16 @@ export class EventsPageComponent implements OnInit {
   }
 
   handleEventClick(arg) {
+
+    console.log(arg.event);
+
+    // for message board
+    this._commonUtils.setSessionField('messagesID', arg.event.id);
+    this._commonUtils.setSessionField('messagesEventTitle', arg.event.title);
+    this._commonUtils.setSessionField('messagesEventStart', arg.event.start);
+    this._commonUtils.setSessionField('messagesEventEnd', arg.event.end);
+
+
     this.currentEvent = arg.event;
     this.createdEvent = false;
     // check if current user is user that created event
@@ -578,25 +576,6 @@ export class EventsPageComponent implements OnInit {
       start: startDate,
       end: endDate,
     });
-  }
-
-  sendMessage() {
-    this._commonUtils.setFormFieldValue( this.addMessageForm, 'eventId', this.currentEvent.id); 
-    this._commonUtils.setFormFieldValue( this.addMessageForm, 'messageCreator', this.user);
-    console.log("messageCreator = " + this.addMessageForm.value.messageCreator);
-    console.log("messageContent = " + this.addMessageForm.value.messageContent);
-    console.log("eventId = " + this.addMessageForm.value.eventId);
-    this._eventsService
-      .addMessage(JSON.stringify(this.addMessageForm.value))
-      .subscribe(
-        (data) => {
-          this.appendMessage(this.addMessageForm.value.messageContent);
-        },
-        (error) => console.error(error)
-      );
-      this.appendMessage(this.addMessageForm.value.messageContent);
-      this.notifier.notify("success", "Message sent!");
-      this.addMessageForm.reset();
   }
 
   appendMessage(inputText) {

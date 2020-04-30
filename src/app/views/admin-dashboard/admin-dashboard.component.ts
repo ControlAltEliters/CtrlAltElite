@@ -4,7 +4,6 @@ import { EventService } from 'src/app/services/event.service';
 import { UserService } from 'src/app/services/user.service';
 import { CommonUtils } from 'src/app/utils/common-utils';
 import { NotifierService } from "angular-notifier";
-
 import { DatePipe } from '@angular/common';
 
 declare let $: any;
@@ -29,6 +28,8 @@ export class AdminDashboardComponent implements OnInit {
   currentPlayers = [];
   searchString: string;
   toggleString: string;
+
+  users = [];
 
   errorMessage: string;
 

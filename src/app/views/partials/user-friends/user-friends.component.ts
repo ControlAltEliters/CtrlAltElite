@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CommonUtils } from 'src/app/utils/common-utils';
 
 declare let $: any;
 
@@ -20,14 +21,17 @@ export class UserFriendsComponent implements OnInit {
   username;
   name;
   email;
+  profilePic;
+  friendID;
 
   friends;
+  hasFriends = true;
 
   userForm: FormGroup = new FormGroup({
     selectedUser: new FormControl(null, Validators.required),
   });
 
-  constructor(private _userService: UserService,) { }
+  constructor(private _userService: UserService, private _commonUtils: CommonUtils) { }
 
   ngOnInit(): void {
     $('.ui.dropdown').dropdown();
@@ -37,38 +41,72 @@ export class UserFriendsComponent implements OnInit {
     this._userService.listOfUsers().subscribe(
       (data) => {
         this.users = data;
-        this.findFriends(data);
       },
       (error) => { console.log("ERROR"); }
     );
     this._userService.user().subscribe(
-      (data) => this.findFriends(data),
+      (data) => {
+        this.findFriends(data)},
       (error) => {}
     );
   }
 
-    findFriends(data){
-      console.log(data);
-      if(data.friends.length) {
-        this.friends = data.friends;
-      }
-      else {
-        let friendsArray = [{username:"No friends added yet!"}];
-        this.friends = friendsArray;
-      }
+  addFriend(){
+    this._userService.addfriend(this._commonUtils.readSessionField('userId'), this.username).subscribe(
+      (data)=>{
+        window.location.reload();
+    },
+    (error)=>{
+      console.log(error);
+    })
+  }
 
+  findFriends(data){
+    if(data.friends.length > 0) {
+      this.friends = data.friends;
+      console.log("friends: " + this.friends);
+    }
+    else { this.hasFriends = false; }
+  }
+
+  selectUser(index){
+    this.selectedUser = this.users[index];
+    console.log(this.selectedUser);
+
+    this.username = this.selectedUser.username;
+    this.name = this.selectedUser.firstname + " " + this.selectedUser.lastname;
+    this.email = this.selectedUser.email;
+    this.friendID = this.selectedUser._id;
+
+    switch (this.selectedUser.userImage) {
+      case "1":
+        this.profilePic = "../../../../assets/images/bulbasaur.png";
+        break;
+      case "2":
+        this.profilePic = "../../../../assets/images/charmander.png";
+        break;
+      case "3":
+        this.profilePic = "../../../../assets/images/eevee.png";
+        break;
+      case "4":
+        this.profilePic = "../../../../assets/images/jigglypuff.png";
+        break;
+      case "5":
+        this.profilePic = "../../../../assets/images/meowth.png";
+        break;
+      case "6":
+        this.profilePic = "../../../../assets/images/pikachu.png";
+        break;
+      case "7":
+        this.profilePic = "../../../../assets/images/snorlax.png";
+        break;
+      default:
+        this.profilePic = "../../../../assets/images/default.png";
+        break;
     }
 
-    selectUser(index){
-      this.selectedUser = this.users[index];
-      console.log(this.selectedUser);
-
-      this.username = this.selectedUser.username;
-      this.name = this.selectedUser.firstname + " " + this.selectedUser.lastname;
-      this.email = this.selectedUser.email;
-
-      $('#profileModal').modal('show');
-    }
+    $('#profileModal').modal('show');
+  }
 
   displayEachUser(){
     this.users.forEach(member => {

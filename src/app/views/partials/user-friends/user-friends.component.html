@@ -1,15 +1,17 @@
 <div class="friends-title">
-  <h2 class="ui center aligned icon header">
+  <h2 class="ui icon header">
     <i class="circular users icon"></i>
     <button (click)="displayFriendModal()" class="ui button float-right">Find Friends</button>
   </h2>
-  <div class="ui inverted divider"></div>
 <div>
-<div *ngFor="let friend of friends; let i = index" (click)="selectUser(i)">
-  <div>{{friend.username}}</div>
+<div class="friendContent">
+  <div *ngIf="hasFriends">
+    <div class="friendDisplay" *ngFor="let friend of friends; let i = index" (click)="selectUser(i)">
+      <div>{{friend}}</div>
+    </div>
+  </div>
+  <div class="friendDisplay" *ngIf="!hasFriends" style="text-align: center;">Add some friends!</div>
 </div>
-
-
 </div>
 
 <!-- MODALS -->
@@ -20,7 +22,7 @@
     <div class="content">
       <div class="ui grid">
         <div class="five wide column" *ngFor="let player of users; let i = index" (click)="selectUser(i)" id="users">
-          {{player.firstname}} {{player.lastname}}
+          <div>{{player.username}}</div>
         </div>
       </div>
     </div>
@@ -31,8 +33,9 @@
     <p>{{username}}</p>
   </div>
   <div class="content">
+    <img src="{{profilePic}}">
     <div>{{name}}</div>
     <div>{{email}}</div>
-    <button class="ui button">Add Friend</button>
+    <div class="buttonWrapper"><button class="ui button" (click)="addFriend()">Add Friend</button></div>
   </div>
 </div>

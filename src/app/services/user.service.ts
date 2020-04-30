@@ -37,11 +37,31 @@ export class UserService {
     });
   }
 
+  listOfUsers() {
+    return this._http.get(environment.baseurl + '/users/listofusers', {
+      observe: 'body',
+      headers: new HttpHeaders().append('Content-Type', 'application/json'),
+      withCredentials: true
+    });
+  }
+
   logout() {
     return this._http.get(environment.baseurl + '/users/logout', {
       observe: 'body',
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
       withCredentials: true
+    });
+  }
+
+  updatePic(id: any, value: string) {
+    return this._http.get(environment.baseurl + '/users/updatepic', {
+      observe: 'body',
+      headers: new HttpHeaders().append('Content-Type', 'application/json'),
+      withCredentials: true,
+      params: {
+        id,
+        value
+      }
     });
   }
 

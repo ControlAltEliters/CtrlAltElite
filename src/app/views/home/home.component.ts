@@ -40,11 +40,11 @@ export class HomeComponent implements OnInit {
   public eventStart: string;
   public eventEnd: string;
   public eventDescription: string;
+  public eventMaxPlayers: string;
+  public eventCurrentPlayers: any;
 
   // notifications
   private readonly notifier: NotifierService;
-
-
 
   constructor(
     private _eventService: EventService,
@@ -166,12 +166,15 @@ export class HomeComponent implements OnInit {
     }
 
     this.eventDescription = event.description;
+    this.eventMaxPlayers = event.maxPlayers;
+    this.eventCurrentPlayers = event.currentPlayers;
+
     $('#eventModal').modal('show');
   }
 
   hideModal() {
     $('#eventModal .close').click();
-    this.notifier.notify("success", "You must be logged in to do that!");
+    this.notifier.notify("warning", "You must be logged in to do that!");
   }
 
   joinEvent(){
@@ -182,25 +185,33 @@ export class HomeComponent implements OnInit {
     this.userJoin.user = this.user;
     this.userJoin.userID = userID;
 
-    if (this.alreadySignedUpForEvent(eventID, userID) == false) {
-      this._eventService.join(this.userJoin).subscribe(
-        (data) => {
-          console.log(data);
-        },
-        (error) => console.error(error)
-      );
-      this.notifier.notify("success", "Joined event!");
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
-    } else {
-      this.notifier.notify("error", 'You\'re already registered for this event!');
-    }
+    this.events.forEach((theEvent)=>{
+      if (theEvent._id == eventID) {
+        if(theEvent.maxPlayers <= theEvent.currentPlayers.length) {
+          this.notifier.notify("error", "Event full, could not join.");
+          return;
+        }
+        else {
+          if (this.alreadySignedUpForEvent(eventID, userID) == false) {
+            this._eventService.join(this.userJoin).subscribe(
+              (data) => {
+                console.log(data);
+              },
+              (error) => console.error(error)
+            );
+            this.notifier.notify("success", "Joined event!");
+            setTimeout(() => {
+              window.location.reload();
+            }, 1000);
+          } else {
+            this.notifier.notify("error", 'You\'re already registered for this event!');
+          }
+        }
+      }
+    })
   }
 
-
   alreadySignedUpForEvent(eventID, userID): boolean {
-
     let signedup = false;
     this.events.forEach((event) => {
       if (event._id == eventID) {

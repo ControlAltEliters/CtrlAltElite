@@ -8,6 +8,7 @@ import { UserService } from 'src/app/services/user.service';
 import { CommonUtils } from 'src/app/utils/common-utils';
 import { Router } from '@angular/router';
 import { NotifierService } from "angular-notifier";
+import { DatePipe } from '@angular/common';
 
 declare let $: any;
 
@@ -61,6 +62,7 @@ export class EventsPageComponent implements OnInit {
   startTime;
   endTime;
   table;
+  maxPlayers;
 
   // For editing event
   currentEvent;
@@ -90,6 +92,7 @@ export class EventsPageComponent implements OnInit {
     minPlayers: new FormControl(null, Validators.required),
     table: new FormControl(null),
     eventCreator: new FormControl(null),
+    eventCreatorID: new FormControl(null)
   });
 
   editEventForm: FormGroup = new FormGroup({
@@ -113,6 +116,7 @@ export class EventsPageComponent implements OnInit {
     private _userService: UserService,
     private _commonUtils: CommonUtils,
     private _router: Router,
+    private datePipe: DatePipe,
     private notifierService: NotifierService
   ) {this.notifier = notifierService;}
 
@@ -261,25 +265,42 @@ export class EventsPageComponent implements OnInit {
     this.userJoin.user = user;
     this.userJoin.userID = userID;
 
-    if (this.alreadySignedUpForEvent(eventID, userID) == false) {
-      this._eventsService.join(this.userJoin).subscribe(
-        (data) => {
-          console.log(data);
-        },
-        (error) => console.error(error)
-      );
-      this.notifier.notify("success", "Joined event!");
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
-    } else {
-      this.notifier.notify("error", 'User already registered.');
-    }
+      this.events.forEach((theEvent) => {
+        if(theEvent.id == eventID)
+        {
+          if (this.currentEvent.extendedProps.max <= theEvent.currentPlayers.length)
+          {
+            console.log(theEvent.currentPlayers.length);
+            this.notifier.notify("error", "Event full, could not join.");
+            setTimeout(() => { $('#singleEventModal').modal('hide'); }, 1000);
+            return;
+          }
+          else
+          {
+            if (this.alreadySignedUpForEvent(eventID, userID) == false) {
+              this._eventsService.join(this.userJoin).subscribe(
+                (data) => {
+                  console.log(data);
+                },
+                (error) => console.error(error)
+              );
+              this.notifier.notify("success", "Joined event!");
+              setTimeout(() => {
+                window.location.reload();
+              }, 1000);
+            }
+            else
+            {
+              this.notifier.notify("error", 'User already registered.');
+            }
+          }
+        }
+      })
   }
 
   // pop up message while routing not logged in user to login page
   notLoggedIn(){
-    this.notifier.notify("success", "You must be logged in to do that!");
+    this.notifier.notify("warning", "You must be logged in to do that!");
   }
 
   // leave joined event
@@ -308,8 +329,10 @@ export class EventsPageComponent implements OnInit {
     let signedup = false;
     this.events.forEach((event) => {
       if (event.id == eventID) {
+        console.log(event.playersIDs);
+        console.log(event.currentPlayers);
         event.playersIDs.forEach((player) => {
-          if (player == this.userID) {
+          if (player == userID) {
             signedup = true;
           }
         });
@@ -382,13 +405,15 @@ export class EventsPageComponent implements OnInit {
         this.table = theEvent.table;
         this.eventID = theEvent.id;
         this.currentPlayers = theEvent.currentPlayers;
+        this.maxPlayers = theEvent.maxPlayers;
         this.desc = theEvent.description;
         this.messages = theEvent.messages;
       }
     });
 
     $('#singleEventModal').modal('show');
-    this.clickedDate = dateAsString;
+    // this.clickedDate = dateAsString
+    this.clickedDate = this.datePipe.transform(dateAsString, 'MM/dd/yyyy');
   }
 
   createEvent() {
@@ -415,6 +440,8 @@ export class EventsPageComponent implements OnInit {
       this.eventsForm.value.endTime += 12;
     }
     this.eventsForm.value.eventCreator = this.user;
+    this.eventsForm.value.eventCreatorID = this.userID;
+
     this._eventsService
       .createEvent(JSON.stringify(this.eventsForm.value))
       .subscribe(
@@ -471,8 +498,10 @@ export class EventsPageComponent implements OnInit {
     // Time variables
     let start;
     const timeStart = new Date(this.currentEvent.start);
+    // console.log("EDIT EVENT 1: " + timeStart);
     let end;
     const timeEnd = new Date(this.currentEvent.end);
+    // console.log("EDIT EVENT 2: " + timeEnd);
 
     // Min and max players
     const min = this.currentEvent.extendedProps.min;

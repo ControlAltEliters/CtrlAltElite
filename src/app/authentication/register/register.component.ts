@@ -26,6 +26,7 @@ export class RegisterComponent implements OnInit {
     username: new FormControl(null, Validators.required),
     password: new FormControl(null, Validators.required),
     cpass: new FormControl(null, Validators.required),
+    profilePic: new FormControl(null),
     code: new FormControl(null)
   });
 
@@ -49,6 +50,8 @@ export class RegisterComponent implements OnInit {
       this.registerForm.reset();
       return;
     }
+
+    this.registerForm.value.profilePic = "";
 
     if(this.registerForm.value.code === secret_admin_code){
       this._userService.registerAdmin(JSON.stringify(this.registerForm.value))

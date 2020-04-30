@@ -10,7 +10,7 @@ import { ProfileComponent } from './views/partials/profile/profile.component';
 import { UserEventsComponent } from './views/partials/user-events/user-events.component';
 import { AdminDashboardComponent } from './views/admin-dashboard/admin-dashboard.component';
 import { MessageBoardComponent } from './views/message-board/message-board.component';
-
+import { UserFriendsComponent } from './views/partials/user-friends/user-friends.component';
 
 const routes: Routes = [
   {
@@ -65,6 +65,10 @@ const routes: Routes = [
       {
         path: 'user-events',
         component: UserEventsComponent
+      },
+      {
+        path: 'user-friends',
+        component: UserFriendsComponent
       }
     ]
   },

@@ -9,6 +9,7 @@ import { CommonUtils } from 'src/app/utils/common-utils';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
+  profilePic: string;
   admin = false;
   user = false;
   inactive = true;
@@ -37,6 +38,36 @@ export class NavbarComponent implements OnInit {
     this._commonutils.setSessionField('userEmail', data.email);
     this._commonutils.setSessionField('userId', data._id);
     this._commonutils.setSessionField('role', data.role);
+
+    switch (data.userImage) {
+      case "1":
+        this._commonutils.setSessionField("profilePic", "../../../../assets/images/bulbasaur.png");
+        break;
+      case "2":
+        this._commonutils.setSessionField("profilePic", "../../../../assets/images/charmander.png");
+        break;
+      case "3":
+        this._commonutils.setSessionField("profilePic", "../../../../assets/images/eevee.png");
+        break;
+      case "4":
+        this._commonutils.setSessionField("profilePic", "../../../../assets/images/jigglypuff.png");
+        break;
+      case "5":
+        this._commonutils.setSessionField("profilePic", "../../../../assets/images/meowth.png");
+        break;
+      case "6":
+        this._commonutils.setSessionField("profilePic", "../../../../assets/images/pikachu.png");
+        break;
+      case "7":
+        this._commonutils.setSessionField("profilePic", "../../../../assets/images/snorlax.png");
+        break;
+      default:
+        this._commonutils.setSessionField("profilePic", "../../../../assets/images/default.png");
+        break;
+    }
+
+    this.profilePic = this._commonutils.readSessionField("profilePic");
+    console.log("VALUE: " + this._commonutils.readSessionField("profilePic"));
 
     if(this.readSession("activeUser")) {
       if(data.role == "Admin") {

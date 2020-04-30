@@ -33,8 +33,8 @@ import { AdminDashboardComponent } from './views/admin-dashboard/admin-dashboard
 import { FilterPipe } from './pipes/filter.pipe';
 import { DatePipe } from '@angular/common';
 import { MessageBoardComponent } from './views/message-board/message-board.component';
-
-
+import { UserFriendsComponent } from './views/partials/user-friends/user-friends.component';
+import { NgpSortModule }from "ngp-sort-pipe";
 
 @NgModule({
   declarations: [
@@ -54,6 +54,7 @@ import { MessageBoardComponent } from './views/message-board/message-board.compo
     AdminDashboardComponent,
     FilterPipe,
     MessageBoardComponent,
+    UserFriendsComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +68,7 @@ import { MessageBoardComponent } from './views/message-board/message-board.compo
     HttpClientModule,
     FullCalendarModule,
     HttpClientJsonpModule,
+    NgpSortModule,
     NotifierModule.withConfig({
       behaviour: {
         autoHide: 3000,

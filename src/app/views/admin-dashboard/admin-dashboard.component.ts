@@ -29,7 +29,14 @@ export class AdminDashboardComponent implements OnInit {
   searchString: string;
   toggleString: string;
 
-  users = [];
+  selectedUser;
+  users;
+  userID;
+  friendModal = false;
+
+  username;
+  name;
+  email;
 
   errorMessage: string;
 
@@ -76,6 +83,10 @@ export class AdminDashboardComponent implements OnInit {
     eventId: new FormControl(null),
   });
 
+  // userForm: FormGroup = new FormGroup({
+  //   selectedUser: new FormControl(null, Validators.required),
+  // });
+
   constructor(
     private _eventsService: EventService,
     private _userService: UserService,
@@ -94,6 +105,13 @@ export class AdminDashboardComponent implements OnInit {
         this.addEventsFromDB(false, data);
       },
       (error) => console.error(error)
+    );
+
+    this._userService.listOfUsers().subscribe(
+      (data) => {
+        this.users = data;
+      },
+      (error) => { console.log("ERROR"); }
     );
   }
 

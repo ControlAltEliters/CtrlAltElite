@@ -83,15 +83,15 @@
                   <th>Email</th>
                   <th>Events Created</th>
                   <th>Actions</th>
-                  <tr *ngFor="let event of events | filter : 'title' : searchString | sortBy : 'asc' : 'date'; let i = index">
+                  <tr *ngFor="let player of users | filter : 'username' : searchString | sortBy : 'asc' : 'username'; let i = index">
                     <td class="text-left">
-                      <!-- {{event.title}} -->
+                      {{player.username}}
                     </td>
                     <td class="text-left">
-                      <!-- {{event.date}}<br>{{event.startTime}} to {{event.endTime}} -->
+                      {{player.firstname}} {{player.lastname}}
                     </td>
                     <td class="text-left">
-                      <!-- {{event.description}} -->
+                      {{player.email}}
                     </td>
                     <td class="text-left">
                       <div id="eventsCreated">

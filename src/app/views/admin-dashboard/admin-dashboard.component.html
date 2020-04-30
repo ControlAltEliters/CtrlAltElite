@@ -1,2 +1,269 @@
 <app-navbar></app-navbar>
-<div class="dashboard"></div>
+<div class="dashboard">
+    <div class="ui grid">
+        <div class="two wide column">
+            <div class="ui vertical fluid tabular menu">
+                <a class="item active" data-tab="events">
+                    Events
+                </a>
+                <a class="item" data-tab="users">
+                    Users
+                </a>
+            </div>
+        </div>
+        <div class="fourteen wide column">
+            <div class="ui tab segment active" data-tab="events">
+                <!-- Input form to filter the table of events -->
+                <form>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="ui transparent icon input">
+                                <input
+                                id="search"
+                                type="text"
+                                class="form-control"
+                                name="searchString"
+                                placeholder="Search events..."
+                                [(ngModel)]="searchString"
+                                />
+                                <i class="search link icon"></i>
+                            </div>
+                            <div class="ui transparent">
+                              <button class="ui toggle button active toggleEvents" (click)="toggle()">{{toggleString}}</button>
+                            </div>
+                            <div class="ui divider"></div>
+                            <br/>
+                        </div>
+                    </div>
+                  </form>
+                <!-- List the table of events -->
+                <div class="table-bg">
+                  <table class="table">
+                    <tr>
+                      <th id="th-title">Title</th>
+                      <th id="th-date">Date</th>
+                      <th>Description</th>
+                      <th>Current Players</th>
+                      <th id="th-actions">Actions</th>
+                    </tr>
+                    <tr *ngFor="let event of events | filter : 'title' : searchString | sortBy : 'asc' : 'date'; let i = index">
+                      <td id="td-title" class="text-left">
+                        {{event.title}}
+                      </td>
+                      <td id="td-date" class="text-left">
+                        {{event.date}}<br>{{event.startTime}} to {{event.endTime}}
+                      </td>
+                      <td class="text-left">
+                        <div id="desc">{{event.description}}</div>
+                      </td>
+                        <td class="text-left">
+                          <div id="currPlayers">
+                            <li *ngFor="let player of event.currentPlayers" style="list-style-type: none;">
+                            {{player}}</li>
+                          </div>
+                        </td>
+                        <td id="td-title" class="text-left">
+                          <button class="edit-button"(click)="displayEditEvent(event)">Edit Event</button>
+                          <button class="delete-button"(click)="removeEvent(event.id)">Delete Event</button>
+                        </td>
+                    </tr>
+                  </table>
+                </div>
+            </div>
+            <div class="ui tab segment" data-tab="users" id="users-tab">
+              <form>
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="ui transparent icon input">
+                        <input
+                        id="search"
+                        type="text"
+                        class="form-control"
+                        name="searchString"
+                        placeholder="Search users..."
+                        [(ngModel)]="searchString"
+                        />
+                        <i class="search link icon"></i>
+                    </div>
+                    <div class="ui divider"></div>
+                    <br/>
+                  </div>
+                </div>
+              </form>
+                <table class="table">
+                  <th>Username</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <!-- <th>Events Created</th> -->
+                  <th>Actions</th>
+                  <tr *ngFor="let player of users | filter : 'username' : searchString | sortBy : 'asc' : 'username'; let i = index">
+                    <td class="text-left">
+                      {{player.username}}
+                    </td>
+                    <td class="text-left">
+                      {{player.firstname}} {{player.lastname}}
+                    </td>
+                    <td class="text-left">
+                      {{player.email}}
+                    </td>
+                    <!-- <td class="text-left">
+                      <div id="eventsCreated">
+                        <li *ngFor="let player of event.currentPlayers" style="list-style-type: none;">
+                          {{player}}</li>
+                      </div>
+                    </td> -->
+                    <td class="text-left">
+                      <!-- <button>Contact</button> -->
+                      <button (click)="removeUser(player._id)">Delete Account</button>
+                    </td>
+                  </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+  <!-- MODALS -->
+    <div id="editEventModal" class="ui small modal">
+      <i class="close icon cancel"></i>
+      <div class="header">
+        <p>Edit Event</p>
+      </div>
+      <div class="content">
+        <form class="ui form" [formGroup]="editEventForm" name="editEventForm">
+          <div class="field">
+            <div class="three fields">
+              <div class="ten wide field">
+                <label>Game Name*</label>
+                <input
+                  formControlName="editEventTitle"
+                  type="text"
+                  class="form-control"
+                  id="inputTitle"
+                />
+              </div>
+              <div class="three wide field">
+                <label>Player Min*</label>
+                <select
+                  class="ui fluid dropdown"
+                  formControlName="editMinPlayers"
+                  id="inputMin"
+                >
+                  <option [ngValue]="1">1</option>
+                  <option [ngValue]="2">2</option>
+                  <option [ngValue]="3">3</option>
+                  <option [ngValue]="4">4</option>
+                  <option [ngValue]="5">5</option>
+                  <option [ngValue]="6">6</option>
+                  <option [ngValue]="7">7</option>
+                  <option [ngValue]="8">8</option>
+                </select>
+              </div>
+              <div class="three wide field">
+                <label>Player Max*</label>
+                <select
+                  class="ui fluid dropdown"
+                  formControlName="editMaxPlayers"
+                  id="inputMax"
+                >
+                  <option [ngValue]="1">1</option>
+                  <option [ngValue]="2">2</option>
+                  <option [ngValue]="3">3</option>
+                  <option [ngValue]="4">4</option>
+                  <option [ngValue]="5">5</option>
+                  <option [ngValue]="6">6</option>
+                  <option [ngValue]="7">7</option>
+                  <option [ngValue]="8">8</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="five fields">
+            <div class="six wide field">
+              <label>Event Date*</label>
+              <input
+                formControlName="editDate"
+                type="date"
+                id="inputDate"
+              />
+            </div>
+            <div class="three wide field">
+              <label>Start Time*</label>
+              <select
+                class="ui fluid dropdown"
+                formControlName="editStartTime"
+                id="inputStartTime"
+              >
+                <option [ngValue]="1">1</option>
+                <option [ngValue]="2">2</option>
+                <option [ngValue]="3">3</option>
+                <option [ngValue]="4">4</option>
+                <option [ngValue]="5">5</option>
+                <option [ngValue]="6">6</option>
+                <option [ngValue]="7">7</option>
+                <option [ngValue]="8">8</option>
+                <option [ngValue]="9">9</option>
+                <option [ngValue]="10">10</option>
+                <option [ngValue]="11">11</option>
+                <option [ngValue]="12">12</option>
+              </select>
+            </div>
+            <div class="two wide field">
+              <div class="ui checkbox">
+                <input id="checked1" type="checkbox" (click)="handleChecked(1)" [checked]="initialPM1" />
+                <label for="checked1">PM</label>
+              </div>
+            </div>
+            <div class="three wide field">
+              <label>End Time*</label>
+              <select
+                class="ui fluid dropdown"
+                formControlName="editEndTime"
+                id="inputEndTime"
+              >
+                <option [ngValue]="1">1</option>
+                <option [ngValue]="2">2</option>
+                <option [ngValue]="3">3</option>
+                <option [ngValue]="4">4</option>
+                <option [ngValue]="5">5</option>
+                <option [ngValue]="6">6</option>
+                <option [ngValue]="7">7</option>
+                <option [ngValue]="8">8</option>
+                <option [ngValue]="9">9</option>
+                <option [ngValue]="10">10</option>
+                <option [ngValue]="11">11</option>
+                <option [ngValue]="12">12</option>
+              </select>
+            </div>
+            <div class="two wide field">
+              <div class="ui checkbox">
+                <input id="checked2" type="checkbox" (click)="handleChecked(2)" [checked]="initialPM2" />
+                <label for="checked2">PM</label>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label>Required Resources*</label>
+            <input
+              formControlName="editResources"
+              type="text"
+              id="inputResources"
+            />
+          </div>
+          <div class="field">
+            <label>Event Description</label>
+            <textarea
+              rows="2"
+              formControlName="editDescription"
+              type="textarea"
+              id="inputDescription"
+            >
+            </textarea>
+          </div>
+        </form>
+      </div>
+      <div class="actions">
+        <button class="ui approve button" (click)="updateEvent()">Save</button>
+        <button class="ui cancel button">Cancel</button>
+      </div>
+    </div>
+</div>

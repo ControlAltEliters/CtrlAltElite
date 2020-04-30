@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ResolvedReflectiveFactory } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { EventService } from 'src/app/services/event.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -7,6 +7,8 @@ import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
 import { UserService } from 'src/app/services/user.service';
 import { CommonUtils } from 'src/app/utils/common-utils';
 import { Router } from '@angular/router';
+import { NotifierService } from "angular-notifier";
+import { DatePipe } from '@angular/common';
 
 declare let $: any;
 
@@ -29,6 +31,7 @@ export class EventsPageComponent implements OnInit {
   tables = [];
   calendarEvents = [];
   currentPlayers = [];
+  messages = [];
   userJoin = { user: '', userID: '', event: '' };
   userQuit = { user: '', userID: '', event: '' };
 
@@ -37,7 +40,6 @@ export class EventsPageComponent implements OnInit {
   check1 = false;
   check2 = false;
   errorMessageModal = false;
-  successMessageModal = false;
   inEvent = false;
   table1 = true;
   table2 = true;
@@ -60,6 +62,7 @@ export class EventsPageComponent implements OnInit {
   startTime;
   endTime;
   table;
+  maxPlayers;
 
   // For editing event
   currentEvent;
@@ -74,6 +77,9 @@ export class EventsPageComponent implements OnInit {
   initialResources = '';
   initialDescription = '';
 
+  // For notifications
+  private readonly notifier: NotifierService;
+
   // Forms
   eventsForm: FormGroup = new FormGroup({
     eventTitle: new FormControl(null, Validators.required),
@@ -86,6 +92,7 @@ export class EventsPageComponent implements OnInit {
     minPlayers: new FormControl(null, Validators.required),
     table: new FormControl(null),
     eventCreator: new FormControl(null),
+    eventCreatorID: new FormControl(null)
   });
 
   editEventForm: FormGroup = new FormGroup({
@@ -102,13 +109,16 @@ export class EventsPageComponent implements OnInit {
     eventId: new FormControl(null),
   });
 
+
   constructor(
     private _eventsService: EventService,
     private elementRef: ElementRef,
     private _userService: UserService,
     private _commonUtils: CommonUtils,
-    private _router: Router
-  ) {}
+    private _router: Router,
+    private datePipe: DatePipe,
+    private notifierService: NotifierService
+  ) {this.notifier = notifierService;}
 
   ngOnInit(): void {
     this._eventsService.event().subscribe(
@@ -124,7 +134,9 @@ export class EventsPageComponent implements OnInit {
     );
   }
 
-  handleClick(event) {}
+  handleClick(event) {
+    // this.notifier.notify("success", "You clicked a date!");
+  }
 
   dealWithUser(data) {
     this.userID = data._id;
@@ -136,14 +148,44 @@ export class EventsPageComponent implements OnInit {
   }
 
   chooseTable() {
-    $('#createEventTableModal').modal('show');
-    this.renderTables();
+
+    if(this.eventsForm.value.startTime < 11 && this.check1 === false) {
+      this.notifier.notify("error", "Invalid time selection: Start time too early");
+      return;
+    }
+
+    if(this.eventsForm.value.startTime > 10 && this.check1 === true) {
+      this.notifier.notify("error", "Invalid time selection: Start time too late");
+      return;
+    }
+
+    if(this.eventsForm.value.endTime > 10 && this.check2 === true) {
+      this.notifier.notify("error", "Invalid time selection: End time too late");
+      return;
+    }
+
+    if(this.eventsForm.value.endTime < 10 && this.check2 === false) {
+      this.notifier.notify("error", "Invalid time selection: End time too early");
+      return;
+    }
+
+    if(this.check1 === true && this.check2 === false) {
+      this.notifier.notify("error", "Invalid time selection: Invalid time range");
+      return;
+
+    } else {
+      $('#createEventTableModal').modal('show');
+      this.renderTables();
+    }
   }
 
   showCreateEventModal() {
     $('#createEventModal').modal('show');
   }
 
+  returnToEventModal(){
+    $('#singleEventModal').modal('show');
+  }
 
   addEventsFromDB(data) {
     data.forEach((event) => {
@@ -178,6 +220,7 @@ export class EventsPageComponent implements OnInit {
         table: event.table,
         id: event._id,
         creator: event.eventCreator,
+        messages: event.messages
       });
     });
   }
@@ -249,24 +292,42 @@ export class EventsPageComponent implements OnInit {
     this.userJoin.user = user;
     this.userJoin.userID = userID;
 
-    if (this.alreadySignedUpForEvent(eventID, userID) == false) {
-      this._eventsService.join(this.userJoin).subscribe(
-        (data) => {
-          console.log(data);
-        },
-        (error) => console.error(error)
-      );
-      this.successMessageModal = true;
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
-    } else {
-      this.errorMessage = 'User already registered.';
-      this.errorMessageModal = true;
-      setTimeout(() => {
-        this.errorMessageModal = false;
-      }, 3000);
-    }
+      this.events.forEach((theEvent) => {
+        if(theEvent.id == eventID)
+        {
+          if (this.currentEvent.extendedProps.max <= theEvent.currentPlayers.length)
+          {
+            console.log(theEvent.currentPlayers.length);
+            this.notifier.notify("error", "Event full, could not join.");
+            setTimeout(() => { $('#singleEventModal').modal('hide'); }, 1000);
+            return;
+          }
+          else
+          {
+            if (this.alreadySignedUpForEvent(eventID, userID) == false) {
+              this._eventsService.join(this.userJoin).subscribe(
+                (data) => {
+                  console.log(data);
+                },
+                (error) => console.error(error)
+              );
+              this.notifier.notify("success", "Joined event!");
+              setTimeout(() => {
+                window.location.reload();
+              }, 1000);
+            }
+            else
+            {
+              this.notifier.notify("error", 'User already registered.');
+            }
+          }
+        }
+      })
+  }
+
+  // pop up message while routing not logged in user to login page
+  notLoggedIn(){
+    this.notifier.notify("warning", "You must be logged in to do that!");
   }
 
   // leave joined event
@@ -282,16 +343,12 @@ export class EventsPageComponent implements OnInit {
         },
         (error) => console.error(error)
       );
-      this.successMessageModal = true;
+      this.notifier.notify("success", "Left event!");
       setTimeout(() => {
         window.location.reload();
       }, 1000);
     } else {
-      this.errorMessage = 'User not registered.';
-      this.errorMessageModal = true;
-      setTimeout(() => {
-        this.errorMessageModal = false;
-      }, 3000);
+      this.notifier.notify("error", 'User not registered.');
     }
   }
 
@@ -299,8 +356,10 @@ export class EventsPageComponent implements OnInit {
     let signedup = false;
     this.events.forEach((event) => {
       if (event.id == eventID) {
+        console.log(event.playersIDs);
+        console.log(event.currentPlayers);
         event.playersIDs.forEach((player) => {
-          if (player == this.userID) {
+          if (player == userID) {
             signedup = true;
           }
         });
@@ -314,6 +373,16 @@ export class EventsPageComponent implements OnInit {
   }
 
   handleEventClick(arg) {
+
+    console.log(arg.event);
+
+    // for message board
+    this._commonUtils.setSessionField('messagesID', arg.event.id);
+    this._commonUtils.setSessionField('messagesEventTitle', arg.event.title);
+    this._commonUtils.setSessionField('messagesEventStart', arg.event.start);
+    this._commonUtils.setSessionField('messagesEventEnd', arg.event.end);
+
+
     this.currentEvent = arg.event;
     this.createdEvent = false;
     // check if current user is user that created event
@@ -363,12 +432,15 @@ export class EventsPageComponent implements OnInit {
         this.table = theEvent.table;
         this.eventID = theEvent.id;
         this.currentPlayers = theEvent.currentPlayers;
+        this.maxPlayers = theEvent.maxPlayers;
         this.desc = theEvent.description;
+        this.messages = theEvent.messages;
       }
     });
 
     $('#singleEventModal').modal('show');
-    this.clickedDate = dateAsString;
+    // this.clickedDate = dateAsString
+    this.clickedDate = this.datePipe.transform(dateAsString, 'MM/dd/yyyy');
   }
 
   createEvent() {
@@ -384,31 +456,42 @@ export class EventsPageComponent implements OnInit {
       this.eventsForm.value.table = '5';
     }
 
+
+
     if (!this.eventsForm.valid) {
       console.log('Invalid Form');
       return;
     }
+    // if(this.check1 === true && this.check2 === false) {
+    //   this.notifier.notify("error", "Invalid time selection");
+    //   return;
+    // }
     if (this.check1 === true) {
       this.eventsForm.value.startTime += 12;
     }
     if (this.check2 === true) {
       this.eventsForm.value.endTime += 12;
     }
-
     this.eventsForm.value.eventCreator = this.user;
+    this.eventsForm.value.eventCreatorID = this.userID;
 
     this._eventsService
       .createEvent(JSON.stringify(this.eventsForm.value))
       .subscribe(
         (data) => {
-          console.log(data);
+          this.putEventOnCalendar();
         },
-        (error) => console.error(error)
+        (error) => {
+          this.notifier.notify("error", "Unable to create event");
+          console.error(error)
+        }
       );
-
-    this.putEventOnCalendar();
     this.eventsForm.reset();
-    window.location.reload();
+    this.notifier.notify("success", "Event created!");
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+
   }
 
   // Makes call to backend to change event information
@@ -419,21 +502,23 @@ export class EventsPageComponent implements OnInit {
     if (this.check2 === true) {
       this.editEventForm.value.editEndTime += 12;
     }
-
     this.editEventForm.value.eventCreator = this.user;
-
     this._eventsService
       .editEvent(JSON.stringify(this.editEventForm.value))
       .subscribe(
         (data) => {
-          console.log('Event updated');
+          this.putEditEventOnCalendar();
         },
-        (error) => console.error(error)
+        (error) => {
+          this.notifier.notify("error", "Unable to update event");
+          console.error(error)
+        }
       );
-
-    this.putEventOnCalendar();
-    this.editEventForm.reset();
-    window.location.reload();
+      this.editEventForm.reset();
+      this.notifier.notify("success", "Updated event!");
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
   }
 
   // Show edit event modal and sets + prefills information from current event
@@ -446,8 +531,10 @@ export class EventsPageComponent implements OnInit {
     // Time variables
     let start;
     const timeStart = new Date(this.currentEvent.start);
+    // console.log("EDIT EVENT 1: " + timeStart);
     let end;
     const timeEnd = new Date(this.currentEvent.end);
+    // console.log("EDIT EVENT 2: " + timeEnd);
 
     // Min and max players
     const min = this.currentEvent.extendedProps.min;
@@ -501,26 +588,67 @@ export class EventsPageComponent implements OnInit {
 
   putEventOnCalendar() {
     let startTime = this.eventsForm.value.startTime;
+    let endTime = this.eventsForm.value.endTime;
+    const date = new Date(this.eventsForm.value.date);
+    const dateCST = new Date(date.getTime() + Math.abs(date.getTimezoneOffset()*60000));
+
     if (this.check1 === false) {
       startTime += 12;
     }
-    let endTime = this.eventsForm.value.endTime;
     if (this.check2 === false) {
       endTime += 12;
     }
 
-    const date = this.eventsForm.value.date;
-    const testDate = new Date(date);
-    const year = testDate.getFullYear();
-    const month = testDate.getMonth();
-    const day = testDate.getDate();
-    const startDate = new Date(year, month, day, startTime, 0);
-    const endDate = new Date(year, month, day, endTime, 0);
+    const startDate = new Date(dateCST.getFullYear(), dateCST.getMonth(), dateCST.getDate(), startTime, 0);
+    const endDate = new Date(dateCST.getFullYear(), dateCST.getMonth(), dateCST.getDate(), endTime, 0);
+
+    console.log('start: ' + startDate)
+    console.log('end: ' + endDate)
 
     this.calendarEvents = this.calendarEvents.concat({
       title: this.eventsForm.value.eventTitle,
       start: startDate,
       end: endDate,
     });
+  }
+
+  putEditEventOnCalendar() {
+    let startTime = this.editEventForm.value.editStartTime;
+    let endTime = this.editEventForm.value.editEndTime;
+    const date = new Date(this.editEventForm.value.editDate);
+    const dateCST = new Date(date.getTime() + Math.abs(date.getTimezoneOffset()*60000));
+
+    if (this.check1 === false) {
+      startTime += 12;
+    }
+    if (this.check2 === false) {
+      endTime += 12;
+    }
+
+    const startDate = new Date(dateCST.getFullYear(), dateCST.getMonth(), dateCST.getDate(), startTime, 0);
+    const endDate = new Date(dateCST.getFullYear(), dateCST.getMonth(), dateCST.getDate(), endTime, 0);
+
+    console.log('start: ' + startDate)
+    console.log('end: ' + endDate)
+
+    //TODO REMOVE DUPLICATE EVENT ON UPDATE BEFORE CONCAT
+
+    this.calendarEvents = this.calendarEvents.concat({
+      title: this.editEventForm.value.editEventTitle,
+      start: startDate,
+      end: endDate,
+    });
+  }
+
+  appendMessage(inputText) {
+    console.log("appendMessage()");
+    var date = this.today.getMonth() + '-' + this.today.getDate() + " " + this.today.getHours() + ":" + this.today.getMinutes();
+    var newDiv = document.createElement("div");
+    newDiv.setAttribute('class', 'message');
+    newDiv.setAttribute('style','float: left; margin: 8px; width: 100%');
+    newDiv.innerHTML += '<code>' + this.user + ' </code><time>@ ' + date + ' : </time><p>'+ inputText + '</p>';
+    document.getElementById("messagesBody1").appendChild(newDiv);
+
+
   }
 }

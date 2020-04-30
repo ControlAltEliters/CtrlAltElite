@@ -39,7 +39,8 @@
           How many games do you have?
         </div>
         <div class="content">
-          <p>NP = NP-Complete</p>
+          <p>Over 75+ retro arcade games and pinball RPG, board and card tabletop gaming
+            Console gaming on NES, SNES, Gamecube, PS1, PS2, Genesis, Xbox</p>
         </div>
         <div class="title">
           <i class="dropdown icon"></i>
@@ -60,7 +61,7 @@
           I have a question not on here! What do I do?
         </div>
         <div class="content">
-          <button type="submit" (click)="toggleModal()">Feel free to send us an email!</button>
+          <button id="email-button" type="submit" (click)="toggleModal()">Feel free to send us an email!</button>
     </div>
   </div>
 </div>
@@ -97,14 +98,12 @@
     <div class="ui button" id="edit-button" (click)="sendEmail()">Send</div>
     <div class="ui button" id="edit-button" (click)="toggleModal()">Cancel</div>
   </div>
-  <div id="center">
-    <div class="ui error message" *ngIf="showErrorMessage">
+    <!-- <div class="ui error message" *ngIf="showErrorMessage">
       <div class="header">Send Error</div>
       <p>{{sendError}}</p>
     </div>
     <div class="ui success message" *ngIf="showSuccessMessage">
       <div class="header">Success!</div>
       <p>{{successMessage}}</p>
-    </div>
-  </div>
+    </div> -->
 </div>

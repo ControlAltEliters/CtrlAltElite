@@ -81,8 +81,8 @@
   border-bottom: 1px solid white;
 }
 .ui.modal>.header:not(.ui) {
-  font-size: 2rem;
-  line-height: 1.28571429em;
+  font-size: 2em;
+  /* line-height: 1.28571429em; */
   font-weight: 700;
   text-align: center;
 }
@@ -113,4 +113,31 @@
 
 .small-p {
   font-size: .60em;
+}
+
+.event-title {
+  margin-bottom: .25em;
+}
+
+
+.tableContent {
+  text-align: center;
+  font-size: .75em !important;
+}
+
+.player-list {
+  background: rgb(148, 148, 148);
+  max-height: 3.5em;
+  border-radius: .5em;
+  overflow-y: scroll;
+  margin: 0 auto;
+}
+
+#player {
+  padding: 0;
+  margin: 0;
+}
+
+*::-webkit-scrollbar {
+  display: none;
 }

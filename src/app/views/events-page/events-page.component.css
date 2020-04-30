@@ -11,6 +11,15 @@ form {
   font-weight: 800;
 }
 
+.hours {
+  float: left;
+  font-size: 10px;
+}
+
+.ui.modal>.actions {
+  height: auto;
+}
+
 .inputTitle {
   color: rgb(167, 161, 161);
 }
@@ -293,4 +302,16 @@ label {
   align-content: center;
   flex-direction: column;
   text-align: center;
+}
+
+
+.eventTitle {
+  display: inline-block;
+  width: 70%;
+}
+
+.messageBoardButton {
+  display: inline-block;
+  text-align: right;
+  width: 30%;
 }

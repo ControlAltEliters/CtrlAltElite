@@ -16,7 +16,7 @@ let schema = new Schema({
     playersIDs: {type: Array, require: true},
     creation_dt:{type:Date, require:true},
     eventID: {type: String},
-    eventCreator: {type: String},
+    eventCreator: {type: String}
 });
 
 module.exports = mongoose.model('Event',schema, 'events');

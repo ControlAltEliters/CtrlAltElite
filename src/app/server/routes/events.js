@@ -1,15 +1,32 @@
 var express = require('express');
 var router = express.Router();
 var Event = require('../models/Event');
+var Message = require('../models/Message');
 var passport = require('passport');
 
 router.post('/createEvent', function (req, res, next) {
   addToDB(req, res);
 });
 
+router.post('/removeEvent', function (req, res, next) {
+  try {
+    Event.findOneAndDelete(
+      { _id: req.body.params.id }, {
+    }, function (err, doc) {
+      if (err) {
+        return res.status(500).json({ message: 'Delete event failed' });
+      } else {
+        return res.status(200).json({ message: 'Deleted event', userObject: doc });
+      }
+    }
+    )
+  }
+  catch (err) {
+    return res.status(500).json({ message: 'Event deletion failed' });
+  }
+})
+
 router.post('/editEvent', function (req, res, next) {
-  console.log('Made it to the backend! Event body:');
-  console.log(req.body);
   try {
     Event.findOneAndUpdate(
     {_id: req.body.eventId }, {
@@ -26,10 +43,8 @@ router.post('/editEvent', function (req, res, next) {
       }
     }, function (err,doc) {
         if (err) {
-          console.log('Event edit error: ' + err)
           return res.status(500).json({message:'Updating event failed'});
         } else {
-          console.log('Updated profile: ' + doc)
           return res.status(200).json({message:'Updated event', eventObject: doc});
         }
       }
@@ -54,11 +69,12 @@ async function addToDB(req, res) {
     minPlayers: req.body.minPlayers,
     table: req.body.table,
     eventID: req.body.id,
-    currentPlayers: [],
+    currentPlayers: [req.body.eventCreator],
     isOpen: true,
-    playersIDs: [],
+    playersIDs: [req.body.eventCreatorID],
     creation_dt: Date.now(),
-    eventCreator: req.body.eventCreator
+    eventCreator: req.body.eventCreator,
+    messages: []
   });
 
   try {
@@ -69,6 +85,23 @@ async function addToDB(req, res) {
     return res.status(501).json(err);
   }
 }
+
+router.post('/add-message', function (req, res, next) {
+  let message = new Message({
+    eventID: req.body.eventID,
+    author: req.body.author,
+    messageContent: req.body.message,
+  });
+
+  try {
+    doc = message.save();
+    return res.status(201).json(doc);
+  }
+  catch (err) {
+    console.log('Error from /add-message: ' + err);
+    return res.status(501).json(err);
+  }
+});
 
 router.get('/events', function(req,res,next){
   Event.find({}, function (err, events) {
@@ -106,6 +139,28 @@ router.get('/event-puller', function(req,res,next){
     return res.status(500).json({message:'The try failed'});
   }
 });
+
+router.get('/messages', function (req, res, next) {
+  try {
+    Message.find(
+      {
+        eventID: req.query.eventID
+      }, function (err, doc) {
+      if (err) {
+        console.log('Get messages error: ' + err)
+        return res.status(500).json({ message: ':(' });
+      } else {
+        // console.log('Updated password: ' + doc)
+        return res.status(200).json({ message: 'Messages found', messagesList: doc });
+      }
+    }
+    )
+  }
+  catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: 'Catch error' });
+  }
+})
 
 
 router.get('/:eventTitle', (req, res, next) => {

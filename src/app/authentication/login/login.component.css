@@ -1,21 +1,22 @@
 @import url('https://fonts.googleapis.com/css?family=VT323&display=swap');
 
 #loginWrapper {
-    position: relative;
-    height: 100%;
+  position: relative;
+  height: 59vh;
+  margin-top: 1vh;
 }
 
 .top20 {
-    margin-top: 20px;
+    padding-top: 20px;
 }
 
 .card {
-    border: 0px;
-    min-width: 400px;
-    margin-top: 5% !important;
-    margin-bottom: 5% !important;
-    background: rgba(52, 222, 252, 0.521);
-    box-shadow: .5em .5em #6bd4dbcc !important;
+  border: 0px;
+  min-width: 400px;
+  margin-top: 5% !important;
+  margin-bottom: 5% !important;
+  background: rgba(52, 222, 252, 0.521);
+  box-shadow: .5em .5em #6bd4dbcc !important;
 }
 
 @keyframes blink {

@@ -5,7 +5,7 @@
         <img src="../../assets/images/logo.png">
       </div>
 
-      <div class="right menu" *ngIf="inactive">
+      <div class="right menu" *ngIf="readSession('userType') === 'inactive'">
           <a class="item" [ngClass]="{'active': href === '/home'}" [routerLink]="['/home']">
           Home
           </a>
@@ -19,9 +19,9 @@
           Login
           </a>
       </div>
-      <div class="right menu" *ngIf="user">
+      <div class="right menu" *ngIf="readSession('userType') === 'user'">
         <a class="item greeting" style="pointer-events: none; font-style: italic;">
-          <img class="ui avatar image" src="./assets/images/icon1.png">
+          <img class="ui avatar image" src="{{readSession('profilePic')}}">
           Welcome, {{readSession('activeUser')}}!
         </a>
         <a class="item loggedIn" [ngClass]="{'active': href === '/home'}" [routerLink]="['/home']">
@@ -40,9 +40,9 @@
         Logout
         </a>
       </div>
-      <div class="right menu" *ngIf="admin">
+      <div class="right menu" *ngIf="readSession('userType') === 'admin'">
         <a class="item greeting" style="pointer-events: none; font-style: italic;">
-          <img class="ui avatar image" src="./assets/images/icon1.png">
+          <img class="ui avatar image" src="{{readSession('profilePic')}}">
           Welcome, {{readSession('activeUser')}}!
         </a>
         <a class="item loggedIn" [ngClass]="{'active': href === '/adminDashboard'}" [routerLink]="['/adminDashboard']">

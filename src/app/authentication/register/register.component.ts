@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
+import { NotifierService } from "angular-notifier";
 
 var secret_admin_code = 'Arcadia';
 
@@ -14,8 +15,8 @@ var secret_admin_code = 'Arcadia';
 export class RegisterComponent implements OnInit {
   public ownerRegistration = false;
 
-    
-  registerError: String;
+  private readonly notifier: NotifierService;
+
   @Input() on: boolean;
 
   registerForm: FormGroup = new FormGroup({
@@ -24,11 +25,14 @@ export class RegisterComponent implements OnInit {
     email: new FormControl(null, [Validators.email, Validators.required]),
     username: new FormControl(null, Validators.required),
     password: new FormControl(null, Validators.required),
-    code: new FormControl(null, Validators.required),
-    cpass: new FormControl(null, Validators.required)
+    cpass: new FormControl(null, Validators.required),
+    profilePic: new FormControl(null),
+    code: new FormControl(null)
   });
-  constructor(private _router: Router, private _userService: UserService) { }
-  
+
+  constructor(private _router: Router, private _userService: UserService, private notifierService: NotifierService
+  ) { this.notifier = notifierService; }
+
 
   ngOnInit() {}
 
@@ -36,24 +40,29 @@ export class RegisterComponent implements OnInit {
     this._router.navigate(['/login']);
   }
 
-  
-
   register() {
-    // need to add ability to set up owner account since now have input for admin code
-    if (!this.registerForm.valid || (this.registerForm.controls.password.value != this.registerForm.controls.cpass.value)) {
-      this.registerError = 'Invalid Form';
-      console.log('Invalid Form');
+    if (!this.registerForm.valid || (this.registerForm.value.password != this.registerForm.value.cpass)) {
+      this.notifier.notify("error", 'Invalid Form.');
+      if(this.ownerRegistration && !this.registerForm.value.code) {
+        this.notifier.notify("warning", 'Make sure you have correct admin code.');
+      }
+      this.notifier.notify("warning", 'Email or username may be non-unique, or entered passwords don\'t match.');
+      this.registerForm.reset();
       return;
     }
+
+    this.registerForm.value.profilePic = "";
 
     if(this.registerForm.value.code === secret_admin_code){
       this._userService.registerAdmin(JSON.stringify(this.registerForm.value))
       .subscribe(
         data => {
          this._router.navigate(['/login']);
+          this.notifier.notify("success", "Successfully registered! Please login with new credentials.");
         },
         error => {
-          this.registerError = error.error.message;
+          this.notifier.notify("error", error.error.message);
+          this.registerForm.reset();
         }
       );
     }else{
@@ -61,17 +70,17 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         data => {
           this._router.navigate(['/login']);
+          this.notifier.notify("success", "Successfully registered! Please login with new credentials.");
         },
         error => {
-          this.registerError = error.error.message;
+          this.notifier.notify("error", error.error.message);
+          this.registerForm.reset();
         }
       );
     }
-
-
     // console.log(JSON.stringify(this.registerForm.value));
   }
-  
+
   toggleForm() {
     this.ownerRegistration = !this.ownerRegistration;
   }

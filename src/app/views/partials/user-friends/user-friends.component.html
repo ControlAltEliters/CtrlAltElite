@@ -1,0 +1,58 @@
+<div class="friends-title">
+  <h2 class="ui icon header">
+    <i class="circular users icon"></i>
+    <button (click)="displayFriendModal()" class="ui button float-right">Find Friends</button>
+  </h2>
+<div>
+<div class="friendContent">
+  <div *ngIf="hasFriends">
+    <div class="friendDisplay" *ngFor="let friend of friendPics; let j = index" (click)="showFriendInfo(j)">
+      <img src="{{friend.pic}}"><div class="friendDisplay-name">{{friend.name}}</div>
+    </div>
+  </div>
+  <div class="friendDisplay" *ngIf="!hasFriends" style="text-align: center;">Add some friends!</div>
+</div>
+</div>
+
+<!-- MODALS -->
+<div id="friendModal" class="ui small modal">
+  <i class="close icon cancel"></i>
+  <div class="header">
+    <p class="ui sticky">Select User to View Profile</p>
+    </div>
+    <div class="ui transparent icon input">
+      <input
+      id="search"
+      type="text"
+      class="form-control"
+      name="searchString"
+      placeholder="Search users..."
+      [(ngModel)]="searchString"
+      />
+      <i class="search link icon"></i>
+  </div>
+    <div class="content">
+      <div class="ui grid">
+        <div class="five wide column buttonlink" *ngFor="let player of users | filter : 'username' : searchString; let i = index" (click)="selectUser(i)" id="users">
+          <div>{{player.username}}</div>
+        </div>
+      </div>
+    <button class="ui button" id="close" (click)="closeModal()">Close</button>
+  </div>
+</div>
+
+<div id="profileModal" class="ui small modal">
+  <i class="close icon cancel"></i>
+  <div class="header">
+    <p>{{username}}</p>
+  </div>
+  <div class="content">
+    <img src="{{profilePic}}">
+    <div>{{name}}</div>
+    <div>{{email}}</div>
+    <div class="buttonWrapper">
+      <button *ngIf="adding" class="ui button" (click)="addFriend()">Add Friend</button>
+      <button *ngIf="!adding" class="ui button" (click)="removeFriend()">Remove Friend</button>
+    </div>
+  </div>
+</div>

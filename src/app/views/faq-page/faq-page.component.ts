@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NotifierService } from "angular-notifier";
 
 declare let $: any;
 
@@ -9,6 +10,8 @@ declare let $: any;
   styleUrls: ['./faq-page.component.css'],
 })
 export class FaqPageComponent implements OnInit {
+
+  private readonly notifier: NotifierService;
 
   sendError: string;
   successMessage: string;
@@ -25,7 +28,8 @@ export class FaqPageComponent implements OnInit {
     content: new FormControl(null)
   });
 
-  constructor() { }
+  constructor(private notifierService: NotifierService
+  ) { this.notifier = notifierService; }
 
   ngOnInit(): void {
     $('.ui.accordion').accordion();
@@ -44,11 +48,10 @@ export class FaqPageComponent implements OnInit {
     alert('add code to send email here\n\nemail: ' + this.userEmail + '\nsubject line: ' + this.subjectLine + '\ncontent: ' + this.content);
 
     // call service here, test for error and success, display msg for 3 seconds and then close modal
-    this.sendError = 'Testing error message.';
-    this.successMessage = 'Testing success message.';
 
-    this.showErrorMessage = true;
-    setTimeout(() => { this.showErrorMessage = false; this.showSuccessMessage = true; }, 2000);
-    setTimeout(() => { this.showSuccessMessage = false; this.toggleModal(); }, 4000);
+    this.notifier.notify("error", "testing error msg");
+    this.notifier.notify("success", "testing success msg");
+
+    setTimeout(() => { this.toggleModal(); }, 1500);
   }
 }

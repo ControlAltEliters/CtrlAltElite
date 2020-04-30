@@ -21,6 +21,7 @@ async function addToDB(req, res) {
     username: req.body.username,
     password: User.hashPassword(req.body.password),
     role: Role.User,
+    userImage: req.body.profilePic,
     creation_dt: Date.now()
   });
 
@@ -34,6 +35,24 @@ async function addToDB(req, res) {
   }
 }
 
+router.post('/removeUser', function (req, res, next) {
+  try {
+    User.findOneAndDelete(
+      { _id: req.body.params.id }, {
+    }, function (err, doc) {
+      if (err) {
+        return res.status(500).json({ message: 'Delete user failed' });
+      } else {
+        return res.status(200).json({ message: 'Deleted user', userObject: doc });
+      }
+    }
+    )
+  }
+  catch (err) {
+    return res.status(500).json({ message: 'User deletion failed' });
+  }
+})
+
 async function addToDBAdmin(req, res) {
   let user = new User({
     firstname: req.body.firstname,
@@ -42,6 +61,7 @@ async function addToDBAdmin(req, res) {
     username: req.body.username,
     password: User.hashPassword(req.body.password),
     role: Role.Admin,
+    userImage: req.body.profilePic,
     creation_dt: Date.now()
   });
 
@@ -76,6 +96,60 @@ router.get('/user',isValidUser,function(req,res,next){
   return res.status(200).json(req.user);
 });
 
+router.get('/listofusers', function (req, res, next) {
+  User.find({}, function (err, users) {
+    if (err) {
+      res.send('something went wrong')
+      next()
+    }
+    res.json(users);
+  });
+});
+
+router.get('/addfriend', function (req, res, next) {
+    try {
+    User.findOneAndUpdate(
+      { _id: req.query.id }, {
+      $push: {
+          friends: req.query.friendUsername
+      }
+    }, function (err, doc) {
+      if (err) {
+        return res.status(500).json({ message: 'Add friend failed' });
+      } else {
+        return res.status(200).json({ message: 'Added friend', userObject: doc });
+      }
+    }
+    )
+  }
+  catch (err) {
+    // console.log(err);
+    return res.status(500).json({ message: 'Add friend failed' });
+  }
+});
+
+router.get('/removefriend', function (req, res, next) {
+  try {
+    User.findOneAndUpdate(
+      { _id: req.query.id }, {
+      $pull: {
+        friends: req.query.friendUsername
+      }
+    }, function (err, doc) {
+      if (err) {
+        return res.status(500).json({ message: 'Remove friend failed' });
+      } else {
+        return res.status(200).json({ message: 'Removed friend', userObject: doc });
+      }
+    }
+    )
+  }
+  catch (err) {
+    // console.log(err);
+    return res.status(500).json({ message: 'Removing friend failed' });
+  }
+});
+
 router.get('/logout',isValidUser, function(req,res,next){
   req.logout();
   return res.status(200).json({message:'Logout Success'});
@@ -104,6 +178,28 @@ router.post('/editprofile',isValidUser, function(req,res,next){
   catch (err) {
     console.log(err);
     return res.status(500).json({message:'Updated user failed'});
+  }
+})
+
+router.get('/updatepic', isValidUser, function (req, res, next) {
+  try {
+    User.findOneAndUpdate(
+      { _id: req.query.id }, {
+      $set: {
+        userImage: JSON.parse(req.query.value),
+      }
+    }, function (err, doc) {
+      if (err) {
+        return res.status(500).json({ message: 'Updated profile picture failed' });
+      } else {
+        return res.status(200).json({ message: 'Updated profile picture', userObject: doc });
+      }
+    }
+    )
+  }
+  catch (err) {
+    // console.log(err);
+    return res.status(500).json({ message: 'Updated password failed' });
   }
 })
 

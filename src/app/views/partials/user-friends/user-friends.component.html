@@ -33,7 +33,7 @@
   </div>
     <div class="content">
       <div class="ui grid">
-        <div class="five wide column buttonlink" *ngFor="let player of users | filter : 'username' : searchString; let i = index" (click)="selectUser(i)" id="users">
+        <div class="five wide column buttonlink" *ngFor="let player of validusers | filter : 'username' : searchString; let i = index" (click)="selectUser(i)" id="users">
           <div>{{player.username}}</div>
         </div>
       </div>

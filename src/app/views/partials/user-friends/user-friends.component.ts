@@ -15,6 +15,7 @@ export class UserFriendsComponent implements OnInit {
   user;
   selectedUser;
   users;
+  validusers = [];
   userID;
   friendModal = false;
 
@@ -59,6 +60,7 @@ export class UserFriendsComponent implements OnInit {
 
     setTimeout(()=>{
       this.findFriends(this.data);
+      this.displayEachUser();
     }, 500);
   }
 
@@ -230,8 +232,23 @@ export class UserFriendsComponent implements OnInit {
   }
 
   displayEachUser(){
+    let foundFriend = 0;
+
     this.users.forEach(member => {
-      console.log(member.firstname)
+      this.friends.forEach(friend => {
+        if(member.username == friend)
+        {
+          foundFriend = 1;
+        }
+      });
+      if(foundFriend || member.username == this._commonUtils.readSessionField('activeUser')) {
+        foundFriend = 0;
+        console.log("FOUND FRIEND or SELF");
+      }
+      else {
+        console.log("not friend: " + member.username);
+        this.validusers.push(member);
+      }
     })
   }
 

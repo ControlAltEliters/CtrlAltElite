@@ -21,8 +21,10 @@ export class NavbarComponent implements OnInit {
     private _commonutils: CommonUtils
   ) {
     this._userService.user().subscribe(
-      (data) => this.setUser(data)
-      // error=>this._router.navigate(['/login'])
+      (data) => this.setUser(data),
+      (error) => {
+        this._commonutils.setSessionField('userType', "inactive");
+      }
     );
   }
 
@@ -70,13 +72,15 @@ export class NavbarComponent implements OnInit {
 
     if(this.readSession("activeUser")) {
       if(data.role == "Admin") {
-        this.admin = true;
+        this._commonutils.setSessionField('userType', "admin");
         localStorage.setItem("path", "adminDashboard");
       }
       else {
-        this.user = true;
+        this._commonutils.setSessionField('userType', "user");
       }
-      this.inactive = false;
+    }
+    else {
+      this._commonutils.setSessionField('userType', "inactive");
     }
   }
 

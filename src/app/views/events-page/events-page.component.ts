@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ResolvedReflectiveFactory } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { EventService } from 'src/app/services/event.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -31,6 +31,7 @@ export class EventsPageComponent implements OnInit {
   tables = [];
   calendarEvents = [];
   currentPlayers = [];
+  messages = [];
   userJoin = { user: '', userID: '', event: '' };
   userQuit = { user: '', userID: '', event: '' };
 
@@ -108,6 +109,7 @@ export class EventsPageComponent implements OnInit {
     eventId: new FormControl(null),
   });
 
+
   constructor(
     private _eventsService: EventService,
     private elementRef: ElementRef,
@@ -154,6 +156,9 @@ export class EventsPageComponent implements OnInit {
     $('#createEventModal').modal('show');
   }
 
+  returnToEventModal(){
+    $('#singleEventModal').modal('show');
+  }
 
   addEventsFromDB(data) {
     data.forEach((event) => {
@@ -188,6 +193,7 @@ export class EventsPageComponent implements OnInit {
         table: event.table,
         id: event._id,
         creator: event.eventCreator,
+        messages: event.messages
       });
     });
   }
@@ -340,6 +346,16 @@ export class EventsPageComponent implements OnInit {
   }
 
   handleEventClick(arg) {
+
+    console.log(arg.event);
+
+    // for message board
+    this._commonUtils.setSessionField('messagesID', arg.event.id);
+    this._commonUtils.setSessionField('messagesEventTitle', arg.event.title);
+    this._commonUtils.setSessionField('messagesEventStart', arg.event.start);
+    this._commonUtils.setSessionField('messagesEventEnd', arg.event.end);
+
+
     this.currentEvent = arg.event;
     this.createdEvent = false;
     // check if current user is user that created event
@@ -391,6 +407,7 @@ export class EventsPageComponent implements OnInit {
         this.currentPlayers = theEvent.currentPlayers;
         this.maxPlayers = theEvent.maxPlayers;
         this.desc = theEvent.description;
+        this.messages = theEvent.messages;
       }
     });
 
@@ -588,5 +605,17 @@ export class EventsPageComponent implements OnInit {
       start: startDate,
       end: endDate,
     });
+  }
+
+  appendMessage(inputText) {
+    console.log("appendMessage()");
+    var date = this.today.getMonth() + '-' + this.today.getDate() + " " + this.today.getHours() + ":" + this.today.getMinutes();
+    var newDiv = document.createElement("div");
+    newDiv.setAttribute('class', 'message');
+    newDiv.setAttribute('style','float: left; margin: 8px; width: 100%');
+    newDiv.innerHTML += '<code>' + this.user + ' </code><time>@ ' + date + ' : </time><p>'+ inputText + '</p>';
+    document.getElementById("messagesBody1").appendChild(newDiv);
+
+
   }
 }

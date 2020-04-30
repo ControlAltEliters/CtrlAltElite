@@ -1,0 +1,45 @@
+.ui.header {
+  color: white;
+}
+
+.content-block {
+  background: rgba(55,13,25,0.8);
+  color: white;
+  height: 100%;
+  padding: 1% 0% 5% 0%;
+}
+
+.ui.comments {
+  width: 100%;
+  margin: auto;
+  max-width: 90%;
+}
+
+.comment-holder {
+  margin:0;
+  padding:0;
+  text-indent:10px;
+}
+
+.ui.comments .comment {
+  background: rgb(46, 163, 184, 0.7);
+  padding: 20px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.ui.comments .comment .author,
+.ui.comments .comment .metadata,
+.ui.comments .comment .text,
+.ui.comments .comment .actions {
+  color: white;
+}
+
+.ui.comments .reply.form textarea {
+  height: 9em;
+}
+
+.custom-pink {
+  background: #FE019A;
+  color: white;
+}

@@ -294,3 +294,15 @@ label {
   flex-direction: column;
   text-align: center;
 }
+
+
+.eventTitle {
+  display: inline-block;
+  width: 70%;
+}
+
+.messageBoardButton {
+  display: inline-block;
+  text-align: right;
+  width: 30%;
+}

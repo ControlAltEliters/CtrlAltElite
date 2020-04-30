@@ -21,7 +21,7 @@
       </div>
       <div class="right menu" *ngIf="readSession('userType') === 'user'">
         <a class="item greeting" style="pointer-events: none; font-style: italic;">
-          <img class="ui avatar image" src="{{profilePic}}">
+          <img class="ui avatar image" src="{{readSession('profilePic')}}">
           Welcome, {{readSession('activeUser')}}!
         </a>
         <a class="item loggedIn" [ngClass]="{'active': href === '/home'}" [routerLink]="['/home']">

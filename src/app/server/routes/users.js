@@ -21,6 +21,7 @@ async function addToDB(req, res) {
     username: req.body.username,
     password: User.hashPassword(req.body.password),
     role: Role.User,
+    userImage: req.body.profilePic,
     creation_dt: Date.now()
   });
 
@@ -42,6 +43,7 @@ async function addToDBAdmin(req, res) {
     username: req.body.username,
     password: User.hashPassword(req.body.password),
     role: Role.Admin,
+    userImage: req.body.profilePic,
     creation_dt: Date.now()
   });
 
@@ -74,6 +76,16 @@ router.post('/login',function(req,res,next){
 
 router.get('/user',isValidUser,function(req,res,next){
   return res.status(200).json(req.user);
+});
+
+router.get('/listofusers', function (req, res, next) {
+  User.find({}, function (err, users) {
+    if (err) {
+      res.send('something went wrong')
+      next()
+    }
+    res.json(users);
+  });
 });
 
 router.get('/logout',isValidUser, function(req,res,next){

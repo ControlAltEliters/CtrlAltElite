@@ -37,6 +37,14 @@ export class UserService {
     });
   }
 
+  listOfUsers() {
+    return this._http.get(environment.baseurl + '/users/listofusers', {
+      observe: 'body',
+      headers: new HttpHeaders().append('Content-Type', 'application/json'),
+      withCredentials: true
+    });
+  }
+
   logout() {
     return this._http.get(environment.baseurl + '/users/logout', {
       observe: 'body',

@@ -21,6 +21,7 @@ async function addToDB(req, res) {
     username: req.body.username,
     password: User.hashPassword(req.body.password),
     role: Role.User,
+    userImage: req.body.profilePic,
     creation_dt: Date.now()
   });
 
@@ -42,6 +43,7 @@ async function addToDBAdmin(req, res) {
     username: req.body.username,
     password: User.hashPassword(req.body.password),
     role: Role.Admin,
+    userImage: req.body.profilePic,
     creation_dt: Date.now()
   });
 

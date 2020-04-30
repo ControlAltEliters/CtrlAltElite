@@ -38,6 +38,7 @@
 .five.wide.column {
   background: rgb(158, 158, 158);
   margin: 0 auto;
+  justify-content: left;
 }
 
 *::-webkit-scrollbar {

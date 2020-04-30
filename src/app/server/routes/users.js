@@ -49,7 +49,7 @@ router.post('/removeUser', function (req, res, next) {
     )
   }
   catch (err) {
-    return res.status(500).json({ message: 'Event deletion failed' });
+    return res.status(500).json({ message: 'User deletion failed' });
   }
 })
 

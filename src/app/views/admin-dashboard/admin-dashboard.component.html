@@ -94,7 +94,7 @@
                   <th>Username</th>
                   <th>Name</th>
                   <th>Email</th>
-                  <th>Events Created</th>
+                  <!-- <th>Events Created</th> -->
                   <th>Actions</th>
                   <tr *ngFor="let player of users | filter : 'username' : searchString | sortBy : 'asc' : 'username'; let i = index">
                     <td class="text-left">
@@ -106,15 +106,15 @@
                     <td class="text-left">
                       {{player.email}}
                     </td>
-                    <td class="text-left">
+                    <!-- <td class="text-left">
                       <div id="eventsCreated">
-                        <!-- <li *ngFor="let player of event.currentPlayers" style="list-style-type: none;">
-                          {{player}}</li> -->
+                        <li *ngFor="let player of event.currentPlayers" style="list-style-type: none;">
+                          {{player}}</li>
                       </div>
-                    </td>
+                    </td> -->
                     <td class="text-left">
-                      <button>Contact</button>
-                      <button (click)="removeUser(player.userId)">Delete Account</button>
+                      <!-- <button>Contact</button> -->
+                      <button (click)="removeUser(player.id)">Delete Account</button>
                     </td>
                   </tr>
                 </table>

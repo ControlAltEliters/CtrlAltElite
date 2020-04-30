@@ -22,7 +22,7 @@ export class UserService {
   }
 
   removeUser(id: any) {
-    return this._http.post(environment.baseurl + '/events/removeUser', {
+    return this._http.post(environment.baseurl + '/users/removeUser', {
       observe: 'body',
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
       params: {

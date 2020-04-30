@@ -21,7 +21,7 @@
       </div>
       <div class="right menu" *ngIf="readSession('userType') === 'user'">
         <a class="item greeting" style="pointer-events: none; font-style: italic;">
-          <img class="ui avatar image" src="./assets/images/icon1.png">
+          <img class="ui avatar image" src="{{profilePic}}">
           Welcome, {{readSession('activeUser')}}!
         </a>
         <a class="item loggedIn" [ngClass]="{'active': href === '/home'}" [routerLink]="['/home']">
@@ -42,7 +42,7 @@
       </div>
       <div class="right menu" *ngIf="readSession('userType') === 'admin'">
         <a class="item greeting" style="pointer-events: none; font-style: italic;">
-          <img class="ui avatar image" src="./assets/images/icon1.png">
+          <img class="ui avatar image" src="{{profilePic}}">
           Welcome, {{readSession('activeUser')}}!
         </a>
         <a class="item loggedIn" [ngClass]="{'active': href === '/adminDashboard'}" [routerLink]="['/adminDashboard']">

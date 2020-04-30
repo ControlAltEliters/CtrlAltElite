@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonUtils } from 'src/app/utils/common-utils';
 import { NotifierService } from "angular-notifier";
+import { HttpClient } from '@angular/common/http';
 
 
 declare let $: any;
@@ -14,6 +15,7 @@ declare let $: any;
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
+  profilePic: string;
   userFirstName: string;
   userLastName: string;
   userName: string;
@@ -24,9 +26,9 @@ export class ProfileComponent implements OnInit {
   showErrorMessage: Boolean;
   successMessage: string;
   showSuccessMessage: Boolean;
+  images
 
   private readonly notifier: NotifierService;
-
 
   editProfile: FormGroup = new FormGroup({
     editFirstName: new FormControl(null),
@@ -46,10 +48,12 @@ export class ProfileComponent implements OnInit {
     private _router: Router,
     private _userService: UserService,
     private _commonUtils: CommonUtils,
-    private notifierService: NotifierService
+    private notifierService: NotifierService,
+    private http: HttpClient,
   ) {this.notifier = notifierService;}
 
   ngOnInit(): void {
+    $('.ui.dropdown').dropdown();
     // set local state
     this.userFirstName = this._commonUtils.readSessionField('userFirst');
     this.userLastName = this._commonUtils.readSessionField('userLast');
@@ -84,6 +88,51 @@ export class ProfileComponent implements OnInit {
 
     this.showErrorMessage = false;
     this.showSuccessMessage = false;
+
+    this.profilePic = this._commonUtils.readSessionField('profilePic');
+  }
+
+  selectPic(val) {
+    // need to pass in user id
+    this._userService
+      .updatePic(this._commonUtils.readSessionField('userId'), JSON.stringify(val))
+      .subscribe(
+        (data) => {
+          this.notifier.notify("success", "Updated your profile picture!");
+        },
+        (error) => {
+          this.notifier.notify("error", "There was an error updating your profile picture.");
+        }
+      );
+
+    switch (val.toString()) {
+      case "1":
+        this._commonUtils.setSessionField("profilePic", "../../../../assets/images/bulbasaur.png");
+        break;
+      case "2":
+        this._commonUtils.setSessionField("profilePic", "../../../../assets/images/charmander.png");
+        break;
+      case "3":
+        this._commonUtils.setSessionField("profilePic", "../../../../assets/images/eevee.png");
+        break;
+      case "4":
+        this._commonUtils.setSessionField("profilePic", "../../../../assets/images/jigglypuff.png");
+        break;
+      case "5":
+        this._commonUtils.setSessionField("profilePic", "../../../../assets/images/meowth.png");
+        break;
+      case "6":
+        this._commonUtils.setSessionField("profilePic", "../../../../assets/images/pikachu.png");
+        break;
+      case "7":
+        this._commonUtils.setSessionField("profilePic", "../../../../assets/images/snorlax.png");
+        break;
+      default:
+        this._commonUtils.setSessionField("profilePic", "../../../../assets/images/default.png");
+        break;
+    }
+
+    window.location.reload();
   }
 
   displayInfoModal() {
@@ -93,6 +142,23 @@ export class ProfileComponent implements OnInit {
   displayPasswordModal() {
     $('#editPasswordModal').modal('show');
   }
+
+  // selectImage(event){
+  //   if (event.target.files.length > 0) {
+  //     const file = event.target.files[0];
+  //     this.images = file;
+  //   }
+  // }
+
+  // onSubmit(){
+  //   const formData = new FormData();
+  //   formData.append('file', this.images);
+
+  //   this.http.post<any>('http://localhost:3000/file', formData).subscribe(
+  //     (res) => console.log(res),
+  //     (err) => console.log(err)
+  //   );
+  // }
 
   editUserProfile() {
     if (!this.editProfile.valid) {

@@ -76,6 +76,16 @@ router.get('/user',isValidUser,function(req,res,next){
   return res.status(200).json(req.user);
 });
 
+router.get('/listofusers', function (req, res, next) {
+  User.find({}, function (err, users) {
+    if (err) {
+      res.send('something went wrong')
+      next()
+    }
+    res.json(users);
+  });
+});
+
 router.get('/logout',isValidUser, function(req,res,next){
   req.logout();
   return res.status(200).json({message:'Logout Success'});

@@ -13,7 +13,7 @@ export class UserFriendsComponent implements OnInit {
 
   user
   selectedUser
-  users = []
+  users;
   userID
   friendModal = false
 
@@ -25,10 +25,14 @@ export class UserFriendsComponent implements OnInit {
 
   ngOnInit(): void {
     $('.ui.dropdown').dropdown();
+
     this.user = sessionStorage.getItem('activeUser');
+
     this._userService.listOfUsers().subscribe(
-      (data) => this.dealWithUser(data),
-      (error) => {}
+      (data) => {
+        this.users = data;
+      },
+      (error) => { console.log("ERROR"); }
     );
     this._userService.user().subscribe(
       (data) => this.findFriends(data),
@@ -36,20 +40,16 @@ export class UserFriendsComponent implements OnInit {
     );
   }
 
-  dealWithUser(data) {
-    console.log(data)
-    this.users = data
-  }
-
     findFriends(data){
   //   console.log(data)
     }
 
     selectUser(index){
-      this.selectUser = this.users[index]
-      console.log(this.selectUser)
-      $('#secondModal').modal('show');
-      
+      console.log(index);
+      this.selectedUser = "";
+      this.selectedUser = this.users[index];
+      console.log(this.selectedUser);
+      $('#profileModal').modal('show');
     }
 
   displayEachUser(){

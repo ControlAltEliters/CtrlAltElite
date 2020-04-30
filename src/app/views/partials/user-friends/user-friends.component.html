@@ -12,11 +12,28 @@
 <!-- MODALS -->
 <div id="friendModal" class="ui small modal">
     <div class="header">
-        <p>Select a user profile to view:</p>
+        <p>Select User to View Profile</p>
     </div>
     <div class="content">
-        <div *ngFor="let player of users; let i = index" (click)="selectUser(i)">
+      <!-- <div class="ui grid">
+  <div class="four wide column"></div>
+  <div class="four wide column"></div>
+  <div class="four wide column"></div>
+  <div class="four wide column"></div>
+</div> -->
+        <div *ngFor="let player of users; let i = index" (click)="selectUser(i)" id="users">
             {{i+1}}. {{player.firstname}} {{player.lastname}}
         </div>
     </div>
+</div>
+
+<div id="profileModal" class="ui small modal">
+  <div class="header">
+    <p>User Profile (Edit this to have username)</p>
+  </div>
+  <div class="content">
+    <div>
+      Content Here
+    </div>
+  </div>
 </div>

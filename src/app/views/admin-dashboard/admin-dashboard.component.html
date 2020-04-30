@@ -63,8 +63,8 @@
                           </div>
                         </td>
                         <td id="td-title" class="text-left">
-                          <button (click)="displayEditEvent(event)">Edit Event</button>
-                          <button (click)="removeEvent(event.id)">Delete Event</button>
+                          <button class="edit-button"(click)="displayEditEvent(event)">Edit Event</button>
+                          <button class="delete-button"(click)="removeEvent(event.id)">Delete Event</button>
                         </td>
                     </tr>
                   </table>
@@ -75,7 +75,7 @@
                 <div class="form-group">
                   <div class="input-group">
                     <div class="ui transparent icon input">
-                        <input 
+                        <input
                         id="search"
                         type="text"
                         class="form-control"

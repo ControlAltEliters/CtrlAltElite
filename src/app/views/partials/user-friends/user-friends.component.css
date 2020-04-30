@@ -46,6 +46,15 @@
   font-size: 2em !important;
 }
 
+.buttonlink:hover{
+  background: rgb(119, 119, 119) !important;
+  cursor: pointer !important;
+}
+
+#search {
+  padding: 10px !important;
+}
+
 *::-webkit-scrollbar {
   display: none;
 }

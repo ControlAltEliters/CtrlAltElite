@@ -106,6 +106,28 @@ router.get('/listofusers', function (req, res, next) {
   });
 });
 
+router.get('/addfriend', function (req, res, next) {
+    try {
+    User.findOneAndUpdate(
+      { _id: req.query.id }, {
+      $push: {
+          friends: req.query.friendUsername
+      }
+    }, function (err, doc) {
+      if (err) {
+        return res.status(500).json({ message: 'Add friend failed' });
+      } else {
+        return res.status(200).json({ message: 'Added friend', userObject: doc });
+      }
+    }
+    )
+  }
+  catch (err) {
+    // console.log(err);
+    return res.status(500).json({ message: 'Updated password failed' });
+  }
+});
+
 router.get('/logout',isValidUser, function(req,res,next){
   req.logout();
   return res.status(200).json({message:'Logout Success'});

@@ -1,12 +1,17 @@
 <div class="friends-title">
-    <h1>My Friends </h1>
-    <div>
-
-    </div>
+  <h2 class="ui icon header">
+    <i class="circular users icon"></i>
     <button (click)="displayFriendModal()" class="ui button float-right">Find Friends</button>
-</div>
+  </h2>
 <div>
-
+<div class="friendContent">
+  <div *ngIf="hasFriends">
+    <div class="friendDisplay" *ngFor="let friend of friendPics; let j = index" (click)="showFriendInfo(j)">
+      <img src="{{friend.pic}}"><div class="friendDisplay-name">{{friend.name}}</div>
+    </div>
+  </div>
+  <div class="friendDisplay" *ngIf="!hasFriends" style="text-align: center;">Add some friends!</div>
+</div>
 </div>
 
 <!-- MODALS -->
@@ -17,7 +22,7 @@
     <div class="content">
       <div class="ui grid">
         <div class="five wide column" *ngFor="let player of users; let i = index" (click)="selectUser(i)" id="users">
-          {{player.firstname}} {{player.lastname}}
+          <div>{{player.username}}</div>
         </div>
       </div>
     </div>
@@ -28,8 +33,12 @@
     <p>{{username}}</p>
   </div>
   <div class="content">
-    <div>
-      {{name}}<br>{{email}}
+    <img src="{{profilePic}}">
+    <div>{{name}}</div>
+    <div>{{email}}</div>
+    <div class="buttonWrapper">
+      <button *ngIf="adding" class="ui button" (click)="addFriend()">Add Friend</button>
+      <button *ngIf="!adding" class="ui button">Remove Friend</button>
     </div>
   </div>
 </div>

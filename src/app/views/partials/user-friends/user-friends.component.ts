@@ -100,6 +100,10 @@ export class UserFriendsComponent implements OnInit {
       })
   }
 
+  closeModal() {
+    $('#friendModal').modal('hide');
+  }
+
   findFriends(data){
     if(data.friends.length > 0) {
       this.friends = data.friends;

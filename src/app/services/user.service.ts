@@ -21,6 +21,16 @@ export class UserService {
     });
   }
 
+  removeUser(id: any) {
+    return this._http.post(environment.baseurl + '/events/removeUser', {
+      observe: 'body',
+      headers: new HttpHeaders().append('Content-Type', 'application/json'),
+      params: {
+        id
+      }
+    });
+  }
+
   login(body: any) {
     return this._http.post(environment.baseurl + '/users/login', body, {
       observe: 'body',

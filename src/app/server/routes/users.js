@@ -35,6 +35,24 @@ async function addToDB(req, res) {
   }
 }
 
+router.post('/removeUser', function (req, res, next) {
+  try {
+    User.findOneAndDelete(
+      { _id: req.body.params.id }, {
+    }, function (err, doc) {
+      if (err) {
+        return res.status(500).json({ message: 'Delete user failed' });
+      } else {
+        return res.status(200).json({ message: 'Deleted user', userObject: doc });
+      }
+    }
+    )
+  }
+  catch (err) {
+    return res.status(500).json({ message: 'Event deletion failed' });
+  }
+})
+
 async function addToDBAdmin(req, res) {
   let user = new User({
     firstname: req.body.firstname,

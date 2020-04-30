@@ -157,6 +157,22 @@ export class AdminDashboardComponent implements OnInit {
       }, 1000);
   }
 
+  removeUser(userId) {
+    this._userService.removeUser(userId).subscribe(
+      (data) => {
+        console.log(data);
+        this.notifier.notify("success", "Removed user!");
+      },
+      (error) => {
+        console.error(error);
+        this.notifier.notify("error", 'User not removed.');
+      }
+    );
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+}
+
   addEventsFromDB(showAll, data) {
     data.forEach((event) => {
       const date = new Date(event.date);

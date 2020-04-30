@@ -31,6 +31,8 @@ export class UserFriendsComponent implements OnInit {
   adding = true;
   data;
 
+  searchString: string;
+
   userForm: FormGroup = new FormGroup({
     selectedUser: new FormControl(null, Validators.required),
   });
@@ -101,7 +103,6 @@ export class UserFriendsComponent implements OnInit {
   findFriends(data){
     if(data.friends.length > 0) {
       this.friends = data.friends;
-      console.log("friends: " + this.friends);
 
       this.users.forEach(member => {
         this.friends.forEach(friend => {

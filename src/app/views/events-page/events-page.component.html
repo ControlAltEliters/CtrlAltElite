@@ -179,7 +179,10 @@
       </form>
     </div>
     <div class="actions">
-      <button class="ui approve button" [disabled]="eventsForm.invalid" (click)="chooseTable()">Choose Table</button>
+      <div class="hours">
+        <p>Hours: Every day from 11am - 10pm</p>
+      </div>
+      <button class="ui button" [disabled]="eventsForm.invalid" (click)="chooseTable()">Choose Table</button>
       <button class="ui cancel button">Cancel</button>
     </div>
   </div>

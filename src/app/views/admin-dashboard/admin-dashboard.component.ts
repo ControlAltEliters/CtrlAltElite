@@ -142,6 +142,8 @@ export class AdminDashboardComponent implements OnInit {
 
   // remove event
   removeEvent(eventId) {
+    let state = confirm("WARNING: This action cannot be undone. Are you sure?");
+    if (state === true) {
       this._eventsService.removeEvent(eventId).subscribe(
         (data) => {
           console.log(data);
@@ -155,22 +157,32 @@ export class AdminDashboardComponent implements OnInit {
       setTimeout(() => {
         window.location.reload();
       }, 1000);
+    } else {
+      this.notifier.notify("error", 'Action cancelled.');
+      return;
+    }
   }
 
   removeUser(userId) {
-    this._userService.removeUser(userId).subscribe(
-      (data) => {
-        console.log(data);
-        this.notifier.notify("success", "Removed user!");
-      },
-      (error) => {
-        console.error(error);
-        this.notifier.notify("error", 'User not removed.');
-      }
-    );
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+    let state = confirm("WARNING: This action cannot be undone. Are you sure?");
+    if (state === true) {
+      this._userService.removeUser(userId).subscribe(
+        (data) => {
+          console.log(data);
+          this.notifier.notify("success", "Removed user!");
+        },
+        (error) => {
+          console.error(error);
+          this.notifier.notify("error", 'User not removed.');
+        }
+      );
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    } else {
+      this.notifier.notify("error", 'Action cancelled.');
+      return;
+    }
 }
 
   addEventsFromDB(showAll, data) {

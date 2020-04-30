@@ -34,9 +34,9 @@ export class AdminDashboardComponent implements OnInit {
   userID;
   friendModal = false;
 
-  username;
-  name;
-  email;
+  // username;
+  // name;
+  // email;
 
   errorMessage: string;
 

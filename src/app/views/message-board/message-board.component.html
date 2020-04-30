@@ -1,0 +1,62 @@
+<app-navbar></app-navbar>
+<div class="ui container">
+  <div class="content-block">
+
+    <div class="ui comments"  *ngIf="messages.length == 0">
+      <h1>Message Board: {{currentEventTitle}}</h1>
+      <div class="content">
+        <div class="text">
+          No comments yet! Go ahead and create the first one!
+        </div>
+      </div>
+      <form class="ui reply form" [formGroup]="messageForm" name="messageForm" *ngIf="this.readSession('activeUser')">
+        <div class="field">
+          <textarea
+          rows="2"
+          formControlName="message"
+          type="textarea"
+          placeholder="Your message..."
+          >
+          </textarea>
+        </div>
+        <div class="ui custom-pink labeled submit icon button" (click)="sendMessage()">
+          <i class="icon edit"></i> Add Reply
+        </div>
+      </form>
+    </div>
+
+    <div class="ui comments"  *ngIf="messages.length > 0">
+      <h1>Message Board: {{currentEventTitle}}</h1>
+      <div class="comment-holder" id="comment-holder">
+        <div class="comment comment-card" *ngFor="let elem of messages">
+          <div class="content">
+            <a class="author">{{elem.author}}</a>
+            <div class="metadata">
+              <span class="date">{{(elem.timeSent.getUTCMonth()+1) +"/"+ elem.timeSent.getUTCDate() +"/"+ elem.timeSent.getUTCFullYear() + " - " + elem.timeSent.getUTCHours() + ":" + elem.timeSent.getUTCMinutes() + ":" + elem.timeSent.getUTCSeconds()}}</span>
+            </div>
+            <div class="text">
+              {{elem.messageContent}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form class="ui reply form" [formGroup]="messageForm" name="messageForm" *ngIf="this.readSession('activeUser')">
+        <div class="field">
+          <textarea
+          rows="1"
+          formControlName="message"
+          type="textarea"
+          placeholder="Your message..."
+          >
+          </textarea>
+        </div>
+        <div class="ui custom-pink labeled submit icon button" (click)="sendMessage()">
+          <i class="icon edit"></i> Add Reply
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+

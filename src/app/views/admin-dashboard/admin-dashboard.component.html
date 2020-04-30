@@ -71,12 +71,25 @@
                 </div>
             </div>
             <div class="ui tab segment" data-tab="users" id="users-tab">
-                <div class="ui transparent icon input">
-                    <input type="text" placeholder="Search users...">
-                    <i class="search link icon"></i>
+              <form>
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="ui transparent icon input">
+                        <input 
+                        id="search"
+                        type="text"
+                        class="form-control"
+                        name="searchString"
+                        placeholder="Search users..."
+                        [(ngModel)]="searchString"
+                        />
+                        <i class="search link icon"></i>
+                    </div>
+                    <div class="ui divider"></div>
+                    <br/>
+                  </div>
                 </div>
-                <div class="ui divider"></div>
-                <br/>
+              </form>
                 <table class="table">
                   <th>Username</th>
                   <th>Name</th>

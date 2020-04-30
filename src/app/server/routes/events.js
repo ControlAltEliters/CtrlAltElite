@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Event = require('../models/Event');
+var Message = require('../models/Message');
 var passport = require('passport');
 
 router.post('/createEvent', function (req, res, next) {
@@ -71,33 +72,20 @@ async function addToDB(req, res) {
   }
 }
 
-router.post('/addMessage', function (req, res, next) {
-  console.log('/addMessage: Made it to the backend! Event body:');
-  console.log(req.body);
-  var message = new Message({
-    sender : req.body.messageCreator,
-    messageContent : req.body.messageContent,
+router.post('/add-message', function (req, res, next) {
+  let message = new Message({
+    eventID: req.body.eventID,
+    author: req.body.author,
+    messageContent: req.body.message,
   });
+
   try {
-    Event.findOneAndUpdate(
-    {_id: req.body.eventId }, {
-      $push: {
-        messages: message,
-      }
-    }, function (err,doc) {
-        if (err) {
-          console.log('Add message error: ' + err)
-          return res.status(500).json({message:'Add message failed'});
-        } else {
-          console.log('Add message: ' + doc)
-          return res.status(200).json({message:'Add message', eventObject: doc});
-        }
-      }
-    )
+    doc = message.save();
+    return res.status(201).json(doc);
   }
   catch (err) {
-    console.log(err);
-    return res.status(500).json({message:'Add message failed'});
+    console.log('Error from /add-message: ' + err);
+    return res.status(501).json(err);
   }
 });
 
@@ -137,6 +125,28 @@ router.get('/event-puller', function(req,res,next){
     return res.status(500).json({message:'The try failed'});
   }
 });
+
+router.get('/messages', function (req, res, next) {
+  try {
+    Message.find(
+      {
+        eventID: req.query.eventID
+      }, function (err, doc) {
+      if (err) {
+        console.log('Get messages error: ' + err)
+        return res.status(500).json({ message: ':(' });
+      } else {
+        // console.log('Updated password: ' + doc)
+        return res.status(200).json({ message: 'Messages found', messagesList: doc });
+      }
+    }
+    )
+  }
+  catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: 'Catch error' });
+  }
+})
 
 
 router.get('/:eventTitle', (req, res, next) => {

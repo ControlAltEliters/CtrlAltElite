@@ -4,7 +4,6 @@ import { EventService } from 'src/app/services/event.service';
 import { UserService } from 'src/app/services/user.service';
 import { CommonUtils } from 'src/app/utils/common-utils';
 import { NotifierService } from "angular-notifier";
-
 import { DatePipe } from '@angular/common';
 
 declare let $: any;
@@ -29,6 +28,15 @@ export class AdminDashboardComponent implements OnInit {
   currentPlayers = [];
   searchString: string;
   toggleString: string;
+
+  selectedUser;
+  users;
+  userID;
+  friendModal = false;
+
+  // username;
+  // name;
+  // email;
 
   errorMessage: string;
 
@@ -75,6 +83,10 @@ export class AdminDashboardComponent implements OnInit {
     eventId: new FormControl(null),
   });
 
+  // userForm: FormGroup = new FormGroup({
+  //   selectedUser: new FormControl(null, Validators.required),
+  // });
+
   constructor(
     private _eventsService: EventService,
     private _userService: UserService,
@@ -93,6 +105,13 @@ export class AdminDashboardComponent implements OnInit {
         this.addEventsFromDB(false, data);
       },
       (error) => console.error(error)
+    );
+
+    this._userService.listOfUsers().subscribe(
+      (data) => {
+        this.users = data;
+      },
+      (error) => { console.log("ERROR"); }
     );
   }
 
@@ -137,6 +156,22 @@ export class AdminDashboardComponent implements OnInit {
         window.location.reload();
       }, 1000);
   }
+
+  removeUser(userId) {
+    this._userService.removeUser(userId).subscribe(
+      (data) => {
+        console.log(data);
+        this.notifier.notify("success", "Removed user!");
+      },
+      (error) => {
+        console.error(error);
+        this.notifier.notify("error", 'User not removed.');
+      }
+    );
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+}
 
   addEventsFromDB(showAll, data) {
     data.forEach((event) => {

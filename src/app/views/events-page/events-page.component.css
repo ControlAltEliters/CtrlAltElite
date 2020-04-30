@@ -11,6 +11,15 @@ form {
   font-weight: 800;
 }
 
+.hours {
+  float: left;
+  font-size: 10px;
+}
+
+.ui.modal>.actions {
+  height: auto;
+}
+
 .inputTitle {
   color: rgb(167, 161, 161);
 }

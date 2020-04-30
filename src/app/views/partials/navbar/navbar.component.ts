@@ -39,7 +39,7 @@ export class NavbarComponent implements OnInit {
     this._commonutils.setSessionField('userId', data._id);
     this._commonutils.setSessionField('role', data.role);
 
-    switch (data.userImage.toString()) {
+    switch (data.userImage) {
       case "1":
         this._commonutils.setSessionField("profilePic", "../../../../assets/images/bulbasaur.png");
         break;

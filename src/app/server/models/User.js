@@ -14,7 +14,7 @@ let schema = new Schema({
     role: {type:Role, require: true},
     creation_dt : {type:Date, require:true},
     userImage : {type:String, require:true},// "1" = Bulbasaur "2" = Charmander "3" = eevee "4" = Jigglypuff "5" = Meowth "6" = pikachu "7"=Snorlax
-    friends: [{ type: Schema.Types.ObjectId, ref: 'User'}],
+    friends: [{ type: String}],
 });
 
 schema.statics.hashPassword = function hashPassword(password){

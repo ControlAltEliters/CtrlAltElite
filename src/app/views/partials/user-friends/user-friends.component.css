@@ -1,6 +1,5 @@
 .friends-title {
     height: auto;
-    margin-left: 1em;
     margin-top: .75em;
     font-size: 3em;
   }
@@ -21,7 +20,6 @@
   .ui.modal>.actions {
     background: rgb(120, 128, 128);
     color: white;
-    font-size: 1.5em;
     font-weight: 200;
   }
 
@@ -45,8 +43,75 @@
   background: rgb(138, 138, 138);
   text-align: center;
   margin: .25em;
+  font-size: 2em !important;
 }
 
 *::-webkit-scrollbar {
   display: none;
+}
+
+i, h2 {
+  color: white !important;
+  float: center;
+  width: 100%;
+}
+
+button {
+  margin: .75em 0 .5em 0 !important;
+}
+
+.circular.users.icon{
+  color: white;
+  background: rgba(255, 255, 255, 0.603);
+}
+
+.ui.inverted.divider {
+  margin: 0 auto !important;
+  margin-left: -1.5em !important;
+  margin-right: 2em !important;
+}
+
+.friendContent {
+  overflow-y: scroll;
+  margin: 0 auto;
+  padding: .5em;
+  height: 12em;
+  width: 15em;
+
+  background: rgba(255, 192, 203, 0.219);
+}
+
+.friendDisplay {
+  font-size: .5em !important;
+  font-weight: 900 !important;
+  width: 90% !important;
+  height: auto;
+  margin: 1em;
+  text-align: center;
+  padding: .25em;
+}
+
+.friendDisplay img {
+  height: 5em !important;
+  width: auto;
+}
+
+.friendDisplay-name {
+  margin: .5em;
+  font-size: 1em !important;
+}
+
+#profileModal {
+  text-align: center;
+  font-size: 2em !important;
+}
+
+.buttonWrapper {
+  width: 100%;
+  text-align: right;
+}
+
+img {
+  height: 5em;
+  width: auto;
 }

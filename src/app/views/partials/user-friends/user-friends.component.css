@@ -6,8 +6,8 @@
   }
 
   .ui.modal>.header {
-    background: rgb(65, 161, 161);
     color: white;
+    background: rgb(65, 161, 161);
     border-bottom: 1px solid white;
   }
 
@@ -26,15 +26,20 @@
   }
 
   #friendModal {
-    max-height: 40em !important;
+    margin-top: 7em;
     overflow-y: scroll;
-    margin: 0 auto !important;
+    max-height: 40em !important;
   }
 
 .header {
   text-align: center;
 }
 
-  *::-webkit-scrollbar {
-    display: none;
-  }
+.five.wide.column {
+  background: rgb(158, 158, 158);
+  margin: 0 auto;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}

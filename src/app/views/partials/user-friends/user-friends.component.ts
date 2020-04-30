@@ -45,8 +45,6 @@ export class UserFriendsComponent implements OnInit {
     }
 
     selectUser(index){
-      console.log(index);
-      this.selectedUser = "";
       this.selectedUser = this.users[index];
       console.log(this.selectedUser);
       $('#profileModal').modal('show');

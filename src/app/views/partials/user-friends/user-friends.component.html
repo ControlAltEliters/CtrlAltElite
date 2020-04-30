@@ -12,18 +12,14 @@
 <!-- MODALS -->
 <div id="friendModal" class="ui small modal">
     <div class="header">
-        <p>Select User to View Profile</p>
+        <p class="ui sticky">Select User to View Profile</p>
     </div>
     <div class="content">
-      <!-- <div class="ui grid">
-  <div class="four wide column"></div>
-  <div class="four wide column"></div>
-  <div class="four wide column"></div>
-  <div class="four wide column"></div>
-</div> -->
-        <div *ngFor="let player of users; let i = index" (click)="selectUser(i)" id="users">
-            {{i+1}}. {{player.firstname}} {{player.lastname}}
+      <div class="ui grid left aligned">
+        <div class="five wide column" *ngFor="let player of users; let i = index" (click)="selectUser(i)" id="users">
+          {{i+1}}. {{player.firstname}} {{player.lastname}}
         </div>
+      </div>
     </div>
 </div>
 

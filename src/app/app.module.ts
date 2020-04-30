@@ -27,12 +27,12 @@ import { ProfileComponent } from './views/partials/profile/profile.component';
 import { UserEventsComponent } from './views/partials/user-events/user-events.component';
 import { FaqPageComponent } from './views/faq-page/faq-page.component';
 import { CommonUtils } from './utils/common-utils';
-import { ChatBoxComponent } from './views/partials/chat-box/chat-box.component';
 import { NotifierModule } from "angular-notifier";
 import { NotifierContainerComponent } from './views/partials/notifier-container/notifier-container.component';
 import { AdminDashboardComponent } from './views/admin-dashboard/admin-dashboard.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { DatePipe } from '@angular/common';
+import { MessageBoardComponent } from './views/message-board/message-board.component';
 import { UserFriendsComponent } from './views/partials/user-friends/user-friends.component';
 import { NgpSortModule }from "ngp-sort-pipe";
 
@@ -50,10 +50,10 @@ import { NgpSortModule }from "ngp-sort-pipe";
     ProfileComponent,
     UserEventsComponent,
     FaqPageComponent,
-    ChatBoxComponent,
     NotifierContainerComponent,
     AdminDashboardComponent,
     FilterPipe,
+    MessageBoardComponent,
     UserFriendsComponent,
   ],
   imports: [

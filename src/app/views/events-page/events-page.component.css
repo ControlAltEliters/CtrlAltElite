@@ -295,12 +295,6 @@ label {
   text-align: center;
 }
 
-.textBox {
-  position: relative;
-  text-align: left;
-  float: left;
-  width: 70%;
-}
 
 .eventTitle {
   display: inline-block;
@@ -311,22 +305,4 @@ label {
   display: inline-block;
   text-align: right;
   width: 30%;
-}
-
-.messagesBody {
-  background: rgb(120, 128, 128);
-  color: white;
-  font-size: 1.5em;
-  font-weight: 200;
-  height: 400px;
-  margin: 12px;
-  padding-right:10px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-
-.message {
-  float: left;
-  margin: 8px;
-  width: 100%;
 }

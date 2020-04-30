@@ -9,6 +9,8 @@ import { AccountPageComponent } from './views/account-page/account-page.componen
 import { ProfileComponent } from './views/partials/profile/profile.component';
 import { UserEventsComponent } from './views/partials/user-events/user-events.component';
 import { AdminDashboardComponent } from './views/admin-dashboard/admin-dashboard.component';
+import { MessageBoardComponent } from './views/message-board/message-board.component';
+
 
 const routes: Routes = [
   {
@@ -40,6 +42,11 @@ const routes: Routes = [
     path: 'events',
     component: EventsPageComponent,
     data: { title: 'Events'}
+  },
+  {
+    path: 'messages',
+    component: MessageBoardComponent,
+    data: { title: 'Messages'}
   },
   {
     path: 'faq',

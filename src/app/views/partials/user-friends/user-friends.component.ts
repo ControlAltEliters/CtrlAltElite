@@ -11,11 +11,15 @@ declare let $: any;
 })
 export class UserFriendsComponent implements OnInit {
 
-  user
-  selectedUser
+  user;
+  selectedUser;
   users;
-  userID
-  friendModal = false
+  userID;
+  friendModal = false;
+
+  username;
+  name;
+  email;
 
   userForm: FormGroup = new FormGroup({
     selectedUser: new FormControl(null, Validators.required),
@@ -47,6 +51,11 @@ export class UserFriendsComponent implements OnInit {
     selectUser(index){
       this.selectedUser = this.users[index];
       console.log(this.selectedUser);
+
+      this.username = this.selectedUser.username;
+      this.name = this.selectedUser.firstname + " " + this.selectedUser.lastname;
+      this.email = this.selectedUser.email;
+
       $('#profileModal').modal('show');
     }
 

@@ -15,9 +15,9 @@
         <p class="ui sticky">Select User to View Profile</p>
     </div>
     <div class="content">
-      <div class="ui grid left aligned">
+      <div class="ui grid">
         <div class="five wide column" *ngFor="let player of users; let i = index" (click)="selectUser(i)" id="users">
-          {{i+1}}. {{player.firstname}} {{player.lastname}}
+          {{player.firstname}} {{player.lastname}}
         </div>
       </div>
     </div>
@@ -25,11 +25,11 @@
 
 <div id="profileModal" class="ui small modal">
   <div class="header">
-    <p>User Profile (Edit this to have username)</p>
+    <p>{{username}}</p>
   </div>
   <div class="content">
     <div>
-      Content Here
+      {{name}}<br>{{email}}
     </div>
   </div>
 </div>

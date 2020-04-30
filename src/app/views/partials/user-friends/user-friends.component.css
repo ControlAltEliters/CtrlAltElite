@@ -35,10 +35,16 @@
   text-align: center;
 }
 
-.five.wide.column {
-  background: rgb(158, 158, 158);
+.ui.grid {
   margin: 0 auto;
-  justify-content: left;
+  display: flex !important;
+  align-items: left !important;
+}
+
+.five.wide.column {
+  background: rgb(138, 138, 138);
+  text-align: center;
+  margin: .25em;
 }
 
 *::-webkit-scrollbar {

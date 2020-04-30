@@ -25,7 +25,10 @@ export class UserFriendsComponent implements OnInit {
   friendID;
 
   friends;
+  friendPics = [];
   hasFriends = true;
+
+  adding = true;
 
   userForm: FormGroup = new FormGroup({
     selectedUser: new FormControl(null, Validators.required),
@@ -46,6 +49,7 @@ export class UserFriendsComponent implements OnInit {
     );
     this._userService.user().subscribe(
       (data) => {
+        // not completing this oninit :/
         this.findFriends(data)},
       (error) => {}
     );
@@ -74,8 +78,85 @@ export class UserFriendsComponent implements OnInit {
     if(data.friends.length > 0) {
       this.friends = data.friends;
       console.log("friends: " + this.friends);
+
+      this.users.forEach(member => {
+        this.friends.forEach(friend => {
+          if(friend == member.username)
+          {
+            switch (member.userImage) {
+              case "1":
+                this.profilePic = "../../../../assets/images/bulbasaur.png";
+                break;
+              case "2":
+                this.profilePic = "../../../../assets/images/charmander.png";
+                break;
+              case "3":
+                this.profilePic = "../../../../assets/images/eevee.png";
+                break;
+              case "4":
+                this.profilePic = "../../../../assets/images/jigglypuff.png";
+                break;
+              case "5":
+                this.profilePic = "../../../../assets/images/meowth.png";
+                break;
+              case "6":
+                this.profilePic = "../../../../assets/images/pikachu.png";
+                break;
+              case "7":
+                this.profilePic = "../../../../assets/images/snorlax.png";
+                break;
+              default:
+                this.profilePic = "../../../../assets/images/default.png";
+                break;
+            }
+
+            this.friendPics.push({name:friend, pic:this.profilePic});
+          }
+        })
+      })
     }
     else { this.hasFriends = false; }
+  }
+
+  showFriendInfo(index){
+    this.users.forEach(member => {
+      if(this.friendPics[index].name == member.username) {
+        this.username = member.username;
+        this.name = member.firstname + " " + member.lastname;
+        this.email = member.email;
+
+        switch (member.userImage) {
+          case "1":
+            this.profilePic = "../../../../assets/images/bulbasaur.png";
+            break;
+          case "2":
+            this.profilePic = "../../../../assets/images/charmander.png";
+            break;
+          case "3":
+            this.profilePic = "../../../../assets/images/eevee.png";
+            break;
+          case "4":
+            this.profilePic = "../../../../assets/images/jigglypuff.png";
+            break;
+          case "5":
+            this.profilePic = "../../../../assets/images/meowth.png";
+            break;
+          case "6":
+            this.profilePic = "../../../../assets/images/pikachu.png";
+            break;
+          case "7":
+            this.profilePic = "../../../../assets/images/snorlax.png";
+            break;
+          default:
+            this.profilePic = "../../../../assets/images/default.png";
+            break;
+        }
+
+        this.adding = false;
+
+        $('#profileModal').modal('show');
+      }
+    })
   }
 
   selectUser(index){
@@ -114,6 +195,8 @@ export class UserFriendsComponent implements OnInit {
         break;
     }
 
+    this.adding = true;
+
     $('#profileModal').modal('show');
   }
 
@@ -126,5 +209,4 @@ export class UserFriendsComponent implements OnInit {
   displayFriendModal(){
     $('#friendModal').modal('show');
   }
-
 }

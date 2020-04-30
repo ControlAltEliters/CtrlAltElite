@@ -78,17 +78,32 @@ button {
   height: 12em;
   width: 15em;
 
-  /* background: rgba(255, 192, 203, 0.445); */
+  background: rgba(255, 192, 203, 0.219);
 }
 
 .friendDisplay {
   font-size: .5em !important;
   font-weight: 900 !important;
+  width: 90% !important;
+  height: auto;
+  margin: 1em;
+  text-align: center;
+  padding: .25em;
+}
+
+.friendDisplay img {
+  height: 5em !important;
+  width: auto;
+}
+
+.friendDisplay-name {
+  margin: .5em;
+  font-size: 1em !important;
 }
 
 #profileModal {
   text-align: center;
-   font-size: 2em !important;
+  font-size: 2em !important;
 }
 
 .buttonWrapper {

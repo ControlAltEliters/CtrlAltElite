@@ -107,7 +107,6 @@ router.get('/listofusers', function (req, res, next) {
 });
 
 router.get('/addfriend', function (req, res, next) {
-  console.log("IN ADDFRIEND BACKEND");
     try {
     User.findOneAndUpdate(
       { _id: req.query.id }, {

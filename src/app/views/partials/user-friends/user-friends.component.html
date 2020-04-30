@@ -6,8 +6,8 @@
 <div>
 <div class="friendContent">
   <div *ngIf="hasFriends">
-    <div class="friendDisplay" *ngFor="let friend of friends; let i = index" (click)="selectUser(i)">
-      <div>{{friend}}</div>
+    <div class="friendDisplay" *ngFor="let friend of friendPics; let j = index" (click)="showFriendInfo(j)">
+      <img src="{{friend.pic}}"><div class="friendDisplay-name">{{friend.name}}</div>
     </div>
   </div>
   <div class="friendDisplay" *ngIf="!hasFriends" style="text-align: center;">Add some friends!</div>
@@ -36,6 +36,9 @@
     <img src="{{profilePic}}">
     <div>{{name}}</div>
     <div>{{email}}</div>
-    <div class="buttonWrapper"><button class="ui button" (click)="addFriend()">Add Friend</button></div>
+    <div class="buttonWrapper">
+      <button *ngIf="adding" class="ui button" (click)="addFriend()">Add Friend</button>
+      <button *ngIf="!adding" class="ui button">Remove Friend</button>
+    </div>
   </div>
 </div>

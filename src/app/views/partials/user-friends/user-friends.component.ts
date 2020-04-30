@@ -79,6 +79,25 @@ export class UserFriendsComponent implements OnInit {
       })
   }
 
+  removeFriend() {
+    // remove friend from user friendArray
+    this._userService.removefriend(this._commonUtils.readSessionField('userId'), this.username).subscribe(
+      (data) => {
+        window.location.reload();
+      },
+      (error) => {
+        console.log(error);
+      })
+    // remove user from friend's friendArray
+    this._userService.removefriend(this.friendID, this._commonUtils.readSessionField('activeUser')).subscribe(
+      (data) => {
+        window.location.reload();
+      },
+      (error) => {
+        console.log(error);
+      })
+  }
+
   findFriends(data){
     if(data.friends.length > 0) {
       this.friends = data.friends;

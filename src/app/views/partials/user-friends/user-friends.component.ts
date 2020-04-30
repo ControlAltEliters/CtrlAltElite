@@ -29,6 +29,7 @@ export class UserFriendsComponent implements OnInit {
   hasFriends = true;
 
   adding = true;
+  data;
 
   userForm: FormGroup = new FormGroup({
     selectedUser: new FormControl(null, Validators.required),
@@ -49,10 +50,14 @@ export class UserFriendsComponent implements OnInit {
     );
     this._userService.user().subscribe(
       (data) => {
-        // not completing this oninit :/
-        this.findFriends(data)},
+        this.data = data;
+      },
       (error) => {}
     );
+
+    setTimeout(()=>{
+      this.findFriends(this.data);
+    }, 500);
   }
 
   addFriend(){

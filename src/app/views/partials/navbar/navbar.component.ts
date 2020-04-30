@@ -67,7 +67,6 @@ export class NavbarComponent implements OnInit {
     }
 
     this.profilePic = this._commonutils.readSessionField("profilePic");
-    console.log("VALUE: " + this._commonutils.readSessionField("profilePic"));
 
     if(this.readSession("activeUser")) {
       if(data.role == "Admin") {

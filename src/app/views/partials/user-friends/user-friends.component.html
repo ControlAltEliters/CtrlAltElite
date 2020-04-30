@@ -1,11 +1,14 @@
 <div class="friends-title">
-    <h1>My Friends </h1>
-    <div>
-
-    </div>
+  <h2 class="ui center aligned icon header">
+    <i class="circular users icon"></i>
     <button (click)="displayFriendModal()" class="ui button float-right">Find Friends</button>
-</div>
+  </h2>
+  <div class="ui inverted divider"></div>
 <div>
+<div *ngFor="let friend of friends; let i = index" (click)="selectUser(i)">
+  <div>{{friend.username}}</div>
+</div>
+
 
 </div>
 
@@ -28,8 +31,8 @@
     <p>{{username}}</p>
   </div>
   <div class="content">
-    <div>
-      {{name}}<br>{{email}}
-    </div>
+    <div>{{name}}</div>
+    <div>{{email}}</div>
+    <button class="ui button">Add Friend</button>
   </div>
 </div>

@@ -50,3 +50,23 @@
 *::-webkit-scrollbar {
   display: none;
 }
+
+i, h2 {
+  margin-top: -.25em !important;
+  color: white !important;
+}
+
+.circular.users.icon{
+  color: white;
+  background: rgba(255, 255, 255, 0.603);
+}
+
+.ui.inverted.divider {
+  margin: 0 auto !important;
+  margin-left: -1.5em !important;
+  margin-right: 2em !important;
+}
+
+button {
+  margin-top: .5em !important;
+}

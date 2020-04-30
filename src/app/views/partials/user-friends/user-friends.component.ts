@@ -21,6 +21,8 @@ export class UserFriendsComponent implements OnInit {
   name;
   email;
 
+  friends;
+
   userForm: FormGroup = new FormGroup({
     selectedUser: new FormControl(null, Validators.required),
   });
@@ -35,6 +37,7 @@ export class UserFriendsComponent implements OnInit {
     this._userService.listOfUsers().subscribe(
       (data) => {
         this.users = data;
+        this.findFriends(data);
       },
       (error) => { console.log("ERROR"); }
     );
@@ -45,7 +48,15 @@ export class UserFriendsComponent implements OnInit {
   }
 
     findFriends(data){
-  //   console.log(data)
+      console.log(data);
+      if(data.friends.length) {
+        this.friends = data.friends;
+      }
+      else {
+        let friendsArray = [{username:"No friends added yet!"}];
+        this.friends = friendsArray;
+      }
+
     }
 
     selectUser(index){

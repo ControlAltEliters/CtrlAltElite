@@ -148,8 +148,35 @@ export class EventsPageComponent implements OnInit {
   }
 
   chooseTable() {
-    $('#createEventTableModal').modal('show');
-    this.renderTables();
+
+    if(this.eventsForm.value.startTime < 11 && this.check1 === false) {
+      this.notifier.notify("error", "Invalid time selection: Start time too early");
+      return;
+    }
+
+    if(this.eventsForm.value.startTime > 10 && this.check1 === true) {
+      this.notifier.notify("error", "Invalid time selection: Start time too late");
+      return;
+    }
+
+    if(this.eventsForm.value.endTime > 10 && this.check2 === true) {
+      this.notifier.notify("error", "Invalid time selection: End time too late");
+      return;
+    }
+
+    if(this.eventsForm.value.endTime < 10 && this.check2 === false) {
+      this.notifier.notify("error", "Invalid time selection: End time too early");
+      return;
+    }
+
+    if(this.check1 === true && this.check2 === false) {
+      this.notifier.notify("error", "Invalid time selection: Invalid time range");
+      return;
+
+    } else {
+      $('#createEventTableModal').modal('show');
+      this.renderTables();
+    }
   }
 
   showCreateEventModal() {
@@ -429,10 +456,16 @@ export class EventsPageComponent implements OnInit {
       this.eventsForm.value.table = '5';
     }
 
+
+
     if (!this.eventsForm.valid) {
       console.log('Invalid Form');
       return;
     }
+    // if(this.check1 === true && this.check2 === false) {
+    //   this.notifier.notify("error", "Invalid time selection");
+    //   return;
+    // }
     if (this.check1 === true) {
       this.eventsForm.value.startTime += 12;
     }

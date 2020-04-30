@@ -10,6 +10,7 @@ import { CommonUtils } from 'src/app/utils/common-utils';
 export class AccountPageComponent implements OnInit {
   activeUser: string;
   profilePic: string;
+  num_of_friends: Number;
 
   constructor(private _router: Router, private _commonUtils: CommonUtils) {}
 

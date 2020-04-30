@@ -67,6 +67,18 @@ export class UserService {
     });
   }
 
+  removefriend(id: any, friendUsername: string) {
+    return this._http.get(environment.baseurl + '/users/removefriend', {
+      observe: 'body',
+      headers: new HttpHeaders().append('Content-Type', 'application/json'),
+      withCredentials: true,
+      params: {
+        id,
+        friendUsername
+      }
+    });
+  }
+
   logout() {
     return this._http.get(environment.baseurl + '/users/logout', {
       observe: 'body',

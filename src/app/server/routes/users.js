@@ -124,7 +124,29 @@ router.get('/addfriend', function (req, res, next) {
   }
   catch (err) {
     // console.log(err);
-    return res.status(500).json({ message: 'Updated password failed' });
+    return res.status(500).json({ message: 'Add friend failed' });
+  }
+});
+
+router.get('/removefriend', function (req, res, next) {
+  try {
+    User.findOneAndUpdate(
+      { _id: req.query.id }, {
+      $pull: {
+        friends: req.query.friendUsername
+      }
+    }, function (err, doc) {
+      if (err) {
+        return res.status(500).json({ message: 'Remove friend failed' });
+      } else {
+        return res.status(200).json({ message: 'Removed friend', userObject: doc });
+      }
+    }
+    )
+  }
+  catch (err) {
+    // console.log(err);
+    return res.status(500).json({ message: 'Removing friend failed' });
   }
 });
 

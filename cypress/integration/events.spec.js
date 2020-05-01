@@ -12,7 +12,7 @@ context('Events Page', () => {
     cy.server()
     cy.route('GET', '*users/user*', 'fixture:user.json').as("userResponse");
 
-    // Setup /users/user stub
+    // Setup /events/events stub
     cy.route('GET', '*events/events*', 'fixture:events.json').as("eventResponse");
 
     // Trigger user and events stubs

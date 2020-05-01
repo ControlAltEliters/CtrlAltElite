@@ -12,9 +12,19 @@ context('Admin Dashboard', () => {
     cy.server()
     cy.route('GET', '*users/user*', 'fixture:admin.json').as("userResponse");
 
+    // Setup /events/events stub
+    cy.route('GET', '*events/events*', 'fixture:events.json').as("eventResponse");
+
+    // Setup /users/listofusers stub
+    cy.route('GET', '*users/listofusers*', 'fixture:listofusers.json').as("usersResponse");
+
+
     // Trigger user stub
-    cy.visit('http://127.0.0.1:4200/')
+    cy.visit('http://127.0.0.1:4200/adminDashboard')
     cy.wait("@userResponse");
+    cy.wait("@eventResponse");
+    cy.wait("@usersResponse");
+
 
     // Visit page under test
     cy.visit('http://127.0.0.1:4200/adminDashboard')

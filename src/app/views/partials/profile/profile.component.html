@@ -5,19 +5,19 @@
     </div>
     <div class="row">
       <div class="four wide column align-right">First Name:</div>
-      <div class="twelve wide column">{{userFirstName}}</div>
+      <div id="first-name" class="twelve wide column">{{userFirstName}}</div>
     </div>
     <div class="row">
       <div class="four wide column align-right">Last Name:</div>
-      <div class="twelve wide column">{{userLastName}}</div>
+      <div id="last-name" class="twelve wide column">{{userLastName}}</div>
     </div>
     <div class="row">
       <div class="four wide column align-right">User Name:</div>
-      <div class="twelve wide column">{{userName}}</div>
+      <div id="username" class="twelve wide column">{{userName}}</div>
     </div>
     <div class="row">
       <div class="four wide column align-right">Email:</div>
-      <div class="twelve wide column">{{userEmail}}</div>
+      <div id="email" class="twelve wide column">{{userEmail}}</div>
     </div>
     <div class="row">
       <div class="four wide column align-right">Profile Picture:</div>
@@ -68,8 +68,8 @@
     </div>
     <div class="row">
       <div class="sixteen wide column align-right">
-        <button (click)="displayInfoModal()" class="ui button float-right">Edit Information</button>
-        <button (click)="displayPasswordModal()" class="ui button float-right">Update Password</button>
+        <button id="edit-info-button" (click)="displayInfoModal()" class="ui button float-right">Edit Information</button>
+        <button id="update-password-button" (click)="displayPasswordModal()" class="ui button float-right">Update Password</button>
       </div>
     </div>
   </div>

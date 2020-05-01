@@ -44,8 +44,8 @@ context('Events Page', () => {
   it('should display event modal when an event is clicked', () => {
 
     // Assertions
-    cy.get('.fc-day-grid-event').first().click();
-    cy.get('#singleEventModal').should('be.visible');
+    cy.get('.fc-day-grid-event').first().click()
+    cy.get('#singleEventModal').should('be.visible')
   })
 
   // ON EVENT MODAL:

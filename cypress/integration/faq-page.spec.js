@@ -39,10 +39,13 @@ context('FAQ Page', () => {
         cy.get('.ui.styled.accordion.custom').find('[class="title"]').should('have.length', 6)
     })
 
-    // it('should display email modal'), () => {
-    //     cy.get('.ui.styled.accordion.custom').first().click();
-    // }
-  
+    it('should display email modal'), () => {
+        cy.get('ui.styled.accordion.custom');
+        cy.get('#email-accordion').first().click();
+        cy.get('#email-button').first().click();
+        cy.get('#emailModal').should('have.class', 'visible')
+
+    }
   
   })
   

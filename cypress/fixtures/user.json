@@ -1,0 +1,13 @@
+{
+  "friends": [],
+  "_id": "5eac5395a0552a729de0a27b",
+  "firstname": "John",
+  "lastname": "Smith",
+  "email": "testuser@yoohoo.com",
+  "username": "John",
+  "password": "$2b$10$5ipyinia0HDsT/tE0PQC8uOSEETEFCI29haySa2aJfaOMsJj0uaU6",
+  "role": "User",
+  "userImage": "",
+  "creation_dt": "2020-05-01T16:51:33.996Z",
+  "__v": 0
+}

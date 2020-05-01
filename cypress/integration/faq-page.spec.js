@@ -4,7 +4,7 @@ context('FAQ Page', () => {
     beforeEach(() => {
       cy.visit('http://127.0.0.1:4200/faq')
     })
-  
+
     it('should display google map', () => {
       cy.get('.map-row').should('exist')
     })
@@ -18,12 +18,12 @@ context('FAQ Page', () => {
       cy.wait(500)
 
       cy.visit('http://127.0.0.1:4200/faq')
-  
+
       cy.url().should('include', '/faq')
       cy.get('.avatar').should('exist')
 
       cy.get('.ui.styled.accordion.custom').should('exist')
-  
+
       cy.get('#nav-logout').click();
     })
 
@@ -39,13 +39,9 @@ context('FAQ Page', () => {
         cy.get('.ui.styled.accordion.custom').find('[class="title"]').should('have.length', 6)
     })
 
-    it('should display email modal'), () => {
-        cy.get('ui.styled.accordion.custom');
-        cy.get('#email-accordion').first().click();
-        cy.get('#email-button').first().click();
-        cy.get('#emailModal').should('have.class', 'visible')
-
-    }
-  
+    it('should display email modal', () => {
+        cy.get('#email-accordion').click()
+        cy.get('#email-button').click()
+        cy.get('#emailModal').should('be.visible')
+    })
   })
-  

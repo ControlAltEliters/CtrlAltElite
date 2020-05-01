@@ -84,15 +84,21 @@ button {
   all: unset;
   padding: .5em;
   display: block;
-  font-size: .5em;
+  font-size: .8em;
+  text-transform: uppercase;
   margin: 1.5em auto;
   border-radius: .5em;
-  background: rgb(201, 85, 105);
+  background: rgb(206, 1, 124);
   box-shadow: 2.5px 2.5px rgb(233, 208, 223);
 }
 
+.edit-button,
+.delete-button {
+  width: 100px;
+}
+
 button:hover {
-  background: rgb(179, 68, 87);
+  background: rgb(185, 1, 112);
 }
 
 button:active {

@@ -21,6 +21,16 @@ export class UserService {
     });
   }
 
+  removeUser(id: any) {
+    return this._http.post(environment.baseurl + '/users/removeUser', {
+      observe: 'body',
+      headers: new HttpHeaders().append('Content-Type', 'application/json'),
+      params: {
+        id
+      }
+    });
+  }
+
   login(body: any) {
     return this._http.post(environment.baseurl + '/users/login', body, {
       observe: 'body',
@@ -42,6 +52,30 @@ export class UserService {
       observe: 'body',
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
       withCredentials: true
+    });
+  }
+
+  addfriend(id:any, friendUsername:string) {
+    return this._http.get(environment.baseurl + '/users/addfriend', {
+      observe: 'body',
+      headers: new HttpHeaders().append('Content-Type', 'application/json'),
+      withCredentials: true,
+      params: {
+        id,
+        friendUsername
+      }
+    });
+  }
+
+  removefriend(id: any, friendUsername: string) {
+    return this._http.get(environment.baseurl + '/users/removefriend', {
+      observe: 'body',
+      headers: new HttpHeaders().append('Content-Type', 'application/json'),
+      withCredentials: true,
+      params: {
+        id,
+        friendUsername
+      }
     });
   }
 

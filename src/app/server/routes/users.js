@@ -35,6 +35,24 @@ async function addToDB(req, res) {
   }
 }
 
+router.post('/removeUser', function (req, res, next) {
+  try {
+    User.findOneAndDelete(
+      { _id: req.body.params.id }, {
+    }, function (err, doc) {
+      if (err) {
+        return res.status(500).json({ message: 'Delete user failed' });
+      } else {
+        return res.status(200).json({ message: 'Deleted user', userObject: doc });
+      }
+    }
+    )
+  }
+  catch (err) {
+    return res.status(500).json({ message: 'User deletion failed' });
+  }
+})
+
 async function addToDBAdmin(req, res) {
   let user = new User({
     firstname: req.body.firstname,
@@ -86,6 +104,50 @@ router.get('/listofusers', function (req, res, next) {
     }
     res.json(users);
   });
+});
+
+router.get('/addfriend', function (req, res, next) {
+    try {
+    User.findOneAndUpdate(
+      { _id: req.query.id }, {
+      $push: {
+          friends: req.query.friendUsername
+      }
+    }, function (err, doc) {
+      if (err) {
+        return res.status(500).json({ message: 'Add friend failed' });
+      } else {
+        return res.status(200).json({ message: 'Added friend', userObject: doc });
+      }
+    }
+    )
+  }
+  catch (err) {
+    // console.log(err);
+    return res.status(500).json({ message: 'Add friend failed' });
+  }
+});
+
+router.get('/removefriend', function (req, res, next) {
+  try {
+    User.findOneAndUpdate(
+      { _id: req.query.id }, {
+      $pull: {
+        friends: req.query.friendUsername
+      }
+    }, function (err, doc) {
+      if (err) {
+        return res.status(500).json({ message: 'Remove friend failed' });
+      } else {
+        return res.status(200).json({ message: 'Removed friend', userObject: doc });
+      }
+    }
+    )
+  }
+  catch (err) {
+    // console.log(err);
+    return res.status(500).json({ message: 'Removing friend failed' });
+  }
 });
 
 router.get('/logout',isValidUser, function(req,res,next){

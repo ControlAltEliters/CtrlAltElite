@@ -179,7 +179,7 @@
     "__v": 0
   },
   {
-    "currentPlayers": ["Leslie", "John"],
+    "currentPlayers": ["Leslie"],
     "playersIDs": ["5eab004dab11bf343779682b", "5eac5395a0552a729de0a27b"],
     "_id": "5eab1a436b732f6f5522725b",
     "eventTitle": "Test",

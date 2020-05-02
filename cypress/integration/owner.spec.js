@@ -37,4 +37,24 @@ context('Admin Dashboard', () => {
     cy.get('#options-menu').find('a').should('have.length', 2)
   })
 
+  it('should display the list of events', () => {
+    cy.get('[id="event table"]')
+    .find('tr')
+    .then(tr => {
+      const trCount = Cypress.$(tr).length;
+      expect(tr).to.have.length(trCount);
+    });
+  })
+
+  it('should display the list of users', () => {
+    cy.get('#user-tab').click()
+    cy.get('[id="user table"]')
+    .find('tr')
+    .then(tr => {
+      const trCount = Cypress.$(tr).length;
+      expect(tr).to.have.length(trCount);
+    });
+  })
+  
+
 })

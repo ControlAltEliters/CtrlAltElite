@@ -32,9 +32,6 @@ context('FAQ Page', () => {
     })
 
     it('should have 7 Q & A', () => {
-        // cy.get('[class=".ui.styled.accordion.custom"] > [class="title"]').its('length').then((size) => {
-        //     cy.get('[class=".ui.styled.accordion.custom"] > div:nth-child(' + size + ')').find('title').should('dropdown.icon', 'title', 'content')
-        //  });
         cy.get('.ui.styled.accordion.custom').find('[class="active title"]').should('have.length', 1)
         cy.get('.ui.styled.accordion.custom').find('[class="title"]').should('have.length', 6)
     })

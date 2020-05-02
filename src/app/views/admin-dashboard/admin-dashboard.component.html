@@ -6,7 +6,7 @@
                 <a class="item active" data-tab="events">
                     Events
                 </a>
-                <a class="item" data-tab="users">
+                <a id="user-tab" class="item" data-tab="users">
                     Users
                 </a>
             </div>
@@ -38,7 +38,7 @@
                   </form>
                 <!-- List the table of events -->
                 <div class="table-bg">
-                  <table class="table">
+                  <table id= "event table" class="table">
                     <tr>
                       <th id="th-title">Title</th>
                       <th id="th-date">Date</th>
@@ -90,11 +90,11 @@
                   </div>
                 </div>
               </form>
-                <table class="table">
+                <table id="user table" class="table">
                   <th>Username</th>
                   <th>Name</th>
                   <th>Email</th>
-                  <!-- <th>Events Created</th> -->
+                  <!-- <th>Users Created</th> -->
                   <th>Actions</th>
                   <tr *ngFor="let player of users | filter : 'username' : searchString | sortBy : 'asc' : 'username'; let i = index">
                     <td class="text-left">
@@ -106,14 +106,7 @@
                     <td class="text-left">
                       {{player.email}}
                     </td>
-                    <!-- <td class="text-left">
-                      <div id="eventsCreated">
-                        <li *ngFor="let player of event.currentPlayers" style="list-style-type: none;">
-                          {{player}}</li>
-                      </div>
-                    </td> -->
                     <td class="text-left">
-                      <!-- <button>Contact</button> -->
                       <button (click)="removeUser(player._id)">Delete Account</button>
                     </td>
                   </tr>

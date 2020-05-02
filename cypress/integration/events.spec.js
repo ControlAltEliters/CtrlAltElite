@@ -46,11 +46,51 @@ context('Events Page', () => {
     // Assertions
     cy.get('.fc-day-grid-event').first().click()
     cy.get('#singleEventModal').should('be.visible')
+    cy.get('#join-event-button-logged-in').should('be.visible')
+    cy.get('#leave-event-button').should('be.visible')
   })
 
   // ON EVENT MODAL:
 
-  // should display join event, leave event
-
   // should display messages - and redirect you go discussion board when clicked
+  it('should display messages button and redirect when clicked', () => {
+
+    // Assertions
+    cy.get('.fc-day-grid-event').first().click()
+    cy.get('#singleEventModal').should('be.visible')
+    cy.get('#messages-button').click()
+    cy.url().should('include', '/messages')
+  })
+
+  it('should allow user to create an event', () => {
+
+    cy.route('POST', '*events/createEvent*', 'fixture:createEvent.json').as("createEventRequest");
+
+    cy.get('#schedule-event-button').click()
+    cy.get('input[formControlName=eventTitle]').type('TEST GAME')
+    cy.get('select[formControlName=minPlayers]').select('2')
+    cy.get('select[formControlName=maxPlayers]').select('5')
+    cy.get('input[formControlName=date]').type('2020-05-02')
+    cy.get('select[formControlName=startTime]').select('2')
+    cy.get('input[id=create-checked1]').check()
+    cy.get('select[formControlName=endTime]').select('8')
+    cy.get('input[id=create-checked2]').check()
+    cy.get('input[formControlName=resources]').type('TEST')
+    cy.get('#choose-table-button').click()
+    cy.get('#table-1-available').click()
+    cy.get('#create-event-button').click()
+
+    cy.wait('@createEventRequest')
+    .then(request => {
+      expect(request.requestBody.date).to.eq('2020-05-02');
+      expect(request.requestBody.endTime).to.eq(20);
+      expect(request.requestBody.startTime).to.eq(14);
+      expect(request.requestBody.maxPlayers).to.eq(5);
+      expect(request.requestBody.minPlayers).to.eq(2);
+      expect(request.requestBody.eventCreator).to.eq('John');
+      expect(request.requestBody.eventTitle).to.eq('TEST GAME');
+      expect(request.requestBody.table).to.eq('1');
+    });
+
+  })
 })

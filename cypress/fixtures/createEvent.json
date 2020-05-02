@@ -1,0 +1,13 @@
+{
+  "eventTitle": "TEST GAME",
+  "date": "2020-05-02",
+  "startTime": 14,
+  "endTime": 20,
+  "resources": "TEST",
+  "description": null,
+  "maxPlayers": 5,
+  "minPlayers": 2,
+  "table": "1",
+  "eventCreator": "John",
+  "eventCreatorID": "5eac5395a0552a729de0a27b"
+}

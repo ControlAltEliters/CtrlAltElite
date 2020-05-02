@@ -5,16 +5,19 @@ context('Home Page', () => {
     cy.window().then((win) => {
       win.sessionStorage.clear()
     })
-     // Setup /users/user stub
-     cy.server()
-     cy.route('GET', '*users/user*', 'fixture:user.json').as("userResponse");
+    // Setup server
+    cy.server()
 
-     // Trigger user stub
-     cy.visit('http://127.0.0.1:4200/')
-     cy.wait("@userResponse");
+    // Setup /events/events stub
+    cy.route('GET', '*events/event-puller*', 'fixture:eventpuller.json').as("eventResponse");
 
-     // Visit page under test
-     cy.visit('http://127.0.0.1:4200/home')
+    // Trigger user stub
+    cy.visit('http://127.0.0.1:4200/')
+    cy.wait("@eventResponse");
+
+
+    // Visit page under test
+    cy.visit('http://127.0.0.1:4200/home')
   })
 
   it('should display event modal', () => {

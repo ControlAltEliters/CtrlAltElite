@@ -1,0 +1,87 @@
+[
+  {
+    "currentPlayers": ["Gal", "Leslie", "Ben"],
+    "playersIDs": [
+      "5eaaf9f8ab11bf3437796827",
+      "5eab004dab11bf343779682b",
+      "5eab0453ab11bf3437796834"
+    ],
+    "_id": "5eaafe3cab11bf343779682a",
+    "eventTitle": "Unstable Unicorns",
+    "date": "2020-05-01T00:00:00.000Z",
+    "startTime": 14,
+    "endTime": 17,
+    "resources": "Cards!",
+    "description": null,
+    "maxPlayers": 6,
+    "minPlayers": 2,
+    "table": "1",
+    "isOpen": true,
+    "creation_dt": "2020-04-30T16:35:08.809Z",
+    "eventCreator": "Gal",
+    "__v": 2
+  },
+  {
+    "currentPlayers": ["MatrixMan", "Leslie", "Izuku", "Ben"],
+    "playersIDs": [
+      "5eaafc4fe1573541e4e52504",
+      "5eab004dab11bf343779682b",
+      "5eaaf976ec22ed7d29b0145d",
+      "5eab0453ab11bf3437796834"
+    ],
+    "_id": "5eaafedde1573541e4e52505",
+    "eventTitle": "Betrayal at House on the Hill",
+    "date": "2020-05-05T00:00:00.000Z",
+    "startTime": 15,
+    "endTime": 18,
+    "resources": "Dice",
+    "description": "A tile game that allows players to build their own haunted house adventure room by room!",
+    "maxPlayers": 6,
+    "minPlayers": 3,
+    "table": "2",
+    "isOpen": true,
+    "creation_dt": "2020-04-30T16:37:49.883Z",
+    "eventCreator": "MatrixMan",
+    "__v": 3
+  },
+  {
+    "currentPlayers": ["Ben", "MatrixMan", "Leslie"],
+    "playersIDs": [
+      "5eab0453ab11bf3437796834",
+      "5eaafc4fe1573541e4e52504",
+      "5eab004dab11bf343779682b"
+    ],
+    "_id": "5eab086cab11bf3437796837",
+    "eventTitle": "Dungeons & Dragons",
+    "date": "2020-05-02T00:00:00.000Z",
+    "startTime": 11,
+    "endTime": 16,
+    "resources": "Dice; DM",
+    "description": "Ben will be acting as DM!",
+    "maxPlayers": 8,
+    "minPlayers": 3,
+    "table": "3",
+    "isOpen": true,
+    "creation_dt": "2020-04-30T17:18:36.360Z",
+    "eventCreator": "Ben",
+    "__v": 2
+  },
+  {
+    "currentPlayers": ["Leslie"],
+    "playersIDs": ["5eab004dab11bf343779682b"],
+    "_id": "5eab1a436b732f6f5522725b",
+    "eventTitle": "Test",
+    "date": "2020-05-01T00:00:00.000Z",
+    "startTime": 11,
+    "endTime": 14,
+    "resources": "Test",
+    "description": null,
+    "maxPlayers": 6,
+    "minPlayers": 2,
+    "table": "5",
+    "isOpen": true,
+    "creation_dt": "2020-04-30T18:34:43.184Z",
+    "eventCreator": "Leslie",
+    "__v": 4
+  }
+]

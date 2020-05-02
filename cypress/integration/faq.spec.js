@@ -9,25 +9,7 @@ context('FAQ Page', () => {
       cy.get('.map-row').should('exist')
     })
 
-    it('should successfully authenticate user', () => {
-      cy.visit('http://127.0.0.1:4200/login')
-      cy.get('input[name=email]').type('testuser@yoohoo.com')
-      cy.get('input[name=password]').type('command')
-      cy.get('#login').click();
-
-      cy.wait(500)
-
-      cy.visit('http://127.0.0.1:4200/faq')
-
-      cy.url().should('include', '/faq')
-      cy.get('.avatar').should('exist')
-
-      cy.get('.ui.styled.accordion.custom').should('exist')
-
-      cy.get('#nav-logout').click();
-    })
-
-    it('should display accordian', () => {
+    it('should display accordion', () => {
         cy.get('.ui.styled.accordion.custom').should('exist')
     })
 

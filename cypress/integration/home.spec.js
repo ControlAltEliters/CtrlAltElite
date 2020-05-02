@@ -5,8 +5,16 @@ context('Home Page', () => {
     cy.window().then((win) => {
       win.sessionStorage.clear()
     })
-    cy.visit('http://127.0.0.1:4200/')
-    // cy.visit('http://45.76.237.107:4200/')
+     // Setup /users/user stub
+     cy.server()
+     cy.route('GET', '*users/user*', 'fixture:user.json').as("userResponse");
+
+     // Trigger user stub
+     cy.visit('http://127.0.0.1:4200/')
+     cy.wait("@userResponse");
+
+     // Visit page under test
+     cy.visit('http://127.0.0.1:4200/home')
   })
 
   it('should display event modal', () => {
@@ -27,7 +35,6 @@ context('Home Page', () => {
 
   it('should successfully authenticate user', () => {
     cy.visit('http://127.0.0.1:4200/login')
-    // cy.visit('http://45.76.237.107:4200/login')
     cy.get('input[name=email]').type('testuser@yoohoo.com')
     cy.get('input[name=password]').type('command')
     cy.get('#login').click();

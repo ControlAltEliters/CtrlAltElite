@@ -125,7 +125,7 @@
           </div>
           <div class="two wide field">
             <div class="ui checkbox">
-              <input id="checked1" type="checkbox" (click)="handleChecked(1)" />
+              <input id="create-checked1" type="checkbox" (click)="handleChecked(1)" />
               <label for="checked1">PM</label>
             </div>
           </div>
@@ -152,7 +152,7 @@
           </div>
           <div class="two wide field">
             <div class="ui checkbox">
-              <input id="checked2" type="checkbox" (click)="handleChecked(2)" />
+              <input id="create-checked2" type="checkbox" (click)="handleChecked(2)" />
               <label for="checked2">PM</label>
             </div>
           </div>
@@ -183,8 +183,8 @@
       <div class="hours">
         <p>Hours: Every day from 11am - 10pm</p>
       </div>
-      <button class="ui button" [disabled]="eventsForm.invalid" (click)="chooseTable()">Choose Table</button>
-      <button class="ui cancel button">Cancel</button>
+      <button id="choose-table-button" class="ui button" [disabled]="eventsForm.invalid" (click)="chooseTable()">Choose Table</button>
+      <button id="cancel-creating-event" class="ui cancel button">Cancel</button>
     </div>
   </div>
 
@@ -234,7 +234,7 @@
                     <div (click)="clickedTable(1)" class="arcade-table selected-table">1</div>
                   </div>
                   <div *ngIf="table1 == true && table1checked == false">
-                    <div (click)="clickedTable(1)" class="arcade-table available-table">1</div>
+                    <div id="table-1-available" (click)="clickedTable(1)" class="arcade-table available-table">1</div>
                   </div>
                   <div *ngIf="table1 == false && table1checked == false">
                     <div (click)="clickedTable(1)" class="arcade-table unavailable-table">1</div>
@@ -299,7 +299,7 @@
       <p class="player-info">* Each table seats a maximum of 8 players</p>
     </div>
     <div class="actions">
-      <button class="ui approve button" (click)="createEvent()">Create Event</button>
+      <button id="create-event-button" class="ui approve button" (click)="createEvent()">Create Event</button>
       <div class="ui cancel button">Cancel</div>
     </div>
   </div>
@@ -455,7 +455,7 @@
           <p>EVENT: {{ eventTitle }}</p>
         </div>
         <div class="child messageBoardButton">
-          <a class="ui cancel button" style="margin-top: 2em;" href="/messages">Messages</a>
+          <a id="messages-button" class="ui cancel button" style="margin-top: 2em;" href="/messages">Messages</a>
         </div>
     </div>
     <div class="content">
@@ -481,9 +481,9 @@
     </div>
     <div class="actions">
       <div *ngIf="createdEvent" class ="ui button" (click)="displayEditEvent()">Edit Event</div>
-      <div *ngIf="user" class="ui button" (click)="joinEvent(eventID, user, userID)">Join Event</div>
-      <div *ngIf="!user" class="ui button" (click)="notLoggedIn()" [routerLink]="['/login']" >Join Event</div>
-      <div *ngIf="user" class="ui button" (click)="leaveEvent(eventID, user, userID)">Leave Event</div>
+      <div id="join-event-button-logged-in" *ngIf="user" class="ui button" (click)="joinEvent(eventID, user, userID)">Join Event</div>
+      <div id="join-event-button" *ngIf="!user" class="ui button" (click)="notLoggedIn()" [routerLink]="['/login']" >Join Event</div>
+      <div id="leave-event-button" *ngIf="user" class="ui button" (click)="leaveEvent(eventID, user, userID)">Leave Event</div>
       <div class="ui cancel button">Cancel</div>
     </div>
   </div>

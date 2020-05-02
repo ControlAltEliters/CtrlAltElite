@@ -1,0 +1,13 @@
+{
+  "friends": [],
+  "_id": "5eab0fd66b732f6f55227256",
+  "firstname": "Lady",
+  "lastname": "Galadriel",
+  "email": "elf@yoohoo.com",
+  "username": "Gal",
+  "password": "$2b$10$ceRHwbfZl5SafE0Xoo7aK.Epn160i8wLxsG6OTbyAbZmqsnmZswBe",
+  "role": "Admin",
+  "userImage": "3",
+  "creation_dt": "2020-04-30T17:50:14.509Z",
+  "__v": 0
+}

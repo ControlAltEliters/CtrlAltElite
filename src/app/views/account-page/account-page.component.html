@@ -6,14 +6,14 @@
         <div class="six wide column">
           <div class="content-block content-right">
             <div class="ui card centered">
-              <div class="image">
-                <img src="{{profilePic}}">
+              <div id="profile-pic" class="image">
+                <img id="profile-pic" src="{{profilePic}}">
               </div>
               <div class="content">
                 <a class="header">{{activeUser}}</a>
                 <!-- TODO: Conditionally render joined date? -->
                 <!-- <span class="date">Joined in 2013</span> -->
-                <div class="ui secondary vertical menu">
+                <div id="left-nav-menu" class="ui secondary vertical menu">
                   <!-- TODO: Add active class for current path -->
                   <a class="active item" [routerLink]="['profile']">
                     My Profile

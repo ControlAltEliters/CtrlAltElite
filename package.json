@@ -46,7 +46,7 @@
     "@types/jquery": "^3.3.33",
     "angular-notifier": "^6.0.1",
     "ansi-colors": "^4.1.1",
-    "bcrypt": "^4.0.0",
+    "bcrypt": "^5.0.0",
     "bluebird": "^3.7.2",
     "ckeditor4-angular": "^1.0.1",
     "connect-mongo": "^3.2.0",
